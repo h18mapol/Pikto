@@ -1,6 +1,6 @@
 package piktoproject.pikto.models;
 
-public class order {
+public class Order {
     int orderId, userId;
     string sessionId,
 }

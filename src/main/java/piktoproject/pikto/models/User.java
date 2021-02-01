@@ -1,6 +1,6 @@
 package piktoproject.pikto.models;
 
-public class user {
+public class User {
     private int userID;
     private String firstName;
     private String lastName;
@@ -11,7 +11,7 @@ public class user {
     private int seller;
     private String pictureUrl;
 
-    public user() {
+    public User() {
     }
 
     public int getUserID() {

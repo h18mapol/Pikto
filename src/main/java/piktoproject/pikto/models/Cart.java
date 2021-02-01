@@ -1,4 +1,4 @@
 package piktoproject.pikto.models;
 
-public class cart {
+public class Cart {
 }

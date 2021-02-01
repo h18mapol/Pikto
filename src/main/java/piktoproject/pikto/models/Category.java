@@ -1,4 +1,4 @@
 package piktoproject.pikto.models;
 
-public class category {
+public class Category {
 }
