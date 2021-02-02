@@ -9,6 +9,7 @@ package piktoproject.pikto.services;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import piktoproject.pikto.models.Order;
 import piktoproject.pikto.models.Product;
 import piktoproject.pikto.models.Product_review;
 import piktoproject.pikto.models.User;
@@ -64,6 +65,7 @@ public class AdminService {
         return adminCrud.addUser(user);
    }
 
+   
    public List<Product_review>getAllReviews(){
         return adminCrud.getAllReviews();
    }
@@ -81,6 +83,21 @@ public class AdminService {
    }
   
  
+      public List<Order>getAllOrders(){
+        return adminCrud.getAllOrders();
+   }
+
+   public Order getOrder(int orderId){
+        return adminCrud.getOrder(orderId);
+
+   }
+     public Order updateOrder(Order order){
+        return adminCrud.updateOrder(order);
+   }
+  
+  
+   
+   
       
       
 }

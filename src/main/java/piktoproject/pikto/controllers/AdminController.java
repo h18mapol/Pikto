@@ -33,7 +33,7 @@ public class AdminController {
     
       @RequestMapping("/Admin/Orders")
     public String getAllOrders(Model model){
-    model.addAttribute("allProducts","Snoppen");
+    model.addAttribute("allOrders", adminService.getAllOrders());
        return "Frontend/Admin/Orders";
         
     }  
