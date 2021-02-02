@@ -34,10 +34,10 @@ public class AdminController {
       
     @RequestMapping("/Admin/{userId}")
     public String getUserPage(Model model, @PathVariable Integer userId){
-        model.addAttribute("userData",userService.getUserById(userId));
+       // model.addAttribute("userData",userService.getUserById(userId));
         model.addAttribute("userProducts",userService.getAllProducts(userId));
         model.addAttribute("userReviews",userService.getAllReviews(userId));
-        model.addAttribute("userOrders",userService.getAllOrders(userId));
+       // model.addAttribute("userOrders",userService.getAllOrders(userId));
         return "Frontend/Admin/IndividualUser";
     }
 

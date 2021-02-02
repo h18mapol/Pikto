@@ -25,6 +25,11 @@ public class UserService {
     @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
     @Autowired
     private IUserCrud userCrud;
+    
+     public User getUserById(int userId){
+        return userCrud.getUserById(userId);
+    }
+
 
     public List<Product>getAllProducts(int userId){
         return userCrud.getAllProducts(userId);
@@ -61,6 +66,8 @@ public class UserService {
     public void deleteReview(int reviewId){
         userCrud.deleteReview(reviewId);
     }
+
+
 }
 
 
