@@ -5,14 +5,11 @@
  */
 package piktoproject.pikto.services;
 
-
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import piktoproject.pikto.models.Product;
 import piktoproject.pikto.models.Product_review;
-import piktoproject.pikto.models.User;
-import piktoproject.pikto.repositorys.IAdminCrud;
 import piktoproject.pikto.repositorys.IUserCrud;
 
 /**
@@ -21,6 +18,7 @@ import piktoproject.pikto.repositorys.IUserCrud;
  */
 @Service
 public class UserService {
+    @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
     @Autowired
     private IUserCrud userCrud;
 
