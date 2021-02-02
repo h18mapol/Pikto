@@ -85,6 +85,37 @@ public class AdminCrud implements IAdminCrud{
 
     @Override
     public List<User> getAllUsers() {
+<<<<<<< HEAD
+=======
+      List <User> userList=new ArrayList<>();
+        try{
+            con=DriverManager.getConnection("jdbc:mysql://localhost:3306/piktodb?serverTimezone=UTC","root","");
+            Statement statement =con.createStatement();
+            statement=con.createStatement();
+            String sqlSelectOrders="SELECT * FROM `user`";
+            ResultSet resultset=statement.executeQuery(sqlSelectOrders);
+            while (resultset.next()){
+                User user=new User();
+                user.setUserId(resultset.getInt(1));
+                user.setFirstName(resultset.getString(2));
+                user.setLastName(resultset.getString(3));
+                user.setMobileNr(resultset.getString(4));
+                user.setEmail(resultset.getString(5));
+                user.setAdmin(resultset.getInt(7));
+                user.setSeller(resultset.getInt(8));
+                user.setPictureUrl(resultset.getString(9));
+
+                   userList.add(user);
+            }
+         
+            resultset.close();
+            statement.close();
+            con.close();
+            return userList;
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminCrud.class.getName()).log(Level.SEVERE, null, ex);
+        }
+>>>>>>> 6371bf7cee12857ffc41552265aaa07da96ddbf6
         return null;
     }
 

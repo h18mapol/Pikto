@@ -14,12 +14,21 @@ public class User {
     public User() {
     }
 
+<<<<<<< HEAD
     public int getUserID() {
         return userId;
     }
 
     public void setUserID(int userID) {
         this.userId = userID;
+=======
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+>>>>>>> 6371bf7cee12857ffc41552265aaa07da96ddbf6
     }
 
     public String getFirstName() {
