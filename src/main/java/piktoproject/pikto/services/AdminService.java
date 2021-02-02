@@ -22,62 +22,63 @@ import piktoproject.pikto.repositorys.IAdminCrud;
 public class AdminService {
     @Autowired
     private IAdminCrud adminCrud;
-    
- public List<Product>getAllProducts(){
-     return adminCrud.getAllProducts();
- }
- 
-       public Product getProduct(int productId){
-           return adminCrud.getProduct(productId);
-       }
-       
-       public Product updateProduct(Product product){
-           return adminCrud.updateProduct(product);
-       }
-       
-       public Product deleteProduct(int productId){
-           return adminCrud.deleteProduct(productId);
-       }
-       
-       public Product addProduct(Product product){
-           return adminCrud.addProduct(product);
-       }
-       
-       
-       public List<User>getAllUsers(){
-       return adminCrud.getAllUsers();
-       }
-       
-       public User getUser(int userId){
-            return adminCrud.getUser(userId);
-       }
-       
-       public User updateUser(User user){
-            return adminCrud.updateUser(user);
-       }
 
-       public User deleteUser(int userId){
-            return adminCrud.deleteUser(userId);
-       }
-       public User addUser(User user){
-            return adminCrud.addUser(user);
-       }
-       
-       public List<Product_review>getAllReviews(){
-            return adminCrud.getAllReviews();
-       }
-       
-       public Product_review getReview(int reviewId){
-            return adminCrud.getReview(reviewId);
+    public List<Product>getAllProducts(){
 
-       }
-       public Product_review updateReview(Product_review product_review){
-          return adminCrud.updateReview(product_review);
-       }
+    return adminCrud.getAllProducts();
+    }
 
-       public Product_review deleteReview(int reviewId){
-            return adminCrud.deleteReview(reviewId);
-       }
+   public Product getProduct(int productId){
+        return adminCrud.getProduct(productId);
+   }
+
+   public Product updateProduct(Product product){
+        return adminCrud.updateProduct(product);
+   }
+
+   public Product deleteProduct(int productId){
+        return adminCrud.deleteProduct(productId);
+   }
+
+   public Product addProduct(Product product){
+        return adminCrud.addProduct(product);
+   }
+
+
+   public List<User>getAllUsers(){
+   return adminCrud.getAllUsers();
+   }
+
+   public User getUser(int userId){
+        return adminCrud.getUser(userId);
+   }
+
+   public User updateUser(User user){
+        return adminCrud.updateUser(user);
+   }
+
+   public User deleteUser(int userId){
+        return adminCrud.deleteUser(userId);
+   }
+   public User addUser(User user){
+        return adminCrud.addUser(user);
+   }
+
+   public List<Product_review>getAllReviews(){
+        return adminCrud.getAllReviews();
+   }
+
+   public Product_review getReview(int reviewId){
+        return adminCrud.getReview(reviewId);
+
+   }
+   public Product_review updateReview(Product_review product_review){
+      return adminCrud.updateReview(product_review);
+   }
+
+   public Product_review deleteReview(int reviewId){
+        return adminCrud.deleteReview(reviewId);
+   }
   
  
       
