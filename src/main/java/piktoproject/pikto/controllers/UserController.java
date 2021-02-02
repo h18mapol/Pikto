@@ -24,12 +24,13 @@ public class UserController {
         return "urlview";
     }
 
-    @RequestMapping("/User/Product/{productId}")
+    @RequestMapping("/User/Products/{productId}")
     public String getAllProducts(Model model, @PathVariable Integer productId){
         model.addAttribute("product",userService.getProduct(productId));
         System.out.println(userService.getProduct(productId).getProductId());
         return "user_getproduct";
     }
+
 
 
 
