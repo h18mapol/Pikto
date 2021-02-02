@@ -8,7 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
+import org.springframework.stereotype.Repository;
+@Repository
 public class UserCrud implements IUserCrud {
     private Connection con;
 
