@@ -85,49 +85,9 @@ public class AdminCrud implements IAdminCrud{
 
     @Override
     public List<User> getAllUsers() {
-      List <User> userList=new ArrayList<>();
-        try{
-            con=DriverManager.getConnection("jdbc:mysql://localhost:3306/piktodb?serverTimezone=UTC","root","");
-            Statement statement =con.createStatement();
-            statement=con.createStatement();
-            String sqlSelectOrders="SELECT * FROM `user`";
-            ResultSet resultset=statement.executeQuery(sqlSelectOrders);
-            while (resultset.next()){
-                User user=new User();
-                user.setOrderId(resultset.getInt(1));
-                user.setUserId(resultset.getInt(2));
-                user.setSessionId(resultset.getString(3));
-                user.setStatus(resultset.getInt(4));
-                user.setSubTotal(resultset.getInt(5));
-                user.setItemDiscount(resultset.getFloat(6));
-                user.setTax(resultset.getFloat(7));
-                user.setShipping(resultset.getFloat(8));
-                user.setTotal(resultset.getFloat(9));
-                user.setPromo(resultset.getFloat(10));
-                user.setDiscount(resultset.getInt(11));
-                user.setGrandTotal(resultset.getInt(12));
-                user.setFirstName(resultset.getString(13));
-                user.setLastName(resultset.getString(14));
-                user.setMobile(resultset.getInt(15));
-                user.setEmail(resultset.getString(16));
-                user.setAddress(resultset.getString(17));
-                user.setCity(resultset.getString(18));
-                user.setCreatedAt(resultset.getString(19));
-                user.setContent(resultset.getString(20));
-                      
-
-                   orderList.add(order);
-            }
-         
-            resultset.close();
-            statement.close();
-            con.close();
-            return orderList;
-        } catch (SQLException ex) {
-            Logger.getLogger(AdminCrud.class.getName()).log(Level.SEVERE, null, ex);
-        }
         return null;
-     }    
+    }
+
     @Override
     public User getUser(int userId) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

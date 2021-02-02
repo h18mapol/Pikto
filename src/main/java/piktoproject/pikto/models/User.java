@@ -1,7 +1,7 @@
 package piktoproject.pikto.models;
 
 public class User {
-    private int userID;
+    private int userId;
     private String firstName;
     private String lastName;
     private String mobileNr;
@@ -15,11 +15,11 @@ public class User {
     }
 
     public int getUserID() {
-        return userID;
+        return userId;
     }
 
     public void setUserID(int userID) {
-        this.userID = userID;
+        this.userId = userID;
     }
 
     public String getFirstName() {

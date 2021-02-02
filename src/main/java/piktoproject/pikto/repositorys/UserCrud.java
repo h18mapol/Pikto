@@ -9,11 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-<<<<<<< HEAD
-
-=======
-import org.springframework.stereotype.Repository;
->>>>>>> e324ea2fb646d83761a8dae5303d744a9ddacf45
 @Repository
 public class UserCrud implements IUserCrud {
     private Connection con;

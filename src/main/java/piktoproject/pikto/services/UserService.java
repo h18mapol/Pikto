@@ -10,10 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import piktoproject.pikto.models.Product;
 import piktoproject.pikto.models.Product_review;
-<<<<<<< HEAD
-=======
-import piktoproject.pikto.models.User;
->>>>>>> e324ea2fb646d83761a8dae5303d744a9ddacf45
 import piktoproject.pikto.repositorys.IUserCrud;
 
 /**
@@ -27,7 +23,6 @@ public class UserService {
     private IUserCrud userCrud;
 
     public List<Product>getAllProducts(int userId){
-
         return userCrud.getAllProducts(userId);
     }
 
