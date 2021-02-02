@@ -3,10 +3,11 @@ package piktoproject.pikto.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.annotation.*;
+import piktoproject.pikto.models.User;
 import piktoproject.pikto.services.UserService;
+
+import java.util.Map;
 
 @Controller
 @SessionAttributes("userName")
@@ -51,6 +52,8 @@ public class UserController {
         System.out.println(userService.getAllOrders(userId).get(0).getFirstName());
         return "getOrders";
     }
+
+
 
 
 
