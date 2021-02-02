@@ -47,9 +47,9 @@ public class UserController {
 
     @RequestMapping("/User/Orders/{userId}")
     public String getAllOrders(Model model, @PathVariable Integer userId){
-        model.addAttribute("product",userService.getAllOrders(userId));
+        model.addAttribute("orders",userService.getAllOrders(userId));
         System.out.println(userService.getAllOrders(userId).get(0).getFirstName());
-        return "user_getproduct";
+        return "getOrders";
     }
 
 

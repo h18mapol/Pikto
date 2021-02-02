@@ -192,14 +192,13 @@ public class UserCrud implements IUserCrud {
         try{
             con = DriverManager.getConnection("jdbc:mysql://localhost:3306/piktodb?serverTimezone=UTC", "root", "");
 
-            String sqlgetAllOrders = "SELECT * FROM order WHERE userId = ?";
+            String sqlgetAllOrders = "SELECT * FROM piktodb.order where userId=?;";
             PreparedStatement statement = con.prepareStatement(sqlgetAllOrders);
             statement.setInt(1, userId);
 
             ResultSet resultSet = statement.executeQuery();
 
             while (resultSet.next()) {
-
                 Order order=new Order();
                 order.setOrderId(resultSet.getInt("orderId"));
                 order.setUserId(resultSet.getInt("userId"));
