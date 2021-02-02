@@ -30,7 +30,6 @@ public class ProductController {
     public String getAdminPage(Model model){
     model.addAttribute("allProducts","Snoppen");
        return "Frontend/Admin/Admin";
-        asdasd
     }    
      @RequestMapping("/Admin/Products")
     public String getAllProducts(Model model){
