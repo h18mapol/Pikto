@@ -8,13 +8,14 @@ package piktoproject.pikto.services;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import piktoproject.pikto.models.Order;
 import piktoproject.pikto.models.Product;
 import piktoproject.pikto.models.Product_review;
 
 
 import piktoproject.pikto.models.User;
 
-import piktoproject.pikto.repositorys.IUserCrud;
+
 
 /**
  *
@@ -31,6 +32,7 @@ public class UserService {
     }
 
 
+    //Methods
     public List<Product>getAllProducts(int userId){
         return userCrud.getAllProducts(userId);
     }
@@ -65,6 +67,13 @@ public class UserService {
 
     public void deleteReview(int reviewId){
         userCrud.deleteReview(reviewId);
+    }
+
+   
+
+
+    public List<Order> getAllOrders(int userId){
+        return userCrud.getAllOrders(userId);
     }
 
 
