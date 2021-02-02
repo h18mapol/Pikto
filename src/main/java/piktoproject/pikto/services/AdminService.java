@@ -49,36 +49,34 @@ public class AdminService {
        }
        
        public User getUser(int userId){
-         return adminCrud.getUser(userId);
+            return adminCrud.getUser(userId);
        }
        
        public User updateUser(User user){
-         return adminCrud.updateUser(user);
-
+            return adminCrud.updateUser(user);
        }
-       public User deleteUser(int userId){
-      return adminCrud.deleteUser(userId);
 
+       public User deleteUser(int userId){
+            return adminCrud.deleteUser(userId);
        }
        public User addUser(User user){
-         return adminCrud.addUser(user);
-
+            return adminCrud.addUser(user);
        }
        
        public List<Product_review>getAllReviews(){
-        return adminCrud.getAllReviews();
+            return adminCrud.getAllReviews();
        }
        
        public Product_review getReview(int reviewId){
-        return adminCrud.getReview(reviewId);
+            return adminCrud.getReview(reviewId);
 
        }
        public Product_review updateReview(Product_review product_review){
           return adminCrud.updateReview(product_review);
-
        }
+
        public Product_review deleteReview(int reviewId){
-               return adminCrud.deleteReview(reviewId);
+            return adminCrud.deleteReview(reviewId);
        }
   
  
