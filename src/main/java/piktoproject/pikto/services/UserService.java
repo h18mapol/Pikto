@@ -5,13 +5,15 @@
  */
 package piktoproject.pikto.services;
 
-
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import piktoproject.pikto.models.Product;
 import piktoproject.pikto.models.Product_review;
+<<<<<<< HEAD
+=======
 import piktoproject.pikto.models.User;
+>>>>>>> e324ea2fb646d83761a8dae5303d744a9ddacf45
 import piktoproject.pikto.repositorys.IUserCrud;
 
 /**
@@ -20,6 +22,7 @@ import piktoproject.pikto.repositorys.IUserCrud;
  */
 @Service
 public class UserService {
+    @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
     @Autowired
     private IUserCrud userCrud;
 
@@ -44,19 +47,19 @@ public class UserService {
         return userCrud.addProduct(product);
     }
 
-    List<Product_review>getAllReviews(int userId){
+    public List<Product_review>getAllReviews(int userId){
         return userCrud.getAllReviews(userId);
     }
 
-    Product_review getReview(int reviewId, int userId){
+    public Product_review getReview(int reviewId, int userId){
         return userCrud.getReview(reviewId, userId);
     }
 
-    Product_review updateReview(Product_review product_review){
+    public Product_review updateReview(Product_review product_review){
         return updateReview(product_review);
     }
 
-    void deleteReview(int reviewId){
+    public void deleteReview(int reviewId){
         userCrud.deleteReview(reviewId);
     }
 }

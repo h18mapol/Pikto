@@ -1,9 +1,9 @@
 package piktoproject.pikto.repositorys;
 
 import java.util.List;
+
 import piktoproject.pikto.models.Product;
 import piktoproject.pikto.models.Product_review;
-import piktoproject.pikto.models.User;
 
 public interface IUserCrud {
     //Products

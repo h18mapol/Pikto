@@ -1,5 +1,6 @@
 package piktoproject.pikto.repositorys;
 
+import org.springframework.stereotype.Repository;
 import piktoproject.pikto.models.Product;
 import piktoproject.pikto.models.Product_review;
 
@@ -8,7 +9,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+<<<<<<< HEAD
+
+=======
 import org.springframework.stereotype.Repository;
+>>>>>>> e324ea2fb646d83761a8dae5303d744a9ddacf45
 @Repository
 public class UserCrud implements IUserCrud {
     private Connection con;
@@ -17,15 +22,16 @@ public class UserCrud implements IUserCrud {
     public List<Product> getAllProducts(int userId) {
         List<Product> products = new ArrayList<>();
         try{
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/sportevent?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "root", "");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/piktodb?serverTimezone=UTC", "root", "");
 
-            String sqlgetAllProducts = "SELECT * FROM product WHERE productId = ?";
+            String sqlgetAllProducts = "SELECT * FROM product WHERE userId = ?";
             PreparedStatement statement = con.prepareStatement(sqlgetAllProducts);
             statement.setInt(1, userId);
 
             ResultSet resultSet = statement.executeQuery();
-            Product product = new Product();
+
             while (resultSet.next()) {
+                Product product = new Product();
                 product.setProductId(resultSet.getInt("productId"));
                 product.setUserId(resultSet.getInt("userId"));
                 product.setTitle(resultSet.getString("title"));
@@ -33,7 +39,7 @@ public class UserCrud implements IUserCrud {
                 product.setType(resultSet.getInt("type"));
                 product.setPrice(resultSet.getInt("price"));
                 product.setDiscount(resultSet.getInt("discount"));
-                product.setPublishedAt(resultSet.getString("puplishedAt"));
+                product.setPublishedAt(resultSet.getString("publishedAt"));
                 product.setProductUrl(resultSet.getString("productUrl"));
                 products.add(product);
             } //End while
@@ -50,6 +56,37 @@ public class UserCrud implements IUserCrud {
 
     @Override
     public Product getProduct(int productId) {
+
+        List<Product> products = new ArrayList<>();
+        try{
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/piktodb?serverTimezone=UTC", "root", "");
+
+            String sqlgetAllProducts = "SELECT * FROM product WHERE productId = ?";
+            PreparedStatement statement = con.prepareStatement(sqlgetAllProducts);
+            statement.setInt(1, productId);
+
+            ResultSet resultSet = statement.executeQuery();
+            Product product = new Product();
+
+            while (resultSet.next()) {
+                product.setProductId(resultSet.getInt("productId"));
+                product.setUserId(resultSet.getInt("userId"));
+                product.setTitle(resultSet.getString("title"));
+                product.setSummary(resultSet.getString("summary"));
+                product.setType(resultSet.getInt("type"));
+                product.setPrice(resultSet.getInt("price"));
+                product.setDiscount(resultSet.getInt("discount"));
+                product.setPublishedAt(resultSet.getString("publishedAt"));
+                product.setProductUrl(resultSet.getString("productUrl"));
+            } //End while
+            resultSet.close();
+            statement.close();
+            con.close();
+            return product;
+        } //end try
+        catch(SQLException ex){
+            Logger.getLogger(UserCrud.class.getName()).log(Level.SEVERE, null, ex);
+        }//End getTeamById
         return null;
     }
 

@@ -4,6 +4,8 @@
     <title></title>
 </head>
 <body>
-    <h1>Test Page</h1>
+    {{#allProducts}}
+        <div><h2>{{userId}}, {{price}} {{productId}},{{summary}}, {{publishedAt}}</h2></div>
+    {{/allProducts}}
 </body>
 </html>
