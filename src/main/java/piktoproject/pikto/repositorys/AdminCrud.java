@@ -31,7 +31,7 @@ public class AdminCrud implements IAdminCrud{
     public List<Product> getAllProducts() {
    List <Product> productList=new ArrayList<>();
         try{
-            con=DriverManager.getConnection("jdbc:mysql://localhost:3306/piktodb?serverTimezone=UTC","root","mindatabas");
+            con=DriverManager.getConnection("jdbc:mysql://localhost:3306/piktodb?serverTimezone=UTC","root","");
             Statement statement =con.createStatement();
             statement=con.createStatement();
             String sqlSelectEvents="SELECT * FROM product";
