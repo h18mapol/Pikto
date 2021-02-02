@@ -11,6 +11,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+<<<<<<< HEAD
+
+=======
+>>>>>>> 8ebc7ad4453eade22ae889f17ff0e5262204dbb9
 @Repository
 public class UserCrud implements IUserCrud {
     private Connection con;

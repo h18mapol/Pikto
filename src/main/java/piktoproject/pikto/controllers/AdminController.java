@@ -5,13 +5,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import piktoproject.pikto.services.AdminService;
+import piktoproject.pikto.services.UserService;
 
 @Controller
 @SessionAttributes("userName")
 public class AdminController {
  @Autowired
     private AdminService adminService;
-
+    private UserService userService;
   
     @RequestMapping("/Admin")
     public String getAdminPage(Model model){
@@ -30,6 +31,14 @@ public class AdminController {
        return "Frontend/Admin/Users";
         
     }   
+      @RequestMapping("/Admin/{userId}")
+    public String getUserPage(Model model, @PathVariable Integer userId){
+        model.addAttribute("userProducts",userService.getAllProducts(userId));
+        model.addAttribute("userOrders",userService.getAllReviews(userId));
+        model.addAttribute("userReviews",userService.getAllOrders(userId));
+        return "Frontend/Admin/IndividualUser";
+    }
+
     
       @RequestMapping("/Admin/Orders")
     public String getAllOrders(Model model){
