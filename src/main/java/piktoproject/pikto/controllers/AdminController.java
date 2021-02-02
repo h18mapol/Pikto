@@ -15,15 +15,14 @@ public class AdminController {
   
     @RequestMapping("/Admin")
     public String getAdminPage(Model model){
-    model.addAttribute("allProducts","Snoppen");
+    model.addAttribute("allProducts",adminService.getAllProducts());
        return "Frontend/Admin/Admin";
     }
 
      @RequestMapping("/Admin/Products")
     public String getAllProducts(Model model){
-    model.addAttribute("allProducts","Snoppen");
+    model.addAttribute("allProducts",adminService.getAllProducts());
        return "Frontend/Admin/Products";
-        
     }   
      @RequestMapping("/Admin/Users")
     public String getAllUsers(Model model){
