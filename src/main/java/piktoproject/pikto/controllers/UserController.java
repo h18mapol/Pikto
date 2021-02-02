@@ -33,7 +33,7 @@ public class UserController {
 
     @RequestMapping("/User/{userId}")
     public String getUserById(Model model, @PathVariable Integer userId){
-        model.addAttribute("product",userService.getProduct(userId));
+        model.addAttribute("user",userService.getProduct(userId));
         System.out.println(userService.getUserById(userId).getFirstName());
         return "user_getproduct";
     }

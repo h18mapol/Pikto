@@ -35,6 +35,7 @@ public class UserCrud implements IUserCrud {
                 user.setEmail(resultSet.getString("email"));
                 user.setAdmin(resultSet.getInt("admin"));
                 user.setSeller(resultSet.getInt("seller"));
+                user.setSeller(resultSet.getInt("content"));
                 user.setPictureUrl(resultSet.getString("pictureUrl"));
             } //End while
             resultSet.close();
