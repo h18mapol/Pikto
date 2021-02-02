@@ -43,19 +43,19 @@ public class UserService {
         return userCrud.addProduct(product);
     }
 
-    List<Product_review>getAllReviews(int userId){
+    public List<Product_review>getAllReviews(int userId){
         return userCrud.getAllReviews(userId);
     }
 
-    Product_review getReview(int reviewId, int userId){
+    public Product_review getReview(int reviewId, int userId){
         return userCrud.getReview(reviewId, userId);
     }
 
-    Product_review updateReview(Product_review product_review){
+    public Product_review updateReview(Product_review product_review){
         return updateReview(product_review);
     }
 
-    void deleteReview(int reviewId){
+    public void deleteReview(int reviewId){
         userCrud.deleteReview(reviewId);
     }
 }

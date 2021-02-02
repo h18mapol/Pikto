@@ -2,12 +2,9 @@ package piktoproject.pikto.repositorys;
 
 import java.util.List;
 
-import org.springframework.stereotype.Repository;
 import piktoproject.pikto.models.Product;
 import piktoproject.pikto.models.Product_review;
-import piktoproject.pikto.models.User;
 
-@Repository
 public interface IUserCrud {
     //Products
     List<Product>getAllProducts(int userId);
