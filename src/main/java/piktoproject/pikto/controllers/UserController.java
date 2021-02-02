@@ -19,27 +19,19 @@ public class UserController {
     @RequestMapping("/User/{userId}")
     public String getAdminPage(Model model, @PathVariable Integer userId){
         model.addAttribute("allProducts",userService.getAllProducts(userId));
-
-        System.out.println(userService.getAllProducts(userId).get(0).getProductId());
-        System.out.println(userService.getAllProducts(userId).get(1).getProductId());
+        System.out.println(userService.getAllProducts(userId).get(0).getProductId()); //Funkar
+        System.out.println(userService.getAllProducts(userId).get(1).getProductId()); //Funkar
         return "urlview";
     }
 
-    @RequestMapping("/User/Products/{userId}")
-    public String getAllProducts(Model model, @PathVariable Integer userId){
-        model.addAttribute("allProducts",userService.getAllProducts(userId));
-        return "urlview";
-    }
-    @RequestMapping("/User/Users")
-    public String getAllUsers(Model model){
-        model.addAttribute("allProducts","Snoppen");
-        return "Frontend/Admin/Users";
+    @RequestMapping("/User/Product/{productId}")
+    public String getAllProducts(Model model, @PathVariable Integer productId){
+        model.addAttribute("product",userService.getProduct(productId));
+        System.out.println(userService.getProduct(productId).getProductId());
+        return "user_getproduct";
     }
 
-    @RequestMapping("/User/Orders")
-    public String getAllOrders(Model model){
-        model.addAttribute("allProducts","Snoppen");
-        return "Frontend/Admin/Orders";
 
-    }
+
+
 }

@@ -114,7 +114,8 @@ public class AdminCrud implements IAdminCrud{
             Logger.getLogger(AdminCrud.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
-     }    
+    }
+
     @Override
     public User getUser(int userId) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
