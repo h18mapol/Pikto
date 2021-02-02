@@ -11,10 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-<<<<<<< HEAD
-
-=======
->>>>>>> 8ebc7ad4453eade22ae889f17ff0e5262204dbb9
 @Repository
 public class UserCrud implements IUserCrud {
     private Connection con;
@@ -189,6 +185,49 @@ public class UserCrud implements IUserCrud {
 
     @Override
     public List<Order> getAllOrders(int userId) {
+        List<Order> orders = new ArrayList<>();
+        try{
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/piktodb?serverTimezone=UTC", "root", "");
+
+            String sqlgetAllOrders = "SELECT * FROM order WHERE userId = ?";
+            PreparedStatement statement = con.prepareStatement(sqlgetAllOrders);
+            statement.setInt(1, userId);
+
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+
+                Order order=new Order();
+                order.setOrderId(resultSet.getInt("orderId"));
+                order.setUserId(resultSet.getInt("userId"));
+                order.setSessionId(resultSet.getString("sessionId"));
+                order.setStatus(resultSet.getInt("status"));
+                order.setSubTotal(resultSet.getInt("subTotal"));
+                order.setItemDiscount(resultSet.getFloat("itemDiscount"));
+                order.setTax(resultSet.getFloat("tax"));
+                order.setShipping(resultSet.getFloat("shipping"));
+                order.setTotal(resultSet.getFloat("total"));
+                order.setPromo(resultSet.getFloat("promo"));
+                order.setDiscount(resultSet.getInt("discount"));
+                order.setGrandTotal(resultSet.getInt("grandTotal"));
+                order.setFirstName(resultSet.getString("firstName"));
+                order.setLastName(resultSet.getString("lastName"));
+                order.setMobile(resultSet.getInt("mobile"));
+                order.setEmail(resultSet.getString("email"));
+                order.setAddress(resultSet.getString("address"));
+                order.setCity(resultSet.getString("city"));
+                order.setCreatedAt(resultSet.getString("createdAt"));
+                order.setContent(resultSet.getString("content"));
+                orders.add(order);
+            } //End while
+            resultSet.close();
+            statement.close();
+            con.close();
+            return orders;
+        } //end try
+        catch(SQLException ex){
+            Logger.getLogger(UserCrud.class.getName()).log(Level.SEVERE, null, ex);
+        }//End getTeamById
         return null;
     }
 }
