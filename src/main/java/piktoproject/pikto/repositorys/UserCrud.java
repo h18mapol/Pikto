@@ -22,7 +22,7 @@ public class UserCrud implements IUserCrud {
     @Override
     public User getUserById(int userId) {
         try{
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/sportevent?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "marcus", "polland");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/piktodb?serverTimezone=UTC", "root", "");
 
             String sqlgetUserById = "SELECT * FROM user WHERE userId=?";
             PreparedStatement statement = con.prepareStatement(sqlgetUserById);
