@@ -31,7 +31,7 @@ public class AdminCrud implements IAdminCrud{
     public List<Product> getAllProducts() {
    List <Product> productList=new ArrayList<>();
         try{
-            con=DriverManager.getConnection("jdbc:mysql://localhost:3306/mvcteams?serverTimezone=UTC","root","mindatabas");
+            con=DriverManager.getConnection("jdbc:mysql://localhost:3306/piktodb?serverTimezone=UTC","root","mindatabas");
             Statement statement =con.createStatement();
             statement=con.createStatement();
             String sqlSelectEvents="SELECT * FROM product";
@@ -98,7 +98,7 @@ public class AdminCrud implements IAdminCrud{
     }
 
     @Override
-    public User deleteUser(int userId) {
+    public void deleteUser(int userId) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

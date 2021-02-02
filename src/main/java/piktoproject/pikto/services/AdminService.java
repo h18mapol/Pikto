@@ -57,8 +57,8 @@ public class AdminService {
         return adminCrud.updateUser(user);
    }
 
-   public User deleteUser(int userId){
-        return adminCrud.deleteUser(userId);
+   public void deleteUser(int userId){
+         adminCrud.deleteUser(userId);
    }
    public User addUser(User user){
         return adminCrud.addUser(user);

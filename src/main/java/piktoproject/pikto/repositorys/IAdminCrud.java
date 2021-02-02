@@ -17,7 +17,7 @@ public interface IAdminCrud {
        public List<User>getAllUsers();
        public User getUser(int userId);
        public User updateUser(User user);
-       public User deleteUser(int userId);
+       public void deleteUser(int userId);
        public User addUser(User user);
        
        public List<Product_review>getAllReviews();
