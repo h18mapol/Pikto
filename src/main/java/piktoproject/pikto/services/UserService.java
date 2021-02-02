@@ -11,8 +11,12 @@ import org.springframework.stereotype.Service;
 import piktoproject.pikto.models.Order;
 import piktoproject.pikto.models.Product;
 import piktoproject.pikto.models.Product_review;
+
+
 import piktoproject.pikto.models.User;
 import piktoproject.pikto.repositorys.IUserCrud;
+
+
 
 /**
  *
@@ -23,6 +27,11 @@ public class UserService {
     @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
     @Autowired
     private IUserCrud userCrud;
+    
+     public User getUserById(int userId){
+        return userCrud.getUserById(userId);
+    }
+
 
     //Methods
     public List<Product>getAllProducts(int userId){
@@ -61,9 +70,7 @@ public class UserService {
         userCrud.deleteReview(reviewId);
     }
 
-    public User getUserById(int userId){
-        return userCrud.getUserById(userId);
-    }
+   
 
 
     public List<Order> getAllOrders(int userId){

@@ -12,6 +12,7 @@ import piktoproject.pikto.services.UserService;
 public class AdminController {
  @Autowired
     private AdminService adminService;
+ @Autowired
     private UserService userService;
   
     @RequestMapping("/Admin")
@@ -31,11 +32,13 @@ public class AdminController {
        return "Frontend/Admin/Users";
         
     }   
-      @RequestMapping("/Admin/{userId}")
+      
+    @RequestMapping("/Admin/{userId}")
     public String getUserPage(Model model, @PathVariable Integer userId){
-        model.addAttribute("userProducts",userService.getAllProducts(userId));
-        model.addAttribute("userOrders",userService.getAllReviews(userId));
-        model.addAttribute("userReviews",userService.getAllOrders(userId));
+      model.addAttribute("userData",userService.getUserById(userId));
+      model.addAttribute("userProducts",userService.getAllProducts(userId));
+       model.addAttribute("userReviews",userService.getAllReviews(userId));
+       // model.addAttribute("userOrders",userService.getAllOrders(userId));
         return "Frontend/Admin/IndividualUser";
     }
 
@@ -44,5 +47,6 @@ public class AdminController {
     public String getAllOrders(Model model){
     model.addAttribute("allOrders", adminService.getAllOrders());
        return "Frontend/Admin/Orders";
+        
     }  
 }

@@ -98,7 +98,7 @@
                                         </thead>
                                         <tfoot>
                                             <tr>
-                                                 <th>UserID</th>
+                                                <th>UserID</th>
                                                 <th>Firstname</th>
                                                 <th>Lastname</th>
                                                 <th>Mobilenumber</th>
@@ -151,5 +151,24 @@
         <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
         <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
         <script src="/js/Admin/datatables-demo.js"></script>
+         
+         <script> //Selecting a row.
+            $(document).ready(function () {	
+                $('#dataTable').dataTable({
+                    "lengthMenu": [ [25, 50, 75, -1], [25, 50, 75, "All"] ]
+                 });
+               $("#dataTable tbody tr").click(function () {
+                   var tableData = $(this).children("td").map(function() {
+                       return $(this).text();
+                   }).get();
+                
+              window.location.href = '/Admin/'+tableData[0];
+               });
+
+            });
+
+       </script>
+
+
     </body>
 </html>
