@@ -10,7 +10,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import piktoproject.pikto.service.AdminService;
+import piktoproject.pikto.services.AdminService;
 
 @Controller
 @SessionAttributes("userName")
@@ -22,7 +22,6 @@ public class ProductController {
     public String loginUser(Model model){
         String userName = "Marcus";
         model.addAttribute("userName", userName);
-
         return "urlview2";
     }
 
@@ -30,7 +29,6 @@ public class ProductController {
     public String getAdminPage(Model model){
     model.addAttribute("allProducts","Snoppen");
        return "Frontend/Admin/Admin";
-        asdasd
     }    
      @RequestMapping("/Admin/Products")
     public String getAllProducts(Model model){
