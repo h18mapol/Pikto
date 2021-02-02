@@ -26,7 +26,7 @@ public class AdminController {
     }   
      @RequestMapping("/Admin/Users")
     public String getAllUsers(Model model){
-    model.addAttribute("allProducts","Snoppen");
+    model.addAttribute("allUsers",adminService.getAllUsers());
        return "Frontend/Admin/Users";
         
     }   

@@ -94,35 +94,22 @@ public class AdminCrud implements IAdminCrud{
             ResultSet resultset=statement.executeQuery(sqlSelectOrders);
             while (resultset.next()){
                 User user=new User();
-                user.setOrderId(resultset.getInt(1));
-                user.setUserId(resultset.getInt(2));
-                user.setSessionId(resultset.getString(3));
-                user.setStatus(resultset.getInt(4));
-                user.setSubTotal(resultset.getInt(5));
-                user.setItemDiscount(resultset.getFloat(6));
-                user.setTax(resultset.getFloat(7));
-                user.setShipping(resultset.getFloat(8));
-                user.setTotal(resultset.getFloat(9));
-                user.setPromo(resultset.getFloat(10));
-                user.setDiscount(resultset.getInt(11));
-                user.setGrandTotal(resultset.getInt(12));
-                user.setFirstName(resultset.getString(13));
-                user.setLastName(resultset.getString(14));
-                user.setMobile(resultset.getInt(15));
-                user.setEmail(resultset.getString(16));
-                user.setAddress(resultset.getString(17));
-                user.setCity(resultset.getString(18));
-                user.setCreatedAt(resultset.getString(19));
-                user.setContent(resultset.getString(20));
-                      
+                user.setUserId(resultset.getInt(1));
+                user.setFirstName(resultset.getString(2));
+                user.setLastName(resultset.getString(3));
+                user.setMobileNr(resultset.getString(4));
+                user.setEmail(resultset.getString(5));
+                user.setAdmin(resultset.getInt(7));
+                user.setSeller(resultset.getInt(8));
+                user.setPictureUrl(resultset.getString(9));
 
-                   orderList.add(order);
+                   userList.add(user);
             }
          
             resultset.close();
             statement.close();
             con.close();
-            return orderList;
+            return userList;
         } catch (SQLException ex) {
             Logger.getLogger(AdminCrud.class.getName()).log(Level.SEVERE, null, ex);
         }
