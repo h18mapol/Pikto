@@ -85,8 +85,6 @@ public class AdminCrud implements IAdminCrud{
 
     @Override
     public List<User> getAllUsers() {
-<<<<<<< HEAD
-=======
       List <User> userList=new ArrayList<>();
         try{
             con=DriverManager.getConnection("jdbc:mysql://localhost:3306/piktodb?serverTimezone=UTC","root","");
@@ -115,7 +113,6 @@ public class AdminCrud implements IAdminCrud{
         } catch (SQLException ex) {
             Logger.getLogger(AdminCrud.class.getName()).log(Level.SEVERE, null, ex);
         }
->>>>>>> 6371bf7cee12857ffc41552265aaa07da96ddbf6
         return null;
     }
 

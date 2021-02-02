@@ -11,24 +11,19 @@ public class User {
     private int seller;
     private String pictureUrl;
 
-    public User() {
-    }
-
-<<<<<<< HEAD
-    public int getUserID() {
-        return userId;
-    }
-
-    public void setUserID(int userID) {
-        this.userId = userID;
-=======
     public int getUserId() {
         return userId;
     }
 
     public void setUserId(int userId) {
         this.userId = userId;
->>>>>>> 6371bf7cee12857ffc41552265aaa07da96ddbf6
+    }
+
+    public User() {
+    }
+
+    public void setUserID(int userId) {
+        this.userId = userId;
     }
 
     public String getFirstName() {
