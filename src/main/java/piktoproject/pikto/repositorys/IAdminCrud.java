@@ -24,8 +24,4 @@ public interface IAdminCrud {
        public Product_review getReview(int reviewId);
        public Product_review updateReview(Product_review product_review);
        public Product_review deleteReview(int reviewId);
-       
-       
-       
-
 }

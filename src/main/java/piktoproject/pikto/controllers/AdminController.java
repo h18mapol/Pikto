@@ -6,12 +6,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import piktoproject.pikto.services.AdminService;
 
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import piktoproject.pikto.services.AdminService;
-
 @Controller
 @SessionAttributes("userName")
 public class AdminController {
@@ -23,7 +17,8 @@ public class AdminController {
     public String getAdminPage(Model model){
     model.addAttribute("allProducts",adminService.getAllProducts());
        return "Frontend/Admin/Admin";
-    }    
+    }
+
      @RequestMapping("/Admin/Products")
     public String getAllProducts(Model model){
     model.addAttribute("allProducts",adminService.getAllProducts());

@@ -1,16 +1,25 @@
 package piktoproject.pikto.models;
 
 public class Product {
-int productId,userId,type;
-String title,summary,content,productUrl,publishedAt;
-float price, discount;
-   public String getPublishedAt() {
+int productId;
+int userId;
+int type;
+String title;
+String summary;
+String content;
+String productUrl;
+String publishedAt;
+float price;
+float discount;
+
+    public String getPublishedAt() {
         return publishedAt;
     }
 
     public void setPublishedAt(String publishedAt) {
         this.publishedAt = publishedAt;
     }
+
     public Product() {
     }
 
