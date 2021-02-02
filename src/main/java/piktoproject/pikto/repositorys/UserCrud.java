@@ -35,7 +35,6 @@ public class UserCrud implements IUserCrud {
                 user.setEmail(resultSet.getString("email"));
                 user.setAdmin(resultSet.getInt("admin"));
                 user.setSeller(resultSet.getInt("seller"));
-                user.setSeller(resultSet.getInt("content"));
                 user.setPictureUrl(resultSet.getString("pictureUrl"));
             } //End while
             resultSet.close();
@@ -72,6 +71,7 @@ public class UserCrud implements IUserCrud {
                 product.setPrice(resultSet.getInt("price"));
                 product.setDiscount(resultSet.getInt("discount"));
                 product.setPublishedAt(resultSet.getString("publishedAt"));
+                product.setContent(resultSet.getString("content"));
                 product.setProductUrl(resultSet.getString("productUrl"));
                 products.add(product);
             } //End while
