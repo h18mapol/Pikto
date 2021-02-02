@@ -7,7 +7,7 @@ import piktoproject.pikto.repositorys.IAdminCrud;
 import java.util.List;
 
 @Service
-public class ProductService {
+public class ShoppingService {
 
     @Autowired
     private IAdminCrud adminCrud;

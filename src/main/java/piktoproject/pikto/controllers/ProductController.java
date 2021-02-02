@@ -4,21 +4,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-<<<<<<< HEAD
-=======
-import piktoproject.pikto.services.AdminService;
-
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
->>>>>>> 96cf335802ee3ba1bf20f64609c2e952803688a4
-import piktoproject.pikto.services.AdminService;
+import piktoproject.pikto.services.ShoppingService;
 
 @Controller
 @SessionAttributes("userName")
 public class ProductController {
+
  @Autowired
+ private ShoppingService productService;
 
     @RequestMapping("/login")
     public String loginUser(Model model){
@@ -26,5 +19,4 @@ public class ProductController {
         model.addAttribute("userName", userName);
         return "urlview2";
     }
-
 }
