@@ -2,6 +2,7 @@ package piktoproject.pikto.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import piktoproject.pikto.models.CartItem;
 import piktoproject.pikto.models.Product;
 import piktoproject.pikto.repositorys.IAdminCrud;
 import piktoproject.pikto.repositorys.IShoppingFunctions;
@@ -15,8 +16,8 @@ public class ShoppingService {
     private IShoppingFunctions ShoppingFunctionsCrud;
 
     //Cart Methods
-    public void addToCart(int productId) {
-        ShoppingFunctionsCrud.addToCart(productId);
+    public void addToCart(CartItem cartItem) {
+        ShoppingFunctionsCrud.addToCart(cartItem);
     }
 
     //OrderFunctions

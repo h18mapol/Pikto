@@ -46,7 +46,7 @@ public class UserCrud implements IUserCrud {
             Logger.getLogger(UserCrud.class.getName()).log(Level.SEVERE, null, ex);
         }//End events
         return null;
-    }
+    } //Klar
 
     @Override
     public List<Product> getAllProducts(int userId) {
@@ -84,7 +84,7 @@ public class UserCrud implements IUserCrud {
             Logger.getLogger(UserCrud.class.getName()).log(Level.SEVERE, null, ex);
         }//End getTeamById
         return null;
-    }
+    } //Klar
 
     @Override
     public Product getProduct(int productId) {
@@ -120,7 +120,7 @@ public class UserCrud implements IUserCrud {
             Logger.getLogger(UserCrud.class.getName()).log(Level.SEVERE, null, ex);
         }//End getTeamById
         return null;
-    }
+    } //Klar
 
     @Override
     public Product updateProduct(Product product) {
@@ -169,7 +169,7 @@ public class UserCrud implements IUserCrud {
             Logger.getLogger(UserCrud.class.getName()).log(Level.SEVERE, null, ex);
         }//End getTeamById
         return null;
-    }
+    } //Klar
 
     @Override
     public Product_review getReview(int reviewId, int userId) {
@@ -231,5 +231,5 @@ public class UserCrud implements IUserCrud {
             Logger.getLogger(UserCrud.class.getName()).log(Level.SEVERE, null, ex);
         }//End getTeamById
         return null;
-    }
+    } //Klar
 }

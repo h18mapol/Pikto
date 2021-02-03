@@ -1,5 +1,6 @@
 package piktoproject.pikto.repositorys;
 
+import org.springframework.stereotype.Repository;
 import piktoproject.pikto.models.Cart;
 import piktoproject.pikto.models.CartItem;
 import piktoproject.pikto.models.Order;
@@ -7,7 +8,9 @@ import piktoproject.pikto.models.Transaction;
 
 import java.util.List;
 
+
 public interface IShoppingFunctions {
+
     //Cart Items Methods
     List<CartItem> getAllCartItems(Cart cart);
     void addToCart(CartItem cartItem);
