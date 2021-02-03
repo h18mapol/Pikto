@@ -19,7 +19,7 @@ public interface IAdminCrud {
        public User getUser(int userId);
        public User updateUser(User user);
        public void deleteUser(int userId);
-       public User addUser(User user);
+       public void addUser(User user);
        
        public List<Product_review>getAllReviews();
        public Product_review getReview(int reviewId);
