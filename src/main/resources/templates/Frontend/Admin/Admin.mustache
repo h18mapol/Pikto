@@ -78,45 +78,125 @@
                         <ol class="breadcrumb mb-4">
                             <li class="breadcrumb-item active">Dashboard</li>
                         </ol>
-                        <div class="row">
-                            <div class="col-xl-3 col-md-6">
-                                <div class="card bg-primary text-white mb-4">
-                                    <div class="card-body">Primary Card</div>
-                                    <div class="card-footer d-flex align-items-center justify-content-between">
-                                        <a class="small text-white stretched-link" href="#">View Details</a>
-                                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-3 col-md-6">
-                                <div class="card bg-warning text-white mb-4">
-                                    <div class="card-body">Warning Card</div>
-                                    <div class="card-footer d-flex align-items-center justify-content-between">
-                                        <a class="small text-white stretched-link" href="#">View Details</a>
-                                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-3 col-md-6">
-                                <div class="card bg-success text-white mb-4">
-                                    <div class="card-body">Success Card</div>
-                                    <div class="card-footer d-flex align-items-center justify-content-between">
-                                        <a class="small text-white stretched-link" href="#">View Details</a>
-                                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-3 col-md-6">
-                                <div class="card bg-danger text-white mb-4">
-                                    <div class="card-body">Danger Card</div>
-                                    <div class="card-footer d-flex align-items-center justify-content-between">
-                                        <a class="small text-white stretched-link" href="#">View Details</a>
-                                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
+<div class="row">
+   <div class="row dashboard-cards">
+  <div class="card col-sm">
+    <div class="card-title">
+      <h2>
+        Add product
+      </h2>
+
+    </div>
+    <div class="card-flap flap1">
+      <div class="card-body">
+        
+        <form>
+  <div class="form-group">
+    <label for="exampleInputEmail1">Product name</label>
+    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPassword1">Summary</label>
+    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPassword1">Type</label>
+    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+  </div>
+   <div class="form-group">
+    <label for="exampleInputPassword1">Category</label>
+    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPassword1">Price</label>
+    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPassword1">Discount</label>
+    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPassword1">PictureURL</label>
+    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+  </div>
+  <div class="form-group form-check">
+    <input type="checkbox" class="form-check-input" id="exampleCheck1">
+    <label class="form-check-label" for="exampleCheck1">Check me out</label>
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+
+    
+      </div>
+      <div class="card-flap flap2">
+        <div class="card-actions">
+          <button id="btn-close" href="#">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card col-sm">
+      <div class="card-title">
+      <h2>
+Add user      </h2>
+    
+    </div>
+    <div class="card-flap flap1">
+      <div class="card-description">
+
+      <div class="form-group">
+    <label for="exampleInputEmail1">Firstname</label>
+    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPassword1">Lastname</label>
+    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPassword1">Phonenumber</label>
+    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPassword1">Email</label>
+    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPassword1">Password</label>
+    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPassword1">Authority</label>
+    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPassword1">Profile pictureURL</label>
+    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+  </div>
+  <div class="form-group form-check">
+    <input type="checkbox" class="form-check-input" id="exampleCheck1">
+    <label class="form-check-label" for="exampleCheck1">Check me out</label>
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+       
+      </div>
+      <div class="card-flap flap2">
+        <div class="card-actions">
+          <a class="btn" href="#">Close</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+ 
+  
+      </div>
+       </div>
+      <div class="row">
                             <div class="col-xl-6">
                                 <div class="card mb-4">
                                     <div class="card-header">
@@ -136,6 +216,8 @@
                                 </div>
                             </div>
                         </div>
+                              <div class="row">
+
                         <div class="card mb-4">
                             <div class="card-header">
                                 <i class="fas fa-table mr-1"></i>
@@ -637,6 +719,7 @@
                             </div>
                         </div>
                     </div>
+                    </div>
                 </main>
                 <footer class="py-4 bg-light mt-auto">
                     <div class="container-fluid">
@@ -661,5 +744,59 @@
         <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
         <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
         <script src="/js/Admin/datatables-demo.js"></script>
+        <script>
+        $(document).ready(function(){
+  var zindex = 10;
+ 
+
+  
+  $("div.card").click(function(e){
+    e.preventDefault();
+    var isShowing = false;
+
+
+
+    if ($("div.dashboard-cards").hasClass("showing")) {
+      // a card is already in view
+      $("div.card.d-card-show")
+        .removeClass("d-card-show");
+
+      if (isShowing) {
+        // this card was showing - reset the grid
+        $("div.dashboard-cards")
+         .removeClass("showing");
+          
+      } else {
+        // this card isn't showing - get in with it
+        $(this)
+          .css({zIndex: zindex})
+          .addClass("d-card-show");
+
+      }
+
+      zindex++;
+
+    } else {
+      // no dashboard-cards in view
+      $("div.dashboard-cards")
+        .addClass("showing");
+      $(this)
+        .css({zIndex:zindex})
+        .addClass("d-card-show");
+
+      zindex++;
+    }
+    
+  });
+     $("#btn-close").click(function(){
+ $("div.dashboard-cards")
+         .removeClass("d-card-show");
+      });
+    
+  
+});
+
+</script>
+
     </body>
 </html>
