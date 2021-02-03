@@ -38,6 +38,7 @@ public class AdminController {
       model.addAttribute("userData",userService.getUserById(userId));
       model.addAttribute("userProducts",userService.getAllProducts(userId));
        model.addAttribute("userReviews",userService.getAllReviews(userId));
+
        model.addAttribute("userOrders",userService.getAllOrders(userId));
         return "Frontend/Admin/IndividualUser";
     }
