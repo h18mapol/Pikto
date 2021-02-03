@@ -129,12 +129,41 @@ public class UserCrud implements IUserCrud {
 
     @Override
     public void deleteProduct(int productId) {
-
+        try{
+            con=DriverManager.getConnection("jdbc:mysql://localhost:3306/piktodb?serverTimezone=UTC","root","");
+            Statement statement = con.createStatement();
+            statement = con.createStatement();
+            String sqlDeleteProduct = "DELETE FROM product WHERE productId="+productId;
+            statement.executeUpdate(sqlDeleteProduct);
+            statement.close();
+            con.close();
+        }
+        catch(SQLException ex){
+            Logger.getLogger(UserCrud.class.getName()).log(Level.SEVERE, null, ex);
+        }//End deleteUser
     }
 
     @Override
-    public Product addProduct(Product product) {
-        return null;
+    public void addProduct(Product product) {
+        try{
+            con=DriverManager.getConnection("jdbc:mysql://localhost:3306/piktodb?serverTimezone=UTC","root","");
+            String sqlAddUser = "INSERT INTO product (title, summary, type, price, discount, content, productUrl) VALUES(?,?,?,?,?,?,?)";
+            PreparedStatement statement = con.prepareStatement(sqlAddUser);
+            statement.setString(1, product.getTitle());
+            statement.setString(2, product.getSummary());
+            statement.setInt(3, product.getType());
+            statement.setFloat(4, product.getPrice());
+            statement.setFloat(5, product.getDiscount());
+            statement.setString(6, product.getContent());
+            statement.setString(7, product.getProductUrl());
+            statement.executeUpdate();
+
+            statement.close();
+            con.close();
+        }
+        catch(SQLException ex){
+            Logger.getLogger(AdminCrud.class.getName()).log(Level.SEVERE, null, ex);
+        }//End addUser
     }
 
     @Override

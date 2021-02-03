@@ -16,7 +16,7 @@ public interface IUserCrud {
     Product getProduct(int productId);
     Product updateProduct(Product product);
     void deleteProduct(int productId);
-    Product addProduct(Product product);
+    void addProduct(Product product);
 
     //Reviews
     List<Product_review>getAllReviews(int userId);

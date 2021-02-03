@@ -57,7 +57,7 @@ public class AdminCrud implements IAdminCrud{
             Logger.getLogger(AdminCrud.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
-     }    
+     } //Klar
 
     @Override
     public Product getProduct(int productId) {
@@ -110,7 +110,7 @@ public class AdminCrud implements IAdminCrud{
             Logger.getLogger(AdminCrud.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
-    }
+    } //Klar
 
     @Override
     public User getUser(int userId) {
@@ -119,13 +119,44 @@ public class AdminCrud implements IAdminCrud{
 
     @Override
     public User updateUser(User user) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+        try{
+            con=DriverManager.getConnection("jdbc:mysql://localhost:3306/piktodb?serverTimezone=UTC","root","");
+
+            String sqlUpdateUser = "UPDATE user SET firstName=?, lastName=?, mobileNr=?, email=?, admin=?, seller=?, pictureUrl=?  WHERE userId=?";
+            PreparedStatement statement = con.prepareStatement(sqlUpdateUser);
+            statement.setString(1, user.getFirstName());
+            statement.setString(2, user.getLastName());
+            statement.setString(3, user.getMobileNr());
+            statement.setString(4, user.getEmail());
+            statement.setInt(5, user.getAdmin());
+            statement.setInt(5, user.getSeller());
+            statement.setString(5, user.getPictureUrl());
+            statement.execute();
+            statement.close();
+            con.close();
+            return user;
+        } //end try
+        catch(SQLException ex){
+            Logger.getLogger(AdminCrud.class.getName()).log(Level.SEVERE, null, ex);
+        }//End events
+        return null;
+    } //Klar inte Testad
 
     @Override
     public void deleteUser(int userId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+        try{
+            con=DriverManager.getConnection("jdbc:mysql://localhost:3306/piktodb?serverTimezone=UTC","root","");
+            Statement statement = con.createStatement();
+            statement = con.createStatement();
+            String sqlDeleteUser = "DELETE FROM user WHERE eventid="+userId;
+            statement.executeUpdate(sqlDeleteUser);
+            statement.close();
+            con.close();
+        }
+        catch(SQLException ex){
+            Logger.getLogger(AdminCrud.class.getName()).log(Level.SEVERE, null, ex);
+        }//End deleteUser
+    } //Klar inte Testad
 
     @Override
     public void addUser(User user) {
@@ -148,12 +179,40 @@ public class AdminCrud implements IAdminCrud{
         }
         catch(SQLException ex){
             Logger.getLogger(AdminCrud.class.getName()).log(Level.SEVERE, null, ex);
-        }//End events
-    }
+        }//End addUser
+    } //Klar
 
     @Override
     public List<Product_review> getAllReviews() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<Product_review> product_reviews = new ArrayList<>();
+        try{
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/piktodb?serverTimezone=UTC", "root", "");
+
+            String sqlgetAllReviews = "SELECT * FROM product_review";
+            PreparedStatement statement = con.prepareStatement(sqlgetAllReviews);
+
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+                Product_review product_review = new Product_review();
+                product_review.setReviewId(resultSet.getInt("reviewId"));
+                product_review.setProductId(resultSet.getInt("productId"));
+                product_review.setTitle(resultSet.getString("title"));
+                product_review.setRating(resultSet.getInt("rating"));
+                product_review.setCreatedAt(resultSet.getString("createdAt"));
+                product_review.setContent(resultSet.getString("content"));
+                product_review.setUserId(resultSet.getInt("userId"));
+                product_reviews.add(product_review);
+            } //End while
+            resultSet.close();
+            statement.close();
+            con.close();
+            return product_reviews;
+        } //end try
+        catch(SQLException ex){
+            Logger.getLogger(UserCrud.class.getName()).log(Level.SEVERE, null, ex);
+        }//End getTeamById
+        return null;
     }
 
     @Override
@@ -215,7 +274,7 @@ public class AdminCrud implements IAdminCrud{
             Logger.getLogger(AdminCrud.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
-     }    
+     } //Klar
     
     @Override
     public Order getOrder(int orderId) {
