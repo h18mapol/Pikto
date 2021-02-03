@@ -46,8 +46,8 @@ public class UserService {
     public void deleteProduct(int productId){
         userCrud.deleteProduct(productId);
     }
-    public Product addProduct(Product product){
-        return userCrud.addProduct(product);
+    public void addProduct(Product product){
+        userCrud.addProduct(product);
     }
 
     //Review Methods

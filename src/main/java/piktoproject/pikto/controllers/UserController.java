@@ -50,13 +50,6 @@ public class UserController {
         return "getorders";
     }
 
-    @RequestMapping("/User/{userId}/Orders")
-    public String getAllOrders(Model model, @PathVariable Integer userId){
-        model.addAttribute("orders",userService.getAllOrders(userId));
-        System.out.println(userService.getAllOrders(userId).get(0).getFirstName());
-        return "getorders";
-    }
-
 
 
 
