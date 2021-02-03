@@ -27,52 +27,44 @@ public class UserService {
     @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
     @Autowired
     private IUserCrud userCrud;
-    
-     public User getUserById(int userId){
+
+    //User Methods
+    public User getUserById(int userId){
         return userCrud.getUserById(userId);
     }
 
-
-    //Methods
+    //Product Methods
     public List<Product>getAllProducts(int userId){
         return userCrud.getAllProducts(userId);
     }
-
     public Product getProduct(int productId){
         return userCrud.getProduct(productId);
     }
-
     public Product updateProduct(Product product){
         return userCrud.updateProduct(product);
     }
-
     public void deleteProduct(int productId){
         userCrud.deleteProduct(productId);
     }
-
     public Product addProduct(Product product){
         return userCrud.addProduct(product);
     }
 
+    //Review Methods
     public List<Product_review>getAllReviews(int userId){
         return userCrud.getAllReviews(userId);
     }
-
     public Product_review getReview(int reviewId, int userId){
         return userCrud.getReview(reviewId, userId);
     }
-
     public Product_review updateReview(Product_review product_review){
         return updateReview(product_review);
     }
-
     public void deleteReview(int reviewId){
         userCrud.deleteReview(reviewId);
     }
 
-   
-
-
+    //Order Methods
     public List<Order> getAllOrders(int userId){
         return userCrud.getAllOrders(userId);
     }

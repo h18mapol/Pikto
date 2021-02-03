@@ -4,15 +4,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import piktoproject.pikto.models.Product;
 import piktoproject.pikto.repositorys.IAdminCrud;
+import piktoproject.pikto.repositorys.IShoppingFunctions;
+
 import java.util.List;
 
 @Service
 public class ShoppingService {
 
     @Autowired
-    private IAdminCrud adminCrud;
+    private IShoppingFunctions ShoppingFunctionsCrud;
 
-    public List<Product> getAllProducts() {
-        return adminCrud.getAllProducts();
+    //Cart Methods
+    public void addToCart(int productId) {
+        ShoppingFunctionsCrud.addToCart(productId);
     }
+
+    //OrderFunctions
+
 }
