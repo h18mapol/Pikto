@@ -48,6 +48,6 @@ public class AdminController {
     public String getAllOrders(Model model){
     model.addAttribute("allOrders", adminService.getAllOrders());
        return "Frontend/Admin/Orders";
-        
+
     }  
 }

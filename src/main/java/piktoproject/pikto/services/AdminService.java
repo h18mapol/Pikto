@@ -61,11 +61,10 @@ public class AdminService {
    public void deleteUser(int userId){
          adminCrud.deleteUser(userId);
    }
-   public User addUser(User user){
-        return adminCrud.addUser(user);
+   public void addUser(User user){
+        adminCrud.addUser(user);
    }
 
-   
    public List<Product_review>getAllReviews(){
         return adminCrud.getAllReviews();
    }

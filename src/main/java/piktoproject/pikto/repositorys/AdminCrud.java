@@ -5,11 +5,7 @@
  */
 package piktoproject.pikto.repositorys;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -132,8 +128,27 @@ public class AdminCrud implements IAdminCrud{
     }
 
     @Override
-    public User addUser(User user) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void addUser(User user) {
+        try{
+            con=DriverManager.getConnection("jdbc:mysql://localhost:3306/piktodb?serverTimezone=UTC","root","");
+            String sqlAddUser = "INSERT INTO user (firstName, lastName, mobileNr, email, password, admin, seller, pictureUrl) VALUES(?,?,?,?,?,?,?,?)";
+            PreparedStatement statement = con.prepareStatement(sqlAddUser);
+            statement.setString(1, user.getFirstName());
+            statement.setString(2, user.getLastName());
+            statement.setString(3, user.getMobileNr());
+            statement.setString(4, user.getEmail());
+            statement.setString(5, user.getPassword());
+            statement.setInt(6, user.getAdmin());
+            statement.setInt(7, user.getSeller());
+            statement.setString(8, user.getPictureUrl());
+            statement.executeUpdate();
+
+            statement.close();
+            con.close();
+        }
+        catch(SQLException ex){
+            Logger.getLogger(AdminCrud.class.getName()).log(Level.SEVERE, null, ex);
+        }//End events
     }
 
     @Override
