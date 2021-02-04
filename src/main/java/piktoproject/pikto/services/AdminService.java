@@ -40,6 +40,7 @@ public class AdminService {
     public void addUser(User user){
         adminCrud.addUser(user);
     }
+
     //Products
     public List<Product>getAllProducts(){
 
@@ -63,7 +64,6 @@ public class AdminService {
     }
 
     //Reviews
-
     public List<Product_review>getAllReviews(){
         return adminCrud.getAllReviews();
     }
@@ -82,6 +82,7 @@ public class AdminService {
     public List<Order>getAllOrders(){
         return adminCrud.getAllOrders();
     }
+
     //Orders
     public List<Order>getAllOrdersById(int userId){return adminCrud.getAllOrdersById(userId);}
     public Order getOrder(int orderId){
