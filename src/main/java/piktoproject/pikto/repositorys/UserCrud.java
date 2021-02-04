@@ -47,7 +47,68 @@ public class UserCrud implements IUserCrud {
         }//End events
         return null;
     } //Klar
+    @Override
+    public User updateUser(User user) {
+        try{
+            con=DriverManager.getConnection("jdbc:mysql://localhost:3306/piktodb?serverTimezone=UTC","root","");
 
+            String sqlUpdateUser = "UPDATE user SET firstName=?, lastName=?, mobileNr=?, email=?, admin=?, seller=?, pictureUrl=?  WHERE userId=?";
+            PreparedStatement statement = con.prepareStatement(sqlUpdateUser);
+            statement.setString(1, user.getFirstName());
+            statement.setString(2, user.getLastName());
+            statement.setString(3, user.getMobileNr());
+            statement.setString(4, user.getEmail());
+            statement.setInt(5, user.getAdmin());
+            statement.setInt(5, user.getSeller());
+            statement.setString(5, user.getPictureUrl());
+            statement.execute();
+            statement.close();
+            con.close();
+            return user;
+        } //end try
+        catch(SQLException ex){
+            Logger.getLogger(AdminCrud.class.getName()).log(Level.SEVERE, null, ex);
+        }//End events
+        return null;
+    } //Klar inte Testad
+    @Override
+    public void deleteUser(int userId) {
+        try{
+            con=DriverManager.getConnection("jdbc:mysql://localhost:3306/piktodb?serverTimezone=UTC","root","");
+            Statement statement = con.createStatement();
+            statement = con.createStatement();
+            String sqlDeleteUser = "DELETE FROM user WHERE eventid="+userId;
+            statement.executeUpdate(sqlDeleteUser);
+            statement.close();
+            con.close();
+        }
+        catch(SQLException ex){
+            Logger.getLogger(AdminCrud.class.getName()).log(Level.SEVERE, null, ex);
+        }//End deleteUser
+    } //Klar inte Testad
+    @Override
+    public void addUser(User user) {
+        try{
+            con=DriverManager.getConnection("jdbc:mysql://localhost:3306/piktodb?serverTimezone=UTC","root","");
+            String sqlAddUser = "INSERT INTO user (firstName, lastName, mobileNr, email, password, admin, seller, pictureUrl) VALUES(?,?,?,?,?,?,?,?)";
+            PreparedStatement statement = con.prepareStatement(sqlAddUser);
+            statement.setString(1, user.getFirstName());
+            statement.setString(2, user.getLastName());
+            statement.setString(3, user.getMobileNr());
+            statement.setString(4, user.getEmail());
+            statement.setString(5, user.getPassword());
+            statement.setInt(6, user.getAdmin());
+            statement.setInt(7, user.getSeller());
+            statement.setString(8, user.getPictureUrl());
+            statement.executeUpdate();
+
+            statement.close();
+            con.close();
+        }
+        catch(SQLException ex){
+            Logger.getLogger(AdminCrud.class.getName()).log(Level.SEVERE, null, ex);
+        }//End addUser
+    } //Klar
     @Override
     public List<Product> getAllProducts(int userId) {
         List<Product> products = new ArrayList<>();
@@ -85,7 +146,6 @@ public class UserCrud implements IUserCrud {
         }//End getTeamById
         return null;
     } //Klar
-
     @Override
     public Product getProduct(int productId) {
 
@@ -121,12 +181,10 @@ public class UserCrud implements IUserCrud {
         }//End getTeamById
         return null;
     } //Klar
-
     @Override
     public Product updateProduct(Product product) {
         return null;
     }
-
     @Override
     public void deleteProduct(int productId) {
         try{
@@ -142,7 +200,6 @@ public class UserCrud implements IUserCrud {
             Logger.getLogger(UserCrud.class.getName()).log(Level.SEVERE, null, ex);
         }//End deleteUser
     }
-
     @Override
     public void addProduct(Product product) {
         try{
@@ -165,7 +222,6 @@ public class UserCrud implements IUserCrud {
             Logger.getLogger(AdminCrud.class.getName()).log(Level.SEVERE, null, ex);
         }//End addUser
     }
-
     @Override
     public List<Product_review> getAllReviews(int userId) {
         List<Product_review> product_reviews = new ArrayList<>();
@@ -199,22 +255,19 @@ public class UserCrud implements IUserCrud {
         }//End getTeamById
         return null;
     } //Klar
-
     @Override
-    public Product_review getReview(int reviewId, int userId) {
+    public Product_review getReview(int reviewId) {
         return null;
     }
-
     @Override
     public Product_review updateReview(Product_review product_review) {
         return null;
     }
-
     @Override
     public void deleteReview(int reviewId) {
 
     }
-
+    //Orders
     @Override
     public List<Order> getAllOrders(int userId) {
         List<Order> orders = new ArrayList<>();
@@ -262,4 +315,16 @@ public class UserCrud implements IUserCrud {
         }//End getTeamById
         return null;
     } //Klar
+    @Override
+    public Order getOrderById(int orderId) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    @Override
+    public Order updateOrder(Order order) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    @Override
+    public void DeleteOrder(int orderId) {
+
+    }
 }

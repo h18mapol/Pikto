@@ -24,75 +24,63 @@ public class AdminService {
     @Autowired
     private IAdminCrud adminCrud;
 
+    //Products
     public List<Product>getAllProducts(){
 
     return adminCrud.getAllProducts();
     }
-
-   public Product getProduct(int productId){
+    public Product getProduct(int productId){
         return adminCrud.getProduct(productId);
-   }
-
-   public Product updateProduct(Product product){
+    }
+    public Product updateProduct(Product product){
         return adminCrud.updateProduct(product);
-   }
-
-   public Product deleteProduct(int productId){
-        return adminCrud.deleteProduct(productId);
-   }
-
-   public Product addProduct(Product product){
-        return adminCrud.addProduct(product);
-   }
-
-
-   public List<User>getAllUsers(){
-   return adminCrud.getAllUsers();
-   }
-
-   public User getUser(int userId){
-        return adminCrud.getUser(userId);
-   }
-
-   public User updateUser(User user){
+    }
+    public void deleteProduct(int productId){
+       adminCrud.deleteProduct(productId);
+    }
+    public Product addProduct(Product product){
+        adminCrud.addProduct(product);
+        return product;
+    }
+    //Users
+    public List<User>getAllUsers(){
+    return adminCrud.getAllUsers();
+    }
+    public User getUser(int userId){
+        return adminCrud.getUserById(userId);
+    }
+    public User updateUser(User user){
         return adminCrud.updateUser(user);
-   }
-
-   public void deleteUser(int userId){
+    }
+    public void deleteUser(int userId){
          adminCrud.deleteUser(userId);
-   }
-   public void addUser(User user){
+    }
+    public void addUser(User user){
         adminCrud.addUser(user);
-   }
-
-   public List<Product_review>getAllReviews(){
+    }
+    //Reviews
+    public List<Product_review>getAllReviews(){
         return adminCrud.getAllReviews();
-   }
-
-   public Product_review getReview(int reviewId){
+    }
+    public Product_review getReview(int reviewId){
         return adminCrud.getReview(reviewId);
-
-   }
-   public Product_review updateReview(Product_review product_review){
+    }
+    public Product_review updateReview(Product_review product_review){
       return adminCrud.updateReview(product_review);
-   }
-
-   public Product_review deleteReview(int reviewId){
-        return adminCrud.deleteReview(reviewId);
-   }
-  
- 
-      public List<Order>getAllOrders(){
+    }
+    public void deleteReview(int reviewId){
+        adminCrud.deleteReview(reviewId);
+    }
+    public List<Order>getAllOrders(){
         return adminCrud.getAllOrders();
-   }
-
-   public Order getOrder(int orderId){
-        return adminCrud.getOrder(orderId);
-
-   }
-     public Order updateOrder(Order order){
+    }
+    //Orders
+    public Order getOrder(int orderId){
+        return adminCrud.getOrderById(orderId);
+    }
+    public Order updateOrder(Order order){
         return adminCrud.updateOrder(order);
-   }
+    }
   
   
    

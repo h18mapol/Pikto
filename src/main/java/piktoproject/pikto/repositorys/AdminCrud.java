@@ -21,9 +21,8 @@ import piktoproject.pikto.models.User;
  * @author Henrik
  */
 @Repository
-public class AdminCrud implements IAdminCrud{
+public class AdminCrud extends UserCrud implements IAdminCrud {
     private Connection con;
-
     @Override
     public List<Product> getAllProducts() {
    List <Product> productList=new ArrayList<>();
@@ -58,27 +57,6 @@ public class AdminCrud implements IAdminCrud{
         }
         return null;
      } //Klar
-
-    @Override
-    public Product getProduct(int productId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public Product updateProduct(Product product) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public Product deleteProduct(int productId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public Product addProduct(Product product) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
     @Override
     public List<User> getAllUsers() {
       List <User> userList=new ArrayList<>();
@@ -101,7 +79,7 @@ public class AdminCrud implements IAdminCrud{
 
                    userList.add(user);
             }
-         
+
             resultset.close();
             statement.close();
             con.close();
@@ -111,77 +89,6 @@ public class AdminCrud implements IAdminCrud{
         }
         return null;
     } //Klar
-
-    @Override
-    public User getUser(int userId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public User updateUser(User user) {
-        try{
-            con=DriverManager.getConnection("jdbc:mysql://localhost:3306/piktodb?serverTimezone=UTC","root","");
-
-            String sqlUpdateUser = "UPDATE user SET firstName=?, lastName=?, mobileNr=?, email=?, admin=?, seller=?, pictureUrl=?  WHERE userId=?";
-            PreparedStatement statement = con.prepareStatement(sqlUpdateUser);
-            statement.setString(1, user.getFirstName());
-            statement.setString(2, user.getLastName());
-            statement.setString(3, user.getMobileNr());
-            statement.setString(4, user.getEmail());
-            statement.setInt(5, user.getAdmin());
-            statement.setInt(5, user.getSeller());
-            statement.setString(5, user.getPictureUrl());
-            statement.execute();
-            statement.close();
-            con.close();
-            return user;
-        } //end try
-        catch(SQLException ex){
-            Logger.getLogger(AdminCrud.class.getName()).log(Level.SEVERE, null, ex);
-        }//End events
-        return null;
-    } //Klar inte Testad
-
-    @Override
-    public void deleteUser(int userId) {
-        try{
-            con=DriverManager.getConnection("jdbc:mysql://localhost:3306/piktodb?serverTimezone=UTC","root","");
-            Statement statement = con.createStatement();
-            statement = con.createStatement();
-            String sqlDeleteUser = "DELETE FROM user WHERE eventid="+userId;
-            statement.executeUpdate(sqlDeleteUser);
-            statement.close();
-            con.close();
-        }
-        catch(SQLException ex){
-            Logger.getLogger(AdminCrud.class.getName()).log(Level.SEVERE, null, ex);
-        }//End deleteUser
-    } //Klar inte Testad
-
-    @Override
-    public void addUser(User user) {
-        try{
-            con=DriverManager.getConnection("jdbc:mysql://localhost:3306/piktodb?serverTimezone=UTC","root","");
-            String sqlAddUser = "INSERT INTO user (firstName, lastName, mobileNr, email, password, admin, seller, pictureUrl) VALUES(?,?,?,?,?,?,?,?)";
-            PreparedStatement statement = con.prepareStatement(sqlAddUser);
-            statement.setString(1, user.getFirstName());
-            statement.setString(2, user.getLastName());
-            statement.setString(3, user.getMobileNr());
-            statement.setString(4, user.getEmail());
-            statement.setString(5, user.getPassword());
-            statement.setInt(6, user.getAdmin());
-            statement.setInt(7, user.getSeller());
-            statement.setString(8, user.getPictureUrl());
-            statement.executeUpdate();
-
-            statement.close();
-            con.close();
-        }
-        catch(SQLException ex){
-            Logger.getLogger(AdminCrud.class.getName()).log(Level.SEVERE, null, ex);
-        }//End addUser
-    } //Klar
-
     @Override
     public List<Product_review> getAllReviews() {
         List<Product_review> product_reviews = new ArrayList<>();
@@ -213,23 +120,7 @@ public class AdminCrud implements IAdminCrud{
             Logger.getLogger(UserCrud.class.getName()).log(Level.SEVERE, null, ex);
         }//End getTeamById
         return null;
-    }
-
-    @Override
-    public Product_review getReview(int reviewId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public Product_review updateReview(Product_review product_review) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public Product_review deleteReview(int reviewId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
+    } //Klar
     @Override
     public List<Order> getAllOrders() {
      List <Order> orderList=new ArrayList<>();
@@ -275,15 +166,4 @@ public class AdminCrud implements IAdminCrud{
         }
         return null;
      } //Klar
-    
-    @Override
-    public Order getOrder(int orderId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public Order updateOrder(Order order) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
 }
