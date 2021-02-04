@@ -109,8 +109,9 @@ public class UserCrud implements IUserCrud {
             Logger.getLogger(AdminCrud.class.getName()).log(Level.SEVERE, null, ex);
         }//End addUser
     } //Klar
+
     @Override
-    public List<Product> getAllProducts(int userId) {
+    public List<Product> getAllProductsById(int userId) {
         List<Product> products = new ArrayList<>();
         try{
             con = DriverManager.getConnection("jdbc:mysql://localhost:3306/piktodb?serverTimezone=UTC", "root", "");
@@ -222,8 +223,9 @@ public class UserCrud implements IUserCrud {
             Logger.getLogger(AdminCrud.class.getName()).log(Level.SEVERE, null, ex);
         }//End addUser
     }
+
     @Override
-    public List<Product_review> getAllReviews(int userId) {
+    public List<Product_review> getAllReviewsById(int userId) {
         List<Product_review> product_reviews = new ArrayList<>();
         try{
             con = DriverManager.getConnection("jdbc:mysql://localhost:3306/piktodb?serverTimezone=UTC", "root", "");
@@ -269,7 +271,7 @@ public class UserCrud implements IUserCrud {
     }
     //Orders
     @Override
-    public List<Order> getAllOrders(int userId) {
+    public List<Order> getAllOrdersById(int userId) {
         List<Order> orders = new ArrayList<>();
         try{
             con = DriverManager.getConnection("jdbc:mysql://localhost:3306/piktodb?serverTimezone=UTC", "root", "");
