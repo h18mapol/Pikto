@@ -46,16 +46,16 @@ public class UserService {
     public void deleteProduct(int productId){
         userCrud.deleteProduct(productId);
     }
-    public Product addProduct(Product product){
-        return userCrud.addProduct(product);
+    public void addProduct(Product product){
+        userCrud.addProduct(product);
     }
 
     //Review Methods
     public List<Product_review>getAllReviews(int userId){
         return userCrud.getAllReviews(userId);
     }
-    public Product_review getReview(int reviewId, int userId){
-        return userCrud.getReview(reviewId, userId);
+    public Product_review getReview(int reviewId){
+        return userCrud.getReview(reviewId);
     }
     public Product_review updateReview(Product_review product_review){
         return updateReview(product_review);
@@ -68,8 +68,6 @@ public class UserService {
     public List<Order> getAllOrders(int userId){
         return userCrud.getAllOrders(userId);
     }
-
-
 }
 
 

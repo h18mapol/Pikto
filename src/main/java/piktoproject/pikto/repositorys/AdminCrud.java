@@ -21,9 +21,8 @@ import piktoproject.pikto.models.User;
  * @author Henrik
  */
 @Repository
-public class AdminCrud implements IAdminCrud{
+public class AdminCrud extends UserCrud implements IAdminCrud {
     private Connection con;
-
     @Override
     public List<Product> getAllProducts() {
    List <Product> productList=new ArrayList<>();
@@ -57,28 +56,7 @@ public class AdminCrud implements IAdminCrud{
             Logger.getLogger(AdminCrud.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
-     }    
-
-    @Override
-    public Product getProduct(int productId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public Product updateProduct(Product product) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public Product deleteProduct(int productId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public Product addProduct(Product product) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
+     } //Klar
     @Override
     public List<User> getAllUsers() {
       List <User> userList=new ArrayList<>();
@@ -101,7 +79,7 @@ public class AdminCrud implements IAdminCrud{
 
                    userList.add(user);
             }
-         
+
             resultset.close();
             statement.close();
             con.close();
@@ -110,67 +88,39 @@ public class AdminCrud implements IAdminCrud{
             Logger.getLogger(AdminCrud.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
-    }
-
-    @Override
-    public User getUser(int userId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public User updateUser(User user) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void deleteUser(int userId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void addUser(User user) {
-        try{
-            con=DriverManager.getConnection("jdbc:mysql://localhost:3306/piktodb?serverTimezone=UTC","root","");
-            String sqlAddUser = "INSERT INTO user (firstName, lastName, mobileNr, email, password, admin, seller, pictureUrl) VALUES(?,?,?,?,?,?,?,?)";
-            PreparedStatement statement = con.prepareStatement(sqlAddUser);
-            statement.setString(1, user.getFirstName());
-            statement.setString(2, user.getLastName());
-            statement.setString(3, user.getMobileNr());
-            statement.setString(4, user.getEmail());
-            statement.setString(5, user.getPassword());
-            statement.setInt(6, user.getAdmin());
-            statement.setInt(7, user.getSeller());
-            statement.setString(8, user.getPictureUrl());
-            statement.executeUpdate();
-
-            statement.close();
-            con.close();
-        }
-        catch(SQLException ex){
-            Logger.getLogger(AdminCrud.class.getName()).log(Level.SEVERE, null, ex);
-        }//End events
-    }
-
+    } //Klar
     @Override
     public List<Product_review> getAllReviews() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+        List<Product_review> product_reviews = new ArrayList<>();
+        try{
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/piktodb?serverTimezone=UTC", "root", "");
 
-    @Override
-    public Product_review getReview(int reviewId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+            String sqlgetAllReviews = "SELECT * FROM product_review";
+            PreparedStatement statement = con.prepareStatement(sqlgetAllReviews);
 
-    @Override
-    public Product_review updateReview(Product_review product_review) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+            ResultSet resultSet = statement.executeQuery();
 
-    @Override
-    public Product_review deleteReview(int reviewId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
+            while (resultSet.next()) {
+                Product_review product_review = new Product_review();
+                product_review.setReviewId(resultSet.getInt("reviewId"));
+                product_review.setProductId(resultSet.getInt("productId"));
+                product_review.setTitle(resultSet.getString("title"));
+                product_review.setRating(resultSet.getInt("rating"));
+                product_review.setCreatedAt(resultSet.getString("createdAt"));
+                product_review.setContent(resultSet.getString("content"));
+                product_review.setUserId(resultSet.getInt("userId"));
+                product_reviews.add(product_review);
+            } //End while
+            resultSet.close();
+            statement.close();
+            con.close();
+            return product_reviews;
+        } //end try
+        catch(SQLException ex){
+            Logger.getLogger(UserCrud.class.getName()).log(Level.SEVERE, null, ex);
+        }//End getTeamById
+        return null;
+    } //Klar
     @Override
     public List<Order> getAllOrders() {
      List <Order> orderList=new ArrayList<>();
@@ -215,16 +165,5 @@ public class AdminCrud implements IAdminCrud{
             Logger.getLogger(AdminCrud.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
-     }    
-    
-    @Override
-    public Order getOrder(int orderId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public Order updateOrder(Order order) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
+     } //Klar
 }
