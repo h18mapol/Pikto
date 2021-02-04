@@ -1,9 +1,12 @@
 package piktoproject.pikto.controllers;
 
+import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import piktoproject.pikto.models.Product;
+import piktoproject.pikto.models.User;
 import piktoproject.pikto.services.AdminService;
 import piktoproject.pikto.services.UserService;
 
@@ -32,20 +35,27 @@ public class AdminController {
        return "Frontend/Admin/Users";
         
     }   
+          @RequestMapping(path="/Admin/addProduct", method={RequestMethod.POST,RequestMethod.PUT})
+    public String addRequestTeam(@ModelAttribute ("Product")Product product,@RequestParam Map<String, String> allRequestParams){
+        userService.addProduct(product);
+       return "redirect:/Admin";
+        
+    }
+         @RequestMapping(path="/Admin/addUser", method={RequestMethod.POST,RequestMethod.PUT})
+    public String addRequestTeam(@ModelAttribute ("User")User user,@RequestParam Map<String, String> allRequestParams){
+        userService.addUser(user);
+       return "redirect:/Admin";
+        
+    }
       
     @RequestMapping("/Admin/{userId}")
     public String getUserPage(Model model, @PathVariable Integer userId){
-<<<<<<< HEAD
-      model.addAttribute("userData",adminService.getUser(userId));
-      model.addAttribute("userProducts",userService.getAllProducts(userId));
-       model.addAttribute("userReviews",userService.getAllReviews(userId));
-       model.addAttribute("userOrders",userService.getAllOrders(userId));
-=======
+
         model.addAttribute("userData",adminService.getUser(userId));
         model.addAttribute("userProducts",adminService.getAllProductsbyId(userId));
         model.addAttribute("userReviews",adminService.getAllReviewsById(userId));
         model.addAttribute("userOrders",adminService.getAllOrdersById(userId));
->>>>>>> e95576719a042b0c9b2f99a7111925de1cd0d5cd
+
         return "Frontend/Admin/IndividualUser";
     }
 

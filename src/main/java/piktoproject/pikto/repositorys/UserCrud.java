@@ -90,7 +90,7 @@ public class UserCrud implements IUserCrud {
     public void addUser(User user) {
         try{
             con=DriverManager.getConnection("jdbc:mysql://localhost:3306/piktodb?serverTimezone=UTC","root","");
-            String sqlAddUser = "INSERT INTO user (firstName, lastName, mobileNr, email, password, admin, seller, pictureUrl) VALUES(?,?,?,?,?,?,?,?)";
+            String sqlAddUser = "INSERT INTO user (firstName, lastName, mobileNr, email, password, admin, pictureUrl) VALUES(?,?,?,?,?,?,?)";
             PreparedStatement statement = con.prepareStatement(sqlAddUser);
             statement.setString(1, user.getFirstName());
             statement.setString(2, user.getLastName());
@@ -98,8 +98,7 @@ public class UserCrud implements IUserCrud {
             statement.setString(4, user.getEmail());
             statement.setString(5, user.getPassword());
             statement.setInt(6, user.getAdmin());
-            statement.setInt(7, user.getSeller());
-            statement.setString(8, user.getPictureUrl());
+            statement.setString(7, user.getPictureUrl());
             statement.executeUpdate();
 
             statement.close();
@@ -205,15 +204,17 @@ public class UserCrud implements IUserCrud {
     public void addProduct(Product product) {
         try{
             con=DriverManager.getConnection("jdbc:mysql://localhost:3306/piktodb?serverTimezone=UTC","root","");
-            String sqlAddUser = "INSERT INTO product (title, summary, type, price, discount, content, productUrl) VALUES(?,?,?,?,?,?,?)";
+            String sqlAddUser = "INSERT INTO product (title,userId, summary, type, price, discount,category,productUrl) VALUES(?,?,?,?,?,?,?,?)";
             PreparedStatement statement = con.prepareStatement(sqlAddUser);
             statement.setString(1, product.getTitle());
-            statement.setString(2, product.getSummary());
-            statement.setInt(3, product.getType());
-            statement.setFloat(4, product.getPrice());
-            statement.setFloat(5, product.getDiscount());
-            statement.setString(6, product.getContent());
-            statement.setString(7, product.getProductUrl());
+            statement.setInt (2, product.getUserId());
+            statement.setString(3, product.getSummary());
+            statement.setInt(4, product.getType());
+            statement.setFloat(5, product.getPrice());
+            statement.setFloat(6, product.getDiscount());
+            statement.setString(7, product.getCategory());
+            System.out.println(product.getCategory());
+            statement.setString(8, product.getProductUrl());
             statement.executeUpdate();
 
             statement.close();
