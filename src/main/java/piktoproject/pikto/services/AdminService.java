@@ -24,10 +24,30 @@ public class AdminService {
     @Autowired
     private IAdminCrud adminCrud;
 
+    //Users
+    public List<User>getAllUsers(){
+        return adminCrud.getAllUsers();
+    }
+    public User getUser(int userId){
+        return adminCrud.getUserById(userId);
+    }
+    public User updateUser(User user){
+        return adminCrud.updateUser(user);
+    }
+    public void deleteUser(int userId){
+        adminCrud.deleteUser(userId);
+    }
+    public void addUser(User user){
+        adminCrud.addUser(user);
+    }
+
     //Products
     public List<Product>getAllProducts(){
 
     return adminCrud.getAllProducts();
+    }
+    public List<Product>getAllProductsbyId(int userId){
+        return adminCrud.getAllProductsById(userId);
     }
     public Product getProduct(int productId){
         return adminCrud.getProduct(productId);
@@ -42,25 +62,13 @@ public class AdminService {
         adminCrud.addProduct(product);
         return product;
     }
-    //Users
-    public List<User>getAllUsers(){
-    return adminCrud.getAllUsers();
-    }
-    public User getUser(int userId){
-        return adminCrud.getUserById(userId);
-    }
-    public User updateUser(User user){
-        return adminCrud.updateUser(user);
-    }
-    public void deleteUser(int userId){
-         adminCrud.deleteUser(userId);
-    }
-    public void addUser(User user){
-        adminCrud.addUser(user);
-    }
+
     //Reviews
     public List<Product_review>getAllReviews(){
         return adminCrud.getAllReviews();
+    }
+    public List<Product_review>getAllReviewsById(int userId){
+        return adminCrud.getAllReviewsById(userId);
     }
     public Product_review getReview(int reviewId){
         return adminCrud.getReview(reviewId);
@@ -74,7 +82,9 @@ public class AdminService {
     public List<Order>getAllOrders(){
         return adminCrud.getAllOrders();
     }
+
     //Orders
+    public List<Order>getAllOrdersById(int userId){return adminCrud.getAllOrdersById(userId);}
     public Order getOrder(int orderId){
         return adminCrud.getOrderById(orderId);
     }

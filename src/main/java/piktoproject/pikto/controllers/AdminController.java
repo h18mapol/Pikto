@@ -35,10 +35,17 @@ public class AdminController {
       
     @RequestMapping("/Admin/{userId}")
     public String getUserPage(Model model, @PathVariable Integer userId){
+<<<<<<< HEAD
       model.addAttribute("userData",adminService.getUser(userId));
       model.addAttribute("userProducts",userService.getAllProducts(userId));
        model.addAttribute("userReviews",userService.getAllReviews(userId));
        model.addAttribute("userOrders",userService.getAllOrders(userId));
+=======
+        model.addAttribute("userData",adminService.getUser(userId));
+        model.addAttribute("userProducts",adminService.getAllProductsbyId(userId));
+        model.addAttribute("userReviews",adminService.getAllReviewsById(userId));
+        model.addAttribute("userOrders",adminService.getAllOrdersById(userId));
+>>>>>>> e95576719a042b0c9b2f99a7111925de1cd0d5cd
         return "Frontend/Admin/IndividualUser";
     }
 
