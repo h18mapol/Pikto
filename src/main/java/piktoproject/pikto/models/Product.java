@@ -17,6 +17,15 @@ public class Product {
     public Product() {
     }
 
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
     public int getCategoryId() {
         return categoryId;
     }
@@ -71,14 +80,6 @@ public class Product {
 
     public void setSummary(String summary) {
         this.summary = summary;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
     }
 
     public String getProductUrl() {

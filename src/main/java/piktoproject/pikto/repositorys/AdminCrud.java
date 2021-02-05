@@ -30,8 +30,10 @@ public class AdminCrud extends UserCrud implements IAdminCrud {
             con=DriverManager.getConnection("jdbc:mysql://localhost:3306/piktodb?serverTimezone=UTC","root","");
             Statement statement =con.createStatement();
             statement=con.createStatement();
-            String sqlSelectEvents="SELECT * FROM product";
-            ResultSet resultset=statement.executeQuery(sqlSelectEvents);
+            String sqlgetAllProducts = "SELECT * \n" +
+                    "FROM product\n" +
+                    "INNER JOIN product_category ON product.productId=product_category.productId";
+            ResultSet resultset=statement.executeQuery(sqlgetAllProducts);
             while (resultset.next()){
                 Product product=new Product();
                 product.setProductId(resultset.getInt(1));
@@ -44,10 +46,10 @@ public class AdminCrud extends UserCrud implements IAdminCrud {
                 product.setPublishedAt(resultset.getString(8));
                 product.setContent(resultset.getString(9));
                 product.setProductUrl(resultset.getString(10));
-
-                   productList.add(product);
+                product.setCategoryId(resultset.getInt("categoryId"));
+                productList.add(product);
             }
-         
+
             resultset.close();
             statement.close();
             con.close();
