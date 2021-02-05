@@ -12,6 +12,7 @@ public interface IUserCrud{
     void addUser(User user);
 
     //Products
+    List<Product>getAllCategoryProducts(int categoryId);
     List<Product>getAllUserProducts(int userId);
     Product getProduct(int productId);
     Product updateProduct(Product product);
@@ -38,4 +39,5 @@ public interface IUserCrud{
     Order getCategoryById(int categoryId);
     Order updateCategory(int categoryId);
     void DeleteCategory(int categoryId);
+
 }

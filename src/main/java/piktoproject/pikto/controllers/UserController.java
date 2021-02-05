@@ -4,8 +4,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import piktoproject.pikto.models.Product;
 import piktoproject.pikto.services.AdminService;
 import piktoproject.pikto.services.UserService;
+
+import java.util.Map;
 
 @Controller
 @SessionAttributes("userName")
@@ -20,6 +23,13 @@ public class UserController {
         model.addAttribute("allProducts",userService.getAllUserProducts(userId));
         System.out.println(userService.getAllUserReviews(userId).get(0).getProductId()); //Funkar
         return "urlview";
+    }
+
+    @RequestMapping("/Category/{categoryId}/Products")
+    public String getAllCategoryProducts(Model model, @PathVariable Integer categoryId){
+        model.addAttribute("allProducts",userService.getAllCategoryProducts(categoryId));
+        System.out.println(userService.getAllUserReviews(categoryId).get(0).getProductId()); //Funkar
+        return "getcategories";
     }
 
     @RequestMapping("/User/Product/{productId}")
@@ -50,7 +60,11 @@ public class UserController {
         return "getorders";
     }
 
-
+    @PostMapping(path = "/User/Add/Product")
+    public String addProduct(@ModelAttribute("product") Product product, @RequestParam Map<String, String> allRequestParams, @PathVariable Integer productId ){
+        userService.addProduct(product);
+        return "redirect:/getproduct";
+    }
 
 
 

@@ -42,6 +42,9 @@ public class UserService {
     public List<Product>getAllUserProducts(int userId){
         return userCrud.getAllUserProducts(userId);
     }
+    public List<Product>getAllCategoryProducts(int categoryId){
+        return userCrud.getAllCategoryProducts(categoryId);
+    }
     public Product getProduct(int productId){
         return userCrud.getProduct(productId);
     }
@@ -54,7 +57,6 @@ public class UserService {
     public void addProduct(Product product){
         userCrud.addProduct(product);
     }
-
     //Review Methods
     public List<Product_review>getAllUserReviews(int userId){
         return userCrud.getAllUserReviews(userId);

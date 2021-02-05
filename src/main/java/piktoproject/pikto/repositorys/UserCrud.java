@@ -13,6 +13,7 @@ import java.util.logging.Logger;
 public class UserCrud implements IUserCrud {
     private Connection con;
 
+    //User
     @Override
     public User getUserById(int userId) {
         try{
@@ -106,6 +107,7 @@ public class UserCrud implements IUserCrud {
         }//End addUser
     } //Klar
 
+    //Product
     @Override
     public List<Product> getAllUserProducts(int userId) {
         List<Product> products = new ArrayList<>();
@@ -115,6 +117,46 @@ public class UserCrud implements IUserCrud {
             String sqlgetAllProducts = "SELECT * FROM product WHERE userId = ?";
             PreparedStatement statement = con.prepareStatement(sqlgetAllProducts);
             statement.setInt(1, userId);
+
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+                System.out.println(resultSet.getInt("productId"));
+                Product product = new Product();
+                product.setProductId(resultSet.getInt("productId"));
+                product.setUserId(resultSet.getInt("userId"));
+                product.setTitle(resultSet.getString("title"));
+                product.setSummary(resultSet.getString("summary"));
+                product.setType(resultSet.getInt("type"));
+                product.setPrice(resultSet.getInt("price"));
+                product.setDiscount(resultSet.getInt("discount"));
+                product.setPublishedAt(resultSet.getString("publishedAt"));
+                product.setContent(resultSet.getString("content"));
+                product.setProductUrl(resultSet.getString("productUrl"));
+                products.add(product);
+            } //End while
+            resultSet.close();
+            statement.close();
+            con.close();
+            return products;
+        } //end try
+        catch(SQLException ex){
+            Logger.getLogger(UserCrud.class.getName()).log(Level.SEVERE, null, ex);
+        }//End getTeamById
+        return null;
+    } //Klar
+    @Override
+    public List<Product> getAllCategoryProducts(int categoryId) {
+        List<Product> products = new ArrayList<>();
+        try{
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/piktodb?serverTimezone=UTC", "root", "");
+
+            String sqlgetAllProducts = "SELECT product.title\n" +
+                    "FROM product\n" +
+                    "INNER JOIN product_category\n" +
+                    "ON product.productId = product_category.productId AND product_category.categoryId  = ?";
+            PreparedStatement statement = con.prepareStatement(sqlgetAllProducts);
+            statement.setInt(1, categoryId);
 
             ResultSet resultSet = statement.executeQuery();
 
@@ -201,25 +243,27 @@ public class UserCrud implements IUserCrud {
     public void addProduct(Product product) {
         try{
             con=DriverManager.getConnection("jdbc:mysql://localhost:3306/piktodb?serverTimezone=UTC","root","");
-            String sqlAddUser = "INSERT INTO product (title,userId, summary, type, price, discount,productUrl) VALUES(?,?,?,?,?,?,?)";
+            String sqlAddUser = "SELECT add_product(?,?,?,?,?,?,?,?)";
             PreparedStatement statement = con.prepareStatement(sqlAddUser);
-            statement.setString(1, product.getTitle());
-            statement.setInt (2, product.getUserId());
+            statement.setInt (1, product.getUserId());
+            statement.setString(2, product.getTitle());
             statement.setString(3, product.getSummary());
             statement.setInt(4, product.getType());
             statement.setFloat(5, product.getPrice());
             statement.setFloat(6, product.getDiscount());
-            statement.setString(7, product.getProductUrl());
-            statement.executeUpdate();
-
+            statement.setString(7, product.getContent());
+            statement.setString(8, product.getProductUrl());
+            statement.setInt(9, product.getCategoryId());
+            statement.executeQuery();
             statement.close();
             con.close();
         }
         catch(SQLException ex){
             Logger.getLogger(AdminCrud.class.getName()).log(Level.SEVERE, null, ex);
         }//End addUser
-    }
+    } //Klar
 
+    //Reviews
     @Override
     public List<Product_review> getAllUserReviews(int userId) {
         List<Product_review> product_reviews = new ArrayList<>();
@@ -257,12 +301,10 @@ public class UserCrud implements IUserCrud {
     public Product_review getReview(int reviewId) {
         return null;
     }
-
     @Override
     public void addReview(Product_review product_review) {
 
     }
-
     @Override
     public Product_review updateReview(Product_review product_review) {
         return null;
@@ -271,6 +313,7 @@ public class UserCrud implements IUserCrud {
     public void deleteReview(int reviewId) {
 
     }
+
     //Orders
     @Override
     public List<Order> getAllUserOrders(int userId) {
@@ -319,12 +362,10 @@ public class UserCrud implements IUserCrud {
         }//End getTeamById
         return null;
     } //Klar
-
     @Override
     public void addOrder(Order order) {
 
     }
-
     @Override
     public Order getOrderById(int orderId) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -338,28 +379,27 @@ public class UserCrud implements IUserCrud {
 
     }
 
+    //Category
     @Override
     public List<Category> getAllCategories() {
         return null;
     }
-
     @Override
     public void addCategory(Category category) {
 
     }
-
     @Override
     public Order getCategoryById(int categoryId) {
         return null;
     }
-
     @Override
     public Order updateCategory(int categoryId) {
         return null;
     }
-
     @Override
     public void DeleteCategory(int categoryId) {
 
     }
+
+    //Helper Functions
 }

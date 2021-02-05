@@ -4,6 +4,7 @@ public class Product {
 
     private int productId;
     private int userId;
+    private int categoryId;
     private int type;
     private String title;
     private String summary;
@@ -14,6 +15,14 @@ public class Product {
     private float discount;
 
     public Product() {
+    }
+
+    public int getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(int categoryId) {
+        this.categoryId = categoryId;
     }
 
     public String getPublishedAt() {

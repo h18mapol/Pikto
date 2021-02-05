@@ -13,41 +13,53 @@ import piktoproject.pikto.services.UserService;
 @Controller
 @SessionAttributes("userName")
 public class AdminController {
- @Autowired
+    @Autowired
     private AdminService adminService;
- @Autowired
+    @Autowired
     private UserService userService;
-  
+
     @RequestMapping("/Admin")
     public String getAdminPage(Model model){
-    model.addAttribute("allProducts",adminService.getAllProducts());
-       return "Frontend/Admin/Admin";
+        model.addAttribute("allProducts",adminService.getAllProducts());
+        return "Frontend/Admin/Admin";
     }
 
-     @RequestMapping("/Admin/Products")
+    @RequestMapping("/Admin/Products")
     public String getAllProducts(Model model){
-    model.addAttribute("allProducts",adminService.getAllProducts());
-       return "Frontend/Admin/Products";
-    }   
-     @RequestMapping("/Admin/Users")
-    public String getAllUsers(Model model){
-    model.addAttribute("allUsers",adminService.getAllUsers());
-       return "Frontend/Admin/Users";
-        
-    }   
-          @RequestMapping(path="/Admin/addProduct", method={RequestMethod.POST,RequestMethod.PUT})
-    public String addRequestTeam(@ModelAttribute ("Product")Product product,@RequestParam Map<String, String> allRequestParams){
-        userService.addProduct(product);
-       return "redirect:/Admin";
-        
+        model.addAttribute("allProducts",adminService.getAllProducts());
+        return "Frontend/Admin/Products";
     }
-         @RequestMapping(path="/Admin/addUser", method={RequestMethod.POST,RequestMethod.PUT})
+    @RequestMapping("/Admin/Users")
+    public String getAllUsers(Model model){
+        model.addAttribute("allUsers",adminService.getAllUsers());
+        return "Frontend/Admin/Users";
+
+    }
+    @RequestMapping(path="/Admin/addProduct", method={RequestMethod.POST})
+    public String addRequestTeam(@ModelAttribute ("product")Product product,@RequestParam Map<String, String> allRequestParams){
+
+        System.out.println(product.getTitle());
+        System.out.println(product.getCategoryId());
+        System.out.println(product.getProductUrl());
+        System.out.println(product.getPrice());
+        System.out.println(product.getContent());
+        System.out.println(product.getDiscount());
+        System.out.println(product.getPublishedAt());
+        System.out.println(product.getType());
+        System.out.println(product.getSummary());
+        System.out.println(product.getProductId());
+        System.out.println(product.getUserId());
+        userService.addProduct(product);
+        return "redirect:/Admin";
+
+    }
+    @RequestMapping(path="/Admin/addUser", method={RequestMethod.POST,RequestMethod.PUT})
     public String addRequestTeam(@ModelAttribute ("User")User user,@RequestParam Map<String, String> allRequestParams){
         userService.addUser(user);
-       return "redirect:/Admin";
-        
+        return "redirect:/Admin";
+
     }
-      
+
     @RequestMapping("/Admin/{userId}")
     public String getUserPage(Model model, @PathVariable Integer userId){
 
@@ -59,10 +71,10 @@ public class AdminController {
         return "Frontend/Admin/IndividualUser";
     }
 
-    
-      @RequestMapping("/Admin/Orders")
+
+    @RequestMapping("/Admin/Orders")
     public String getAllOrders(Model model){
-    model.addAttribute("allOrders", adminService.getAllOrders());
-       return "Frontend/Admin/Orders";
-    }  
+        model.addAttribute("allOrders", adminService.getAllOrders());
+        return "Frontend/Admin/Orders";
+    }
 }
