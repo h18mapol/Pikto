@@ -32,6 +32,11 @@ public class UserService {
     public User getUserById(int userId){
         return userCrud.getUserById(userId);
     }
+    
+     public void addUser(User user){
+        userCrud.addUser(user);
+    }
+
 
     //Product Methods
     public List<Product>getAllUserProducts(int userId){

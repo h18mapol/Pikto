@@ -8,6 +8,15 @@ public class Product {
     private String title;
     private String summary;
     private String content;
+    private String category;
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
     private String productUrl;
     private String publishedAt;
     private float price;
