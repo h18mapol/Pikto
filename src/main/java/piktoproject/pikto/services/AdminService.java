@@ -47,7 +47,7 @@ public class AdminService {
     return adminCrud.getAllProducts();
     }
     public List<Product>getAllProductsbyId(int userId){
-        return adminCrud.getAllProductsById(userId);
+        return adminCrud.getAllUserProducts(userId);
     }
     public Product getProduct(int productId){
         return adminCrud.getProduct(productId);
@@ -68,7 +68,7 @@ public class AdminService {
         return adminCrud.getAllReviews();
     }
     public List<Product_review>getAllReviewsById(int userId){
-        return adminCrud.getAllReviewsById(userId);
+        return adminCrud.getAllUserReviews(userId);
     }
     public Product_review getReview(int reviewId){
         return adminCrud.getReview(reviewId);
@@ -84,7 +84,7 @@ public class AdminService {
     }
 
     //Orders
-    public List<Order>getAllOrdersById(int userId){return adminCrud.getAllOrdersById(userId);}
+    public List<Order>getAllOrdersById(int userId){return adminCrud.getAllUserOrders(userId);}
     public Order getOrder(int orderId){
         return adminCrud.getOrderById(orderId);
     }

@@ -16,9 +16,9 @@ public class UserController {
 
 
     @RequestMapping("/User/{userId}/Products")
-    public String getUserAllProducts(Model model, @PathVariable Integer userId){
-        model.addAttribute("allProducts",userService.getAllProducts(userId));
-        System.out.println(userService.getAllProducts(userId).get(0).getProductId()); //Funkar
+    public String getAllUserProducts(Model model, @PathVariable Integer userId){
+        model.addAttribute("allProducts",userService.getAllUserProducts(userId));
+        System.out.println(userService.getAllUserReviews(userId).get(0).getProductId()); //Funkar
         return "urlview";
     }
 
@@ -37,16 +37,16 @@ public class UserController {
     }
 
     @RequestMapping("/User/{userId}/Reviews")
-    public String getAllReviews(Model model, @PathVariable Integer userId){
-        model.addAttribute("reviews",userService.getAllReviews(userId));
-        System.out.println(userService.getAllReviews(userId).get(0).getTitle());
+    public String getAllUserReviews(Model model, @PathVariable Integer userId){
+        model.addAttribute("reviews",userService.getAllUserReviews(userId));
+        System.out.println(userService.getAllUserReviews(userId).get(0).getTitle());
         return "getreview";
     }
 
     @RequestMapping("/User/{userId}/Orders")
-    public String getAllOrders(Model model, @PathVariable Integer userId){
-        model.addAttribute("orders",userService.getAllOrders(userId));
-        System.out.println(userService.getAllOrders(userId).get(0).getFirstName());
+    public String getAllUserOrders(Model model, @PathVariable Integer userId){
+        model.addAttribute("orders",userService.getAllUserOrders(userId));
+        System.out.println(userService.getAllUserOrders(userId).get(0).getFirstName());
         return "getorders";
     }
 

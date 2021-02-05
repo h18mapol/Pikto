@@ -15,20 +15,20 @@ public interface IUserCrud{
     void addUser(User user);
 
     //Products
-    List<Product>getAllProductsById(int userId);
+    List<Product>getAllUserProducts(int userId);
     Product getProduct(int productId);
     Product updateProduct(Product product);
     void deleteProduct(int productId);
     void addProduct(Product product);
 
     //Reviews
-    List<Product_review>getAllReviewsById(int userId);
+    List<Product_review>getAllUserReviews(int userId);
     Product_review getReview(int reviewId);
     Product_review updateReview(Product_review product_review);
     void deleteReview(int reviewId);
 
     //Orders
-    List<Order>getAllOrdersById(int userId);
+    List<Order>getAllUserOrders(int userId);
     Order getOrderById(int orderId);
     Order updateOrder(Order order);
     void DeleteOrder(int orderId);

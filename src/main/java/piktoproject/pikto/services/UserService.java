@@ -34,8 +34,8 @@ public class UserService {
     }
 
     //Product Methods
-    public List<Product>getAllProducts(int userId){
-        return userCrud.getAllProductsById(userId);
+    public List<Product>getAllUserProducts(int userId){
+        return userCrud.getAllUserProducts(userId);
     }
     public Product getProduct(int productId){
         return userCrud.getProduct(productId);
@@ -51,8 +51,8 @@ public class UserService {
     }
 
     //Review Methods
-    public List<Product_review>getAllReviews(int userId){
-        return userCrud.getAllReviewsById(userId);
+    public List<Product_review>getAllUserReviews(int userId){
+        return userCrud.getAllUserReviews(userId);
     }
     public Product_review getReview(int reviewId){
         return userCrud.getReview(reviewId);
@@ -65,8 +65,8 @@ public class UserService {
     }
 
     //Order Methods
-    public List<Order> getAllOrders(int userId){
-        return userCrud.getAllOrdersById(userId);
+    public List<Order> getAllUserOrders(int userId){
+        return userCrud.getAllUserOrders(userId);
     }
 }
 
