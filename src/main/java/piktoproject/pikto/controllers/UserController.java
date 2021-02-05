@@ -35,7 +35,7 @@ public class UserController {
     @RequestMapping("/User/Product/{productId}")
     public String getProduct(Model model, @PathVariable Integer productId){
         model.addAttribute("product",userService.getProduct(productId));
-        System.out.println(userService.getProduct(productId).getProductId());
+        System.out.println(userService.getProduct(productId).getCategoryId());
         return "getproduct";
     }
 

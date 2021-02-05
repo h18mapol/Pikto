@@ -114,14 +114,16 @@ public class UserCrud implements IUserCrud {
         try{
             con = DriverManager.getConnection("jdbc:mysql://localhost:3306/piktodb?serverTimezone=UTC", "root", "");
 
-            String sqlgetAllProducts = "SELECT * FROM product WHERE userId = ?";
+            String sqlgetAllProducts = "SELECT * \n" +
+                    "FROM product\n" +
+                    "INNER JOIN product_category ON product.productId=product_category.productId\n" +
+                    "WHERE userId = ?";
             PreparedStatement statement = con.prepareStatement(sqlgetAllProducts);
             statement.setInt(1, userId);
 
             ResultSet resultSet = statement.executeQuery();
 
             while (resultSet.next()) {
-                System.out.println(resultSet.getInt("productId"));
                 Product product = new Product();
                 product.setProductId(resultSet.getInt("productId"));
                 product.setUserId(resultSet.getInt("userId"));
@@ -133,6 +135,7 @@ public class UserCrud implements IUserCrud {
                 product.setPublishedAt(resultSet.getString("publishedAt"));
                 product.setContent(resultSet.getString("content"));
                 product.setProductUrl(resultSet.getString("productUrl"));
+                product.setCategoryId(resultSet.getInt("categoryId"));
                 products.add(product);
             } //End while
             resultSet.close();
@@ -161,7 +164,6 @@ public class UserCrud implements IUserCrud {
             ResultSet resultSet = statement.executeQuery();
 
             while (resultSet.next()) {
-                System.out.println(resultSet.getInt("productId"));
                 Product product = new Product();
                 product.setProductId(resultSet.getInt("productId"));
                 product.setUserId(resultSet.getInt("userId"));
@@ -172,6 +174,7 @@ public class UserCrud implements IUserCrud {
                 product.setDiscount(resultSet.getInt("discount"));
                 product.setPublishedAt(resultSet.getString("publishedAt"));
                 product.setContent(resultSet.getString("content"));
+                product.setCategoryId(resultSet.getInt("categoryId"));
                 product.setProductUrl(resultSet.getString("productUrl"));
                 products.add(product);
             } //End while
@@ -187,12 +190,13 @@ public class UserCrud implements IUserCrud {
     } //Klar
     @Override
     public Product getProduct(int productId) {
-
-        List<Product> products = new ArrayList<>();
         try{
             con = DriverManager.getConnection("jdbc:mysql://localhost:3306/piktodb?serverTimezone=UTC", "root", "");
 
-            String sqlgetAllProducts = "SELECT * FROM product WHERE productId = ?";
+            String sqlgetAllProducts = "SELECT * \n" +
+                    "FROM product\n" +
+                    "INNER JOIN product_category ON product.productId=product_category.productId\n" +
+                    "WHERE product.productId = ?";
             PreparedStatement statement = con.prepareStatement(sqlgetAllProducts);
             statement.setInt(1, productId);
 
@@ -207,6 +211,8 @@ public class UserCrud implements IUserCrud {
                 product.setType(resultSet.getInt("type"));
                 product.setPrice(resultSet.getInt("price"));
                 product.setDiscount(resultSet.getInt("discount"));
+                product.setContent(resultSet.getString("content"));
+                product.setCategoryId(resultSet.getInt("categoryId"));
                 product.setPublishedAt(resultSet.getString("publishedAt"));
                 product.setProductUrl(resultSet.getString("productUrl"));
             } //End while
@@ -243,7 +249,7 @@ public class UserCrud implements IUserCrud {
     public void addProduct(Product product) {
         try{
             con=DriverManager.getConnection("jdbc:mysql://localhost:3306/piktodb?serverTimezone=UTC","root","");
-            String sqlAddUser = "SELECT add_product(?,?,?,?,?,?,?,?)";
+            String sqlAddUser = "SELECT add_product(?,?,?,?,?,?,?,?,?)";
             PreparedStatement statement = con.prepareStatement(sqlAddUser);
             statement.setInt (1, product.getUserId());
             statement.setString(2, product.getTitle());
