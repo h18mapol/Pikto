@@ -18,6 +18,18 @@ public class AdminController {
     @Autowired
     private UserService userService;
 
+    @RequestMapping("/")
+    public String getStart(Model model){
+        model.addAttribute("user",adminService.getUser(14));
+        return "Frontend/Main/Index";
+    }
+
+    @RequestMapping("/Index")
+    public String getIndexPage(Model model){
+        model.addAttribute("user",adminService.getUser(14));
+        return "Frontend/Main/Index";
+    }
+
     @RequestMapping("/Admin")
     public String getAdminPage(Model model){
         model.addAttribute("allProducts",adminService.getAllProducts());
