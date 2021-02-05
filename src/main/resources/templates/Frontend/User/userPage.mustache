@@ -7,7 +7,7 @@
         <meta name="description" content="" />
         <meta name="author" content="" />
         <title>Dashboard - SB Admin</title>
-        <link href="/css/Admin/styles.css" rel="stylesheet" />
+        <link href="/css/User/userstyles.css" rel="stylesheet" />
         <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js" crossorigin="anonymous"></script>
     </head>
@@ -39,34 +39,55 @@
         </nav>
         <div id="layoutSidenav">
             <div id="layoutSidenav_nav">
+
                 <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+                   
                     <div class="sb-sidenav-menu">
+                    
+                    <div class="profile-userpic">
+                    
+					<img src="https://scontent.fbma2-1.fna.fbcdn.net/v/t1.0-9/17796707_10155264022745159_8129848447376750595_n.jpg?_nc_cat=111&ccb=2&_nc_sid=174925&_nc_ohc=njmSzJq0HE8AX_RWY6P&_nc_ht=scontent.fbma2-1.fna&oh=ae2a9a187954f17fe489be1522d04e9e&oe=60448624" class="img-responsive" style="display:block; margin: 0 auto; padding-top: 20px; ">
+				</div>
+			
+				<div class="profile-usertitle">
+					<div class="profile-usertitle-name" >
+						{{user.firstName}}
+            <div class="profile-usertitle-name" >
+						{{user.lastName}}
+            <div class="profile-usertitle-name" >
+						{{user.email}}
+					<div class="profile-usertitle-job">
+							{{user.mobileNr}}
+					</div>
+				</div>
+        	</div>
+          	</div>
+				<div class="profile-userbuttons">
+				</div>
                         <div class="nav">
                            <div class="sb-sidenav-menu-heading">Admin</div>
-                            <a class="nav-link" href="http://localhost:8888/Admin">
+                            <a class="nav-link" href="http://localhost:8888/User/{{user.userId}}">
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 Dashboard
                             </a>
-                            <a class="nav-link" href="http://localhost:8888/Admin/Products">
+                            <a class="nav-link" href="http://localhost:8888/User/Checkout/{{user.userId}}">
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                                Products
-                            </a>
-                            <a class="nav-link" href="http://localhost:8888/Admin/Users">
-                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                                Users
+                                Cart
                             </a>
                           
-                            <a class="nav-link" href="http://localhost:8888/Admin/Orders">
-                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                                Orders
-                            </a>
                         </div>
                     </div>
-                    <div class="sb-sidenav-footer">
-                        <div class="small">Logged in as:</div>
-                        Start Bootstrap
+                     </div>
+               <div class="sb-sidenav-footer">
+          <a data-toggle="modal" data-target="#editModal">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-gear" viewBox="0 0 16 16">
+         <path d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492zM5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0z"/>
+        <path d="M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52l-.094-.319zm-2.633.283c.246-.835 1.428-.835 1.674 0l.094.319a1.873 1.873 0 0 0 2.693 1.115l.291-.16c.764-.415 1.6.42 1.184 1.185l-.159.292a1.873 1.873 0 0 0 1.116 2.692l.318.094c.835.246.835 1.428 0 1.674l-.319.094a1.873 1.873 0 0 0-1.115 2.693l.16.291c.415.764-.42 1.6-1.185 1.184l-.291-.159a1.873 1.873 0 0 0-2.693 1.116l-.094.318c-.246.835-1.428.835-1.674 0l-.094-.319a1.873 1.873 0 0 0-2.692-1.115l-.292.16c-.764.415-1.6-.42-1.184-1.185l.159-.291A1.873 1.873 0 0 0 1.945 8.93l-.319-.094c-.835-.246-.835-1.428 0-1.674l.319-.094A1.873 1.873 0 0 0 3.06 4.377l-.16-.292c-.415-.764.42-1.6 1.185-1.184l.292.159a1.873 1.873 0 0 0 2.692-1.115l.094-.319z"/>
+         </svg>
+         </a>
                     </div>
-                </nav>
+                    </nav>
+               
             </div>
             <div id="layoutSidenav_content">
                 <main>
@@ -76,83 +97,25 @@
                             <li class="breadcrumb-item active">Userprofile</li>
                         </ol>
                         <div class="row">
-                            <div class="col-xl-3 col-md-6">
-                                <div class="card mb-3">                                    
-                                    <div class="card-body">User data</div>
-                                    <form method="POST" action="/Events/Admin/manuallyAdd">
-                                    <div class="form-group row">
-                                        <label for="text" class="col-4 col-form-label">Note</label> 
-                                        <div class="col-8">
-                                          <input name="note" type="text" class="form-control">
-                                        </div>
-                                      </div> 
-                                      <form method="POST" action="/Events/Admin/manuallyAdd">
-                                        <div class="form-group row">
-                                          <label for="text2" class="col-4 col-form-label">Team name</label> 
-                                          <div class="col-8">
-                                            <input name="name" type="text" class="form-control">
-                                          </div>
-                                        </div>
-                                        <div class="form-group row">
-                                          <label for="text" class="col-4 col-form-label">City</label> 
-                                          <div class="col-8">
-                                            <input name="city" type="text" class="form-control">
-                                          </div>
-                                        </div> 
-                                    <div class="form-group row">
-                                        <label for="text" class="col-4 col-form-label">Payment recieved?</label> 
-                                        <div class="col-8">
-                                    <div class="form-check">
-                                     <input class="form-check-input" type="radio" name="paid" id="exampleRadios1" value="1" checked>
-                                      <label class="form-check-label" for="exampleRadios1">
-                                    Yes
-                                      </label>
-                                    <div class="form-check">
-                                      </div>
-                                     <input class="form-check-input" type="radio" name="paid" id="exampleRadios2" value="0">
-                                      <label class="form-check-label" for="exampleRadios2">
-                                       No
-                                      </label>
-                                        </div>
-                                      </div> 
-                                    </div>
-                                    
-                                    <div class="form-group row">
-                                        <label for="text" class="col-4 col-form-label">N.O players</label> 
-                                        <div class="col-8">
-                                          <input name="number" type="text" class="form-control">
-                                        </div>
-                                      </div> 
-                                       <div class="form-group row">
-                                        <div class="col-8">
-                                        </div>
-                                      </div>
-                                      <div class="form-group row">
-                                         <div class="col-8">
-                                          <button name="submit" type="submit" class="btn btn-primary">Add team</button>
-                                        </div>
-                                      </div>
-                                    </form>
+                                
                                   
-                                        </div>
-
-                            </div>
-
-                            <div class="col-xl-4 col-md-6">
+                                 
+                             <div class="col-xl-6">
+                                <div class="card mb-4">
                                         <div class="card-header">
                                             <i class="fas fa-chart-bar mr-1"></i>
                                             User orders
                                         </div>
-                                        <div class="card-body"><canvas id="myBarChart" width="100%" height="70"></canvas></div>
+                                        <div class="card-body"><canvas id="myBarChart" width="100%" height="40"></canvas></div>
                                 </div>
-
-                            <div class="col-xl-4 col-md-6">
-                                    <div class="card mb-4">
+                            </div>
+                            <div class="col-xl-6">
+                                <div class="card mb-4">
                                         <div class="card-header">
                                             <i class="fas fa-chart-area mr-1"></i>
                                             User spending
                                         </div>
-                                        <div class="card-body"><canvas id="myAreaChart" width="100%" height="70"></canvas></div>
+                                        <div class="card-body"><canvas id="myAreaChart" width="100%" height="40"></canvas></div>
                                     </div>
                             </div>
                         </div>
@@ -418,6 +381,129 @@
                     </div>
                 </div>
                 </main>
+
+   <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+       <div class="card card-outline-secondary">
+                        <div class="card-header">
+                            <h3 class="mb-0">Edit user</h3>
+                        </div>
+        <div class="card-body">
+
+       
+        <form method="POST" action="/User/updateProfile">
+        <div class="form-group">
+    <label for="exampleInputEmail1">Firstname</label>
+    <input type="text" class="form-control" id="exampleInputEmail1" name ="firstName" aria-describedby="emailHelp" value="{{user.firstName}}">
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPassword1">Lastname</label>
+    <input type="text" class="form-control" id="exampleInputPassword1" name ="lastName" value="{{user.lastName}}">
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPassword1">Phonenumber</label>
+    <input type="text" class="form-control" id="exampleInputPassword1" name ="mobileNr"value="{{user.mobileNr}}">
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPassword1">Email</label>
+    <input type="text" class="form-control" id="exampleInputPassword1" name ="email" value="{{user.email}}">
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPassword1">Profile pictureURL</label>
+    <input type="text" class="form-control" id="exampleInputPassword1" name ="pictureUrl" value="{{user.pictureUrl}}">
+  </div>
+  <div class="form-group form-check">
+    <input type="checkbox" class="form-check-input" id="exampleCheck1">
+    <label class="form-check-label" for="exampleCheck1">Check me out</label>
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+ <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+</form>
+                                </div>
+
+
+
+      </div>
+       </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+   <div class="modal fade" id="editPassword" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Update profile</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="card-body">
+               
+
+<div class="card card-outline-secondary">
+                        <div class="card-header">
+                            <h3 class="mb-0">Change Password</h3>
+                        </div>
+                        <div class="card-body">
+                            <form class="form" role="form" autocomplete="off">
+                                <div class="form-group">
+                                    <label for="inputPasswordOld">Current Password</label>
+                                    <input type="password" class="form-control" id="inputPasswordOld" required="">
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputPasswordNew">New Password</label>
+                                    <input type="password" class="form-control" id="inputPasswordNew" required="">
+                                    <span class="form-text small text-muted">
+                                            The password must be 8-20 characters, and must <em>not</em> contain spaces.
+                                        </span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputPasswordNewVerify">Verify</label>
+                                    <input type="password" class="form-control" id="inputPasswordNewVerify" required="">
+                                    <span class="form-text small text-muted">
+                                            To confirm, type the new password again.
+                                        </span>
+                                </div>
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-success btn-lg float-right">Save</button>
+</div>
+                            </form>
+                        </div>
+                    </div>
+
+
+      </div>
+          </div>
+     
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+ 
+</div>
+
+
+
+
                 <footer class="py-4 bg-light mt-auto">
                     <div class="container-fluid">
                         <div class="d-flex align-items-center justify-content-between small">
