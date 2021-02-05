@@ -27,6 +27,7 @@ public class AdminController {
     @RequestMapping("/Admin/Products")
     public String getAllProducts(Model model){
         model.addAttribute("allProducts",adminService.getAllProducts());
+        System.out.println(adminService.getAllProducts().get(0).getContent());
         return "Frontend/Admin/Products";
     }
     @RequestMapping("/Admin/Users")
@@ -36,7 +37,7 @@ public class AdminController {
 
     }
     @RequestMapping(path="/Admin/addProduct", method={RequestMethod.POST})
-    public String addRequestTeam(@ModelAttribute ("product")Product product,@RequestParam Map<String, String> allRequestParams){
+    public String addProduct(@ModelAttribute ("product")Product product,@RequestParam Map<String, String> allRequestParams){
 
         System.out.println(product.getTitle());
         System.out.println(product.getCategoryId());
@@ -53,11 +54,12 @@ public class AdminController {
         return "redirect:/Admin";
 
     }
+
+
     @RequestMapping(path="/Admin/addUser", method={RequestMethod.POST,RequestMethod.PUT})
-    public String addRequestTeam(@ModelAttribute ("User")User user,@RequestParam Map<String, String> allRequestParams){
+    public String addUser(@ModelAttribute ("User")User user,@RequestParam Map<String, String> allRequestParams){
         userService.addUser(user);
         return "redirect:/Admin";
-
     }
 
     @RequestMapping("/Admin/{userId}")
