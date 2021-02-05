@@ -2,10 +2,7 @@ package piktoproject.pikto.repositorys;
 
 import java.util.List;
 
-import piktoproject.pikto.models.Order;
-import piktoproject.pikto.models.Product;
-import piktoproject.pikto.models.Product_review;
-import piktoproject.pikto.models.User;
+import piktoproject.pikto.models.*;
 
 public interface IUserCrud{
     //User
@@ -24,12 +21,21 @@ public interface IUserCrud{
     //Reviews
     List<Product_review>getAllUserReviews(int userId);
     Product_review getReview(int reviewId);
+    void addReview(Product_review product_review);
     Product_review updateReview(Product_review product_review);
     void deleteReview(int reviewId);
 
     //Orders
     List<Order>getAllUserOrders(int userId);
+    void addOrder(Order order);
     Order getOrderById(int orderId);
     Order updateOrder(Order order);
     void DeleteOrder(int orderId);
+
+    //Category
+    List<Category>getAllCategories();
+    void addCategory(Category category);
+    Order getCategoryById(int categoryId);
+    Order updateCategory(int categoryId);
+    void DeleteCategory(int categoryId);
 }

@@ -1,10 +1,7 @@
 package piktoproject.pikto.repositorys;
 
 import org.springframework.stereotype.Repository;
-import piktoproject.pikto.models.Order;
-import piktoproject.pikto.models.Product;
-import piktoproject.pikto.models.Product_review;
-import piktoproject.pikto.models.User;
+import piktoproject.pikto.models.*;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -204,7 +201,7 @@ public class UserCrud implements IUserCrud {
     public void addProduct(Product product) {
         try{
             con=DriverManager.getConnection("jdbc:mysql://localhost:3306/piktodb?serverTimezone=UTC","root","");
-            String sqlAddUser = "INSERT INTO product (title,userId, summary, type, price, discount,category,productUrl) VALUES(?,?,?,?,?,?,?,?)";
+            String sqlAddUser = "INSERT INTO product (title,userId, summary, type, price, discount,productUrl) VALUES(?,?,?,?,?,?,?)";
             PreparedStatement statement = con.prepareStatement(sqlAddUser);
             statement.setString(1, product.getTitle());
             statement.setInt (2, product.getUserId());
@@ -212,9 +209,7 @@ public class UserCrud implements IUserCrud {
             statement.setInt(4, product.getType());
             statement.setFloat(5, product.getPrice());
             statement.setFloat(6, product.getDiscount());
-            statement.setString(7, product.getCategory());
-            System.out.println(product.getCategory());
-            statement.setString(8, product.getProductUrl());
+            statement.setString(7, product.getProductUrl());
             statement.executeUpdate();
 
             statement.close();
@@ -262,6 +257,12 @@ public class UserCrud implements IUserCrud {
     public Product_review getReview(int reviewId) {
         return null;
     }
+
+    @Override
+    public void addReview(Product_review product_review) {
+
+    }
+
     @Override
     public Product_review updateReview(Product_review product_review) {
         return null;
@@ -318,6 +319,12 @@ public class UserCrud implements IUserCrud {
         }//End getTeamById
         return null;
     } //Klar
+
+    @Override
+    public void addOrder(Order order) {
+
+    }
+
     @Override
     public Order getOrderById(int orderId) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -328,6 +335,31 @@ public class UserCrud implements IUserCrud {
     }
     @Override
     public void DeleteOrder(int orderId) {
+
+    }
+
+    @Override
+    public List<Category> getAllCategories() {
+        return null;
+    }
+
+    @Override
+    public void addCategory(Category category) {
+
+    }
+
+    @Override
+    public Order getCategoryById(int categoryId) {
+        return null;
+    }
+
+    @Override
+    public Order updateCategory(int categoryId) {
+        return null;
+    }
+
+    @Override
+    public void DeleteCategory(int categoryId) {
 
     }
 }
