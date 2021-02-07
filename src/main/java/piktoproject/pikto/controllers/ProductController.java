@@ -16,13 +16,14 @@ public class ProductController {
 
  @Autowired
  private ShoppingService productService;
+
 @Autowired
   private UserService userService;
     @RequestMapping("/login")
     public String loginUser(Model model){
         String userName = "Marcus";
         model.addAttribute("userName", userName);
-        return "urlview2";
+        return "hello";
     }
     
     
@@ -35,7 +36,6 @@ public class ProductController {
        @RequestMapping("/")
     public String getIndex(Model model){
         model.addAttribute("allProducts",adminService.getAllProducts());
-   
         return "Frontend/Main/Index";
     }
     

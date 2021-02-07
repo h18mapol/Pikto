@@ -18,7 +18,6 @@ public class AdminController {
     @Autowired
     private UserService userService;
 
-    
 
 
     @RequestMapping("/Admin/{userId}")
