@@ -14,6 +14,7 @@ public class ShoppingFunctions implements IShoppingFunctions {
     public List<CartItem> getAllCartItems(Cart cart) {
         return null;
     }
+    
 
     @Override
     public void addToCart(CartItem cartItem) {

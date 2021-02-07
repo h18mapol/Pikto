@@ -7,7 +7,7 @@
         <meta name="description" content="" />
         <meta name="author" content="" />
         <title>Dashboard - SB Admin</title>
-        <link href="/css/Admin/styles.css" rel="stylesheet" />
+        <link href="/css/User/userstyles.css" rel="stylesheet" />
         <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js" crossorigin="anonymous"></script>
     </head>
@@ -41,6 +41,32 @@
             <div id="layoutSidenav_nav">
                 <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
                     <div class="sb-sidenav-menu">
+
+
+                    <div class="profile-userpic">
+                    
+					<img src="https://scontent.fbma2-1.fna.fbcdn.net/v/t1.0-9/17796707_10155264022745159_8129848447376750595_n.jpg?_nc_cat=111&ccb=2&_nc_sid=174925&_nc_ohc=njmSzJq0HE8AX_RWY6P&_nc_ht=scontent.fbma2-1.fna&oh=ae2a9a187954f17fe489be1522d04e9e&oe=60448624" class="img-responsive" style="display:block; margin: 0 auto; padding-top: 20px; ">
+				</div>
+			
+				<div class="profile-usertitle">
+					<div class="profile-usertitle-name" >
+						{{userData.firstName}}
+            <div class="profile-usertitle-name" >
+						{{userData.lastName}}
+            <div class="profile-usertitle-name" >
+						{{userData.email}}
+					<div class="profile-usertitle-job">
+							{{userData.mobileNr}}
+					</div>
+				</div>
+        	</div>
+          	</div>
+				<div class="profile-userbuttons">
+				</div>
+
+
+
+
                         <div class="nav">
                            <div class="sb-sidenav-menu-heading">Admin</div>
                             <a class="nav-link" href="http://localhost:8888/Admin">
@@ -76,83 +102,24 @@
                             <li class="breadcrumb-item active">Userprofile</li>
                         </ol>
                         <div class="row">
-                            <div class="col-xl-3 col-md-6">
-                                <div class="card mb-3">                                    
-                                    <div class="card-body">User data</div>
-                                    <form method="POST" action="/Events/Admin/manuallyAdd">
-                                    <div class="form-group row">
-                                        <label for="text" class="col-4 col-form-label">Note</label> 
-                                        <div class="col-8">
-                                          <input name="note" type="text" class="form-control">
-                                        </div>
-                                      </div> 
-                                      <form method="POST" action="/Events/Admin/manuallyAdd">
-                                        <div class="form-group row">
-                                          <label for="text2" class="col-4 col-form-label">Team name</label> 
-                                          <div class="col-8">
-                                            <input name="name" type="text" class="form-control">
-                                          </div>
-                                        </div>
-                                        <div class="form-group row">
-                                          <label for="text" class="col-4 col-form-label">City</label> 
-                                          <div class="col-8">
-                                            <input name="city" type="text" class="form-control">
-                                          </div>
-                                        </div> 
-                                    <div class="form-group row">
-                                        <label for="text" class="col-4 col-form-label">Payment recieved?</label> 
-                                        <div class="col-8">
-                                    <div class="form-check">
-                                     <input class="form-check-input" type="radio" name="paid" id="exampleRadios1" value="1" checked>
-                                      <label class="form-check-label" for="exampleRadios1">
-                                    Yes
-                                      </label>
-                                    <div class="form-check">
-                                      </div>
-                                     <input class="form-check-input" type="radio" name="paid" id="exampleRadios2" value="0">
-                                      <label class="form-check-label" for="exampleRadios2">
-                                       No
-                                      </label>
-                                        </div>
-                                      </div> 
-                                    </div>
-                                    
-                                    <div class="form-group row">
-                                        <label for="text" class="col-4 col-form-label">N.O players</label> 
-                                        <div class="col-8">
-                                          <input name="number" type="text" class="form-control">
-                                        </div>
-                                      </div> 
-                                       <div class="form-group row">
-                                        <div class="col-8">
-                                        </div>
-                                      </div>
-                                      <div class="form-group row">
-                                         <div class="col-8">
-                                          <button name="submit" type="submit" class="btn btn-primary">Add team</button>
-                                        </div>
-                                      </div>
-                                    </form>
-                                  
-                                        </div>
+                        
 
-                            </div>
-
-                            <div class="col-xl-4 col-md-6">
+                            <div class="col-xl-6">
+                                <div class="card mb-4">
                                         <div class="card-header">
                                             <i class="fas fa-chart-bar mr-1"></i>
                                             User orders
                                         </div>
-                                        <div class="card-body"><canvas id="myBarChart" width="100%" height="70"></canvas></div>
+                                        <div class="card-body"><canvas id="myBarChart" width="100%" height="40"></canvas></div>
                                 </div>
-
-                            <div class="col-xl-4 col-md-6">
-                                    <div class="card mb-4">
+                              </div>
+                             <div class="col-xl-6">
+                                <div class="card mb-4">
                                         <div class="card-header">
                                             <i class="fas fa-chart-area mr-1"></i>
                                             User spending
                                         </div>
-                                        <div class="card-body"><canvas id="myAreaChart" width="100%" height="70"></canvas></div>
+                                        <div class="card-body"><canvas id="myAreaChart" width="100%" height="40"></canvas></div>
                                     </div>
                             </div>
                         </div>

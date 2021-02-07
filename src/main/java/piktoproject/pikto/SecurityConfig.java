@@ -7,16 +7,17 @@ import org.springframework.security.web.authentication.logout.SecurityContextLog
 
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-    @Override
+  @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
-        httpSecurity
-                .antMatcher("/**").authorizeRequests()
-                .antMatchers("/Admin").permitAll()
-                .anyRequest().authenticated()
-                .and()
-                .oauth2Login();
-        httpSecurity.logout()
-                .logoutUrl("/logout/")
-                .addLogoutHandler(new SecurityContextLogoutHandler());
-    }
+       httpSecurity
+               .antMatcher("/bajs").authorizeRequests()
+               .antMatchers("/Admin").permitAll()
+
+               .anyRequest().authenticated()
+             .and()
+              .oauth2Login();
+       httpSecurity.logout()
+              .logoutUrl("/logout/")
+             .addLogoutHandler(new SecurityContextLogoutHandler());
+  }
 }

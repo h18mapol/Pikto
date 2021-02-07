@@ -7,7 +7,7 @@
     <meta name="description" content="" />
     <meta name="author" content="" />
     <title>Admin Dashboard</title>
-    <link href="/css/Admin/styles.css" rel="stylesheet" />
+    <link href="/css/User/userstyles.css" rel="stylesheet" />
     <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js" crossorigin="anonymous"></script>
 </head>
@@ -34,112 +34,6 @@
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="login.html">Logout</a>
             </div>
-<<<<<<< HEAD
-            <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
-        <div class="card-body">
-
-
-           <div class="row">
-                            <div class="col-xl-6">
-                                <div class="card mb-4">
-                                 <div class="card-body">
-   <form method="POST" action="/Admin/addProduct">
-  <div class="form-group">
-    <label for="exampleInputEmail1">Product name</label>
-    <input type="text" name="title" class="form-control" id="exampleInputEmail1"  placeholder="Enter email">
-  </div>
-  <div class="form-group">
-    <label for="exampleInputPassword1">User id</label>
-    <input type="text" class="form-control" id="exampleInputPassword1"  name="userId" name="summary" placeholder="Password">
-  </div>
-  <div class="form-group">
-    <label for="exampleInputPassword1">Summary</label>
-    <input type="text" class="form-control" id="exampleInputPassword1" name="summary" placeholder="Password">
-  </div>
-  <div class="form-group">
-    <label for="exampleInputPassword1">Type</label>
-    <input type="text" class="form-control" name="type" id="exampleInputPassword1" placeholder="Password">
-  </div>
-  <div class="form-group">
-    <label for="exampleInputPassword1">Price</label>
-    <input type="text" class="form-control" name="price" id="exampleInputPassword1" placeholder="Password">
-  </div>
-  <div class="form-group">
-    <label for="exampleInputPassword1">Discount</label>
-    <input type="text" class="form-control" name="discount" id="exampleInputPassword1" placeholder="Password">
-  </div>
-  <div class="form-group">
-    <label for="exampleInputPassword1">Category</label>
-    <input type="text" class="form-control" name="categoryId" id="exampleInputPassword1" placeholder="Password">
-  </div>
-  <div class="form-group">
-    <label for="exampleInputPassword1">PictureURL</label>
-    <input type="text" class="form-control" id="exampleInputPassword1" name="productUrl" placeholder="Password">
-  </div>
-  <div class="form-group form-check">
-    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-    <label class="form-check-label" for="exampleCheck1">Check me out</label>
-  </div>
-  <button type="submit" class="btn btn-primary">Submit</button>
-</form>    
-            
-                                </div>
-                            </div>
-                            </div>
-                            <div class="col-xl-6">
-                            <div class="card mb-4">
-                            <div class="card-body">
-        <form method="POST" action="/Admin/addUser">
-        <div class="form-group">
-    <label for="exampleInputEmail1">Firstname</label>
-    <input type="text" class="form-control" id="exampleInputEmail1" name ="firstName" aria-describedby="emailHelp" placeholder="Enter email">
-  </div>
-  <div class="form-group">
-    <label for="exampleInputPassword1">Lastname</label>
-    <input type="text" class="form-control" id="exampleInputPassword1" name ="lastName" placeholder="Password">
-  </div>
-  <div class="form-group">
-    <label for="exampleInputPassword1">Phonenumber</label>
-    <input type="text" class="form-control" id="exampleInputPassword1" name ="mobileNr"placeholder="Password">
-  </div>
-  <div class="form-group">
-    <label for="exampleInputPassword1">Email</label>
-    <input type="text" class="form-control" id="exampleInputPassword1" name ="email" placeholder="Password">
-  </div>
-  <div class="form-group">
-    <label for="exampleInputPassword1">Password</label>
-    <input type="password" class="form-control" id="exampleInputPassword1" name ="password" placeholder="Password">
-  </div>
-  <div class="form-group">
-    <label for="exampleInputPassword1">Authority</label>
-    <input type="text" class="form-control" id="exampleInputPassword1" name ="admin" placeholder="Password">
-  </div>
-  <div class="form-group">
-    <label for="exampleInputPassword1">Profile pictureURL</label>
-    <input type="text" class="form-control" id="exampleInputPassword1" name ="pictureUrl" placeholder="Password">
-  </div>
-  <div class="form-group form-check">
-    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-    <label class="form-check-label" for="exampleCheck1">Check me out</label>
-  </div>
-  <button type="submit" class="btn btn-primary">Submit</button>
-</form>
-                                </div>
-                            </div>
-                        </div>
-
- 
-
-
-</div>
-</div>
-</div>
-</div>
-</div>
-    </div>   
-
-    
-=======
         </li>
     </ul>
 </nav>
@@ -147,8 +41,29 @@
     <div id="layoutSidenav_nav">
         <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
             <div class="sb-sidenav-menu">
+            
+                    <div class="profile-userpic">
+                    
+					<img src="https://scontent.fbma2-1.fna.fbcdn.net/v/t1.0-9/17796707_10155264022745159_8129848447376750595_n.jpg?_nc_cat=111&ccb=2&_nc_sid=174925&_nc_ohc=njmSzJq0HE8AX_RWY6P&_nc_ht=scontent.fbma2-1.fna&oh=ae2a9a187954f17fe489be1522d04e9e&oe=60448624" class="img-responsive" style="display:block; margin: 0 auto; padding-top: 20px; ">
+				</div>
+			
+				<div class="profile-usertitle">
+					<div class="profile-usertitle-name" >
+						{{userData.firstName}}
+            <div class="profile-usertitle-name" >
+						{{userData.lastName}}
+            <div class="profile-usertitle-name" >
+						{{userData.email}}
+					<div class="profile-usertitle-job">
+							{{userData.mobileNr}}
+					</div>
+				</div>
+        	</div>
+          	</div>
+				<div class="profile-userbuttons">
+				</div>
+
                 <div class="nav">
->>>>>>> 609d10ac687a4cff0d34dda38f5d99f5b8d4ae74
 
                     <div class="sb-sidenav-menu-heading">Admin</div>
                     <a class="nav-link" href="http://localhost:8888/Admin">

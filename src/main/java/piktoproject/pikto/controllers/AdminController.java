@@ -18,21 +18,14 @@ public class AdminController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping("/")
-    public String getStart(Model model){
-        model.addAttribute("user",adminService.getUser(14));
-        return "Frontend/Main/Index";
-    }
+ 
 
-    @RequestMapping("/Index")
-    public String getIndexPage(Model model){
-        model.addAttribute("user",adminService.getUser(14));
-        return "Frontend/Main/Index";
-    }
 
-    @RequestMapping("/Admin")
-    public String getAdminPage(Model model){
+
+    @RequestMapping("/Admin/{userId}")
+    public String getAdminPage(Model model, @PathVariable Integer userId){
         model.addAttribute("allProducts",adminService.getAllProducts());
+           model.addAttribute("userData",userService.getUserById(userId));
         return "Frontend/Admin/Admin";
     }
 
@@ -74,14 +67,13 @@ public class AdminController {
         return "redirect:/Admin";
     }
 
-    @RequestMapping("/Admin/{userId}")
+    @RequestMapping("/Admin/User/{userId}")
     public String getUserPage(Model model, @PathVariable Integer userId){
 
         model.addAttribute("userData",adminService.getUser(userId));
         model.addAttribute("userProducts",adminService.getAllProductsbyId(userId));
         model.addAttribute("userReviews",adminService.getAllReviewsById(userId));
         model.addAttribute("userOrders",adminService.getAllOrdersById(userId));
-
         return "Frontend/Admin/IndividualUser";
     }
 
