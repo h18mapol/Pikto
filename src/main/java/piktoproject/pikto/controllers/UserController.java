@@ -42,9 +42,10 @@ public class UserController {
     @RequestMapping("/User/{userId}")
     public String getUserById(Model model, @PathVariable Integer userId){
         model.addAttribute("user",userService.getUserById(userId));
-        System.out.println(userService.getUserById(userId).getFirstName());
-        return "getuser";
+        return "Frontend/User/userPage";
     }
+     
+
 
     @RequestMapping("/User/{userId}/Reviews")
     public String getAllUserReviews(Model model, @PathVariable Integer userId){

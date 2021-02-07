@@ -24,9 +24,10 @@ public class AdminController {
         return "Frontend/Main/Index";
     }
 
-    @RequestMapping("/Admin")
-    public String getAdminPage(Model model){
+    @RequestMapping("/Admin/{userId}")
+    public String getAdminPage(Model model, @PathVariable Integer userId){
         model.addAttribute("allProducts",adminService.getAllProducts());
+           model.addAttribute("userData",userService.getUserById(userId));
         return "Frontend/Admin/Admin";
     }
 
@@ -68,14 +69,13 @@ public class AdminController {
         return "redirect:/Admin";
     }
 
-    @RequestMapping("/Admin/{userId}")
+    @RequestMapping("/Admin/User/{userId}")
     public String getUserPage(Model model, @PathVariable Integer userId){
 
         model.addAttribute("userData",adminService.getUser(userId));
         model.addAttribute("userProducts",adminService.getAllProductsbyId(userId));
         model.addAttribute("userReviews",adminService.getAllReviewsById(userId));
         model.addAttribute("userOrders",adminService.getAllOrdersById(userId));
-
         return "Frontend/Admin/IndividualUser";
     }
 
