@@ -13,10 +13,10 @@ public class ProductController {
  @Autowired
  private ShoppingService productService;
 
-    @RequestMapping("/login")
+    @RequestMapping("/hello")
     public String loginUser(Model model){
         String userName = "Marcus";
         model.addAttribute("userName", userName);
-        return "urlview2";
+        return "hello";
     }
 }
