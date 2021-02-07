@@ -44,8 +44,6 @@ public class UserController {
         model.addAttribute("user",userService.getUserById(userId));
         return "Frontend/User/userPage";
     }
-     
-
 
     @RequestMapping("/User/{userId}/Reviews")
     public String getAllUserReviews(Model model, @PathVariable Integer userId){
