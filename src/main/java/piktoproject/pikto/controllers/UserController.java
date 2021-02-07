@@ -41,7 +41,11 @@ public class UserController {
 
     @RequestMapping("/User/{userId}")
     public String getUserById(Model model, @PathVariable Integer userId){
-        model.addAttribute("user",userService.getUserById(userId));
+                model.addAttribute("user",userService.getUserById(userId));
+        model.addAttribute("userOrders",userService.getAllUserOrders(userId));
+       model.addAttribute("userProducts",userService.getAllUserProducts(userId));
+       model.addAttribute("userReviews",userService.getAllUserReviews(userId));
+
         return "Frontend/User/userPage";
     }
      
