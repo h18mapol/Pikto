@@ -89,41 +89,38 @@
                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                 <thead>
                                 <tr>
-                                    <th>UserID</th>
-                                    <th>Firstname</th>
-                                    <th>Lastname</th>
-                                    <th>Mobilenumber</th>
-                                    <th>Email</th>
-                                    <th class="hide">admin</th>
-                                    <th class="hide">seller</th>
-                                    <th class="hide">pictureUrl</th>
+                                    <th>ReviewId</th>
+                                    <th>ProductId</th>
+                                    <th>Title</th>
+                                    <th>Rating</th>
+                                    <th>CreatedAt</th>
+                                    <th class="hide">Content</th>
+                                    <th>UserId</th>
                                 </tr>
                                 </thead>
                                 <tfoot>
                                 <tr>
-                                    <th>UserID</th>
-                                    <th>Firstname</th>
-                                    <th>Lastname</th>
-                                    <th>Mobilenumber</th>
-                                    <th>Email</th>
-                                    <th class="hide">admin</th>
-                                    <th class="hide">seller</th>
-                                    <th class="hide">pictureUrl</th>
+                                    <th>ReviewId</th>
+                                    <th>ProductId</th>
+                                    <th>Title</th>
+                                    <th>Rating</th>
+                                    <th>CreatedAt</th>
+                                    <th class="hide">Content</th>
+                                    <th>UserId</th>
                                 </tr>
                                 </tfoot>
                                 <tbody>
-                                {{#allUsers}}
+                                {{#allReviews}}
                                 <tr>
-                                    <td>{{userId}}</td>
-                                    <td>{{firstName}}</td>
-                                    <td>{{lastName}}</td>
-                                    <td>{{mobileNr}}</td>
-                                    <td>{{email}}</td>
-                                    <td class="hide">{{admin}}</td>
-                                    <td class="hide">{{seller}}</td>
-                                    <td class="hide">{{pictureUrl}}</td>
+                                    <th>{{reviewId}}</th>
+                                    <th>{{productId}}</th>
+                                    <th>{{title}}</th>
+                                    <th>{{rating}}</th>
+                                    <th>{{createdAt}}</th>
+                                    <th class="hide">{{content}}</th>
+                                    <th>{{userId}}</th>
                                 </tr>
-                                {{/allUsers}}
+                                {{/allReviews}}
                                 </tbody>
                             </table>
                         </div>

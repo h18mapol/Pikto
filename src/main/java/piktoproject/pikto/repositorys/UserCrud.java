@@ -1,5 +1,7 @@
 package piktoproject.pikto.repositorys;
 
+import org.springframework.security.crypto.bcrypt.BCrypt;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Repository;
 import piktoproject.pikto.models.*;
 
@@ -57,8 +59,9 @@ public class UserCrud implements IUserCrud {
             statement.setString(3, user.getMobileNr());
             statement.setString(4, user.getEmail());
             statement.setInt(5, user.getAdmin());
-            statement.setInt(5, user.getSeller());
-            statement.setString(5, user.getPictureUrl());
+            statement.setInt(6, user.getSeller());
+            statement.setString(7, user.getPictureUrl());
+            statement.setInt(8, user.getUserId());
             statement.execute();
             statement.close();
             con.close();
@@ -94,11 +97,10 @@ public class UserCrud implements IUserCrud {
             statement.setString(2, user.getLastName());
             statement.setString(3, user.getMobileNr());
             statement.setString(4, user.getEmail());
-            statement.setString(5, user.getPassword());
+            statement.setString(5, BCrypt.hashpw(user.getPassword(), BCrypt.gensalt()));
             statement.setInt(6, user.getAdmin());
             statement.setString(7, user.getPictureUrl());
             statement.executeUpdate();
-
             statement.close();
             con.close();
         }
@@ -106,6 +108,37 @@ public class UserCrud implements IUserCrud {
             Logger.getLogger(AdminCrud.class.getName()).log(Level.SEVERE, null, ex);
         }//End addUser
     } //Klar
+    @Override
+    public User getUserByEmail(String email) {
+        try{
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/piktodb?serverTimezone=UTC", "root", "");
+
+            String sqlgetUserById = "SELECT * FROM user WHERE email=?";
+            PreparedStatement statement = con.prepareStatement(sqlgetUserById);
+            statement.setString(1, email);
+
+            ResultSet resultSet = statement.executeQuery();
+            User user = new User();
+            while (resultSet.next()) {
+                user.setUserId(resultSet.getInt("userId"));
+                user.setFirstName(resultSet.getString("firstName"));
+                user.setLastName(resultSet.getString("lastName")); //eventdate
+                user.setMobileNr(resultSet.getString("mobileNr"));
+                user.setEmail(resultSet.getString("email"));
+                user.setAdmin(resultSet.getInt("admin"));
+                user.setSeller(resultSet.getInt("seller"));
+                user.setPictureUrl(resultSet.getString("pictureUrl"));
+            } //End while
+            resultSet.close();
+            statement.close();
+            con.close();
+            return user;
+        } //end try
+        catch(SQLException ex){
+            Logger.getLogger(UserCrud.class.getName()).log(Level.SEVERE, null, ex);
+        }//End events
+        return null;
+    }
 
     //Product
     @Override

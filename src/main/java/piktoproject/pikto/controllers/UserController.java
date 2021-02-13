@@ -11,7 +11,7 @@ import piktoproject.pikto.services.UserService;
 import java.util.Map;
 
 @Controller
-@SessionAttributes("userName")
+@SessionAttributes("userId")
 public class UserController {
 
     @Autowired
