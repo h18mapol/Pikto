@@ -1,10 +1,13 @@
 package piktoproject.pikto.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import piktoproject.pikto.models.Product;
+import piktoproject.pikto.models.User;
 import piktoproject.pikto.services.AdminService;
 import piktoproject.pikto.services.UserService;
 
@@ -16,6 +19,8 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+    @Autowired
+    private AdminService adminService;
 
 
     @RequestMapping("/User/{userId}/Products")
@@ -39,9 +44,20 @@ public class UserController {
         return "getproduct";
     }
 
+    @RequestMapping("/User")
+    public String getUser(Model model){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = adminService.getUserByEmail(auth.getName());
+        model.addAttribute("userData", user);
+        model.addAttribute("userOrders",userService.getAllUserOrders(user.getUserId()));
+        model.addAttribute("userProducts",userService.getAllUserProducts(user.getUserId()));
+        model.addAttribute("userReviews",userService.getAllUserReviews(user.getUserId()));
+        return "Frontend/User/userPage";
+    }
+
     @RequestMapping("/User/{userId}")
     public String getUserById(Model model, @PathVariable Integer userId){
-                model.addAttribute("user",userService.getUserById(userId));
+            model.addAttribute("userData",userService.getUserById(userId));
         model.addAttribute("userOrders",userService.getAllUserOrders(userId));
        model.addAttribute("userProducts",userService.getAllUserProducts(userId));
        model.addAttribute("userReviews",userService.getAllUserReviews(userId));

@@ -26,7 +26,7 @@ import java.security.Principal;
 import java.util.Map;
 
 import static org.springframework.security.web.context.HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY;
-
+@SessionAttributes("userId")
 @Controller
 public class LoginController {
 
@@ -61,15 +61,16 @@ public class LoginController {
         System.out.println("Form Login!" + auth.getAuthorities());
         User user = adminService.getUserByEmail(auth.getName());
         model.addAttribute("userData", user);
-        if (auth.getAuthorities().contains("ROLE_ADMIN")){
+        model.addAttribute("userId", user.getUserId());
+        if (auth.getAuthorities().contains("[ROLE_ADMIN]")){
             System.out.println("Role Admin -->");
-            return "Frontend/Admin/Admin";
+            return "redirect:/Admin";
         } else {
             System.out.println("Role Vanliga User -->");
             model.addAttribute("userProducts",adminService.getAllProductsbyId(user.getUserId()));
             model.addAttribute("userReviews",adminService.getAllReviewsById(user.getUserId()));
             model.addAttribute("userOrders",adminService.getAllOrdersById(user.getUserId()));
-            return "Frontend/User/userPage";
+            return "redirect:/User";
         }
     }
 
