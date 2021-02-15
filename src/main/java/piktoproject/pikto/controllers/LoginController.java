@@ -103,12 +103,24 @@ public class LoginController {
                     user.setPictureUrl("");
                     adminService.addUser(user);
                     User facebookUser = adminService.getUserByEmail(facebookEmail);
-                    model.addAttribute("user", facebookUser);
+                    model.addAttribute("userDate", facebookUser);
+                    model.addAttribute("userProducts",adminService.getAllProductsbyId(facebookUser.getUserId()));
+                    model.addAttribute("userReviews",adminService.getAllReviewsById(facebookUser.getUserId()));
+                    model.addAttribute("userOrders",adminService.getAllOrdersById(facebookUser.getUserId()));
                 } else {
                     System.out.println("Already a user");
-                    model.addAttribute("user", user);
+                    model.addAttribute("userData", user);
+                    model.addAttribute("userProducts",adminService.getAllProductsbyId(user.getUserId()));
+                    model.addAttribute("userReviews",adminService.getAllReviewsById(user.getUserId()));
+                    model.addAttribute("userOrders",adminService.getAllOrdersById(user.getUserId()));
                 }
-            return "home";
+                if (user.getAdmin() == 1){
+                    System.out.println("Role Admin -->");
+                    return "Frontend/Admin/Users";
+                } else {
+                    System.out.println("Role Vanliga User -->");
+                    return "Frontend/User/userPage";
+                }
             case "google":
                 String googleEmail = (String) oauthToken.getPrincipal().getAttributes().get("email");
                 User googleUser = adminService.getUserByEmail(googleEmail);
@@ -124,8 +136,17 @@ public class LoginController {
                 } else {
                     System.out.println("Already a user");
                 }
-                model.addAttribute("user", googleUser);
-                return "home";
+                model.addAttribute("userData", googleUser);
+                model.addAttribute("userProducts",adminService.getAllProductsbyId(googleUser.getUserId()));
+                model.addAttribute("userReviews",adminService.getAllReviewsById(googleUser.getUserId()));
+                model.addAttribute("userOrders",adminService.getAllOrdersById(googleUser.getUserId()));
+                if (googleUser.getAdmin() == 1){
+                    System.out.println("Role Admin -->");
+                    return "Frontend/Admin/Users";
+                } else {
+                    System.out.println("Role Vanliga User -->");
+                    return "Frontend/User/userPage";
+                }
             case "github":
                 System.out.println(oauthToken.getPrincipal().getAttributes().toString());
                 String githubEmail = (String) oauthToken.getPrincipal().getAttributes().get("login")+"@github.com";
@@ -149,8 +170,17 @@ public class LoginController {
                 } else {
                     System.out.println("Already a user");
                 }
-                model.addAttribute("user", githubUser);
-                return "home";
+                model.addAttribute("userData", githubUser);
+                model.addAttribute("userProducts",adminService.getAllProductsbyId(githubUser.getUserId()));
+                model.addAttribute("userReviews",adminService.getAllReviewsById(githubUser.getUserId()));
+                model.addAttribute("userOrders",adminService.getAllOrdersById(githubUser.getUserId()));
+                if (githubUser.getAdmin() == 1){
+                    System.out.println("Role Admin -->");
+                    return "Frontend/Admin/Users";
+                } else {
+                    System.out.println("Role Vanliga User -->");
+                    return "Frontend/User/userPage";
+                }
             default:
                 return "login";
         }

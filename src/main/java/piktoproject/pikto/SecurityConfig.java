@@ -25,7 +25,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .successForwardUrl("/formLogin")
                 .and().logout() // enable logout
                 .and().oauth2Login() // enable OAuth2
-                .loginPage("/login").defaultSuccessUrl("/oauth2LoginSuccess")
+                .loginPage("/login").defaultSuccessUrl("/oauth2LoginSuccess", true)
                 .and()
                 .csrf().disable();
     }
