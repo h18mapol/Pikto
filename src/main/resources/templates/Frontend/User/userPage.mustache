@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Dashboard - SB Admin</title>
+        <title>Dashboard - SB User</title>
         <link href="/css/User/userstyles.css" rel="stylesheet" />
         <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js" crossorigin="anonymous"></script>
@@ -32,7 +32,10 @@
                         <a class="dropdown-item" href="#">Settings</a>
                         <a class="dropdown-item" href="#">Activity Log</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="login.html">Logout</a>
+                        <form class="dropdown-item" action="/logout" method="post">
+                            <input type="hidden" name="_csrf" value="" />
+                            <button type="submit" class="btn btn-primary">Logout</button>
+                        </form>
                     </div>
                 </li>
             </ul>
@@ -51,13 +54,13 @@
 			
 				<div class="profile-usertitle">
 					<div class="profile-usertitle-name" >
-						{{user.firstName}}
+						{{userData.firstName}}
             <div class="profile-usertitle-name" >
-						{{user.lastName}}
+						{{userData.lastName}}
             <div class="profile-usertitle-name" >
-						{{user.email}}
+						{{userData.email}}
 					<div class="profile-usertitle-job">
-							{{user.mobileNr}}
+							{{userData.mobileNr}}
 					</div>
 				</div>
         	</div>
@@ -65,12 +68,12 @@
 				<div class="profile-userbuttons">
 				</div>
                         <div class="nav">
-                           <div class="sb-sidenav-menu-heading">Admin</div>
-                            <a class="nav-link" href="http://localhost:8888/User/{{user.userId}}">
+                           <div class="sb-sidenav-menu-heading">User</div>
+                            <a class="nav-link" href="http://localhost:8888/User/{{userData.userId}}">
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 Dashboard
                             </a>
-                            <a class="nav-link" href="http://localhost:8888/User/Checkout/{{user.userId}}">
+                            <a class="nav-link" href="http://localhost:8888/User/Checkout/{{userData.userId}}">
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 Cart
                             </a>
@@ -396,23 +399,23 @@
         <form method="POST" action="/User/updateProfile">
         <div class="form-group">
     <label for="exampleInputEmail1">Firstname</label>
-    <input type="text" class="form-control" id="exampleInputEmail1" name ="firstName" aria-describedby="emailHelp" value="{{user.firstName}}">
+    <input type="text" class="form-control" id="exampleInputEmail1" name ="firstName" aria-describedby="emailHelp" value="{{userData.firstName}}">
   </div>
   <div class="form-group">
     <label for="exampleInputPassword1">Lastname</label>
-    <input type="text" class="form-control" id="exampleInputPassword1" name ="lastName" value="{{user.lastName}}">
+    <input type="text" class="form-control" id="exampleInputPassword1" name ="lastName" value="{{userData.lastName}}">
   </div>
   <div class="form-group">
     <label for="exampleInputPassword1">Phonenumber</label>
-    <input type="text" class="form-control" id="exampleInputPassword1" name ="mobileNr"value="{{user.mobileNr}}">
+    <input type="text" class="form-control" id="exampleInputPassword1" name ="mobileNr"value="{{userData.mobileNr}}">
   </div>
   <div class="form-group">
     <label for="exampleInputPassword1">Email</label>
-    <input type="text" class="form-control" id="exampleInputPassword1" name ="email" value="{{user.email}}">
+    <input type="text" class="form-control" id="exampleInputPassword1" name ="email" value="{{userData.email}}">
   </div>
   <div class="form-group">
     <label for="exampleInputPassword1">Profile pictureURL</label>
-    <input type="text" class="form-control" id="exampleInputPassword1" name ="pictureUrl" value="{{user.pictureUrl}}">
+    <input type="text" class="form-control" id="exampleInputPassword1" name ="pictureUrl" value="{{userData.pictureUrl}}">
   </div>
   <div class="form-group form-check">
     <input type="checkbox" class="form-check-input" id="exampleCheck1">

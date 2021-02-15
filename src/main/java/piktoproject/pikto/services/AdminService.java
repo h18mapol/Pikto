@@ -40,6 +40,7 @@ public class AdminService {
     public void addUser(User user){
         adminCrud.addUser(user);
     }
+    public User getUserByEmail(String email){return adminCrud.getUserByEmail(email);}
 
     //Products
     public List<Product>getAllProducts(){

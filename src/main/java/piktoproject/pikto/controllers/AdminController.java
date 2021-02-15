@@ -1,7 +1,10 @@
 package piktoproject.pikto.controllers;
 
+import java.security.Principal;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -10,20 +13,29 @@ import piktoproject.pikto.models.User;
 import piktoproject.pikto.services.AdminService;
 import piktoproject.pikto.services.UserService;
 
+
+import javax.management.relation.Role;
+
 @Controller
-@SessionAttributes("userName")
+@SessionAttributes("userData")
 public class AdminController {
     @Autowired
     private AdminService adminService;
     @Autowired
     private UserService userService;
 
-
+    @RequestMapping("/Admin")
+    public String getAdminPageWithId(Model model){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        model.addAttribute("allProducts",adminService.getAllProducts());
+        model.addAttribute("userData",adminService.getUserByEmail(auth.getName()));
+        return "Frontend/Admin/Admin";
+    }
 
     @RequestMapping("/Admin/{userId}")
-    public String getAdminPage(Model model, @PathVariable Integer userId){
+    public String getAdminPageWithId(Model model, @PathVariable Integer userId){
         model.addAttribute("allProducts",adminService.getAllProducts());
-           model.addAttribute("userData",userService.getUserById(userId));
+        model.addAttribute("userData",userService.getUserById(userId));
         return "Frontend/Admin/Admin";
     }
 
@@ -37,8 +49,14 @@ public class AdminController {
     public String getAllUsers(Model model){
         model.addAttribute("allUsers",adminService.getAllUsers());
         return "Frontend/Admin/Users";
-
     }
+
+    @RequestMapping("/Admin/Reviews")
+    public String getAllReviews(Model model){
+        model.addAttribute("allReviews",adminService.getAllReviews());
+        return "Frontend/Admin/Reviews";
+    }
+
     @RequestMapping(path="/Admin/addProduct", method={RequestMethod.POST})
     public String addProduct(@ModelAttribute ("product")Product product,@RequestParam Map<String, String> allRequestParams){
 
@@ -67,7 +85,6 @@ public class AdminController {
 
     @RequestMapping("/Admin/User/{userId}")
     public String getUserPage(Model model, @PathVariable Integer userId){
-
         model.addAttribute("userData",adminService.getUser(userId));
         model.addAttribute("userProducts",adminService.getAllProductsbyId(userId));
         model.addAttribute("userReviews",adminService.getAllReviewsById(userId));
@@ -81,4 +98,7 @@ public class AdminController {
         model.addAttribute("allOrders", adminService.getAllOrders());
         return "Frontend/Admin/Orders";
     }
+
+
 }
+

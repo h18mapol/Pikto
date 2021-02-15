@@ -19,12 +19,6 @@ public class ProductController {
 
 @Autowired
   private UserService userService;
-    @RequestMapping("/login")
-    public String loginUser(Model model){
-        String userName = "Marcus";
-        model.addAttribute("userName", userName);
-        return "hello";
-    }
     
     
     @RequestMapping("/User/Checkout/{userId}")
@@ -32,8 +26,8 @@ public class ProductController {
         model.addAttribute("user",userService.getUserById(userId));
         return "Frontend/User/Checkout";
     }
-    
-       @RequestMapping("/")
+
+      @RequestMapping("/Index")
     public String getIndex(Model model){
         model.addAttribute("allProducts",adminService.getAllProducts());
         return "Frontend/Main/Index";
