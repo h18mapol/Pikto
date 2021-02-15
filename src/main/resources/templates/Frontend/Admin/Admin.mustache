@@ -1,24 +1,28 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <meta name="description" content="" />
-    <meta name="author" content="" />
-    <title>Admin Dashboard</title>
-    <link href="/css/User/userstyles.css" rel="stylesheet" />
-    <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js" crossorigin="anonymous"></script>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+    <title>Dashboard - SB Admin</title>
+    <link href="/css/User/userstyles.css" rel="stylesheet"/>
+    <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet"
+          crossorigin="anonymous"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js"
+            crossorigin="anonymous"></script>
 </head>
 <body class="sb-nav-fixed">
 <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-    <a class="navbar-brand" href="/Main/index">Pikto Pictogram</a>
-    <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i></button>
+    <a class="navbar-brand" href="admin.html">Start Bootstrap</a>
+    <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i>
+    </button>
     <!-- Navbar Search-->
     <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
         <div class="input-group">
-            <input class="form-control" type="text" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2" />
+            <input class="form-control" type="text" placeholder="Search for..." aria-label="Search"
+                   aria-describedby="basic-addon2"/>
             <div class="input-group-append">
                 <button class="btn btn-primary" type="button"><i class="fas fa-search"></i></button>
             </div>
@@ -27,13 +31,14 @@
     <!-- Navbar-->
     <ul class="navbar-nav ml-auto ml-md-0">
         <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" id="userDropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
+            <a class="nav-link dropdown-toggle" id="userDropdown" href="#" role="button" data-toggle="dropdown"
+               aria-haspopup="true" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
                 <a class="dropdown-item" href="#">Settings</a>
                 <a class="dropdown-item" href="#">Activity Log</a>
                 <div class="dropdown-divider"></div>
                 <form class="dropdown-item" action="/logout" method="post">
-                    <input type="hidden" name="_csrf" value="" />
+                    <input type="hidden" name="_csrf" value=""/>
                     <button type="submit" class="btn btn-primary">Logout</button>
                 </form>
             </div>
@@ -45,28 +50,26 @@
         <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
             <div class="sb-sidenav-menu">
                 <div class="profile-userpic">
-
-                    <img src={{userData.pictureUrl}} class="img-responsive" style="display:block; margin: 0 auto; padding-top: 20px; ">
+                    <img src="https://scontent.fbma2-1.fna.fbcdn.net/v/t1.0-9/17796707_10155264022745159_8129848447376750595_n.jpg?_nc_cat=111&ccb=2&_nc_sid=174925&_nc_ohc=njmSzJq0HE8AX_RWY6P&_nc_ht=scontent.fbma2-1.fna&oh=ae2a9a187954f17fe489be1522d04e9e&oe=60448624"
+                         class="img-responsive" style="display:block; margin: 0 auto; padding-top: 20px; ">
                 </div>
                 <div class="profile-usertitle">
-
-                    <div class="profile-usertitle-name" >
-                        <p>{{userData.firstName}} {{userData.lastName}}</p>
-                        <div class="profile-usertitle-name" >
-
-                            <div class="profile-usertitle-name" >
-                                <p>{{userData.email}}</p>
+                    <div class="profile-usertitle-name">
+                        {{userData.firstName}}
+                        <div class="profile-usertitle-name">
+                            {{userData.lastName}}
+                            <div class="profile-usertitle-name">
+                                {{userData.email}}
                                 <div class="profile-usertitle-job">
-                                    <p>{{userData.mobileNr}}</p>
+                                    {{userData.mobileNr}}
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="sb-sidenav-menu-heading">Admin Section</div>
                     <div class="profile-userbuttons">
                     </div>
-
                     <div class="nav">
+                        <div class="sb-sidenav-menu-heading">Admin</div>
                         <a class="nav-link" href="http://localhost:8888/Admin">
                             <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                             Dashboard
@@ -91,7 +94,7 @@
                 </div>
                 <div class="sb-sidenav-footer">
                     <div class="small">Logged in as:</div>
-                    Start Bootstrap
+                    {{userData.email}}
                 </div>
             </div>
         </nav>
@@ -106,62 +109,85 @@
                 <div class="row">
                     <div class="col-xl-12">
                         <div class="card mb-4">
-                            <div class="accordion" id="accordionExample" style="width:100%" >
+                            <div class="accordion" id="accordionExample" style="width:100%">
                                 <div class="card">
-                                    <div class="card-header" id="headingOne" >
+                                    <div class="card-header" id="headingOne">
                                         <h2 class="mb-0">
-                                            <button type="button" class="btn btn-link" data-toggle="collapse" data-target="#collapseOne">Admin functions</button>
+                                            <button type="button" class="btn btn-link" data-toggle="collapse"
+                                                    data-target="#collapseOne">Admin functions
+                                            </button>
                                         </h2>
                                     </div>
-                                    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                                    <div id="collapseOne" class="collapse" aria-labelledby="headingOne"
+                                         data-parent="#accordionExample">
                                         <div class="card-body">
                                             <div class="row">
                                                 <div class="col-xl-6">
                                                     <div class="card mb-4">
                                                         <div class="card-body">
                                                             <form method="POST" action="/Admin/addProduct">
-                                                                <h1 class="align-content-center text-primary">Add Product</h1>
+                                                                <h1 class="align-content-center text-primary">Add
+                                                                    Product</h1>
                                                                 <div class="form-group">
                                                                     <label for="adminProductName">Product name</label>
-                                                                    <input type="text" class="form-control" id="adminProductName" name="title" placeholder="">
+                                                                    <input type="text" class="form-control"
+                                                                           id="adminProductName" name="title"
+                                                                           placeholder="">
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label for="adminid">User id</label>
-                                                                    <input type="text" class="form-control" id="adminid" name="userId" placeholder="">
+                                                                    <input type="text" class="form-control" id="adminid"
+                                                                           name="userId" placeholder="">
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label for="adminSummary">Summary</label>
-                                                                    <input type="text" class="form-control" id="adminSummary" name="summary" placeholder="">
+                                                                    <input type="text" class="form-control"
+                                                                           id="adminSummary" name="summary"
+                                                                           placeholder="">
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label for="adminproducttype">Type</label>
-                                                                    <input type="text" class="form-control" id="adminproducttype" name="type" placeholder="">
+                                                                    <input type="text" class="form-control"
+                                                                           id="adminproducttype" name="type"
+                                                                           placeholder="">
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label for="adminprice">Price</label>
-                                                                    <input type="text" class="form-control" id="adminprice" name="price" placeholder="">
+                                                                    <input type="text" class="form-control"
+                                                                           id="adminprice" name="price" placeholder="">
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label for="admindiscount">Discount</label>
-                                                                    <input type="text" class="form-control" id="admindiscount" name="discount" placeholder="">
+                                                                    <input type="text" class="form-control"
+                                                                           id="admindiscount" name="discount"
+                                                                           placeholder="">
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label for="admincategoryid">Category</label>
-                                                                    <input type="text" class="form-control" id="admincategoryid" name="categoryId" placeholder="">
+                                                                    <input type="text" class="form-control"
+                                                                           id="admincategoryid" name="categoryId"
+                                                                           placeholder="">
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label for="adminproductUrl">PictureURL</label>
-                                                                    <input type="text" class="form-control" id="adminproductUrl" name="productUrl" placeholder="">
+                                                                    <input type="text" class="form-control"
+                                                                           id="adminproductUrl" name="productUrl"
+                                                                           placeholder="">
                                                                 </div>
                                                                 <div class="form-group hide">
                                                                     <label for="adminproductUrl">PictureURL</label>
-                                                                    <input type="text" class="form-control" id="adminContent" name="content" placeholder="">
+                                                                    <input type="text" class="form-control"
+                                                                           id="adminContent" name="content"
+                                                                           placeholder="">
                                                                 </div>
                                                                 <div class="form-group form-check">
-                                                                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                                                    <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                                                                    <input type="checkbox" class="form-check-input"
+                                                                           id="exampleCheck1">
+                                                                    <label class="form-check-label" for="exampleCheck1">Check
+                                                                        me out</label>
                                                                 </div>
-                                                                <button type="submit" class="btn btn-primary">Submit</button>
+                                                                <button type="submit" class="btn btn-primary">Submit
+                                                                </button>
                                                             </form>
                                                         </div>
                                                     </div>
@@ -170,40 +196,60 @@
                                                     <div class="card mb-4">
                                                         <div class="card-body">
                                                             <form method="POST" action="/Admin/addUser">
-                                                                <h1 class="h1 align-content-center text-secondary">Add User</h1>
+                                                                <h1 class="h1 align-content-center text-secondary">Add
+                                                                    User</h1>
                                                                 <div class="form-group">
                                                                     <label for="AdminfirstName">Firstname</label>
-                                                                    <input type="text" class="form-control" id="AdminfirstName" name ="firstName" aria-describedby="emailHelp" placeholder="Enter email">
+                                                                    <input type="text" class="form-control"
+                                                                           id="AdminfirstName" name="firstName"
+                                                                           aria-describedby="emailHelp"
+                                                                           placeholder="Enter email">
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label for="AdminLastName">Lastname</label>
-                                                                    <input type="text" class="form-control" id="AdminLastName" name ="lastName" placeholder="Password">
+                                                                    <input type="text" class="form-control"
+                                                                           id="AdminLastName" name="lastName"
+                                                                           placeholder="Password">
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label for="AdminPhoneNumber">Phonenumber</label>
-                                                                    <input type="text" class="form-control" id="AdminPhoneNumber" name ="mobileNr"placeholder="Password">
+                                                                    <input type="text" class="form-control"
+                                                                           id="AdminPhoneNumber" name="mobileNr"
+                                                                           placeholder="Password">
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label for="AdminEmail">Email</label>
-                                                                    <input type="text" class="form-control" id="AdminEmail" name ="email" placeholder="Password">
+                                                                    <input type="text" class="form-control"
+                                                                           id="AdminEmail" name="email"
+                                                                           placeholder="Password">
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label for="AdminPassword">Password</label>
-                                                                    <input type="password" class="form-control" id="AdminPassword" name ="password" placeholder="Password">
+                                                                    <input type="password" class="form-control"
+                                                                           id="AdminPassword" name="password"
+                                                                           placeholder="Password">
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label for="AdminAuth">Authority</label>
-                                                                    <input type="text" class="form-control" id="AdminAuth" name ="admin" placeholder="Password">
+                                                                    <input type="text" class="form-control"
+                                                                           id="AdminAuth" name="admin"
+                                                                           placeholder="Password">
                                                                 </div>
                                                                 <div class="form-group">
-                                                                    <label for="AdminPictureUrl">Profile pictureURL</label>
-                                                                    <input type="text" class="form-control" id="AdminPictureUrl" name ="pictureUrl" placeholder="Password">
+                                                                    <label for="AdminPictureUrl">Profile
+                                                                        pictureURL</label>
+                                                                    <input type="text" class="form-control"
+                                                                           id="AdminPictureUrl" name="pictureUrl"
+                                                                           placeholder="Password">
                                                                 </div>
                                                                 <div class="form-group form-check">
-                                                                    <input type="checkbox" class="form-check-input" id="AdminCheck2">
-                                                                    <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                                                                    <label class="form-check-label" for="AdminCheck2">Check
+                                                                        me out</label>
+                                                                    <input type="checkbox" class="form-check-input"
+                                                                           id="AdminCheck2">
                                                                 </div>
-                                                                <button type="submit" class="btn btn-primary">Submit</button>
+                                                                <button type="submit" class="btn btn-primary">Submit
+                                                                </button>
                                                             </form>
                                                         </div>
                                                     </div>
@@ -223,7 +269,9 @@
                                 <i class="fas fa-chart-area mr-1"></i>
                                 Area Chart Example
                             </div>
-                            <div class="card-body"><canvas id="myAreaChart" width="100%" height="40"></canvas></div>
+                            <div class="card-body">
+                                <canvas id="myAreaChart" width="100%" height="40"></canvas>
+                            </div>
                         </div>
                     </div>
                     <div class="col-xl-6">
@@ -232,7 +280,9 @@
                                 <i class="fas fa-chart-bar mr-1"></i>
                                 Bar Chart Example
                             </div>
-                            <div class="card-body"><canvas id="myBarChart" width="100%" height="40"></canvas></div>
+                            <div class="card-body">
+                                <canvas id="myBarChart" width="100%" height="40"></canvas>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -253,7 +303,8 @@
     </div>
 </div>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
+        crossorigin="anonymous"></script>
 <script src="/js/Admin/scripts.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
 <script src="/js/Admin/chart-area-demo.js"></script>

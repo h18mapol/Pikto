@@ -1,24 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <meta name="description" content="" />
-    <meta name="author" content="" />
-    <title>Dashboard - Pikto Admin</title>
-    <link href="/css/Admin/styles.css" rel="stylesheet" />
-    <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js" crossorigin="anonymous"></script>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+    <title>Dashboard - SB Admin</title>
+    <link href="/css/User/userstyles.css" rel="stylesheet"/>
+    <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet"
+          crossorigin="anonymous"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js"
+            crossorigin="anonymous"></script>
 </head>
 <body class="sb-nav-fixed">
 <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-    <a class="navbar-brand" href="http://localhost:8888/Admin">Pikto Pictograms</a>
-    <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i></button>
+    <a class="navbar-brand" href="admin.html">Start Bootstrap</a>
+    <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i>
+    </button>
     <!-- Navbar Search-->
     <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
         <div class="input-group">
-            <input class="form-control" type="text" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2" />
+            <input class="form-control" type="text" placeholder="Search for..." aria-label="Search"
+                   aria-describedby="basic-addon2"/>
             <div class="input-group-append">
                 <button class="btn btn-primary" type="button"><i class="fas fa-search"></i></button>
             </div>
@@ -27,13 +31,14 @@
     <!-- Navbar-->
     <ul class="navbar-nav ml-auto ml-md-0">
         <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" id="userDropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
+            <a class="nav-link dropdown-toggle" id="userDropdown" href="#" role="button" data-toggle="dropdown"
+               aria-haspopup="true" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
                 <a class="dropdown-item" href="#">Settings</a>
                 <a class="dropdown-item" href="#">Activity Log</a>
                 <div class="dropdown-divider"></div>
                 <form class="dropdown-item" action="/logout" method="post">
-                    <input type="hidden" name="_csrf" value="" />
+                    <input type="hidden" name="_csrf" value=""/>
                     <button type="submit" class="btn btn-primary">Logout</button>
                 </form>
             </div>
@@ -44,34 +49,53 @@
     <div id="layoutSidenav_nav">
         <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
             <div class="sb-sidenav-menu">
-                <div class="nav">
-                    <div class="sb-sidenav-menu-heading">Admin</div>
-                    <a class="nav-link" href="http://localhost:8888/Admin">
-                        <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                        Dashboard
-                    </a>
-                    <a class="nav-link" href="http://localhost:8888/Admin/Products">
-                        <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                        Products
-                    </a>
-                    <a class="nav-link" href="http://localhost:8888/Admin/Users">
-                        <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                        Users
-                    </a>
-
-                    <a class="nav-link" href="http://localhost:8888/Admin/Orders">
-                        <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                        Orders
-                    </a>
-                    <a class="nav-link" href="http://localhost:8888/Admin/Reviews">
-                        <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                        Reviews
-                    </a>
+                <div class="profile-userpic">
+                    <img src="https://scontent.fbma2-1.fna.fbcdn.net/v/t1.0-9/17796707_10155264022745159_8129848447376750595_n.jpg?_nc_cat=111&ccb=2&_nc_sid=174925&_nc_ohc=njmSzJq0HE8AX_RWY6P&_nc_ht=scontent.fbma2-1.fna&oh=ae2a9a187954f17fe489be1522d04e9e&oe=60448624"
+                         class="img-responsive" style="display:block; margin: 0 auto; padding-top: 20px; ">
                 </div>
-            </div>
-            <div class="sb-sidenav-footer">
-                <div class="small">Logged in as:</div>
-                Start Bootstrap
+                <div class="profile-usertitle">
+                    <div class="profile-usertitle-name">
+                        {{userData.firstName}}
+                        <div class="profile-usertitle-name">
+                            {{userData.lastName}}
+                            <div class="profile-usertitle-name">
+                                {{userData.email}}
+                                <div class="profile-usertitle-job">
+                                    {{userData.mobileNr}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="profile-userbuttons">
+                    </div>
+                    <div class="nav">
+                        <div class="sb-sidenav-menu-heading">Admin</div>
+                        <a class="nav-link" href="http://localhost:8888/Admin">
+                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                            Dashboard
+                        </a>
+                        <a class="nav-link" href="http://localhost:8888/Admin/Products">
+                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                            Products
+                        </a>
+                        <a class="nav-link" href="http://localhost:8888/Admin/Users">
+                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                            Users
+                        </a>
+                        <a class="nav-link" href="http://localhost:8888/Admin/Orders">
+                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                            Orders
+                        </a>
+                        <a class="nav-link" href="http://localhost:8888/Admin/Reviews">
+                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                            Reviews
+                        </a>
+                    </div>
+                </div>
+                <div class="sb-sidenav-footer">
+                    <div class="small">Logged in as:</div>
+                    {{userData.email}}
+                </div>
             </div>
         </nav>
     </div>
@@ -187,11 +211,11 @@
 </div>
 
 
-<div class="modal" tabindex="-1" role="dialog" id="editModal">
+<div class="modal" tabindex="-1" role="dialog" id="orderModal">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Modal title</h5>
+                <h5 class="modal-title">Edit Order</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -199,39 +223,63 @@
             <div class="modal-body" id="modalBody">
                 <form>
                     <div class="form-group row">
-                        <label for="productId" class="col-4 col-form-label">Product id</label>
+                        <label for="orderId" class="col-4 col-form-label">Order Id</label>
                         <div class="col-8">
-                            <input id="productId" name="text1" type="text" class="form-control">
+                            <input id="orderId" name="text1" type="text" class="form-control" readonly>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="userId" class="col-4 col-form-label">User id</label>
                         <div class="col-8">
-                            <input id="userId" name="text2" type="text" class="form-control">
+                            <input id="userId" name="text2" type="text" class="form-control" readonly>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="title" class="col-4 col-form-label">Title</label>
+                        <label for="sessionId" class="col-4 col-form-label">Session Id</label>
                         <div class="col-8">
-                            <input id="title" name="text" type="text" class="form-control">
+                            <input id="sessionId" name="text" type="text" class="form-control" readonly>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="summary" class="col-4 col-form-label">Summary</label>
+                        <label for="status" class="col-4 col-form-label">Status</label>
                         <div class="col-8">
-                            <input id="summary" name="text3" type="text" class="form-control">
+                            <input id="status" name="text3" type="text" class="form-control">
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="type" class="col-4 col-form-label">Type</label>
+                        <label for="subTotal" class="col-4 col-form-label">Sub Total</label>
                         <div class="col-8">
-                            <input id="type" name="text3" type="text" class="form-control">
+                            <input id="subTotal" name="text3" type="text" class="form-control">
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="price" class="col-4 col-form-label">Price</label>
+                        <label for="itemDiscount" class="col-4 col-form-label">Item Discount</label>
                         <div class="col-8">
-                            <input id="price" name="text3" type="text" class="form-control">
+                            <input id="itemDiscount" name="text3" type="text" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="tax" class="col-4 col-form-label">Tax</label>
+                        <div class="col-8">
+                            <input id="tax" name="text3" type="text" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="shipping" class="col-4 col-form-label">Shipping cost</label>
+                        <div class="col-8">
+                            <input id="shipping" name="text3" type="text" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="total" class="col-4 col-form-label">Total</label>
+                        <div class="col-8">
+                            <input id="total" name="text3" type="text" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="promo" class="col-4 col-form-label">Promotion</label>
+                        <div class="col-8">
+                            <input id="promo" name="text3" type="text" class="form-control">
                         </div>
                     </div>
                     <div class="form-group row">
@@ -241,9 +289,45 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="publishedAt" class="col-4 col-form-label">Published at</label>
+                        <label for="grandTotal" class="col-4 col-form-label">Grand Total</label>
                         <div class="col-8">
-                            <input id="publishedAt" name="text3" type="text" class="form-control">
+                            <input id="grandTotal" name="text3" type="text" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="firstName" class="col-4 col-form-label">First Name</label>
+                        <div class="col-8">
+                            <input id="firstName" name="text3" type="text" class="form-control" readonly>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="lastName" class="col-4 col-form-label">Last name</label>
+                        <div class="col-8">
+                            <input id="lastName" name="text3" type="text" class="form-control" readonly>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="mobile" class="col-4 col-form-label">Mobile Number</label>
+                        <div class="col-8">
+                            <input id="mobile" name="text3" type="text" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="address" class="col-4 col-form-label">Address</label>
+                        <div class="col-8">
+                            <input id="address" name="text3" type="text" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="city" class="col-4 col-form-label">City</label>
+                        <div class="col-8">
+                            <input id="city" name="text3" type="text" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="createdAt" class="col-4 col-form-label">Date</label>
+                        <div class="col-8">
+                            <input id="createdAt" name="text3" type="text" class="form-control">
                         </div>
                     </div>
                     <div class="form-group row">
@@ -252,17 +336,11 @@
                             <input id="content" name="text3" type="text" class="form-control">
                         </div>
                     </div>
-
-                    <div class="form-group row">
-                        <label for="productUrl" class="col-4 col-form-label">ProductURL</label>
-                        <div class="col-8">
-                            <input id="productUrl" name="text3" type="text" class="form-control">
-                        </div>
-                    </div>
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary">Save changes</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Delete</button>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             </div>
         </div>
@@ -284,19 +362,27 @@ $(document).ready(function () {
         var tableData = $(this).children("td").map(function() {
             return $(this).text();
         }).get();
-
-        $("#productId").val(tableData[0]);
+        $("#orderId").val(tableData[0]);
         $("#userId").val(tableData[1]);
-        $("#title").val(tableData[2]);
-        $("#summary").val(tableData[3]);
-        $("#type").val(tableData[4]);
-        $("#price").val(tableData[5]);
-        $("#discount").val(tableData[6]);
-        $("#date").val(tableData[7]);
-        $("#content").val(tableData[8]);
-        $("#productUrl").val(tableData[9]);
-        $('#editModal').modal('show');
-
+        $("#sessionId").val(tableData[2]);
+        $("#status").val(tableData[3]);
+        $("#subTotal").val(tableData[4]);
+        $("#itemDiscount").val(tableData[5]);
+        $("#tax").val(tableData[6]);
+        $("#shipping").val(tableData[7]);
+        $("#total").val(tableData[8]);
+        $("#promo").val(tableData[9]);
+        $("#discount").val(tableData[10]);
+        $("#grandTotal").val(tableData[11]);
+        $("#firstName").val(tableData[12]);
+        $("#lastName").val(tableData[13]);
+        $("#mobile").val(tableData[14]);
+        $("#email").val(tableData[15]);
+        $("#address").val(tableData[16]);
+        $("#city").val(tableData[17]);
+        $("#createdAt").val(tableData[18]);
+        $("#content").val(tableData[19]);
+        $('#orderModal').modal('show');
     });
 });
 

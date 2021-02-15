@@ -1,24 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <meta name="description" content="" />
-    <meta name="author" content="" />
-    <title>{{userData.firstName}}</title>
-    <link href="/css/Admin/styles.css" rel="stylesheet" />
-    <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js" crossorigin="anonymous"></script>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+    <title>Dashboard - SB Admin</title>
+    <link href="/css/User/userstyles.css" rel="stylesheet"/>
+    <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet"
+          crossorigin="anonymous"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js"
+            crossorigin="anonymous"></script>
 </head>
 <body class="sb-nav-fixed">
 <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-    <a class="navbar-brand" href="index.html">Start Bootstrap</a>
-    <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i></button>
+    <a class="navbar-brand" href="admin.html">Start Bootstrap</a>
+    <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i>
+    </button>
     <!-- Navbar Search-->
     <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
         <div class="input-group">
-            <input class="form-control" type="text" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2" />
+            <input class="form-control" type="text" placeholder="Search for..." aria-label="Search"
+                   aria-describedby="basic-addon2"/>
             <div class="input-group-append">
                 <button class="btn btn-primary" type="button"><i class="fas fa-search"></i></button>
             </div>
@@ -27,13 +31,14 @@
     <!-- Navbar-->
     <ul class="navbar-nav ml-auto ml-md-0">
         <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" id="userDropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
+            <a class="nav-link dropdown-toggle" id="userDropdown" href="#" role="button" data-toggle="dropdown"
+               aria-haspopup="true" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
                 <a class="dropdown-item" href="#">Settings</a>
                 <a class="dropdown-item" href="#">Activity Log</a>
                 <div class="dropdown-divider"></div>
                 <form class="dropdown-item" action="/logout" method="post">
-                    <input type="hidden" name="_csrf" value="" />
+                    <input type="hidden" name="_csrf" value=""/>
                     <button type="submit" class="btn btn-primary">Logout</button>
                 </form>
             </div>
@@ -44,34 +49,53 @@
     <div id="layoutSidenav_nav">
         <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
             <div class="sb-sidenav-menu">
-                <div class="nav">
-                    <div class="sb-sidenav-menu-heading">Admin</div>
-                    <a class="nav-link" href="http://localhost:8888/Admin">
-                        <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                        Dashboard
-                    </a>
-                    <a class="nav-link" href="http://localhost:8888/Admin/Products">
-                        <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                        Products
-                    </a>
-                    <a class="nav-link" href="http://localhost:8888/Admin/Users">
-                        <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                        Users
-                    </a>
-
-                    <a class="nav-link" href="http://localhost:8888/Admin/Orders">
-                        <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                        Orders
-                    </a>
-                    <a class="nav-link" href="http://localhost:8888/Admin/Reviews">
-                        <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                        Reviews
-                    </a>
+                <div class="profile-userpic">
+                    <img src="https://scontent.fbma2-1.fna.fbcdn.net/v/t1.0-9/17796707_10155264022745159_8129848447376750595_n.jpg?_nc_cat=111&ccb=2&_nc_sid=174925&_nc_ohc=njmSzJq0HE8AX_RWY6P&_nc_ht=scontent.fbma2-1.fna&oh=ae2a9a187954f17fe489be1522d04e9e&oe=60448624"
+                         class="img-responsive" style="display:block; margin: 0 auto; padding-top: 20px; ">
                 </div>
-            </div>
-            <div class="sb-sidenav-footer">
-                <div class="small">Logged in as:</div>
-                Start Bootstrap
+                <div class="profile-usertitle">
+                    <div class="profile-usertitle-name">
+                        {{userData.firstName}}
+                        <div class="profile-usertitle-name">
+                            {{userData.lastName}}
+                            <div class="profile-usertitle-name">
+                                {{userData.email}}
+                                <div class="profile-usertitle-job">
+                                    {{userData.mobileNr}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="profile-userbuttons">
+                    </div>
+                    <div class="nav">
+                        <div class="sb-sidenav-menu-heading">Admin</div>
+                        <a class="nav-link" href="http://localhost:8888/Admin">
+                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                            Dashboard
+                        </a>
+                        <a class="nav-link" href="http://localhost:8888/Admin/Products">
+                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                            Products
+                        </a>
+                        <a class="nav-link" href="http://localhost:8888/Admin/Users">
+                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                            Users
+                        </a>
+                        <a class="nav-link" href="http://localhost:8888/Admin/Orders">
+                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                            Orders
+                        </a>
+                        <a class="nav-link" href="http://localhost:8888/Admin/Reviews">
+                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                            Reviews
+                        </a>
+                    </div>
+                </div>
+                <div class="sb-sidenav-footer">
+                    <div class="small">Logged in as:</div>
+                    {{userData.email}}
+                </div>
             </div>
         </nav>
     </div>
@@ -156,7 +180,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Modal title</h5>
+                <h5 class="modal-title">Edit Product</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -164,70 +188,71 @@
             <div class="modal-body" id="modalBody">
                 <form>
                     <div class="form-group row">
-                        <label for="text1" class="col-4 col-form-label">Product id</label>
+                        <label for="productId" class="col-4 col-form-label">Product id</label>
                         <div class="col-8">
-                            <input id="productId" name="text1" type="text" class="form-control">
+                            <input id="productId" name="text1" type="text" class="form-control" readonly>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="text2" class="col-4 col-form-label">User id</label>
+                        <label for="userId" class="col-4 col-form-label">User id</label>
                         <div class="col-8">
-                            <input id="userId" name="text2" type="text" class="form-control">
+                            <input id="userId" name="text2" type="text" class="form-control" readonly>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="text" class="col-4 col-form-label">Title</label>
+                        <label for="title" class="col-4 col-form-label">Title</label>
                         <div class="col-8">
                             <input id="title" name="text" type="text" class="form-control">
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="text3" class="col-4 col-form-label">Summary</label>
+                        <label for="summary" class="col-4 col-form-label">Summary</label>
                         <div class="col-8">
                             <input id="summary" name="text3" type="text" class="form-control">
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="text3" class="col-4 col-form-label">Type</label>
+                        <label for="type" class="col-4 col-form-label">Type</label>
                         <div class="col-8">
                             <input id="type" name="text3" type="text" class="form-control">
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="text3" class="col-4 col-form-label">Price</label>
+                        <label for="price" class="col-4 col-form-label">Price</label>
                         <div class="col-8">
                             <input id="price" name="text3" type="text" class="form-control">
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="text3" class="col-4 col-form-label">Discount</label>
+                        <label for="discount" class="col-4 col-form-label">Discount</label>
                         <div class="col-8">
                             <input id="discount" name="text3" type="text" class="form-control">
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="text3" class="col-4 col-form-label">Published at</label>
+                        <label for="date" class="col-4 col-form-label">Published at</label>
                         <div class="col-8">
                             <input id="date" name="text3" type="text" class="form-control">
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="text3" class="col-4 col-form-label">Content</label>
+                        <label for="content" class="col-4 col-form-label">Content</label>
                         <div class="col-8">
                             <input id="content" name="text3" type="text" class="form-control">
                         </div>
                     </div>
 
                     <div class="form-group row">
-                        <label for="text3" class="col-4 col-form-label">ProductURL</label>
+                        <label for="productUrl" class="col-4 col-form-label">ProductURL</label>
                         <div class="col-8">
                             <input id="productUrl" name="text3" type="text" class="form-control">
                         </div>
                     </div>
-
-                </form>                </div>
+                </form>
+            </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary">Save changes</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Delete</button>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             </div>
         </div>
