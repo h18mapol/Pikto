@@ -173,6 +173,7 @@ public class AdminCrud extends UserCrud implements IAdminCrud {
         }
         return null;
      } //Klar
+<<<<<<< HEAD
 
     @Override
     public User getLoggedInUser() {
@@ -195,4 +196,44 @@ public class AdminCrud extends UserCrud implements IAdminCrud {
         }
     }
 
+=======
+    @Override
+    public List<Product> getAllProductsBySearch(String SearchWord) {
+ List<Product> products = new ArrayList<>();
+        try{
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/piktodb?serverTimezone=UTC", "root", "");
+
+     String sqlgetAllProducts = "SELECT * FROM product INNER JOIN product_category ON product.productId=product_category.productId WHERE title LIKE ?";
+
+            PreparedStatement statement = con.prepareStatement(sqlgetAllProducts);
+           statement.setString(1, "'%Bok%'");
+
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+                Product product = new Product();
+                product.setProductId(resultSet.getInt("productId"));
+                product.setUserId(resultSet.getInt("userId"));
+                product.setTitle(resultSet.getString("title"));
+                product.setSummary(resultSet.getString("summary"));
+                product.setType(resultSet.getInt("type"));
+                product.setPrice(resultSet.getInt("price"));
+                product.setDiscount(resultSet.getInt("discount"));
+                product.setPublishedAt(resultSet.getString("publishedAt"));
+                product.setContent(resultSet.getString("content"));
+                product.setProductUrl(resultSet.getString("productUrl"));
+                product.setCategoryId(resultSet.getInt("categoryId"));
+                products.add(product);
+            } //End while
+            resultSet.close();
+            statement.close();
+            con.close();
+            return products;
+        } //end try
+        catch(SQLException ex){
+            Logger.getLogger(UserCrud.class.getName()).log(Level.SEVERE, null, ex);
+        }//End getTeamById
+        return null;
+    } //Klar
+>>>>>>> 44b32bba4675426c16be5a10385f6af50e85a712
 }

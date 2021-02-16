@@ -61,6 +61,9 @@ public class UserService {
     public List<Product_review>getAllUserReviews(int userId){
         return userCrud.getAllUserReviews(userId);
     }
+      public List<Product_review>getAllProductReviews(int productId){
+        return userCrud.getAllProductReviews(productId);
+    }
     public Product_review getReview(int reviewId){
         return userCrud.getReview(reviewId);
     }
