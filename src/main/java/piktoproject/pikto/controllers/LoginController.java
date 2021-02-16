@@ -41,6 +41,9 @@ public class LoginController {
     GoogleInfoService googleInfoService;
 
     @Autowired
+    OAuth2AuthorizedClientService authclientService;
+
+    @Autowired
     public LoginController(Facebook facebook) {
         this.facebook = facebook;
     }
@@ -55,8 +58,7 @@ public class LoginController {
         return "home";
     }
 
-    @Autowired
-    OAuth2AuthorizedClientService authclientService;
+
 
     @RequestMapping("/formLogin")
     public String getformLoginInfo(Model model) {

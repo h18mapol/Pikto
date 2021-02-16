@@ -3,6 +3,7 @@ package piktoproject.pikto.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.oauth2.client.OAuth2AuthorizedClientService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -21,6 +22,21 @@ public class UserController {
     private UserService userService;
     @Autowired
     private AdminService adminService;
+    @Autowired
+    OAuth2AuthorizedClientService authclientService;
+
+
+    @RequestMapping("/User")
+    public String getUser(Model model){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = adminService.getUserByEmail(auth.getName());
+        System.out.println(user.getFirstName());
+        model.addAttribute("userData", user);
+        model.addAttribute("userOrders",userService.getAllUserOrders(user.getUserId()));
+        model.addAttribute("userProducts",userService.getAllUserProducts(user.getUserId()));
+        model.addAttribute("userReviews",userService.getAllUserReviews(user.getUserId()));
+        return "Frontend/User/userPage";
+    }
 
 
     @RequestMapping("/User/{userId}/Products")
@@ -41,29 +57,22 @@ public class UserController {
     public String getProduct(Model model, @PathVariable Integer productId){
         model.addAttribute("product",userService.getProduct(productId));
         System.out.println(userService.getProduct(productId).getCategoryId());
-        return "getproduct";
-    }
-
-    @RequestMapping("/User")
-    public String getUser(Model model){
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        User user = adminService.getUserByEmail(auth.getName());
-        model.addAttribute("userData", user);
-        model.addAttribute("userOrders",userService.getAllUserOrders(user.getUserId()));
-        model.addAttribute("userProducts",userService.getAllUserProducts(user.getUserId()));
-        model.addAttribute("userReviews",userService.getAllUserReviews(user.getUserId()));
-        return "Frontend/User/userPage";
-    }
+        return "getproduct";   }
 
     @RequestMapping("/User/{userId}")
     public String getUserById(Model model, @PathVariable Integer userId){
-
-            model.addAttribute("userData",userService.getUserById(userId));
-        model.addAttribute("userOrders",userService.getAllUserOrders(userId));
-       model.addAttribute("userProducts",userService.getAllUserProducts(userId));
-       model.addAttribute("userReviews",userService.getAllUserReviews(userId));
-
-        return "Frontend/User/userPage";
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = adminService.getUserByEmail(auth.getName());
+        if (user.getUserId() == userId){
+            model.addAttribute("userData",user);
+            model.addAttribute("userOrders",userService.getAllUserOrders(userId));
+            model.addAttribute("userProducts",userService.getAllUserProducts(userId));
+            model.addAttribute("userReviews",userService.getAllUserReviews(userId));
+            return "Frontend/User/userPage";
+        } else {
+            System.out.println("Redirect to /User");
+            return "redirect:http://localhost:8888/User";
+        }
     }
 
     @RequestMapping("/User/{userId}/Reviews")

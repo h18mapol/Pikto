@@ -113,35 +113,35 @@
                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                 <thead>
                                 <tr>
-                                    <th>ReviewId</th>
+                                    <th class="hide">ReviewId</th>
                                     <th>ProductId</th>
                                     <th>Title</th>
                                     <th>Rating</th>
                                     <th>CreatedAt</th>
-                                    <th class="hide">Content</th>
+                                    <th>Content</th>
                                     <th>UserId</th>
                                 </tr>
                                 </thead>
                                 <tfoot>
                                 <tr>
-                                    <th>ReviewId</th>
+                                    <th class="hide">ReviewId</th>
                                     <th>ProductId</th>
                                     <th>Title</th>
                                     <th>Rating</th>
                                     <th>CreatedAt</th>
-                                    <th class="hide">Content</th>
+                                    <th>Content</th>
                                     <th>UserId</th>
                                 </tr>
                                 </tfoot>
                                 <tbody>
                                 {{#allReviews}}
                                 <tr>
-                                    <td>{{reviewId}}</td>
+                                    <td class="hide">{{reviewId}}</td>
                                     <td>{{productId}}</td>
                                     <td>{{title}}</td>
                                     <td>{{rating}}</td>
                                     <td>{{createdAt}}</td>
-                                    <td class="hide">{{content}}</td>
+                                    <td>{{content}}</td>
                                     <td>{{userId}}</td>
                                 </tr>
                                 {{/allReviews}}
