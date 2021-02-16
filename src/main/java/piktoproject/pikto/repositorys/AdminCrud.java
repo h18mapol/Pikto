@@ -173,8 +173,6 @@ public class AdminCrud extends UserCrud implements IAdminCrud {
         }
         return null;
      } //Klar
-<<<<<<< HEAD
-
     @Override
     public User getLoggedInUser() {
         System.out.println("USER --> /USER");
@@ -195,8 +193,6 @@ public class AdminCrud extends UserCrud implements IAdminCrud {
             return getUserByEmail(authentication.getName());
         }
     }
-
-=======
     @Override
     public List<Product> getAllProductsBySearch(String SearchWord) {
  List<Product> products = new ArrayList<>();
@@ -235,5 +231,4 @@ public class AdminCrud extends UserCrud implements IAdminCrud {
         }//End getTeamById
         return null;
     } //Klar
->>>>>>> 44b32bba4675426c16be5a10385f6af50e85a712
 }
