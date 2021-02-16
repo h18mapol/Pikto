@@ -10,6 +10,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.oauth2.client.OAuth2AuthorizedClientService;
+import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
 import org.springframework.stereotype.Repository;
 import piktoproject.pikto.models.Product;
 import piktoproject.pikto.models.Order;
@@ -168,4 +173,26 @@ public class AdminCrud extends UserCrud implements IAdminCrud {
         }
         return null;
      } //Klar
+
+    @Override
+    public User getLoggedInUser() {
+        System.out.println("USER --> /USER");
+        OAuth2AuthorizedClientService clientService;
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication instanceof OAuth2AuthenticationToken){
+            OAuth2AuthenticationToken oauthToken = (OAuth2AuthenticationToken) authentication;
+            String clientRegistrationId = oauthToken.getAuthorizedClientRegistrationId();
+            if (clientRegistrationId.equalsIgnoreCase( "github")){
+                String githubEmail = (String) oauthToken.getPrincipal().getAttributes().get("login")+"@github.com";
+                return getUserByEmail(githubEmail);
+            }
+            String email = (String)oauthToken.getPrincipal().getAttributes().get("email");
+            System.out.println(email);
+            return getUserByEmail(email);
+        } else {
+            System.out.println("Normal Login");
+            return getUserByEmail(authentication.getName());
+        }
+    }
+
 }

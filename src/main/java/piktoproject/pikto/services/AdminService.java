@@ -28,6 +28,9 @@ public class AdminService {
     public List<User>getAllUsers(){
         return adminCrud.getAllUsers();
     }
+    public User getLoggedInUser(){
+        return adminCrud.getLoggedInUser();
+    }
     public User getUser(int userId){
         return adminCrud.getUserById(userId);
     }

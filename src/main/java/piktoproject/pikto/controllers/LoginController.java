@@ -16,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import piktoproject.pikto.login.facebook.Facebook;
 import piktoproject.pikto.models.User;
 import piktoproject.pikto.repositorys.UserCrud;
@@ -61,9 +62,11 @@ public class LoginController {
 
 
     @RequestMapping("/formLogin")
-    public String getformLoginInfo(Model model) {
+    public String getformLoginInfo(Model model, HttpServletRequest request) {
+        HttpSession session = request.getSession();
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = adminService.getUserByEmail(auth.getName());
+        session.setAttribute("userData", user);
         model.addAttribute("userData", user);
         model.addAttribute("userId", user.getUserId());
         if (auth.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_ADMIN"))){
@@ -79,7 +82,8 @@ public class LoginController {
     }
 
     @RequestMapping("/oauth2LoginSuccess")
-    public String getOauth2LoginInfo(Model model) {
+    public String getOauth2LoginInfo(Model model, HttpServletRequest request, RedirectAttributes redirectAttrs) {
+        HttpSession session = request.getSession();
         System.out.println("Social Login!");
         OAuth2AuthorizedClientService clientService;
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -104,11 +108,11 @@ public class LoginController {
                     user.setMobileNr("");
                     user.setPictureUrl("");
                     adminService.addUser(user);
-                    User facebookUser = adminService.getUserByEmail(facebookEmail);
-                    model.addAttribute("userDate", facebookUser);
-                    model.addAttribute("userProducts",adminService.getAllProductsbyId(facebookUser.getUserId()));
-                    model.addAttribute("userReviews",adminService.getAllReviewsById(facebookUser.getUserId()));
-                    model.addAttribute("userOrders",adminService.getAllOrdersById(facebookUser.getUserId()));
+                    user = adminService.getUserByEmail(facebookEmail);
+                    model.addAttribute("userDate", user);
+                    model.addAttribute("userProducts",adminService.getAllProductsbyId(user.getUserId()));
+                    model.addAttribute("userReviews",adminService.getAllReviewsById(user.getUserId()));
+                    model.addAttribute("userOrders",adminService.getAllOrdersById(user.getUserId()));
                 } else {
                     System.out.println("Already a user");
                     model.addAttribute("userData", user);
@@ -116,9 +120,10 @@ public class LoginController {
                     model.addAttribute("userReviews",adminService.getAllReviewsById(user.getUserId()));
                     model.addAttribute("userOrders",adminService.getAllOrdersById(user.getUserId()));
                 }
+                session.setAttribute("userData", user);
                 if (user.getAdmin() == 1){
                     System.out.println("Role Admin -->");
-                    return "Frontend/Admin/Users";
+                    return "Frontend/Admin/Admin";
                 } else {
                     System.out.println("Role Vanliga User -->");
                     return "Frontend/User/userPage";

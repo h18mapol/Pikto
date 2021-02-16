@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.client.OAuth2AuthorizedClientService;
+import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -12,6 +14,7 @@ import piktoproject.pikto.models.User;
 import piktoproject.pikto.services.AdminService;
 import piktoproject.pikto.services.UserService;
 
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 @Controller
@@ -28,13 +31,23 @@ public class UserController {
 
     @RequestMapping("/User")
     public String getUser(Model model){
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        User user = adminService.getUserByEmail(auth.getName());
-        System.out.println(user.getFirstName());
+        User user = adminService.getLoggedInUser();
         model.addAttribute("userData", user);
         model.addAttribute("userOrders",userService.getAllUserOrders(user.getUserId()));
         model.addAttribute("userProducts",userService.getAllUserProducts(user.getUserId()));
         model.addAttribute("userReviews",userService.getAllUserReviews(user.getUserId()));
+        return "Frontend/User/userPage";
+    }
+
+    @RequestMapping("/User/Social")
+    public String getUserSocial(Model model, @RequestParam("userId") Integer userId){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = adminService.getUserByEmail(auth.getName());
+        System.out.println(user.getFirstName());
+        model.addAttribute("userData", userService.getUserById(userId));
+        model.addAttribute("userOrders",userService.getAllUserOrders(userId));
+        model.addAttribute("userProducts",userService.getAllUserProducts(userId));
+        model.addAttribute("userReviews",userService.getAllUserReviews(userId));
         return "Frontend/User/userPage";
     }
 
@@ -94,8 +107,6 @@ public class UserController {
         userService.addProduct(product);
         return "redirect:/getproduct";
     }
-
-
 
 
 

@@ -29,11 +29,19 @@ public class AdminController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         model.addAttribute("allProducts",adminService.getAllProducts());
         model.addAttribute("userData",adminService.getUserByEmail(auth.getName()));
+        System.out.println(auth.getName());
         return "Frontend/Admin/Admin";
     }
 
     @RequestMapping("/Admin/{userId}")
     public String getAdminPageWithId(Model model, @PathVariable Integer userId){
+        model.addAttribute("allProducts",adminService.getAllProducts());
+        model.addAttribute("userData",userService.getUserById(userId));
+        return "Frontend/Admin/Admin";
+    }
+
+    @RequestMapping("/Admin/Social")
+    public String getAdminSocialPageWithId(Model model, @RequestParam("userId") Integer userId){
         model.addAttribute("allProducts",adminService.getAllProducts());
         model.addAttribute("userData",userService.getUserById(userId));
         return "Frontend/Admin/Admin";
