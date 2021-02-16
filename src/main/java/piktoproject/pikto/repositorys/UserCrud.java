@@ -441,4 +441,39 @@ public class UserCrud implements IUserCrud {
     }
 
     //Helper Functions
+
+    @Override
+    public List<Product_review> getAllProductReviews(int productId) {
+          List<Product_review> product_reviews = new ArrayList<>();
+        try{
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/piktodb?serverTimezone=UTC", "root", "");
+
+            String sqlgetAllReviews = "SELECT * FROM product_review WHERE productId = ?";
+            PreparedStatement statement = con.prepareStatement(sqlgetAllReviews);
+            statement.setInt(1, productId);
+
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+                Product_review product_review = new Product_review();
+                product_review.setReviewId(resultSet.getInt("reviewId"));
+                product_review.setProductId(resultSet.getInt("productId"));
+                product_review.setTitle(resultSet.getString("title"));
+                product_review.setRating(resultSet.getInt("rating"));
+                product_review.setCreatedAt(resultSet.getString("createdAt"));
+                product_review.setContent(resultSet.getString("content"));
+                product_review.setUserId(resultSet.getInt("userId"));
+                product_reviews.add(product_review);
+            } //End while
+            resultSet.close();
+            statement.close();
+            con.close();
+            return product_reviews;
+        } //end try
+        catch(SQLException ex){
+            Logger.getLogger(UserCrud.class.getName()).log(Level.SEVERE, null, ex);
+        }//End getTeamById
+        return null;
+    } //Klar
+    
 }

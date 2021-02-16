@@ -47,6 +47,10 @@ public class AdminService {
 
     return adminCrud.getAllProducts();
     }
+      public List<Product>getAllProductsBySearch(String SearchWord){
+
+    return adminCrud.getAllProductsBySearch(SearchWord);
+    }
     public List<Product>getAllProductsbyId(int userId){
         return adminCrud.getAllUserProducts(userId);
     }

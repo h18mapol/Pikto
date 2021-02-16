@@ -22,6 +22,7 @@ public interface IUserCrud{
 
     //Reviews
     List<Product_review>getAllUserReviews(int userId);
+     List<Product_review>getAllProductReviews(int productId);
     Product_review getReview(int reviewId);
     void addReview(Product_review product_review);
     Product_review updateReview(Product_review product_review);

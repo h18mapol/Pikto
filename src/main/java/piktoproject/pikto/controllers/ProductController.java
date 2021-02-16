@@ -36,7 +36,15 @@ public class ProductController {
      @RequestMapping("/Index/{productId}")
     public String getProductPage(Model model, @PathVariable Integer productId){
         model.addAttribute("Product",adminService.getProduct(productId));
+        model.addAttribute("Reviews",userService.getAllProductReviews(productId));
         return "Frontend/Main/ProductPage";
+    }
+    
+     @RequestMapping("/Index/Search/{SearchWord}")
+    public String getProductPage(Model model, @PathVariable String SearchWord){
+        model.addAttribute("Product",adminService.getAllProductsBySearch(SearchWord));
+         System.out.println(adminService.getAllProductsBySearch(SearchWord));
+        return "Frontend/Main/SearchPage";
     }
     
     
