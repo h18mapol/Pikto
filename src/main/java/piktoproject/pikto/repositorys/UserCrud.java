@@ -78,7 +78,7 @@ public class UserCrud implements IUserCrud {
             con=DriverManager.getConnection("jdbc:mysql://localhost:3306/piktodb?serverTimezone=UTC","root","");
             Statement statement = con.createStatement();
             statement = con.createStatement();
-            String sqlDeleteUser = "DELETE FROM user WHERE eventid="+userId;
+            String sqlDeleteUser = "DELETE FROM piktodb.user WHERE userId="+userId;
             statement.executeUpdate(sqlDeleteUser);
             statement.close();
             con.close();
@@ -86,7 +86,7 @@ public class UserCrud implements IUserCrud {
         catch(SQLException ex){
             Logger.getLogger(AdminCrud.class.getName()).log(Level.SEVERE, null, ex);
         }//End deleteUser
-    } //Klar inte Testad
+    } //Klar
     @Override
     public void addUser(User user) {
         try{
@@ -138,7 +138,7 @@ public class UserCrud implements IUserCrud {
             Logger.getLogger(UserCrud.class.getName()).log(Level.SEVERE, null, ex);
         }//End events
         return null;
-    }
+    } //Klar
 
     //Product
     @Override
@@ -261,8 +261,30 @@ public class UserCrud implements IUserCrud {
     } //Klar
     @Override
     public Product updateProduct(Product product) {
+        try{
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/piktodb?serverTimezone=UTC", "root", "");
+            String sqlUpdateEvent = "UPDATE product SET userId=?, title=?, summary=?, type=?, price=?, discount=?, publishedAt=?, content=?, productUrl=? WHERE productId=?";
+            PreparedStatement statement = con.prepareStatement(sqlUpdateEvent);
+            statement.setInt (1, product.getUserId());
+            statement.setString(2, product.getTitle());
+            statement.setString(3, product.getSummary());
+            statement.setInt(4, product.getType());
+            statement.setFloat(5, product.getPrice());
+            statement.setFloat(6, product.getDiscount());
+            statement.setString(7, product.getPublishedAt());
+            statement.setString(8, product.getContent());
+            statement.setString(9, product.getProductUrl());
+            statement.setInt(10, product.getProductId());
+            statement.execute();
+            statement.close();
+            con.close();
+            return product;
+        } //end try
+        catch(SQLException ex){
+            Logger.getLogger(UserCrud.class.getName()).log(Level.SEVERE, null, ex);
+        }//End events
         return null;
-    }
+    } //Klar
     @Override
     public void deleteProduct(int productId) {
         try{
@@ -276,8 +298,8 @@ public class UserCrud implements IUserCrud {
         }
         catch(SQLException ex){
             Logger.getLogger(UserCrud.class.getName()).log(Level.SEVERE, null, ex);
-        }//End deleteUser
-    }
+        }//End deleteProduct
+    } //Klar
     @Override
     public void addProduct(Product product) {
         try{

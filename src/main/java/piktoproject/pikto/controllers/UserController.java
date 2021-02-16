@@ -39,19 +39,6 @@ public class UserController {
         return "Frontend/User/userPage";
     }
 
-    @RequestMapping("/User/Social")
-    public String getUserSocial(Model model, @RequestParam("userId") Integer userId){
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        User user = adminService.getUserByEmail(auth.getName());
-        System.out.println(user.getFirstName());
-        model.addAttribute("userData", userService.getUserById(userId));
-        model.addAttribute("userOrders",userService.getAllUserOrders(userId));
-        model.addAttribute("userProducts",userService.getAllUserProducts(userId));
-        model.addAttribute("userReviews",userService.getAllUserReviews(userId));
-        return "Frontend/User/userPage";
-    }
-
-
     @RequestMapping("/User/{userId}/Products")
     public String getAllUserProducts(Model model, @PathVariable Integer userId){
         model.addAttribute("allProducts",userService.getAllUserProducts(userId));
@@ -102,9 +89,15 @@ public class UserController {
         return "getorders";
     }
 
-    @PostMapping(path = "/User/Add/Product")
+    @PostMapping(path = "/User/Add/Product/{productId}")
     public String addProduct(@ModelAttribute("product") Product product, @RequestParam Map<String, String> allRequestParams, @PathVariable Integer productId ){
         userService.addProduct(product);
+        return "redirect:/getproduct";
+    }
+
+    @PostMapping(path = "/User/Update/Product/{productId}")
+    public String updateProduct(@ModelAttribute("product") Product product, @RequestParam Map<String, String> allRequestParams, @PathVariable Integer productId ){
+        userService.updateProduct(product);
         return "redirect:/getproduct";
     }
 

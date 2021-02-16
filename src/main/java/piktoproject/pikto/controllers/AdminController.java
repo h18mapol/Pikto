@@ -32,21 +32,12 @@ public class AdminController {
         System.out.println(auth.getName());
         return "Frontend/Admin/Admin";
     }
-
     @RequestMapping("/Admin/{userId}")
     public String getAdminPageWithId(Model model, @PathVariable Integer userId){
         model.addAttribute("allProducts",adminService.getAllProducts());
         model.addAttribute("userData",userService.getUserById(userId));
         return "Frontend/Admin/Admin";
     }
-
-    @RequestMapping("/Admin/Social")
-    public String getAdminSocialPageWithId(Model model, @RequestParam("userId") Integer userId){
-        model.addAttribute("allProducts",adminService.getAllProducts());
-        model.addAttribute("userData",userService.getUserById(userId));
-        return "Frontend/Admin/Admin";
-    }
-
     @RequestMapping("/Admin/Products")
     public String getAllProducts(Model model){
         model.addAttribute("allProducts",adminService.getAllProducts());
@@ -58,11 +49,18 @@ public class AdminController {
         model.addAttribute("allUsers",adminService.getAllUsers());
         return "Frontend/Admin/Users";
     }
-
     @RequestMapping("/Admin/Reviews")
     public String getAllReviews(Model model){
         model.addAttribute("allReviews",adminService.getAllReviews());
         return "Frontend/Admin/Reviews";
+    }
+    @RequestMapping("/Admin/User/{userId}")
+    public String getUserPage(Model model, @PathVariable Integer userId){
+        model.addAttribute("userData",adminService.getUser(userId));
+        model.addAttribute("userProducts",adminService.getAllProductsbyId(userId));
+        model.addAttribute("userReviews",adminService.getAllReviewsById(userId));
+        model.addAttribute("userOrders",adminService.getAllOrdersById(userId));
+        return "Frontend/Admin/IndividualUser";
     }
 
     @RequestMapping(path="/Admin/addProduct", method={RequestMethod.POST})
@@ -83,22 +81,24 @@ public class AdminController {
         return "redirect:/Admin";
 
     }
-
-
     @RequestMapping(path="/Admin/addUser", method={RequestMethod.POST,RequestMethod.PUT})
     public String addUser(@ModelAttribute ("User")User user,@RequestParam Map<String, String> allRequestParams){
         userService.addUser(user);
         return "redirect:/Admin";
     }
 
-    @RequestMapping("/Admin/User/{userId}")
-    public String getUserPage(Model model, @PathVariable Integer userId){
-        model.addAttribute("userData",adminService.getUser(userId));
-        model.addAttribute("userProducts",adminService.getAllProductsbyId(userId));
-        model.addAttribute("userReviews",adminService.getAllReviewsById(userId));
-        model.addAttribute("userOrders",adminService.getAllOrdersById(userId));
-        return "Frontend/Admin/IndividualUser";
+    @RequestMapping(path="/Admin/updateUser", method={RequestMethod.POST})
+    public String updateUser(@ModelAttribute ("product")Product product,@RequestParam Map<String, String> allRequestParams){
+        userService.addProduct(product);
+        return "redirect:/Admin/Users";
     }
+    @RequestMapping(path="/Admin/updateProduct", method={RequestMethod.POST})
+    public String updateProduct(@ModelAttribute ("product")Product product,@RequestParam Map<String, String> allRequestParams){
+        userService.updateProduct(product);
+        return "redirect:/Admin/Products";
+    }
+
+
 
 
     @RequestMapping("/Admin/Orders")
@@ -106,7 +106,6 @@ public class AdminController {
         model.addAttribute("allOrders", adminService.getAllOrders());
         return "Frontend/Admin/Orders";
     }
-
 
 }
 
