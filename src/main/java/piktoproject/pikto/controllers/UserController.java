@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.client.OAuth2AuthorizedClientService;
+import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -12,6 +14,7 @@ import piktoproject.pikto.models.User;
 import piktoproject.pikto.services.AdminService;
 import piktoproject.pikto.services.UserService;
 
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 @Controller
@@ -28,16 +31,13 @@ public class UserController {
 
     @RequestMapping("/User")
     public String getUser(Model model){
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        User user = adminService.getUserByEmail(auth.getName());
-        System.out.println(user.getFirstName());
+        User user = adminService.getLoggedInUser();
         model.addAttribute("userData", user);
         model.addAttribute("userOrders",userService.getAllUserOrders(user.getUserId()));
         model.addAttribute("userProducts",userService.getAllUserProducts(user.getUserId()));
         model.addAttribute("userReviews",userService.getAllUserReviews(user.getUserId()));
         return "Frontend/User/userPage";
     }
-
 
     @RequestMapping("/User/{userId}/Products")
     public String getAllUserProducts(Model model, @PathVariable Integer userId){
@@ -89,13 +89,17 @@ public class UserController {
         return "getorders";
     }
 
-    @PostMapping(path = "/User/Add/Product")
+    @PostMapping(path = "/User/Add/Product/{productId}")
     public String addProduct(@ModelAttribute("product") Product product, @RequestParam Map<String, String> allRequestParams, @PathVariable Integer productId ){
         userService.addProduct(product);
         return "redirect:/getproduct";
     }
 
-
+    @PostMapping(path = "/User/Update/Product/{productId}")
+    public String updateProduct(@ModelAttribute("product") Product product, @RequestParam Map<String, String> allRequestParams, @PathVariable Integer productId ){
+        userService.updateProduct(product);
+        return "redirect:/getproduct";
+    }
 
 
 

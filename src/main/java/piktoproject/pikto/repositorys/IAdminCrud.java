@@ -13,4 +13,5 @@ public interface IAdminCrud extends IUserCrud{
     public List<Product>getAllProductsBySearch(String SearchWord);
     public List<Product_review>getAllReviews();
     public List<Order>getAllOrders();
+    public User getLoggedInUser();
 }

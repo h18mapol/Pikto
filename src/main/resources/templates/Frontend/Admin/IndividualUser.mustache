@@ -107,6 +107,162 @@
                     <li class="breadcrumb-item active">Userprofile</li>
                 </ol>
                 <div class="row">
+                    <div class="col-xl-12">
+                        <div class="card mb-4">
+                            <div class="accordion" id="accordionExample" style="width:100%">
+                                <div class="card">
+                                    <div class="card-header" id="headingOne">
+                                        <h2 class="mb-0">
+                                            <button type="button" class="btn btn-link" data-toggle="collapse"
+                                                    data-target="#collapseOne">Admin functions
+                                            </button>
+                                        </h2>
+                                    </div>
+                                    <div id="collapseOne" class="collapse" aria-labelledby="headingOne"
+                                         data-parent="#accordionExample">
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-xl-6">
+                                                    <div class="card mb-4">
+                                                        <div class="card-body">
+                                                            <form method="POST" action="/Admin/addProduct">
+                                                                <h1 class="align-content-center text-primary">Add
+                                                                    Product</h1>
+                                                                <div class="form-group">
+                                                                    <label for="adminProductName">Product name</label>
+                                                                    <input type="text" class="form-control"
+                                                                           id="adminProductName" name="title"
+                                                                           placeholder="">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="adminid">User id</label>
+                                                                    <input type="text" class="form-control" id="adminid"
+                                                                           name="userId" placeholder="">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="adminSummary">Summary</label>
+                                                                    <input type="text" class="form-control"
+                                                                           id="adminSummary" name="summary"
+                                                                           placeholder="">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="adminproducttype">Type</label>
+                                                                    <input type="text" class="form-control"
+                                                                           id="adminproducttype" name="type"
+                                                                           placeholder="">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="adminprice">Price</label>
+                                                                    <input type="text" class="form-control"
+                                                                           id="adminprice" name="price" placeholder="">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="admindiscount">Discount</label>
+                                                                    <input type="text" class="form-control"
+                                                                           id="admindiscount" name="discount"
+                                                                           placeholder="">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="admincategoryid">Category</label>
+                                                                    <input type="text" class="form-control"
+                                                                           id="admincategoryid" name="categoryId"
+                                                                           placeholder="">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="adminproductUrl">PictureURL</label>
+                                                                    <input type="text" class="form-control"
+                                                                           id="adminproductUrl" name="productUrl"
+                                                                           placeholder="">
+                                                                </div>
+                                                                <div class="form-group hide">
+                                                                    <label for="adminproductUrl">PictureURL</label>
+                                                                    <input type="text" class="form-control"
+                                                                           id="adminContent" name="content"
+                                                                           placeholder="">
+                                                                </div>
+                                                                <div class="form-group form-check">
+                                                                    <input type="checkbox" class="form-check-input"
+                                                                           id="exampleCheck1">
+                                                                    <label class="form-check-label" for="exampleCheck1">Check
+                                                                        me out</label>
+                                                                </div>
+                                                                <button type="submit" class="btn btn-primary">Submit
+                                                                </button>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xl-6">
+                                                    <div class="card mb-4">
+                                                        <div class="card-body">
+                                                            <form method="POST" action="/Admin/addUser">
+                                                                <h1 class="h1 align-content-center text-secondary">Add
+                                                                    User</h1>
+                                                                <div class="form-group">
+                                                                    <label for="AdminfirstName">Firstname</label>
+                                                                    <input type="text" class="form-control"
+                                                                           id="AdminfirstName" name="firstName"
+                                                                           aria-describedby="emailHelp"
+                                                                           placeholder="Enter email">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="AdminLastName">Lastname</label>
+                                                                    <input type="text" class="form-control"
+                                                                           id="AdminLastName" name="lastName"
+                                                                           placeholder="Password">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="AdminPhoneNumber">Phonenumber</label>
+                                                                    <input type="text" class="form-control"
+                                                                           id="AdminPhoneNumber" name="mobileNr"
+                                                                           placeholder="Password">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="AdminEmail">Email</label>
+                                                                    <input type="text" class="form-control"
+                                                                           id="AdminEmail" name="email"
+                                                                           placeholder="Password">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="AdminPassword">Password</label>
+                                                                    <input type="password" class="form-control"
+                                                                           id="AdminPassword" name="password"
+                                                                           placeholder="Password">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="AdminAuth">Authority</label>
+                                                                    <input type="text" class="form-control"
+                                                                           id="AdminAuth" name="admin"
+                                                                           placeholder="Password">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="AdminPictureUrl">Profile
+                                                                        pictureURL</label>
+                                                                    <input type="text" class="form-control"
+                                                                           id="AdminPictureUrl" name="pictureUrl"
+                                                                           placeholder="Password">
+                                                                </div>
+                                                                <div class="form-group form-check">
+                                                                    <label class="form-check-label" for="AdminCheck2">Check
+                                                                        me out</label>
+                                                                    <input type="checkbox" class="form-check-input"
+                                                                           id="AdminCheck2">
+                                                                </div>
+                                                                <button type="submit" class="btn btn-primary">Submit
+                                                                </button>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
                     <div class="col-xl-6">
                         <div class="card mb-4">
                             <div class="card-header">
