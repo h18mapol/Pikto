@@ -177,7 +177,11 @@ public class AdminCrud extends UserCrud implements IAdminCrud {
      String sqlgetAllProducts = "SELECT * FROM product INNER JOIN product_category ON product.productId=product_category.productId WHERE title LIKE ?";
 
             PreparedStatement statement = con.prepareStatement(sqlgetAllProducts);
-           statement.setString(1, "'%Bok%'");
+          String search="%"+SearchWord+"%";
+          System.out.println(search);
+          statement.setString(1, search);
+          
+            System.out.println(statement);
 
             ResultSet resultSet = statement.executeQuery();
 
