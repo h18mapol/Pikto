@@ -10,12 +10,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import piktoproject.pikto.models.Product;
+import piktoproject.pikto.models.Cart;
+
 import piktoproject.pikto.models.User;
 import piktoproject.pikto.services.AdminService;
 import piktoproject.pikto.services.UserService;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
+import piktoproject.pikto.services.ShoppingService;
 
 @Controller
 @SessionAttributes("userId")
@@ -27,15 +30,21 @@ public class UserController {
     private AdminService adminService;
     @Autowired
     OAuth2AuthorizedClientService authclientService;
+     @Autowired
+    private ShoppingService shoppingService;
+ 
 
 
     @RequestMapping("/User")
     public String getUser(Model model){
         User user = adminService.getLoggedInUser();
+      
+   
         model.addAttribute("userData", user);
         model.addAttribute("userOrders",userService.getAllUserOrders(user.getUserId()));
         model.addAttribute("userProducts",userService.getAllUserProducts(user.getUserId()));
         model.addAttribute("userReviews",userService.getAllUserReviews(user.getUserId()));
+
         return "Frontend/User/userPage";
     }
 

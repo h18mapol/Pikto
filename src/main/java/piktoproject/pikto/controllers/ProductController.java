@@ -7,10 +7,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import piktoproject.pikto.models.User;
+import piktoproject.pikto.models.Cart;
 import piktoproject.pikto.services.AdminService;
 import piktoproject.pikto.services.ShoppingService;
 import piktoproject.pikto.services.UserService;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -28,8 +28,12 @@ public class ProductController {
 
 
     @RequestMapping("/User/Checkout/{userId}")
+
     public String checkoutUser(Model model, @PathVariable Integer userId) {
+        Cart cart = new Cart();
+        cart.setCartId(1);
         model.addAttribute("user", userService.getUserById(userId));
+        model.addAttribute("userCart", productService.getAllCartItems(cart));
         return "Frontend/User/Checkout";
     }
 
