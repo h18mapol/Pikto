@@ -30,7 +30,8 @@ import java.util.Collection;
 import java.util.Map;
 
 import static org.springframework.security.web.context.HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY;
-@SessionAttributes("userId")
+
+@SessionAttributes("userData")
 @Controller
 public class LoginController {
 
@@ -56,9 +57,8 @@ public class LoginController {
 
     @GetMapping("/")
     public String facebook(Model model) {
-        return "home";
+        return "Frontend/Main/Index";
     }
-
 
 
     @RequestMapping("/formLogin")
@@ -69,38 +69,40 @@ public class LoginController {
         session.setAttribute("userData", user);
         model.addAttribute("userData", user);
         model.addAttribute("userId", user.getUserId());
-        if (auth.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_ADMIN"))){
+        if (auth.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_ADMIN"))) {
             System.out.println("Role Admin -->");
             return "redirect:/Admin";
         } else {
             System.out.println("Role Vanliga User -->");
-            model.addAttribute("userProducts",adminService.getAllProductsbyId(user.getUserId()));
-            model.addAttribute("userReviews",adminService.getAllReviewsById(user.getUserId()));
-            model.addAttribute("userOrders",adminService.getAllOrdersById(user.getUserId()));
+            model.addAttribute("userProducts", adminService.getAllProductsbyId(user.getUserId()));
+            model.addAttribute("userReviews", adminService.getAllReviewsById(user.getUserId()));
+            model.addAttribute("userOrders", adminService.getAllOrdersById(user.getUserId()));
             return "redirect:/User";
         }
     }
 
     @RequestMapping("/oauth2LoginSuccess")
-    public String getOauth2LoginInfo(Model model, HttpServletRequest request, RedirectAttributes redirectAttrs) {
+    public String getOauth2LoginInfo(Model model, HttpServletRequest request) {
         HttpSession session = request.getSession();
         System.out.println("Social Login!");
         OAuth2AuthorizedClientService clientService;
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         OAuth2AuthenticationToken oauthToken = (OAuth2AuthenticationToken) authentication;
         String clientRegistrationId = oauthToken.getAuthorizedClientRegistrationId();
-        switch (clientRegistrationId){
+        System.out.println(session.getId());
+        switch (clientRegistrationId) {
             case "facebook":
                 System.out.println(oauthToken.getPrincipal().getAttributes().toString());
                 String facebookEmail = (String) oauthToken.getPrincipal().getAttributes().get("email");
+                System.out.println(facebookEmail);
                 String facebookname = (String) oauthToken.getPrincipal().getAttributes().get("name");
                 User user = adminService.getUserByEmail(facebookEmail);
-                if (user.getEmail() == null){
+                if (user.getEmail() == null) {
                     int idx = facebookname.lastIndexOf(' ');
                     if (idx == -1)
                         throw new IllegalArgumentException("Only a single name: " + facebookname);
                     String firstName = facebookname.substring(0, idx);
-                    String lastName  = facebookname.substring(idx + 1);
+                    String lastName = facebookname.substring(idx + 1);
                     user.setFirstName(firstName);
                     user.setLastName(lastName);
                     user.setEmail(facebookEmail);
@@ -109,29 +111,30 @@ public class LoginController {
                     user.setPictureUrl("");
                     adminService.addUser(user);
                     user = adminService.getUserByEmail(facebookEmail);
-                    model.addAttribute("userDate", user);
-                    model.addAttribute("userProducts",adminService.getAllProductsbyId(user.getUserId()));
-                    model.addAttribute("userReviews",adminService.getAllReviewsById(user.getUserId()));
-                    model.addAttribute("userOrders",adminService.getAllOrdersById(user.getUserId()));
+                    model.addAttribute("userData", user);
+                    model.addAttribute("userProducts", adminService.getAllProductsbyId(user.getUserId()));
+                    model.addAttribute("userReviews", adminService.getAllReviewsById(user.getUserId()));
+                    model.addAttribute("userOrders", adminService.getAllOrdersById(user.getUserId()));
                 } else {
                     System.out.println("Already a user");
-                    model.addAttribute("userData", user);
-                    model.addAttribute("userProducts",adminService.getAllProductsbyId(user.getUserId()));
-                    model.addAttribute("userReviews",adminService.getAllReviewsById(user.getUserId()));
-                    model.addAttribute("userOrders",adminService.getAllOrdersById(user.getUserId()));
                 }
-                session.setAttribute("userData", user);
-                if (user.getAdmin() == 1){
-                    System.out.println("Role Admin -->");
-                    return "Frontend/Admin/Admin";
+                if (user.getAdmin() == 1) {
+                    model.addAttribute("userData", user);
+                    System.out.println("Role Admin -->" + session.getAttribute("userData").toString());
+                    return "loginAdmin";
                 } else {
-                    System.out.println("Role Vanliga User -->");
+                    System.out.println("Role Vanliga User -->" + session.getAttribute("userData").toString());
+                    session.setAttribute("userData", user);
+                    model.addAttribute("userData", session.getAttribute("userData"));
+                    model.addAttribute("userProducts", adminService.getAllProductsbyId(user.getUserId()));
+                    model.addAttribute("userReviews", adminService.getAllReviewsById(user.getUserId()));
+                    model.addAttribute("userOrders", adminService.getAllOrdersById(user.getUserId()));
                     return "Frontend/User/userPage";
                 }
             case "google":
                 String googleEmail = (String) oauthToken.getPrincipal().getAttributes().get("email");
                 User googleUser = adminService.getUserByEmail(googleEmail);
-                if (googleUser.getEmail() == null){
+                if (googleUser.getEmail() == null) {
                     googleUser.setPassword("password");
                     googleUser.setEmail(googleEmail);
                     googleUser.setFirstName((String) oauthToken.getPrincipal().getAttributes().get("given_name"));
@@ -143,29 +146,31 @@ public class LoginController {
                 } else {
                     System.out.println("Already a user");
                 }
-                model.addAttribute("userData", googleUser);
-                model.addAttribute("userProducts",adminService.getAllProductsbyId(googleUser.getUserId()));
-                model.addAttribute("userReviews",adminService.getAllReviewsById(googleUser.getUserId()));
-                model.addAttribute("userOrders",adminService.getAllOrdersById(googleUser.getUserId()));
-                if (googleUser.getAdmin() == 1){
-                    System.out.println("Role Admin -->");
-                    return "Frontend/Admin/Users";
+                if (googleUser.getAdmin() == 1) {
+                    model.addAttribute("userData", session.getAttribute("userData"));
+                    System.out.println("Role Admin --> Google: ");
+                    return "loginAdmin";
                 } else {
-                    System.out.println("Role Vanliga User -->");
+                    session.setAttribute("userData", googleUser);
+                    model.addAttribute("userData", session.getAttribute("userData"));
+                    model.addAttribute("userProducts", adminService.getAllProductsbyId(googleUser.getUserId()));
+                    model.addAttribute("userReviews", adminService.getAllReviewsById(googleUser.getUserId()));
+                    model.addAttribute("userOrders", adminService.getAllOrdersById(googleUser.getUserId()));
+                    System.out.println("Role Vanliga User --> Google: " + session.getAttribute("userData").toString());
                     return "Frontend/User/userPage";
                 }
             case "github":
                 System.out.println(oauthToken.getPrincipal().getAttributes().toString());
-                String githubEmail = (String) oauthToken.getPrincipal().getAttributes().get("login")+"@github.com";
+                String githubEmail = (String) oauthToken.getPrincipal().getAttributes().get("login") + "@github.com";
                 String githubname = (String) oauthToken.getPrincipal().getAttributes().get("name");
                 System.out.println(githubEmail + "email : name " + githubname);
                 User githubUser = adminService.getUserByEmail(githubEmail);
-                if (githubUser.getEmail() == null){
+                if (githubUser.getEmail() == null) {
                     int idx = githubname.lastIndexOf(' ');
                     if (idx == -1)
                         throw new IllegalArgumentException("Only a single name: " + githubname);
                     String firstName = githubname.substring(0, idx);
-                    String lastName  = githubname.substring(idx + 1);
+                    String lastName = githubname.substring(idx + 1);
                     githubUser.setFirstName(firstName);
                     githubUser.setLastName(lastName);
                     githubUser.setMobileNr("");
@@ -174,18 +179,21 @@ public class LoginController {
                     githubUser.setPictureUrl((String) oauthToken.getPrincipal().getAttributes().get("avatar_url"));
                     adminService.addUser(githubUser);
                     githubUser = adminService.getUserByEmail(githubEmail);
+                    session.setAttribute("userData", githubUser);
                 } else {
                     System.out.println("Already a user");
                 }
-                model.addAttribute("userData", githubUser);
-                model.addAttribute("userProducts",adminService.getAllProductsbyId(githubUser.getUserId()));
-                model.addAttribute("userReviews",adminService.getAllReviewsById(githubUser.getUserId()));
-                model.addAttribute("userOrders",adminService.getAllOrdersById(githubUser.getUserId()));
-                if (githubUser.getAdmin() == 1){
-                    System.out.println("Role Admin -->");
-                    return "Frontend/Admin/Users";
+                if (githubUser.getAdmin() == 1) {
+                    System.out.println("Role Admin User --> Github: ");
+                    System.out.println(authentication.toString());
+                    return "loginAdmin";
                 } else {
-                    System.out.println("Role Vanliga User -->");
+                    session.setAttribute("userData", githubUser);
+                    model.addAttribute("userData", session.getAttribute("userData"));
+                    model.addAttribute("userProducts", adminService.getAllProductsbyId(githubUser.getUserId()));
+                    model.addAttribute("userReviews", adminService.getAllReviewsById(githubUser.getUserId()));
+                    model.addAttribute("userOrders", adminService.getAllOrdersById(githubUser.getUserId()));
+                    System.out.println("Role Vanliga User --> GitHub: " + session.getAttribute("userData").toString());
                     return "Frontend/User/userPage";
                 }
             default:
@@ -194,11 +202,11 @@ public class LoginController {
     }
 
 
-    @RequestMapping("/formLoginSuccess")
+/*    @RequestMapping("/formLoginSuccess")
     public String getOauth2LoginFormInfo(Model model){
         OAuth2AuthorizedClientService clientService;
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         System.out.println(authentication.toString());
         return "home";
-    }
+    }*/
 }
