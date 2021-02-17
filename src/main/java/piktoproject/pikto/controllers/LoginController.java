@@ -56,7 +56,17 @@ public class LoginController {
     }
 
     @GetMapping("/")
-    public String facebook(Model model) {
+    public String IndexPage(Model model, HttpServletRequest request) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if(auth.getPrincipal() != null){
+            System.out.println("User is logged in");
+            HttpSession session = request.getSession();
+            User user = (User) session.getAttribute("userData");
+            model.addAttribute("userData", user);
+            return "Frontend/Main/Index";
+        }
+        System.out.println("User is not logged in");
+        model.addAttribute("userData", "null");
         return "Frontend/Main/Index";
     }
 

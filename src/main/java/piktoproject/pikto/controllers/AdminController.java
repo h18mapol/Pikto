@@ -98,9 +98,6 @@ public class AdminController {
         return "redirect:/Admin/Products";
     }
 
-
-
-
     @RequestMapping("/Admin/Orders")
     public String getAllOrders(Model model){
         model.addAttribute("allOrders", adminService.getAllOrders());
