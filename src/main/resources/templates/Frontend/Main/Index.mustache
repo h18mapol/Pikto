@@ -16,7 +16,6 @@
 	<link rel="stylesheet" href="/css/Main/animate.css">
 	<link rel="stylesheet" href="/css/Main/style.css">
 	<link rel="stylesheet" href="/css/Main/media-queries.css">
-	<link rel="stylesheet" href="/css/Main/carousel.css">
 
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -236,10 +235,9 @@ nav ul li a {
     <div class="container">
       <div class="col-12">
         <div class="search">
-          <form>
+          <div>
             <input class="input" type="text" id="searchValue" name="s" placeholder="How may we help you?">
-            <button type="submit" id="search"  onclick="search()"><i class="fa fa-search"></i></button>
-          </form>
+            <button onclick="myFunction()"><i class="fa fa-search"></i></button>
         </div>
       </div>
     </div>
@@ -253,6 +251,8 @@ nav ul li a {
 
 	
 <div class="container" style="max-width:90%; margin-top:1.25rem; ">
+            <button onclick="myFunction()"></button>
+
   <div class="row">
   <div class="card-columns" style="column-count: 4;">
    
@@ -316,11 +316,12 @@ nav ul li a {
             else {
                   $('nav').removeClass('black');
             }
-      })
+      });
 
-      function search() {
-           var text=document.getElementById("searchValue").value;
-           window.alert(text);
+      function myFunction() {
+            var text=document.getElementById("searchValue").value;
+            var concat="http://localhost:8888/Index/Search/"+text;
+            window.location.replace(concat);
 
 }
 </script>
