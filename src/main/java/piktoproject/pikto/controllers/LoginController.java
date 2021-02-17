@@ -120,10 +120,9 @@ public class LoginController {
                 }
                 if (user.getAdmin() == 1) {
                     model.addAttribute("userData", user);
-                    System.out.println("Role Admin -->" + session.getAttribute("userData").toString());
+                    System.out.println("Role Admin --> redirect to login Admin");
                     return "loginAdmin";
                 } else {
-                    System.out.println("Role Vanliga User -->" + session.getAttribute("userData").toString());
                     session.setAttribute("userData", user);
                     model.addAttribute("userData", session.getAttribute("userData"));
                     model.addAttribute("userProducts", adminService.getAllProductsbyId(user.getUserId()));
@@ -179,12 +178,12 @@ public class LoginController {
                     githubUser.setPictureUrl((String) oauthToken.getPrincipal().getAttributes().get("avatar_url"));
                     adminService.addUser(githubUser);
                     githubUser = adminService.getUserByEmail(githubEmail);
-                    session.setAttribute("userData", githubUser);
                 } else {
                     System.out.println("Already a user");
                 }
                 if (githubUser.getAdmin() == 1) {
                     System.out.println("Role Admin User --> Github: ");
+                    model.addAttribute("userData", githubUser);
                     System.out.println(authentication.toString());
                     return "loginAdmin";
                 } else {
