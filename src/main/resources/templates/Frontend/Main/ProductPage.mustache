@@ -221,21 +221,20 @@
 
     <script>
 
-    $('.review-block-rate').each(function(index) {
+    $('.review-block-rate').each(function(i, obj) {
     var id = $(this).attr('id');
     if(id === '1'){
 
  document.getChildById("star2").className = "btn btn-default btn-grey btn-sm";
  document.getElementById("star3").className = "btn btn-default btn-grey btn-sm";
  document.getElementById("star4").className = "btn btn-default btn-grey btn-sm";
-document.getElementById("star5").className = "btn btn-default btn-grey btn-sm";
+ document.getElementById("star5").className = "btn btn-default btn-grey btn-sm";
 
 
      
     } else if(id === '2'){
         alert("2");
-
-document.getElementById("star3").className = "btn btn-default btn-grey btn-sm";
+$(this).find("#star3").className = "btn btn-default btn-grey btn-sm";
 document.getElementById("star4").className = "btn btn-default btn-grey btn-sm";
 document.getElementById("star5").className = "btn btn-default btn-grey btn-sm";
 
@@ -253,7 +252,6 @@ document.getElementById("star5").className = "btn btn-default btn-grey btn-sm";
 
 
     }
-
     
 });
     

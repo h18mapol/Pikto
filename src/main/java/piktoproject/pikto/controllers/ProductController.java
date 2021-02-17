@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import piktoproject.pikto.models.Cart;
 import piktoproject.pikto.services.AdminService;
 import piktoproject.pikto.services.ShoppingService;
 import piktoproject.pikto.services.UserService;
@@ -11,6 +12,7 @@ import piktoproject.pikto.services.UserService;
 @Controller
 @SessionAttributes("userName")
 public class ProductController {
+    
      @Autowired
  private AdminService adminService;
 
@@ -23,7 +25,11 @@ public class ProductController {
     
     @RequestMapping("/User/Checkout/{userId}")
     public String checkoutUser(Model model, @PathVariable Integer userId){
+          Cart cart=new Cart();
+        cart.setCartId(1);
         model.addAttribute("user",userService.getUserById(userId));
+          model.addAttribute("userCart",productService.getAllCartItems(cart));
+
         return "Frontend/User/Checkout";
     }
 
