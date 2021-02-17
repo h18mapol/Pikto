@@ -1,10 +1,7 @@
 package piktoproject.pikto.repositorys;
 
 import org.springframework.stereotype.Repository;
-import piktoproject.pikto.models.Cart;
-import piktoproject.pikto.models.CartItem;
-import piktoproject.pikto.models.Order;
-import piktoproject.pikto.models.Transaction;
+import piktoproject.pikto.models.*;
 
 import java.util.List;
 
@@ -17,11 +14,11 @@ public interface IShoppingFunctions {
     void deleteFromCart(CartItem cartItem);
 
     //Cart Functions
-    Cart getCart(int sessionId);
+    Cart getCart(String sessionId);
     void deleteCart(Cart cart);
 
     //Order Functions
-    Order createOrder(Cart cart);
+    void createOrder(Cart cart, User user);
 
     //Transaction Functions
     Transaction createTransaction(Order order);
