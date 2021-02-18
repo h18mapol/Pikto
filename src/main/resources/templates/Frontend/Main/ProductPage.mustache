@@ -48,28 +48,21 @@
     </ul>
 </nav>
 <div id="layoutSidenav">
-
     <div id="layoutSidenav_content">
-
         <main>
             <div class="container-fluid" style="margin:auto;">
-
                 <div class="container" style="padding-top: 5%">
-
                     <div class="row">
-
                         <div class="container">
                             <div class="card">
                                 <div class="container-fliud">
                                     <div class="wrapper row">
                                         <div class="preview col-md-6">
-
                                             <div class="preview-pic tab-content">
-                                                <div class="tab-pane active" id="pic-1"><img
-                                                        src="{{Product.productUrl}}"/></div>
+                                                <div class="tab-pane active" id="pic-1">
+                                                    <img src="{{Product.productUrl}}"/>
+                                                </div>
                                             </div>
-
-
                                         </div>
                                         <div class="details col-md-6">
                                             <h3 class="product-title">{{Product.title}}</h3>
@@ -108,14 +101,9 @@
                                 </div>
                             </div>
                         </div>
-
-
                     </div>
-
                 </div>
-
                 <div class="container">
-
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="rating-block">
@@ -140,25 +128,10 @@
                                 </button>
                             </div>
                         </div>
-
-
                         <div class="row">
                             <div class="col-sm-12">
-                                <hr/>
                                 <div class="review-block">
-
                                     {{#Reviews}}
-
-<<<<<<< HEAD
-    $('.review-block-rate').each(function(i, obj) {
-    var id = $(this).attr('id');
-    if(id === '1'){
-
- document.getChildById("star2").className = "btn btn-default btn-grey btn-sm";
- document.getElementById("star3").className = "btn btn-default btn-grey btn-sm";
- document.getElementById("star4").className = "btn btn-default btn-grey btn-sm";
- document.getElementById("star5").className = "btn btn-default btn-grey btn-sm";
-=======
                                     <div class="row">
                                         <div class="col-sm-12">
                                             <img src="http://dummyimage.com/60x60/666/ffffff&text=No+Image"
@@ -167,93 +140,69 @@
                                             <div class="review-block-date">{{createdAt}}</div>
                                         </div>
                                         <div class="col-sm-9">
-
                                             <div class="review-block-rate" id="{{rating}}">
                                                 <button type="button" id="star1" class="btn btn-default btn-grey btn-sm"
                                                         aria-label="Left Align">
                                                     <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
                                                 </button>
->>>>>>> 26540ccddd5e952408045691cb52db94aac1a5f6
-
                                                 <button type="button" id="star2" class="btn btn-default btn-grey btn-sm"
                                                         aria-label="Left Align">
                                                     <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
                                                 </button>
-
-<<<<<<< HEAD
-     
-    } else if(id === '2'){
-        alert("2");
-$(this).find("#star3").className = "btn btn-default btn-grey btn-sm";
-document.getElementById("star4").className = "btn btn-default btn-grey btn-sm";
-document.getElementById("star5").className = "btn btn-default btn-grey btn-sm";
-=======
                                                 <button type="button" id="star3" class="btn btn-default btn-grey btn-sm"
                                                         aria-label="Left Align">
                                                     <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
                                                 </button>
-
                                                 <button type="button" id="star4" class="btn btn-default btn-grey btn-sm"
                                                         aria-label="Left Align">
                                                     <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
                                                 </button>
->>>>>>> 26540ccddd5e952408045691cb52db94aac1a5f6
-
                                                 <button type="button" id="star5" class="btn btn-default btn-grey btn-sm"
                                                         aria-label="Left Align">
                                                     <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
                                                 </button>
                                             </div>
-
                                             <div class="review-block-title">{{title}}</div>
                                             <div class="review-block-description">{{content}}</div>
                                         </div>
                                     </div>
-                                    <hr/>
-
                                     {{/Reviews}}
-
-
-<<<<<<< HEAD
-    }
-    
-});
-    
-    </script>
-  
-    </body>
-=======
                                 </div>
                             </div>
                         </div>
                     </div>
-
-
-        </main>
-
-
-        <footer class="py-4 bg-light mt-auto">
-            <div class="container-fluid">
-                <div class="d-flex align-items-center justify-content-between small">
-                    <div class="text-muted">Copyright &copy; Your Website 2020</div>
-                    <div>
-                        <a href="#">Privacy Policy</a>
-                        &middot;
-                        <a href="#">Terms &amp; Conditions</a>
-                    </div>
                 </div>
             </div>
-        </footer>
+        </main>
     </div>
 </div>
+<footer class="py-4 bg-light mt-auto">
+    <div class="container-fluid">
+        <div class="d-flex align-items-center justify-content-between small">
+            <div class="text-muted"> Copyright & copy; Your Website 2020
+            </div>
+            <div>
+                <a href="#"> Privacy
+                    Policy </a>
+                & middot;
+                <a href="#"> Terms &amp; Conditions </a>
+            </div>
+        </div>
+    </div>
+</footer>
 
 
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" crossorigin="anonymous"></script>
+<script
+        src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
         crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
-<script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
-<script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"
+        crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
         crossorigin="anonymous"></script>
@@ -271,29 +220,17 @@ document.getElementById("star5").className = "btn btn-default btn-grey btn-sm";
             if (id == 2 && index2 < id) {
                 $(this).removeClass("btn btn-default btn-grey btn-sm").addClass("btn btn-warning btn-sm");
             }
-
             if (id == 3 && index2 < id) {
                 $(this).removeClass("btn btn-default btn-grey btn-sm").addClass("btn btn-warning btn-sm");
             }
-
             if (id == 4 && index2 < id) {
                 $(this).removeClass("btn btn-default btn-grey btn-sm").addClass("btn btn-warning btn-sm");
             }
-
             if (id == 5 && index2 < id) {
                 $(this).removeClass("btn btn-default btn-grey btn-sm").addClass("btn btn-warning btn-sm");
             }
-
         })
-
-        //test[0].className("btn btn-default btn-grey btn-sm");
-        /*            test[1].attr("class","btn btn-default btn-grey btn-sm");
-                    test[2].attr("class","btn btn-default btn-grey btn-sm");
-                    test[3].attr("class","btn btn-default btn-grey btn-sm");
-                    test[4].attr("class","btn btn-default btn-grey btn-sm");*/
     });
-
 </script>
 </body>
->>>>>>> 26540ccddd5e952408045691cb52db94aac1a5f6
 </html>

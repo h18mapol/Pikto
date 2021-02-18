@@ -1,8 +1,9 @@
 package piktoproject.pikto.models;
 
 public class Cart {
-    int cartId,userId;
-    boolean status;
+    private int cartId,userId;
+    private boolean status;
+    private String sessionId,firstName,lastName,mobile,email,address,city,createdAt,content;
 
     public int getCartId() {
         return cartId;
@@ -76,12 +77,12 @@ public class Cart {
         this.address = address;
     }
 
-    public String getCiry() {
-        return ciry;
+    public String getCity() {
+        return city;
     }
 
-    public void setCiry(String ciry) {
-        this.ciry = ciry;
+    public void setCity(String city) {
+        this.city = city;
     }
 
     public String getCreatedAt() {
@@ -102,5 +103,4 @@ public class Cart {
 
     public Cart() {
     }
-    String sessionId,firstName,lastName,mobile,email,address,ciry,createdAt,content;
 }
