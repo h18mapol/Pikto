@@ -18,7 +18,7 @@ public class UserCrud implements IUserCrud {
     //User
     @Override
     public User getUserById(int userId) {
-        try{
+        try {
             con = DriverManager.getConnection("jdbc:mysql://localhost:3306/piktodb?serverTimezone=UTC", "root", "");
 
             String sqlgetUserById = "SELECT * FROM user WHERE userId=?";
@@ -42,15 +42,16 @@ public class UserCrud implements IUserCrud {
             con.close();
             return user;
         } //end try
-        catch(SQLException ex){
+        catch (SQLException ex) {
             Logger.getLogger(UserCrud.class.getName()).log(Level.SEVERE, null, ex);
         }//End events
         return null;
     } //Klar
+
     @Override
     public User updateUser(User user) {
-        try{
-            con=DriverManager.getConnection("jdbc:mysql://localhost:3306/piktodb?serverTimezone=UTC","root","");
+        try {
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/piktodb?serverTimezone=UTC", "root", "");
 
             String sqlUpdateUser = "UPDATE user SET firstName=?, lastName=?, mobileNr=?, email=?, admin=?, seller=?, pictureUrl=?  WHERE userId=?";
             PreparedStatement statement = con.prepareStatement(sqlUpdateUser);
@@ -67,30 +68,31 @@ public class UserCrud implements IUserCrud {
             con.close();
             return user;
         } //end try
-        catch(SQLException ex){
+        catch (SQLException ex) {
             Logger.getLogger(AdminCrud.class.getName()).log(Level.SEVERE, null, ex);
         }//End events
         return null;
     } //Klar inte Testad
+
     @Override
     public void deleteUser(int userId) {
-        try{
-            con=DriverManager.getConnection("jdbc:mysql://localhost:3306/piktodb?serverTimezone=UTC","root","");
+        try {
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/piktodb?serverTimezone=UTC", "root", "");
             Statement statement = con.createStatement();
             statement = con.createStatement();
-            String sqlDeleteUser = "DELETE FROM piktodb.user WHERE userId="+userId;
+            String sqlDeleteUser = "DELETE FROM piktodb.user WHERE userId=" + userId;
             statement.executeUpdate(sqlDeleteUser);
             statement.close();
             con.close();
-        }
-        catch(SQLException ex){
+        } catch (SQLException ex) {
             Logger.getLogger(AdminCrud.class.getName()).log(Level.SEVERE, null, ex);
         }//End deleteUser
     } //Klar
+
     @Override
     public void addUser(User user) {
-        try{
-            con=DriverManager.getConnection("jdbc:mysql://localhost:3306/piktodb?serverTimezone=UTC","root","");
+        try {
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/piktodb?serverTimezone=UTC", "root", "");
             String sqlAddUser = "INSERT INTO user (firstName, lastName, mobileNr, email, password, admin, pictureUrl) VALUES(?,?,?,?,?,?,?)";
             PreparedStatement statement = con.prepareStatement(sqlAddUser);
             statement.setString(1, user.getFirstName());
@@ -103,14 +105,14 @@ public class UserCrud implements IUserCrud {
             statement.executeUpdate();
             statement.close();
             con.close();
-        }
-        catch(SQLException ex){
+        } catch (SQLException ex) {
             Logger.getLogger(AdminCrud.class.getName()).log(Level.SEVERE, null, ex);
         }//End addUser
     } //Klar
+
     @Override
     public User getUserByEmail(String email) {
-        try{
+        try {
             con = DriverManager.getConnection("jdbc:mysql://localhost:3306/piktodb?serverTimezone=UTC", "root", "");
 
             String sqlgetUserById = "SELECT * FROM user WHERE email=?";
@@ -134,7 +136,7 @@ public class UserCrud implements IUserCrud {
             con.close();
             return user;
         } //end try
-        catch(SQLException ex){
+        catch (SQLException ex) {
             Logger.getLogger(UserCrud.class.getName()).log(Level.SEVERE, null, ex);
         }//End events
         return null;
@@ -144,7 +146,7 @@ public class UserCrud implements IUserCrud {
     @Override
     public List<Product> getAllUserProducts(int userId) {
         List<Product> products = new ArrayList<>();
-        try{
+        try {
             con = DriverManager.getConnection("jdbc:mysql://localhost:3306/piktodb?serverTimezone=UTC", "root", "");
 
             String sqlgetAllProducts = "SELECT * \n" +
@@ -176,15 +178,16 @@ public class UserCrud implements IUserCrud {
             con.close();
             return products;
         } //end try
-        catch(SQLException ex){
+        catch (SQLException ex) {
             Logger.getLogger(UserCrud.class.getName()).log(Level.SEVERE, null, ex);
         }//End getTeamById
         return null;
     } //Klar
+
     @Override
     public List<Product> getAllCategoryProducts(int categoryId) {
         List<Product> products = new ArrayList<>();
-        try{
+        try {
             con = DriverManager.getConnection("jdbc:mysql://localhost:3306/piktodb?serverTimezone=UTC", "root", "");
 
             String sqlgetAllProducts = "SELECT product.title\n" +
@@ -216,14 +219,15 @@ public class UserCrud implements IUserCrud {
             con.close();
             return products;
         } //end try
-        catch(SQLException ex){
+        catch (SQLException ex) {
             Logger.getLogger(UserCrud.class.getName()).log(Level.SEVERE, null, ex);
         }//End getTeamById
         return null;
     } //Klar
+
     @Override
     public Product getProduct(int productId) {
-        try{
+        try {
             con = DriverManager.getConnection("jdbc:mysql://localhost:3306/piktodb?serverTimezone=UTC", "root", "");
 
             String sqlgetAllProducts = "SELECT * \n" +
@@ -254,18 +258,19 @@ public class UserCrud implements IUserCrud {
             con.close();
             return product;
         } //end try
-        catch(SQLException ex){
+        catch (SQLException ex) {
             Logger.getLogger(UserCrud.class.getName()).log(Level.SEVERE, null, ex);
         }//End getTeamById
         return null;
     } //Klar
+
     @Override
     public Product updateProduct(Product product) {
-        try{
+        try {
             con = DriverManager.getConnection("jdbc:mysql://localhost:3306/piktodb?serverTimezone=UTC", "root", "");
             String sqlUpdateEvent = "UPDATE product SET userId=?, title=?, summary=?, type=?, price=?, discount=?, publishedAt=?, content=?, productUrl=? WHERE productId=?";
             PreparedStatement statement = con.prepareStatement(sqlUpdateEvent);
-            statement.setInt (1, product.getUserId());
+            statement.setInt(1, product.getUserId());
             statement.setString(2, product.getTitle());
             statement.setString(3, product.getSummary());
             statement.setInt(4, product.getType());
@@ -280,33 +285,34 @@ public class UserCrud implements IUserCrud {
             con.close();
             return product;
         } //end try
-        catch(SQLException ex){
+        catch (SQLException ex) {
             Logger.getLogger(UserCrud.class.getName()).log(Level.SEVERE, null, ex);
         }//End events
         return null;
     } //Klar
+
     @Override
     public void deleteProduct(int productId) {
-        try{
-            con=DriverManager.getConnection("jdbc:mysql://localhost:3306/piktodb?serverTimezone=UTC","root","");
+        try {
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/piktodb?serverTimezone=UTC", "root", "");
             Statement statement = con.createStatement();
             statement = con.createStatement();
-            String sqlDeleteProduct = "DELETE FROM product WHERE productId="+productId;
+            String sqlDeleteProduct = "DELETE FROM product WHERE productId=" + productId;
             statement.executeUpdate(sqlDeleteProduct);
             statement.close();
             con.close();
-        }
-        catch(SQLException ex){
+        } catch (SQLException ex) {
             Logger.getLogger(UserCrud.class.getName()).log(Level.SEVERE, null, ex);
         }//End deleteProduct
     } //Klar
+
     @Override
     public void addProduct(Product product) {
-        try{
-            con=DriverManager.getConnection("jdbc:mysql://localhost:3306/piktodb?serverTimezone=UTC","root","");
+        try {
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/piktodb?serverTimezone=UTC", "root", "");
             String sqlAddUser = "SELECT add_product(?,?,?,?,?,?,?,?,?)";
             PreparedStatement statement = con.prepareStatement(sqlAddUser);
-            statement.setInt (1, product.getUserId());
+            statement.setInt(1, product.getUserId());
             statement.setString(2, product.getTitle());
             statement.setString(3, product.getSummary());
             statement.setInt(4, product.getType());
@@ -318,8 +324,7 @@ public class UserCrud implements IUserCrud {
             statement.executeQuery();
             statement.close();
             con.close();
-        }
-        catch(SQLException ex){
+        } catch (SQLException ex) {
             Logger.getLogger(AdminCrud.class.getName()).log(Level.SEVERE, null, ex);
         }//End addUser
     } //Klar
@@ -328,7 +333,7 @@ public class UserCrud implements IUserCrud {
     @Override
     public List<Product_review> getAllUserReviews(int userId) {
         List<Product_review> product_reviews = new ArrayList<>();
-        try{
+        try {
             con = DriverManager.getConnection("jdbc:mysql://localhost:3306/piktodb?serverTimezone=UTC", "root", "");
 
             String sqlgetAllReviews = "SELECT * FROM product_review WHERE userId = ?";
@@ -353,23 +358,27 @@ public class UserCrud implements IUserCrud {
             con.close();
             return product_reviews;
         } //end try
-        catch(SQLException ex){
+        catch (SQLException ex) {
             Logger.getLogger(UserCrud.class.getName()).log(Level.SEVERE, null, ex);
         }//End getTeamById
         return null;
     } //Klar
+
     @Override
     public Product_review getReview(int reviewId) {
         return null;
     }
+
     @Override
     public void addReview(Product_review product_review) {
 
     }
+
     @Override
     public Product_review updateReview(Product_review product_review) {
         return null;
     }
+
     @Override
     public void deleteReview(int reviewId) {
 
@@ -379,7 +388,7 @@ public class UserCrud implements IUserCrud {
     @Override
     public List<Order> getAllUserOrders(int userId) {
         List<Order> orders = new ArrayList<>();
-        try{
+        try {
             con = DriverManager.getConnection("jdbc:mysql://localhost:3306/piktodb?serverTimezone=UTC", "root", "");
 
 
@@ -390,7 +399,7 @@ public class UserCrud implements IUserCrud {
             ResultSet resultSet = statement.executeQuery();
 
             while (resultSet.next()) {
-                Order order=new Order();
+                Order order = new Order();
                 order.setOrderId(resultSet.getInt("orderId"));
                 order.setUserId(resultSet.getInt("userId"));
                 order.setSessionId(resultSet.getString("sessionId"));
@@ -418,23 +427,27 @@ public class UserCrud implements IUserCrud {
             con.close();
             return orders;
         } //end try
-        catch(SQLException ex){
+        catch (SQLException ex) {
             Logger.getLogger(UserCrud.class.getName()).log(Level.SEVERE, null, ex);
         }//End getTeamById
         return null;
     } //Klar
+
     @Override
     public void addOrder(Order order) {
 
     }
+
     @Override
     public Order getOrderById(int orderId) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
     @Override
     public Order updateOrder(Order order) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
     @Override
     public void DeleteOrder(int orderId) {
 
@@ -445,18 +458,22 @@ public class UserCrud implements IUserCrud {
     public List<Category> getAllCategories() {
         return null;
     }
+
     @Override
     public void addCategory(Category category) {
 
     }
+
     @Override
     public Order getCategoryById(int categoryId) {
         return null;
     }
+
     @Override
     public Order updateCategory(int categoryId) {
         return null;
     }
+
     @Override
     public void DeleteCategory(int categoryId) {
 
@@ -466,8 +483,8 @@ public class UserCrud implements IUserCrud {
 
     @Override
     public List<Product_review> getAllProductReviews(int productId) {
-          List<Product_review> product_reviews = new ArrayList<>();
-        try{
+        List<Product_review> product_reviews = new ArrayList<>();
+        try {
             con = DriverManager.getConnection("jdbc:mysql://localhost:3306/piktodb?serverTimezone=UTC", "root", "");
 
             String sqlgetAllReviews = "SELECT * FROM product_review WHERE productId = ?";
@@ -492,10 +509,10 @@ public class UserCrud implements IUserCrud {
             con.close();
             return product_reviews;
         } //end try
-        catch(SQLException ex){
+        catch (SQLException ex) {
             Logger.getLogger(UserCrud.class.getName()).log(Level.SEVERE, null, ex);
         }//End getTeamById
         return null;
     } //Klar
-    
+
 }
