@@ -703,8 +703,8 @@ public class UserCrud implements IUserCrud {
             con = DriverManager.getConnection("jdbc:mysql://localhost:3306/piktodb?serverTimezone=UTC", "root", "");
             String sqlUpdateOCategory = "UPDATE `category` SET title=?, content=? WHERE categoryId=?";
             PreparedStatement statement = con.prepareStatement(sqlUpdateOCategory);
-            statement.setInt(1, category.getUserId());
-            statement.setString(2, category.getSessionId());
+            statement.setString(1, category.getTitle());
+            statement.setString(2, category.getContent());
             statement.setInt(3, category.getCategoryId());
             statement.execute();
             statement.close();
