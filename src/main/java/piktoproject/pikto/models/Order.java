@@ -6,13 +6,12 @@
 package piktoproject.pikto.models;
 
 /**
- *
  * @author Henrik
  */
 public class Order {
-      int  orderId,userId, status,mobile;
-  float itemDiscount,tax,shipping,total,promo,discount,grandTotal,subTotal;
- String sessionId, firstName, lastName, email,address,city, createdAt,content;
+    int orderId, userId, status;
+    float itemDiscount, tax, shipping, total, discount, grandTotal, subTotal;
+    String sessionId, firstName, lastName, email, address, city, createdAt, content, promo, mobile;
 
     public Order() {
     }
@@ -41,11 +40,11 @@ public class Order {
         this.status = status;
     }
 
-    public int getMobile() {
+    public String getMobile() {
         return mobile;
     }
 
-    public void setMobile(int mobile) {
+    public void setMobile(String mobile) {
         this.mobile = mobile;
     }
 
@@ -81,11 +80,11 @@ public class Order {
         this.total = total;
     }
 
-    public float getPromo() {
+    public String getPromo() {
         return promo;
     }
 
-    public void setPromo(float promo) {
+    public void setPromo(String promo) {
         this.promo = promo;
     }
 

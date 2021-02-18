@@ -148,12 +148,12 @@ public class AdminCrud extends UserCrud implements IAdminCrud {
                 order.setTax(resultset.getFloat(7));
                 order.setShipping(resultset.getFloat(8));
                 order.setTotal(resultset.getFloat(9));
-                order.setPromo(resultset.getFloat(10));
+                order.setPromo(resultset.getString(10));
                 order.setDiscount(resultset.getInt(11));
                 order.setGrandTotal(resultset.getInt(12));
                 order.setFirstName(resultset.getString(13));
                 order.setLastName(resultset.getString(14));
-                order.setMobile(resultset.getInt(15));
+                order.setMobile(resultset.getString(15));
                 order.setEmail(resultset.getString(16));
                 order.setAddress(resultset.getString(17));
                 order.setCity(resultset.getString(18));

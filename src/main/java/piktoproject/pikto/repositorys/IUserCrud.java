@@ -23,7 +23,7 @@ public interface IUserCrud{
     //Reviews
     List<Product_review>getAllUserReviews(int userId);
      List<Product_review>getAllProductReviews(int productId);
-    Product_review getReview(int reviewId);
+    Product_review getReviewById(int reviewId);
     void addReview(Product_review product_review);
     Product_review updateReview(Product_review product_review);
     void deleteReview(int reviewId);
@@ -38,8 +38,8 @@ public interface IUserCrud{
     //Category
     List<Category>getAllCategories();
     void addCategory(Category category);
-    Order getCategoryById(int categoryId);
-    Order updateCategory(int categoryId);
+    Category getCategoryById(int categoryId);
+    Category updateCategory(Category category);
     void DeleteCategory(int categoryId);
 
 }

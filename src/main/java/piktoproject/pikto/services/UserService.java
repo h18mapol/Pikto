@@ -61,11 +61,11 @@ public class UserService {
     public List<Product_review>getAllUserReviews(int userId){
         return userCrud.getAllUserReviews(userId);
     }
-      public List<Product_review>getAllProductReviews(int productId){
+    public List<Product_review>getAllProductReviews(int productId){
         return userCrud.getAllProductReviews(productId);
     }
-    public Product_review getReview(int reviewId){
-        return userCrud.getReview(reviewId);
+    public Product_review getReviewById(int reviewId){
+        return userCrud.getReviewById(reviewId);
     }
     public Product_review updateReview(Product_review product_review){
         return updateReview(product_review);
