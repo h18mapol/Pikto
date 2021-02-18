@@ -113,6 +113,7 @@
                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                 <thead>
                                 <tr>
+                                <th>Image</th>
                                     <th>ProductID</th>
                                     <th>UserID</th>
                                     <th>Title</th>
@@ -122,12 +123,12 @@
                                     <th class="hide">discount</td>
                                     <th>Date</th>
                                     <th class="hide">content</td>
-                                    <th>ProductURL</th>
                                 </tr>
                                 </thead>
                                 <tfoot>
                                 <tr>
-                                    <th>ProductID</th>
+                                    <th>Image</th>
+                                     <th>ProductID</th>
                                     <th>UserID</th>
                                     <th>Title</th>
                                     <th class="hide">summary</td>
@@ -136,12 +137,12 @@
                                     <th class="hide">discount</td>
                                     <th>Date</th>
                                     <th class="hide">content</td>
-                                    <th>ProductURL</th>
                                 </tr>
                                 </tfoot>
                                 <tbody>
                                 {{#allProducts}}
                                 <tr>
+                                    <td> <img src="{{productUrl}}" style="object-fit:cover;" alt="Girl in a jacket" width="100" height="100"></td>
                                     <td>{{productId}}</td>
                                     <td>{{userId}}</td>
                                     <td>{{title}}</td>
@@ -151,7 +152,8 @@
                                     <td class="hide">{{discount}}</td>
                                     <td>{{publishedAt}}</td>
                                     <td class="hide">{{content}}</td>
-                                    <td>{{productUrl}}</td>
+
+                                    
                                 </tr>
                                 {{/allProducts}}
                                 </tbody>
@@ -242,12 +244,7 @@
                         </div>
                     </div>
 
-                    <div class="form-group row">
-                        <label for="productUrl" class="col-4 col-form-label">ProductURL</label>
-                        <div class="col-8">
-                            <input id="productUrl" name="text3" type="text" class="form-control">
-                        </div>
-                    </div>
+                   
                 </form>
             </div>
             <div class="modal-footer">
@@ -277,17 +274,19 @@ $(document).ready(function () {
             return $(this).text();
         }).get();
 
-        $("#productId").val(tableData[0]);
-        $("#userId").val(tableData[1]);
-        $("#title").val(tableData[2]);
-        $("#summary").val(tableData[3]);
-        $("#type").val(tableData[4]);
-        $("#price").val(tableData[5]);
-        $("#discount").val(tableData[6]);
-        $("#date").val(tableData[7]);
-        $("#content").val(tableData[8]);
-        $("#productUrl").val(tableData[9]);
+
+        $("#productId").val(tableData[1]);
+        $("#userId").val(tableData[2]);
+        $("#title").val(tableData[3]);
+        $("#summary").val(tableData[4]);
+        $("#type").val(tableData[5]);
+        $("#price").val(tableData[6]);
+        $("#discount").val(tableData[7]);
+        $("#date").val(tableData[8]);
+        $("#content").val(tableData[9]);
+        $("#productUrl").val(tableData[0]);
         $('#editModal').modal('show');
+        
     });
 
 });
