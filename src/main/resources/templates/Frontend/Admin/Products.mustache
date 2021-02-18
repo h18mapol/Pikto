@@ -10,8 +10,7 @@
     <link href="/css/User/userstyles.css" rel="stylesheet"/>
     <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet"
           crossorigin="anonymous"/>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js"
-            crossorigin="anonymous"></script>
+
 </head>
 <body class="sb-nav-fixed">
 <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
@@ -113,36 +112,38 @@
                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                 <thead>
                                 <tr>
-                                <th>Image</th>
+                                    <th>Image</th>
                                     <th>ProductID</th>
                                     <th>UserID</th>
                                     <th>Title</th>
-                                    <th class="hide">summary</td>
-                                    <th class="hide">type</td>
+                                    <th class="hide">summary</th>
+                                    <th class="hide">type</th>
                                     <th>Price</th>
-                                    <th class="hide">discount</td>
+                                    <th class="hide">discount</th>
                                     <th>Date</th>
-                                    <th class="hide">content</td>
+                                    <th class="hide">content</th>
+                                    <th class="hide">ProductUrl</th>
                                 </tr>
                                 </thead>
                                 <tfoot>
                                 <tr>
                                     <th>Image</th>
-                                     <th>ProductID</th>
+                                    <th>ProductID</th>
                                     <th>UserID</th>
                                     <th>Title</th>
-                                    <th class="hide">summary</td>
-                                    <th class="hide">type</td>
+                                    <th class="hide">summary</th>
+                                    <th class="hide">type</th>
                                     <th>Price</th>
-                                    <th class="hide">discount</td>
+                                    <th class="hide">discount</th>
                                     <th>Date</th>
-                                    <th class="hide">content</td>
+                                    <th class="hide">content</th>
+                                    <th class="hide">ProductUrl</th>
                                 </tr>
                                 </tfoot>
                                 <tbody>
                                 {{#allProducts}}
                                 <tr>
-                                    <td> <img src="{{productUrl}}" style="object-fit:cover;" alt="Girl in a jacket" width="100" height="100"></td>
+                                    <td><img src="{{productUrl}}" style="object-fit:cover;" alt="Girl in a jacket" width="100" height="100"></td>
                                     <td>{{productId}}</td>
                                     <td>{{userId}}</td>
                                     <td>{{title}}</td>
@@ -152,8 +153,7 @@
                                     <td class="hide">{{discount}}</td>
                                     <td>{{publishedAt}}</td>
                                     <td class="hide">{{content}}</td>
-
-                                    
+                                    <td class="hide">{{productUrl}}</td>
                                 </tr>
                                 {{/allProducts}}
                                 </tbody>
@@ -188,70 +188,75 @@
                 </button>
             </div>
             <div class="modal-body" id="modalBody">
-                <form>
+                <form method="POST" action="/Admin/updateProduct" novalidate>
                     <div class="form-group row">
                         <label for="productId" class="col-4 col-form-label">Product id</label>
                         <div class="col-8">
-                            <input id="productId" name="text1" type="text" class="form-control" readonly>
+                            <input id="productId" name="productId" type="text" class="form-control" readonly>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="userId" class="col-4 col-form-label">User id</label>
                         <div class="col-8">
-                            <input id="userId" name="text2" type="text" class="form-control" readonly>
+                            <input id="userId" name="userId" type="text" class="form-control" readonly>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="title" class="col-4 col-form-label">Title</label>
                         <div class="col-8">
-                            <input id="title" name="text" type="text" class="form-control">
+                            <input id="title" name="title" type="text" class="form-control">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="summary" class="col-4 col-form-label">Summary</label>
                         <div class="col-8">
-                            <input id="summary" name="text3" type="text" class="form-control">
+                            <input id="summary" name="summary" type="text" class="form-control">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="type" class="col-4 col-form-label">Type</label>
                         <div class="col-8">
-                            <input id="type" name="text3" type="text" class="form-control">
+                            <input id="type" name="type" type="text" class="form-control">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="price" class="col-4 col-form-label">Price</label>
                         <div class="col-8">
-                            <input id="price" name="text3" type="text" class="form-control">
+                            <input id="price" name="price" type="text" class="form-control">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="discount" class="col-4 col-form-label">Discount</label>
                         <div class="col-8">
-                            <input id="discount" name="text3" type="text" class="form-control">
+                            <input id="discount" name="discount" type="text" class="form-control">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="date" class="col-4 col-form-label">Published at</label>
                         <div class="col-8">
-                            <input id="date" name="text3" type="text" class="form-control">
+                            <input id="date" name="publishedAt" type="text" class="form-control">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="content" class="col-4 col-form-label">Content</label>
                         <div class="col-8">
-                            <input id="content" name="text3" type="text" class="form-control">
+                            <input id="content" name="content" type="text" class="form-control">
                         </div>
                     </div>
-
-                   
+                    <div class="form-group row">
+                        <label for="productUrl" class="col-4 col-form-label">Product Url</label>
+                        <div class="col-8">
+                            <input id="productUrl" name="productUrl" type="text" class="form-control">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                        <a id="deletebtn" class="btn btn-danger">Delete Event</a>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
                 </form>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary">Save changes</button>
-                <button type="button" class="btn btn-danger" data-dismiss="modal">Delete</button>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            </div>
+
         </div>
     </div>
 </div>
@@ -261,35 +266,11 @@
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 <script src="/js/Admin/scripts.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
-<script src="/js/Admin/chart-area-demo.js"></script>
-<script src="/js/Admin/chart-bar-demo.js"></script>
 <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
 <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
-<script src="/js/Admin/datatables-demo.js"></script>
-<script> //Selecting a row.
-$(document).ready(function () {
-    $("#dataTable tbody tr").click(function () {
-        var tableData = $(this).children("td").map(function() {
-            return $(this).text();
-        }).get();
-
-
-        $("#productId").val(tableData[1]);
-        $("#userId").val(tableData[2]);
-        $("#title").val(tableData[3]);
-        $("#summary").val(tableData[4]);
-        $("#type").val(tableData[5]);
-        $("#price").val(tableData[6]);
-        $("#discount").val(tableData[7]);
-        $("#date").val(tableData[8]);
-        $("#content").val(tableData[9]);
-        $("#productUrl").val(tableData[0]);
-        $('#editModal').modal('show');
-        
-    });
-
-});
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js" crossorigin="anonymous"></script>
+<script src="/js/Admin/datatables-products.js"></script>
+<script>
 
 </script>
 </body>

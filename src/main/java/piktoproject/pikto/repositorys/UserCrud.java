@@ -422,7 +422,8 @@ public class UserCrud implements IUserCrud {
             statement.setInt(3, product_review.getRating());
             statement.setString(4, product_review.getCreatedAt());
             statement.setString(5, product_review.getContent());
-            statement.setInt(5, product_review.getUserId());
+            statement.setInt(6, product_review.getUserId());
+            statement.setInt(7, product_review.getReviewId());
             statement.execute();
             statement.close();
             con.close();
@@ -613,7 +614,7 @@ public class UserCrud implements IUserCrud {
     } //Klar
 
     @Override
-    public void DeleteOrder(int orderId) {
+    public void deleteOrder(int orderId) {
         try {
             con = DriverManager.getConnection("jdbc:mysql://localhost:3306/piktodb?serverTimezone=UTC", "root", "");
             Statement statement = con.createStatement();

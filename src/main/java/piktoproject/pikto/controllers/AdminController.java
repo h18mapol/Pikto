@@ -8,7 +8,9 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import piktoproject.pikto.models.Order;
 import piktoproject.pikto.models.Product;
+import piktoproject.pikto.models.Product_review;
 import piktoproject.pikto.models.User;
 import piktoproject.pikto.services.AdminService;
 import piktoproject.pikto.services.UserService;
@@ -41,7 +43,6 @@ public class AdminController {
     @RequestMapping("/Admin/Products")
     public String getAllProducts(Model model){
         model.addAttribute("allProducts",adminService.getAllProducts());
-        System.out.println(adminService.getAllProducts().get(0).getContent());
         return "Frontend/Admin/Products";
     }
     @RequestMapping("/Admin/Users")
@@ -54,6 +55,11 @@ public class AdminController {
         model.addAttribute("allReviews",adminService.getAllReviews());
         return "Frontend/Admin/Reviews";
     }
+    @RequestMapping("/Admin/Orders")
+    public String getAllOrders(Model model){
+        model.addAttribute("allOrders", adminService.getAllOrders());
+        return "Frontend/Admin/Orders";
+    }
     @RequestMapping("/Admin/User/{userId}")
     public String getUserPage(Model model, @PathVariable Integer userId){
         model.addAttribute("userData",adminService.getUser(userId));
@@ -62,7 +68,6 @@ public class AdminController {
         model.addAttribute("userOrders",adminService.getAllOrdersById(userId));
         return "Frontend/Admin/IndividualUser";
     }
-
     @RequestMapping(path="/Admin/addProduct", method={RequestMethod.POST})
     public String addProduct(@ModelAttribute ("product")Product product,@RequestParam Map<String, String> allRequestParams){
 
@@ -86,23 +91,124 @@ public class AdminController {
         userService.addUser(user);
         return "redirect:/Admin";
     }
-
     @RequestMapping(path="/Admin/updateUser", method={RequestMethod.POST})
     public String updateUser(@ModelAttribute ("product")Product product,@RequestParam Map<String, String> allRequestParams){
         userService.addProduct(product);
         return "redirect:/Admin/Users";
     }
     @RequestMapping(path="/Admin/updateProduct", method={RequestMethod.POST})
-    public String updateProduct(@ModelAttribute ("product")Product product,@RequestParam Map<String, String> allRequestParams){
+    public String updateProduct(Model model,@ModelAttribute ("product")Product product,@RequestParam Map<String, String> allRequestParams){
         userService.updateProduct(product);
-        return "redirect:/Admin/Products";
+        model.addAttribute("allProducts",adminService.getAllProducts());
+        return "Frontend/Admin/Products";
+    }
+    @RequestMapping(path="/Admin/deleteProduct/{productId}")
+    public String deleteProduct(Model model,@PathVariable Integer productId){
+        adminService.deleteProduct(productId);
+        model.addAttribute("allProducts",adminService.getAllProducts());
+        return "Frontend/Admin/Products";
     }
 
-    @RequestMapping("/Admin/Orders")
-    public String getAllOrders(Model model){
+    @RequestMapping(path="/Admin/updateOrder", method={RequestMethod.POST})
+    public String updateOrder(Model model, @ModelAttribute ("order") Order order, @RequestParam Map<String, String> allRequestParams){
+        adminService.updateOrder(order);
+        order.getFirstName();
+        order.getLastName();
         model.addAttribute("allOrders", adminService.getAllOrders());
         return "Frontend/Admin/Orders";
     }
+    @RequestMapping(path="/Admin/deleteOrder/{orderId}")
+    public String deleteOrder(Model model,@PathVariable Integer orderId){
+        adminService.deleteOrder(orderId);
+        model.addAttribute("allOrders", adminService.getAllOrders());
+        return "Frontend/Admin/Orders";
+    }
+
+    @RequestMapping(path="/Admin/updateReview", method={RequestMethod.POST})
+    public String updateReview(Model model, @ModelAttribute ("product_review") Product_review product_review, @RequestParam Map<String, String> allRequestParams){
+        adminService.updateReview(product_review);
+        model.addAttribute("allReviews",adminService.getAllReviews());
+        return "Frontend/Admin/Reviews";
+    }
+    @RequestMapping(path="/Admin/deleteReview/{reviewId}")
+    public String deleteReview(Model model,@PathVariable Integer reviewId){
+        adminService.deleteReview(reviewId);
+        model.addAttribute("allReviews",adminService.getAllReviews());
+        return "Frontend/Admin/Reviews";
+    }
+
+
+
+    @RequestMapping(path="/Admin/User/updateProduct", method={RequestMethod.POST})
+    public String updateUserProduct(Model model,@ModelAttribute ("product")Product product,@RequestParam Map<String, String> allRequestParams){
+        userService.updateProduct(product);
+        model.addAttribute("userData",adminService.getUser(product.getUserId()));
+        model.addAttribute("userProducts",adminService.getAllProductsbyId(product.getUserId()));
+        model.addAttribute("userReviews",adminService.getAllReviewsById(product.getUserId()));
+        model.addAttribute("userOrders",adminService.getAllOrdersById(product.getUserId()));
+        return "Frontend/Admin/IndividualUser";
+    }
+    @RequestMapping(path="/Admin/User/deleteProduct/{productId}")
+    public String deleteUserProduct(Model model,@PathVariable Integer productId){
+        Product product = adminService.getProduct(productId);
+        adminService.deleteProduct(productId);
+        model.addAttribute("userData",adminService.getUser(product.getUserId()));
+        model.addAttribute("userProducts",adminService.getAllProductsbyId(product.getUserId()));
+        model.addAttribute("userReviews",adminService.getAllReviewsById(product.getUserId()));
+        model.addAttribute("userOrders",adminService.getAllOrdersById(product.getUserId()));
+        return "Frontend/Admin/IndividualUser";
+    }
+
+    @RequestMapping(path="/Admin/User/updateOrder", method={RequestMethod.POST})
+    public String updateUserOrder(Model model, @ModelAttribute ("order") Order order, @RequestParam Map<String, String> allRequestParams){
+        adminService.updateOrder(order);
+        model.addAttribute("userData",adminService.getUser(order.getUserId()));
+        model.addAttribute("userProducts",adminService.getAllProductsbyId(order.getUserId()));
+        model.addAttribute("userReviews",adminService.getAllReviewsById(order.getUserId()));
+        model.addAttribute("userOrders",adminService.getAllOrdersById(order.getUserId()));
+        return "Frontend/Admin/IndividualUser";
+    }
+    @RequestMapping(path="/Admin/User/deleteOrder/{orderId}")
+    public String deleteUserOrder(Model model,@PathVariable Integer orderId){
+        Order order = adminService.getOrder(orderId);
+        adminService.deleteOrder(orderId);
+        model.addAttribute("userData",adminService.getUser(order.getUserId()));
+        model.addAttribute("userProducts",adminService.getAllProductsbyId(order.getUserId()));
+        model.addAttribute("userReviews",adminService.getAllReviewsById(order.getUserId()));
+        model.addAttribute("userOrders",adminService.getAllOrdersById(order.getUserId()));
+        return "Frontend/Admin/IndividualUser";
+    }
+
+    @RequestMapping(path="/Admin/User/updateReview", method={RequestMethod.POST})
+    public String updateUserReview(Model model, @ModelAttribute ("product_review") Product_review product_review, @RequestParam Map<String, String> allRequestParams){
+        adminService.updateReview(product_review);
+        model.addAttribute("userData",adminService.getUser(product_review.getUserId()));
+        model.addAttribute("userProducts",adminService.getAllProductsbyId(product_review.getUserId()));
+        model.addAttribute("userReviews",adminService.getAllReviewsById(product_review.getUserId()));
+        model.addAttribute("userOrders",adminService.getAllOrdersById(product_review.getUserId()));
+        return "Frontend/Admin/IndividualUser";
+    }
+    @RequestMapping(path="/Admin/User/deleteReview/{reviewId}")
+    public String deleteUserReview(Model model,@PathVariable Integer reviewId){
+        Product_review product_review = adminService.getReviewById(reviewId);
+        adminService.deleteReview(reviewId);
+        model.addAttribute("userData",adminService.getUser(product_review.getUserId()));
+        model.addAttribute("userProducts",adminService.getAllProductsbyId(product_review.getUserId()));
+        model.addAttribute("userReviews",adminService.getAllReviewsById(product_review.getUserId()));
+        model.addAttribute("userOrders",adminService.getAllOrdersById(product_review.getUserId()));
+        return "Frontend/Admin/IndividualUser";
+    }
+
+    @RequestMapping(path="/Admin/User/updateUser", method={RequestMethod.POST})
+    public String updateUser(Model model, @ModelAttribute ("user") User user, @RequestParam Map<String, String> allRequestParams){
+        adminService.updateUser(user);
+        model.addAttribute("userData",adminService.getUser(user.getUserId()));
+        model.addAttribute("userProducts",adminService.getAllProductsbyId(user.getUserId()));
+        model.addAttribute("userReviews",adminService.getAllReviewsById(user.getUserId()));
+        model.addAttribute("userOrders",adminService.getAllOrdersById(user.getUserId()));
+        return "Frontend/Admin/IndividualUser";
+    }
+
 
 }
 

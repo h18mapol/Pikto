@@ -26,7 +26,6 @@ public class ProductController {
     @Autowired
     private UserService userService;
 
-
     @RequestMapping("/User/Checkout/{userId}")
 
     public String checkoutUser(Model model, @PathVariable Integer userId) {
@@ -65,6 +64,7 @@ public class ProductController {
         System.out.println(adminService.getAllProductsBySearch(SearchWord));
         return "Frontend/Main/SearchPage";
     }
+
 
 
 }

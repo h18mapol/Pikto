@@ -78,9 +78,7 @@ public class AdminService {
     public List<Product_review>getAllReviewsById(int userId){
         return adminCrud.getAllUserReviews(userId);
     }
-    public Product_review getReview(int reviewId){
-        return adminCrud.getReview(reviewId);
-    }
+    public Product_review getReviewById(int reviewId){return adminCrud.getReviewById(reviewId);}
     public Product_review updateReview(Product_review product_review){
       return adminCrud.updateReview(product_review);
     }
@@ -99,11 +97,9 @@ public class AdminService {
     public Order updateOrder(Order order){
         return adminCrud.updateOrder(order);
     }
-  
-  
-   
-   
-      
+    public void deleteOrder(int orderId){
+        adminCrud.deleteOrder(orderId);
+    }
       
 }
     

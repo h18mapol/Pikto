@@ -113,8 +113,12 @@
                                 <div class="card">
                                     <div class="card-header" id="headingOne">
                                         <h2 class="mb-0">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-gear-fill" viewBox="0 0 16 16">
+                                                <path d="M9.405 1.05c-.413-1.4-2.397-1.4-2.81 0l-.1.34a1.464 1.464 0 0 1-2.105.872l-.31-.17c-1.283-.698-2.686.705-1.987 1.987l.169.311c.446.82.023 1.841-.872 2.105l-.34.1c-1.4.413-1.4 2.397 0 2.81l.34.1a1.464 1.464 0 0 1 .872 2.105l-.17.31c-.698 1.283.705 2.686 1.987 1.987l.311-.169a1.464 1.464 0 0 1 2.105.872l.1.34c.413 1.4 2.397 1.4 2.81 0l.1-.34a1.464 1.464 0 0 1 2.105-.872l.31.17c1.283.698 2.686-.705 1.987-1.987l-.169-.311a1.464 1.464 0 0 1 .872-2.105l.34-.1c1.4-.413 1.4-2.397 0-2.81l-.34-.1a1.464 1.464 0 0 1-.872-2.105l.17-.31c.698-1.283-.705-2.686-1.987-1.987l-.311.169a1.464 1.464 0 0 1-2.105-.872l-.1-.34zM8 10.93a2.929 2.929 0 1 1 0-5.86 2.929 2.929 0 0 1 0 5.858z"/>
+                                            </svg>
                                             <button type="button" class="btn btn-link" data-toggle="collapse"
-                                                    data-target="#collapseOne">Admin functions
+                                                    data-target="#collapseOne">
+                                                User
                                             </button>
                                         </h2>
                                     </div>
@@ -125,130 +129,73 @@
                                                 <div class="col-xl-6">
                                                     <div class="card mb-4">
                                                         <div class="card-body">
-                                                            <form method="POST" action="/Admin/addProduct">
-                                                                <h1 class="align-content-center text-primary">Add
-                                                                    Product</h1>
-                                                                <div class="form-group">
-                                                                    <label for="adminProductName">Product name</label>
-                                                                    <input type="text" class="form-control"
-                                                                           id="adminProductName" name="title"
-                                                                           placeholder="">
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <label for="adminid">User id</label>
-                                                                    <input type="text" class="form-control" id="adminid"
-                                                                           name="userId" placeholder="">
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <label for="adminSummary">Summary</label>
-                                                                    <input type="text" class="form-control"
-                                                                           id="adminSummary" name="summary"
-                                                                           placeholder="">
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <label for="adminproducttype">Type</label>
-                                                                    <input type="text" class="form-control"
-                                                                           id="adminproducttype" name="type"
-                                                                           placeholder="">
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <label for="adminprice">Price</label>
-                                                                    <input type="text" class="form-control"
-                                                                           id="adminprice" name="price" placeholder="">
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <label for="admindiscount">Discount</label>
-                                                                    <input type="text" class="form-control"
-                                                                           id="admindiscount" name="discount"
-                                                                           placeholder="">
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <label for="admincategoryid">Category</label>
-                                                                    <input type="text" class="form-control"
-                                                                           id="admincategoryid" name="categoryId"
-                                                                           placeholder="">
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <label for="adminproductUrl">PictureURL</label>
-                                                                    <input type="text" class="form-control"
-                                                                           id="adminproductUrl" name="productUrl"
-                                                                           placeholder="">
-                                                                </div>
-                                                                <div class="form-group hide">
-                                                                    <label for="adminproductUrl">PictureURL</label>
-                                                                    <input type="text" class="form-control"
-                                                                           id="adminContent" name="content"
-                                                                           placeholder="">
-                                                                </div>
-                                                                <div class="form-group form-check">
-                                                                    <input type="checkbox" class="form-check-input"
-                                                                           id="exampleCheck1">
-                                                                    <label class="form-check-label" for="exampleCheck1">Check
-                                                                        me out</label>
-                                                                </div>
-                                                                <button type="submit" class="btn btn-primary">Submit
-                                                                </button>
-                                                            </form>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-xl-6">
-                                                    <div class="card mb-4">
-                                                        <div class="card-body">
-                                                            <form method="POST" action="/Admin/addUser">
-                                                                <h1 class="h1 align-content-center text-secondary">Add
-                                                                    User</h1>
+                                                            <form method="POST" action="/Admin/User/updateUser">
+                                                                <h1 class="h1 align-content-center text-secondary">
+                                                                    Update
+                                                                    User Information</h1>
                                                                 <div class="form-group">
                                                                     <label for="AdminfirstName">Firstname</label>
                                                                     <input type="text" class="form-control"
                                                                            id="AdminfirstName" name="firstName"
                                                                            aria-describedby="emailHelp"
-                                                                           placeholder="Enter email">
+                                                                           placeholder=""
+                                                                           value="{{userData.firstName}}">
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label for="AdminLastName">Lastname</label>
                                                                     <input type="text" class="form-control"
                                                                            id="AdminLastName" name="lastName"
-                                                                           placeholder="Password">
+                                                                           placeholder=""
+                                                                           value="{{userData.lastName}}">
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label for="AdminPhoneNumber">Phonenumber</label>
                                                                     <input type="text" class="form-control"
                                                                            id="AdminPhoneNumber" name="mobileNr"
-                                                                           placeholder="Password">
+                                                                           placeholder=""
+                                                                           value="{{userData.mobileNr}}">
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label for="AdminEmail">Email</label>
                                                                     <input type="text" class="form-control"
                                                                            id="AdminEmail" name="email"
-                                                                           placeholder="Password">
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <label for="AdminPassword">Password</label>
-                                                                    <input type="password" class="form-control"
-                                                                           id="AdminPassword" name="password"
-                                                                           placeholder="Password">
+                                                                           placeholder=""
+                                                                           value="{{userData.email}}">
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label for="AdminAuth">Authority</label>
                                                                     <input type="text" class="form-control"
                                                                            id="AdminAuth" name="admin"
-                                                                           placeholder="Password">
+                                                                           placeholder=""
+                                                                           value="{{userData.admin}}">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="AdminPictureUrl">Seller
+                                                                        </label>
+                                                                    <input type="text" class="form-control"
+                                                                           id="Seller" name="seller"
+                                                                           placeholder=""
+                                                                           value="{{userData.seller}}">
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label for="AdminPictureUrl">Profile
-                                                                        pictureURL</label>
+                                                                        Picture</label>
                                                                     <input type="text" class="form-control"
                                                                            id="AdminPictureUrl" name="pictureUrl"
-                                                                           placeholder="Password">
+                                                                           placeholder=""
+                                                                           value="{{userData.pictureUrl}}">
                                                                 </div>
+                                                                <div class="form-group hide">
+                                                                    <label for="userId">userId
+                                                                        </label>
+                                                                    <input type="text" class="hidden" name="userId"
+                                                                           value="{{userData.userId}}">
+                                                                </div>
+
                                                                 <div class="form-group form-check">
-                                                                    <label class="form-check-label" for="AdminCheck2">Check
-                                                                        me out</label>
-                                                                    <input type="checkbox" class="form-check-input"
-                                                                           id="AdminCheck2">
                                                                 </div>
-                                                                <button type="submit" class="btn btn-primary">Submit
+                                                                <button type="submit" class="btn btn-primary">Update
+                                                                    User
                                                                 </button>
                                                             </form>
                                                         </div>
@@ -293,7 +240,7 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <table class="table table-bordered" id="dataTableOrders" width="100%" cellspacing="0">
                                 <thead>
                                 <tr>
                                     <th>OrderID</th>
@@ -382,43 +329,39 @@
                             <table class="table table-bordered" id="dataTableProducts" width="100%" cellspacing="0">
                                 <thead>
                                 <tr>
+                                    <th>Image</th>
                                     <th>ProductID</th>
                                     <th>UserID</th>
                                     <th>Title</th>
-                                    <th class="hide">summary
-                                    </td>
-                                    <th class="hide">type
-                                    </td>
+                                    <th class="hide">summary</th>
+                                    <th class="hide">type</th>
                                     <th>Price</th>
-                                    <th class="hide">discount
-                                    </td>
+                                    <th class="hide">discount</th>
                                     <th>Date</th>
-                                    <th class="hide">content
-                                    </td>
-                                    <th>ProductURL</th>
+                                    <th class="hide">content</th>
+                                    <th class="hide">ProductUrl</th>
                                 </tr>
                                 </thead>
                                 <tfoot>
                                 <tr>
+                                    <th>Image</th>
                                     <th>ProductID</th>
                                     <th>UserID</th>
                                     <th>Title</th>
-                                    <th class="hide">summary
-                                    </td>
-                                    <th class="hide">type
-                                    </td>
+                                    <th class="hide">summary</th>
+                                    <th class="hide">type</th>
                                     <th>Price</th>
-                                    <th class="hide">discount
-                                    </td>
+                                    <th class="hide">discount</th>
                                     <th>Date</th>
-                                    <th class="hide">content
-                                    </td>
-                                    <th>ProductURL</th>
+                                    <th class="hide">content</th>
+                                    <th class="hide">ProductUrl</th>
                                 </tr>
                                 </tfoot>
                                 <tbody>
                                 {{#userProducts}}
                                 <tr>
+                                    <td><img src="{{productUrl}}" style="object-fit:cover;" alt="Girl in a jacket"
+                                             width="100" height="100"></td>
                                     <td>{{productId}}</td>
                                     <td>{{userId}}</td>
                                     <td>{{title}}</td>
@@ -428,7 +371,7 @@
                                     <td class="hide">{{discount}}</td>
                                     <td>{{publishedAt}}</td>
                                     <td class="hide">{{content}}</td>
-                                    <td>{{productUrl}}</td>
+                                    <td class="hide">{{productUrl}}</td>
                                 </tr>
                                 {{/userProducts}}
                                 </tbody>
@@ -499,6 +442,230 @@
         </footer>
     </div>
 </div>
+
+<div class="modal" tabindex="-1" role="dialog" id="orderModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Edit Order</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="modalBody">
+                <form method="POST" action="/Admin/User/updateOrder" novalidate>
+                    <div class="form-group row">
+                        <label for="orderId" class="col-4 col-form-label">Order Id</label>
+                        <div class="col-8">
+                            <input id="orderId" name="orderId" type="text" class="form-control" readonly>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="userId" class="col-4 col-form-label">User id</label>
+                        <div class="col-8">
+                            <input id="userId" name="userId" type="text" class="form-control" readonly>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="sessionId" class="col-4 col-form-label">Session Id</label>
+                        <div class="col-8">
+                            <input id="sessionId" name="sessionId" type="text" class="form-control" readonly>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="status" class="col-4 col-form-label">Status</label>
+                        <div class="col-8">
+                            <input id="status" name="status" type="text" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="subTotal" class="col-4 col-form-label">Sub Total</label>
+                        <div class="col-8">
+                            <input id="subTotal" name="subTotal" type="text" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="itemDiscount" class="col-4 col-form-label">Item Discount</label>
+                        <div class="col-8">
+                            <input id="itemDiscount" name="itemDiscount" type="text" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="tax" class="col-4 col-form-label">Tax</label>
+                        <div class="col-8">
+                            <input id="tax" name="tax" type="text" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="shipping" class="col-4 col-form-label">Shipping cost</label>
+                        <div class="col-8">
+                            <input id="shipping" name="shipping" type="text" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="total" class="col-4 col-form-label">Total</label>
+                        <div class="col-8">
+                            <input id="total" name="total" type="text" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="promo" class="col-4 col-form-label">Promotion</label>
+                        <div class="col-8">
+                            <input id="promo" name="promo" type="text" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="discount" class="col-4 col-form-label">Discount</label>
+                        <div class="col-8">
+                            <input id="discount" name="discount" type="text" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="grandTotal" class="col-4 col-form-label">Grand Total</label>
+                        <div class="col-8">
+                            <input id="grandTotal" name="grandTotal" type="text" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="firstName" class="col-4 col-form-label">First Name</label>
+                        <div class="col-8">
+                            <input id="firstName" name="firstName" type="text" class="form-control" readonly>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="lastName" class="col-4 col-form-label">Last name</label>
+                        <div class="col-8">
+                            <input id="lastName" name="lastName" type="text" class="form-control" readonly>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="mobile" class="col-4 col-form-label">Mobile Number</label>
+                        <div class="col-8">
+                            <input id="mobile" name="mobile" type="text" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="email" class="col-4 col-form-label">Email</label>
+                        <div class="col-8">
+                            <input id="email" name="email" type="text" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="address" class="col-4 col-form-label">Address</label>
+                        <div class="col-8">
+                            <input id="address" name="address" type="text" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="city" class="col-4 col-form-label">City</label>
+                        <div class="col-8">
+                            <input id="city" name="city" type="text" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="createdAt" class="col-4 col-form-label">Date</label>
+                        <div class="col-8">
+                            <input id="createdAt" name="createdAt" type="text" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="content" class="col-4 col-form-label">Content</label>
+                        <div class="col-8">
+                            <input id="content" name="content" type="text" class="form-control">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                        <a id="deletebtn" class="btn btn-danger">Delete Event</a>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal" tabindex="-1" role="dialog" id="p_ProductModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Edit Product</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="modalBody">
+                <form method="POST" action="/Admin/User/updateProduct" novalidate>
+                    <div class="form-group row">
+                        <label for="p_productId" class="col-4 col-form-label">Product id</label>
+                        <div class="col-8">
+                            <input id="p_productId" name="productId" type="text" class="form-control" readonly>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="p_userId" class="col-4 col-form-label">User id</label>
+                        <div class="col-8">
+                            <input id="p_userId" name="userId" type="text" class="form-control" readonly>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="p_title" class="col-4 col-form-label">Title</label>
+                        <div class="col-8">
+                            <input id="p_title" name="title" type="text" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="p_summary" class="col-4 col-form-label">Summary</label>
+                        <div class="col-8">
+                            <input id="p_summary" name="summary" type="text" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="p_type" class="col-4 col-form-label">Type</label>
+                        <div class="col-8">
+                            <input id="p_type" name="type" type="text" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="p_price" class="col-4 col-form-label">Price</label>
+                        <div class="col-8">
+                            <input id="p_price" name="price" type="text" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="p_discount" class="col-4 col-form-label">Discount</label>
+                        <div class="col-8">
+                            <input id="p_discount" name="discount" type="text" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="p_date" class="col-4 col-form-label">Published at</label>
+                        <div class="col-8">
+                            <input id="p_date" name="publishedAt" type="text" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="p_content" class="col-4 col-form-label">Content</label>
+                        <div class="col-8">
+                            <input id="p_content" name="content" type="text" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="p_productUrl" class="col-4 col-form-label">Product Url</label>
+                        <div class="col-8">
+                            <input id="p_productUrl" name="productUrl" type="text" class="form-control">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                        <a id="p_deleteBtn" class="btn btn-danger">Delete Event</a>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
         crossorigin="anonymous"></script>
@@ -508,14 +675,6 @@
 <script src="/js/Admin/chart-bar-demo.js"></script>
 <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
 <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
-<script src="/js/Admin/datatables-demo.js"></script>
-<script>
-    $(document).ready(function() {
-        $('#dataTableReview').DataTable();
-    });
-    $(document).ready(function() {
-        $('#dataTableProducts').DataTable();
-    });
-</script>
+<script src="/js/Admin/datatables-user.js"></script>
 </body>
 </html>

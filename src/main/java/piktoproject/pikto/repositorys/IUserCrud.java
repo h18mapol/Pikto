@@ -33,7 +33,7 @@ public interface IUserCrud{
     void addOrder(Order order);
     Order getOrderById(int orderId);
     Order updateOrder(Order order);
-    void DeleteOrder(int orderId);
+    void deleteOrder(int orderId);
 
     //Category
     List<Category>getAllCategories();
