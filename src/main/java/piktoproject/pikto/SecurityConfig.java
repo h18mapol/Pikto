@@ -19,10 +19,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
 
 
-        http.authorizeRequests().antMatchers("/**").permitAll()
+        http.authorizeRequests().antMatchers("/login").permitAll()
                 .antMatchers("/Index/**").permitAll()
                 .antMatchers("/Admin/**").hasAuthority("ROLE_ADMIN")
-                .antMatchers("/css/**", "/js/**", "/webjars/**").permitAll()
+                .antMatchers("/css/**","/img/**","/font/**","/js/**", "/webjars/**").permitAll()
                 .anyRequest().authenticated()
                 .and().formLogin().permitAll() // enable form based login
                 .loginPage("/login")

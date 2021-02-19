@@ -45,7 +45,7 @@ public class AdminCrud extends UserCrud implements IAdminCrud {
                 product.setUserId(resultset.getInt(2));
                 product.setTitle(resultset.getString(3));
                 product.setSummary(resultset.getString(4));
-                product.setType(resultset.getInt(5));
+                product.setType(resultset.getString(5));
                 product.setPrice(resultset.getFloat(6));
                 product.setDiscount(resultset.getFloat(7));
                 product.setPublishedAt(resultset.getString(8));
@@ -216,7 +216,7 @@ public class AdminCrud extends UserCrud implements IAdminCrud {
                 product.setUserId(resultSet.getInt("userId"));
                 product.setTitle(resultSet.getString("title"));
                 product.setSummary(resultSet.getString("summary"));
-                product.setType(resultSet.getInt("type"));
+                product.setType(resultSet.getString("type"));
                 product.setPrice(resultSet.getInt("price"));
                 product.setDiscount(resultSet.getInt("discount"));
                 product.setPublishedAt(resultSet.getString("publishedAt"));
@@ -237,7 +237,7 @@ public class AdminCrud extends UserCrud implements IAdminCrud {
     } //Klar
 
     @Override
-    public List<Product> getAllProductsByCategory(String categoryId) {
+    public List<Product> getAllProductsByCategory(String type) {
          List<Product> products = new ArrayList<>();
         try{
             con = DriverManager.getConnection("jdbc:mysql://localhost:3306/piktodb?serverTimezone=UTC", "root", "");
@@ -245,7 +245,7 @@ public class AdminCrud extends UserCrud implements IAdminCrud {
      String sqlgetAllProducts = "SELECT * FROM product INNER JOIN product_category ON product.productId=product_category.productId WHERE categoryId= ?";
 
             PreparedStatement statement = con.prepareStatement(sqlgetAllProducts);
-          statement.setString(1, categoryId);
+          statement.setString(1, type);
           
             System.out.println(statement);
 
@@ -257,7 +257,7 @@ public class AdminCrud extends UserCrud implements IAdminCrud {
                 product.setUserId(resultSet.getInt("userId"));
                 product.setTitle(resultSet.getString("title"));
                 product.setSummary(resultSet.getString("summary"));
-                product.setType(resultSet.getInt("type"));
+                product.setType(resultSet.getString("type"));
                 product.setPrice(resultSet.getInt("price"));
                 product.setDiscount(resultSet.getInt("discount"));
                 product.setPublishedAt(resultSet.getString("publishedAt"));

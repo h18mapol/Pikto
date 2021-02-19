@@ -162,7 +162,7 @@ public class UserCrud implements IUserCrud {
                 product.setUserId(resultSet.getInt("userId"));
                 product.setTitle(resultSet.getString("title"));
                 product.setSummary(resultSet.getString("summary"));
-                product.setType(resultSet.getInt("type"));
+                product.setType(resultSet.getString("type"));
                 product.setPrice(resultSet.getInt("price"));
                 product.setDiscount(resultSet.getInt("discount"));
                 product.setPublishedAt(resultSet.getString("publishedAt"));
@@ -203,7 +203,7 @@ public class UserCrud implements IUserCrud {
                 product.setUserId(resultSet.getInt("userId"));
                 product.setTitle(resultSet.getString("title"));
                 product.setSummary(resultSet.getString("summary"));
-                product.setType(resultSet.getInt("type"));
+                product.setType(resultSet.getString("type"));
                 product.setPrice(resultSet.getInt("price"));
                 product.setDiscount(resultSet.getInt("discount"));
                 product.setPublishedAt(resultSet.getString("publishedAt"));
@@ -243,7 +243,7 @@ public class UserCrud implements IUserCrud {
                 product.setUserId(resultSet.getInt("userId"));
                 product.setTitle(resultSet.getString("title"));
                 product.setSummary(resultSet.getString("summary"));
-                product.setType(resultSet.getInt("type"));
+                product.setType(resultSet.getString("type"));
                 product.setPrice(resultSet.getInt("price"));
                 product.setDiscount(resultSet.getInt("discount"));
                 product.setContent(resultSet.getString("content"));
@@ -271,7 +271,7 @@ public class UserCrud implements IUserCrud {
             statement.setInt(1, product.getUserId());
             statement.setString(2, product.getTitle());
             statement.setString(3, product.getSummary());
-            statement.setInt(4, product.getType());
+            statement.setString(4, product.getType());
             statement.setFloat(5, product.getPrice());
             statement.setFloat(6, product.getDiscount());
             statement.setString(7, product.getPublishedAt());
@@ -313,7 +313,7 @@ public class UserCrud implements IUserCrud {
             statement.setInt(1, product.getUserId());
             statement.setString(2, product.getTitle());
             statement.setString(3, product.getSummary());
-            statement.setInt(4, product.getType());
+            statement.setString(4, product.getType());
             statement.setFloat(5, product.getPrice());
             statement.setFloat(6, product.getDiscount());
             statement.setString(7, product.getContent());

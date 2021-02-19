@@ -368,9 +368,9 @@
  
     <div class="flex-container">
     <div class=center>
-    <div class="profile-circel-image-50" onclick="filter();">
+    <div class="profile-circel-image-50">
       <img src="https://images.pexels.com/photos/2113566/pexels-photo-2113566.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" class="img-fluid rounded-circle">
-      <h5 class="categoryText" >Nature</h5>
+      <h5 class="categoryText" value="nature">Nature</h5>
       </div>
        </div>
 
@@ -417,7 +417,7 @@
             {{#CategoryItems}}
             <div class="card" style="margin:0; padding:0; border:0px;">
                 <div class="card-body" style="margin:0; padding:0;">
-                <h4 style="display:none;">{{title}}</h4>
+                <h5 class="card-title" style="display:none;">{{type}}</h4>
                     <a href="http://localhost:8888/Index/{{productId}}">
                         <img src="{{productUrl}}" alt="Italian Trulli" style="padding-bottom:1.25rem;">
                     </a>
@@ -471,22 +471,36 @@
         }
     });
 
-    function myFunction() {
-        var text = document.getElementById("searchValue").value;
-        var concat = "http://localhost:8888/Index/Search/" + text;
-        window.location.replace(concat);
+   
 
+$(document).on("click",".profile-circel-image-50", function () {
+        var clickedBtnID = $(this).find("h5").text(); // or var clickedBtnID = this.id
+        alert(clickedBtnID);
+
+        cardContainer = document.getElementById("MyCards");
+    cards = cardContainer.getElementsByClassName("card");
+    for (i = 0; i < cards.length; i++) {
+        title = cards[i].querySelector(".card-body h5.card-title");
+        if (title.innerText.indexOf(clickedBtnID) > -1) {
+            cards[i].style.display = "";
+        } else {
+            cards[i].style.display = "none";
+        }
     }
 
-    function filter() {
-   var value = $(this).find("h5").value;
-   alert(value);
+    });
+
+    //function filter() {
+   //var value = $(this).find(".categoryText").text();
+  // alert(value);
+
+
    // $("#MyCards .card").filter(function() {
     //  $(this).toggle($(this).find('h4').text().toLowerCase().indexOf(value) > -1)
   //  });
  // });
 
-    }
+    
 
 
     
