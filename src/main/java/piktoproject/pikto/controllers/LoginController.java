@@ -36,6 +36,8 @@ import static org.springframework.security.web.context.HttpSessionSecurityContex
 @Controller
 public class LoginController {
 
+    private Facebook facebook;
+
     @Autowired
     AdminService adminService;
 
@@ -72,7 +74,6 @@ public class LoginController {
         model.addAttribute("userData", "null");
         return "Frontend/Main/Index";
     }
-
 
     @RequestMapping("/formLogin")
     public String getformLoginInfo(Model model, HttpServletRequest request) {
@@ -124,7 +125,7 @@ public class LoginController {
                     user.setPictureUrl("");
                     adminService.addUser(user);
                     user = adminService.getUserByEmail(facebookEmail);
-                    shoppingFunctions.a
+
                     model.addAttribute("userData", user);
                     model.addAttribute("userProducts", adminService.getAllProductsbyId(user.getUserId()));
                     model.addAttribute("userReviews", adminService.getAllReviewsById(user.getUserId()));

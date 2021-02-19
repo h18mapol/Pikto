@@ -5,7 +5,7 @@ public class Product {
     private int productId;
     private int userId;
     private int categoryId;
-    private int type;
+    private String type;
     private String title;
     private String summary;
     private String content;
@@ -58,11 +58,11 @@ public class Product {
         this.userId = userId;
     }
 
-    public int getType() {
+    public String getType() {
         return type;
     }
 
-    public void setType(int type) {
+    public void setType(String type) {
         this.type = type;
     }
 

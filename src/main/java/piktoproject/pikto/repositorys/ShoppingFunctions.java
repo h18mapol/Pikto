@@ -12,7 +12,11 @@ import java.util.logging.Logger;
 @Repository
 public class ShoppingFunctions implements IShoppingFunctions {
      private Connection con;
-     
+
+    @Override
+    public Cart createCart(String sessionId, User user) {
+        return null;
+    }
     @Override
     public List<CartItem> getAllCartItems(Cart cart) {
        List <CartItem> cartList=new ArrayList<>();

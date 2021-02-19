@@ -9,7 +9,7 @@ import java.util.List;
 public interface IShoppingFunctions {
 
     //Cart Items Methods
-    Cart createCartById(String sessionId, User user);
+    Cart createCart(String sessionId, User user);
     List<CartItem> getAllCartItems(Cart cart);
     void addToCart(CartItem cartItem);
     void deleteFromCart(CartItem cartItem);
