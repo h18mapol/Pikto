@@ -1,10 +1,8 @@
 package piktoproject.pikto.repositorys;
 
 import org.springframework.security.crypto.bcrypt.BCrypt;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Repository;
 import piktoproject.pikto.models.*;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -44,7 +42,7 @@ public class UserCrud implements IUserCrud {
         } //end try
         catch (SQLException ex) {
             Logger.getLogger(UserCrud.class.getName()).log(Level.SEVERE, null, ex);
-        }//End events
+        }//End End GetUserById
         return null;
     } //Klar
 
@@ -260,7 +258,7 @@ public class UserCrud implements IUserCrud {
         } //end try
         catch (SQLException ex) {
             Logger.getLogger(UserCrud.class.getName()).log(Level.SEVERE, null, ex);
-        }//End getTeamById
+        }//End getProductById
         return null;
     } //Klar
 
@@ -335,11 +333,9 @@ public class UserCrud implements IUserCrud {
         List<Product_review> product_reviews = new ArrayList<>();
         try {
             con = DriverManager.getConnection("jdbc:mysql://localhost:3306/piktodb?serverTimezone=UTC", "root", "");
-
             String sqlgetAllReviews = "SELECT * FROM product_review WHERE userId = ?";
             PreparedStatement statement = con.prepareStatement(sqlgetAllReviews);
             statement.setInt(1, userId);
-
             ResultSet resultSet = statement.executeQuery();
 
             while (resultSet.next()) {
@@ -365,24 +361,94 @@ public class UserCrud implements IUserCrud {
     } //Klar
 
     @Override
-    public Product_review getReview(int reviewId) {
+    public Product_review getReviewById(int reviewId) {
+        try {
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/piktodb?serverTimezone=UTC", "root", "");
+
+            String sqlgetReviewById = "SELECT * FROM product_review WHERE reviewId=?";
+            PreparedStatement statement = con.prepareStatement(sqlgetReviewById);
+            statement.setInt(1, reviewId);
+
+            ResultSet resultSet = statement.executeQuery();
+            Product_review product_review = new Product_review();
+
+            while (resultSet.next()) {
+                product_review.setReviewId(resultSet.getInt("reviewId"));
+                product_review.setProductId(resultSet.getInt("productId"));
+                product_review.setTitle(resultSet.getString("title"));
+                product_review.setRating(resultSet.getInt("rating"));
+                product_review.setCreatedAt(resultSet.getString("createdAt"));
+                product_review.setContent(resultSet.getString("content"));
+                product_review.setUserId(resultSet.getInt("userId"));
+            } //End while
+            resultSet.close();
+            statement.close();
+            con.close();
+            return product_review;
+        } //end try
+        catch (SQLException ex) {
+            Logger.getLogger(UserCrud.class.getName()).log(Level.SEVERE, null, ex);
+        }//End getReview
         return null;
-    }
+    } //Klar
 
     @Override
     public void addReview(Product_review product_review) {
-
-    }
+        try {
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/piktodb?serverTimezone=UTC", "root", "");
+            String sqlAddReview = "INSERT INTO product_review (productId, title, rating, content, userId) VALUES(?,?,?,?,?)";
+            PreparedStatement statement = con.prepareStatement(sqlAddReview);
+            statement.setInt(1, product_review.getProductId());
+            statement.setString(2, product_review.getTitle());
+            statement.setInt(3, product_review.getRating());
+            statement.setString(4, product_review.getContent());
+            statement.setInt(5, product_review.getUserId());
+            statement.executeUpdate();
+            statement.close();
+            con.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(UserCrud.class.getName()).log(Level.SEVERE, null, ex);
+        }//End addUser
+    } //Klar
 
     @Override
     public Product_review updateReview(Product_review product_review) {
+        try {
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/piktodb?serverTimezone=UTC", "root", "");
+            String sqlUpdateReview = "UPDATE product_review SET productId=?, title=?, rating=?, createdAt=?, content=?, userId=? WHERE reviewId=?";
+            PreparedStatement statement = con.prepareStatement(sqlUpdateReview);
+            statement.setInt(1, product_review.getProductId());
+            statement.setString(2, product_review.getTitle());
+            statement.setInt(3, product_review.getRating());
+            statement.setString(4, product_review.getCreatedAt());
+            statement.setString(5, product_review.getContent());
+            statement.setInt(6, product_review.getUserId());
+            statement.setInt(7, product_review.getReviewId());
+            statement.execute();
+            statement.close();
+            con.close();
+            return product_review;
+        } //end try
+        catch (SQLException ex) {
+            Logger.getLogger(UserCrud.class.getName()).log(Level.SEVERE, null, ex);
+        }//End updateReview
         return null;
-    }
+    } //Klar
 
     @Override
     public void deleteReview(int reviewId) {
-
-    }
+        try {
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/piktodb?serverTimezone=UTC", "root", "");
+            Statement statement = con.createStatement();
+            statement = con.createStatement();
+            String sqlDeleteReview = "DELETE FROM product_review WHERE reviewId=" + reviewId;
+            statement.executeUpdate(sqlDeleteReview);
+            statement.close();
+            con.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(UserCrud.class.getName()).log(Level.SEVERE, null, ex);
+        }//End deleteReview
+    } //Klar
 
     //Orders
     @Override
@@ -409,12 +475,12 @@ public class UserCrud implements IUserCrud {
                 order.setTax(resultSet.getFloat("tax"));
                 order.setShipping(resultSet.getFloat("shipping"));
                 order.setTotal(resultSet.getFloat("total"));
-                order.setPromo(resultSet.getFloat("promo"));
+                order.setPromo(resultSet.getString("promo"));
                 order.setDiscount(resultSet.getInt("discount"));
                 order.setGrandTotal(resultSet.getInt("grandTotal"));
                 order.setFirstName(resultSet.getString("firstName"));
                 order.setLastName(resultSet.getString("lastName"));
-                order.setMobile(resultSet.getInt("mobile"));
+                order.setMobile(resultSet.getString("mobile"));
                 order.setEmail(resultSet.getString("email"));
                 order.setAddress(resultSet.getString("address"));
                 order.setCity(resultSet.getString("city"));
@@ -435,52 +501,239 @@ public class UserCrud implements IUserCrud {
 
     @Override
     public void addOrder(Order order) {
-
-    }
+        try {
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/piktodb?serverTimezone=UTC", "root", "");
+            String sqlAddOrder = "INSERT INTO `order` (userId, sessionId, status, subTotal, itemDiscount, tax, shipping, total, promo, discount, grandTotal, firstName, lastName, mobile, email, address, city, createdAt, content) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+            PreparedStatement statement = con.prepareStatement(sqlAddOrder);
+            statement.setInt(1, order.getUserId());
+            statement.setString(2, order.getSessionId());
+            statement.setInt(3, order.getStatus());
+            statement.setFloat(4, order.getSubTotal());
+            statement.setFloat(5, order.getItemDiscount());
+            statement.setFloat(6, order.getTax());
+            statement.setFloat(7, order.getShipping());
+            statement.setFloat(8, order.getTotal());
+            statement.setString(9, order.getPromo());
+            statement.setFloat(10, order.getDiscount());
+            statement.setFloat(11, order.getGrandTotal());
+            statement.setString(12, order.getFirstName());
+            statement.setString(13, order.getLastName());
+            statement.setString(14, order.getMobile());
+            statement.setString(15, order.getEmail());
+            statement.setString(16, order.getAddress());
+            statement.setString(17, order.getCity());
+            statement.setString(18, order.getCreatedAt());
+            statement.setString(19, order.getContent());
+            statement.executeUpdate();
+            statement.close();
+            con.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(UserCrud.class.getName()).log(Level.SEVERE, null, ex);
+        }//End addOrder
+    } //Klar
 
     @Override
     public Order getOrderById(int orderId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+        try {
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/piktodb?serverTimezone=UTC", "root", "");
+
+            String sqlGetOrderById = "SELECT * FROM `order` WHERE orderId=?";
+            PreparedStatement statement = con.prepareStatement(sqlGetOrderById);
+            statement.setInt(1, orderId);
+
+            ResultSet resultSet = statement.executeQuery();
+            Order order = new Order();
+            while (resultSet.next()) {
+                order.setUserId(resultSet.getInt("orderId"));
+                order.setUserId(resultSet.getInt("userId"));
+                order.setUserId(resultSet.getInt("sessionId"));
+                order.setUserId(resultSet.getInt("status"));
+                order.setUserId(resultSet.getInt("subTotal"));
+                order.setUserId(resultSet.getInt("itemDiscount"));
+                order.setUserId(resultSet.getInt("tax"));
+                order.setUserId(resultSet.getInt("shipping"));
+                order.setUserId(resultSet.getInt("total"));
+                order.setUserId(resultSet.getInt("promo"));
+                order.setUserId(resultSet.getInt("discount"));
+                order.setUserId(resultSet.getInt("grandTotal"));
+                order.setUserId(resultSet.getInt("firstName"));
+                order.setUserId(resultSet.getInt("lastName"));
+                order.setUserId(resultSet.getInt("mobile"));
+                order.setUserId(resultSet.getInt("email"));
+                order.setUserId(resultSet.getInt("address"));
+                order.setUserId(resultSet.getInt("city"));
+                order.setUserId(resultSet.getInt("createdAt"));
+                order.setUserId(resultSet.getInt("content"));
+            } //End while
+            resultSet.close();
+            statement.close();
+            con.close();
+            return order;
+        } //end try
+        catch (SQLException ex) {
+            Logger.getLogger(UserCrud.class.getName()).log(Level.SEVERE, null, ex);
+        }//End End GetUserById
+        return null;
+    } //Klar
 
     @Override
     public Order updateOrder(Order order) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+        try {
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/piktodb?serverTimezone=UTC", "root", "");
+            String sqlUpdateOrder = "UPDATE `order` SET userId=?, sessionId=?, status=?, subTotal=?, itemDiscount=?, tax=?, shipping=?, total=?, promo=?, discount=?, grandTotal=?, firstName=?, lastName=?, mobile=?, email=?, address=?, city=?, createdAt=?, content=? WHERE orderId=?";
+            PreparedStatement statement = con.prepareStatement(sqlUpdateOrder);
+            statement.setInt(1, order.getUserId());
+            statement.setString(2, order.getSessionId());
+            statement.setInt(3, order.getStatus());
+            statement.setFloat(4, order.getSubTotal());
+            statement.setFloat(5, order.getItemDiscount());
+            statement.setFloat(6, order.getTax());
+            statement.setFloat(7, order.getShipping());
+            statement.setFloat(8, order.getTotal());
+            statement.setString(9, order.getPromo());
+            statement.setFloat(10, order.getDiscount());
+            statement.setFloat(11, order.getGrandTotal());
+            statement.setString(12, order.getFirstName());
+            statement.setString(13, order.getLastName());
+            statement.setString(14, order.getMobile());
+            statement.setString(15, order.getEmail());
+            statement.setString(16, order.getAddress());
+            statement.setString(17, order.getCity());
+            statement.setString(18, order.getCreatedAt());
+            statement.setString(19, order.getContent());
+            statement.setInt(20, order.getOrderId());
+            statement.execute();
+            statement.close();
+            con.close();
+            return order;
+        } //end try
+        catch (SQLException ex) {
+            Logger.getLogger(UserCrud.class.getName()).log(Level.SEVERE, null, ex);
+        }//End UpdateOrder
+        return null;
+    } //Klar
 
     @Override
-    public void DeleteOrder(int orderId) {
-
-    }
+    public void deleteOrder(int orderId) {
+        try {
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/piktodb?serverTimezone=UTC", "root", "");
+            Statement statement = con.createStatement();
+            statement = con.createStatement();
+            String sqlDeleteOrder = "DELETE FROM `order` WHERE orderId=" + orderId;
+            statement.executeUpdate(sqlDeleteOrder);
+            statement.close();
+            con.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(UserCrud.class.getName()).log(Level.SEVERE, null, ex);
+        }//End deleteOrder
+    } //Klar
 
     //Category
     @Override
     public List<Category> getAllCategories() {
+        List<Category> categories = new ArrayList<>();
+        try{
+            con=DriverManager.getConnection("jdbc:mysql://localhost:3306/piktodb?serverTimezone=UTC","root","");
+            Statement statement =con.createStatement();
+            statement=con.createStatement();
+            String sqlSelectAllCategories="SELECT * FROM `category`";
+            ResultSet resultset=statement.executeQuery(sqlSelectAllCategories);
+            while (resultset.next()){
+                Category category=new Category();
+                category.setCategoryId(resultset.getInt("categoryId"));
+                category.setTitle(resultset.getString("title"));
+                category.setContent(resultset.getString("content"));
+                categories.add(category);
+            }
+            resultset.close();
+            statement.close();
+            con.close();
+            return categories;
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminCrud.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return null;
-    }
+    } //Klar
 
     @Override
     public void addCategory(Category category) {
-
-    }
+        try {
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/piktodb?serverTimezone=UTC", "root", "");
+            String sqlAddCategory = "INSERT INTO `category` (title, content) VALUES(?,?)";
+            PreparedStatement statement = con.prepareStatement(sqlAddCategory);
+            statement.setString(1, category.getTitle());
+            statement.setString(2, category.getContent());
+            statement.executeUpdate();
+            statement.close();
+            con.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(UserCrud.class.getName()).log(Level.SEVERE, null, ex);
+        }//End addCategory
+    } //Klar
 
     @Override
-    public Order getCategoryById(int categoryId) {
+    public Category getCategoryById(int categoryId) {
+        try {
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/piktodb?serverTimezone=UTC", "root", "");
+
+            String sqlgetCategoryById = "SELECT * FROM category WHERE categoryId=?";
+            PreparedStatement statement = con.prepareStatement(sqlgetCategoryById);
+            statement.setInt(1, categoryId);
+            ResultSet resultSet = statement.executeQuery();
+             Category category = new Category();
+
+            while (resultSet.next()){
+                category.setCategoryId(resultSet.getInt("categoryId"));
+                category.setTitle(resultSet.getString("title"));
+                category.setContent(resultSet.getString("content"));
+            } //End while
+            resultSet.close();
+            statement.close();
+            con.close();
+            return category;
+        } //end try
+        catch (SQLException ex) {
+            Logger.getLogger(UserCrud.class.getName()).log(Level.SEVERE, null, ex);
+        }//End getCategoryById
         return null;
-    }
+    } //Klar
 
     @Override
-    public Order updateCategory(int categoryId) {
+    public Category updateCategory(Category category) {
+        try {
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/piktodb?serverTimezone=UTC", "root", "");
+            String sqlUpdateOCategory = "UPDATE `category` SET title=?, content=? WHERE categoryId=?";
+            PreparedStatement statement = con.prepareStatement(sqlUpdateOCategory);
+            statement.setString(1, category.getTitle());
+            statement.setString(2, category.getContent());
+            statement.setInt(3, category.getCategoryId());
+            statement.execute();
+            statement.close();
+            con.close();
+            return category;
+        } //end try
+        catch (SQLException ex) {
+            Logger.getLogger(UserCrud.class.getName()).log(Level.SEVERE, null, ex);
+        }//End UpdateCategory
         return null;
-    }
+    } //Klar
 
     @Override
     public void DeleteCategory(int categoryId) {
-
-    }
+        try {
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/piktodb?serverTimezone=UTC", "root", "");
+            Statement statement = con.createStatement();
+            statement = con.createStatement();
+            String sqlDeleteCategory = "DELETE FROM category WHERE categoryId=" + categoryId;
+            statement.executeUpdate(sqlDeleteCategory);
+            statement.close();
+            con.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(UserCrud.class.getName()).log(Level.SEVERE, null, ex);
+        }//End deleteCategory
+    } //Klar
 
     //Helper Functions
-
     @Override
     public List<Product_review> getAllProductReviews(int productId) {
         List<Product_review> product_reviews = new ArrayList<>();

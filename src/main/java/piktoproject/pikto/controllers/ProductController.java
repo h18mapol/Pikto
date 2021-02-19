@@ -26,7 +26,6 @@ public class ProductController {
     @Autowired
     private UserService userService;
 
-
     @RequestMapping("/User/Checkout/{userId}")
 
     public String checkoutUser(Model model, @PathVariable Integer userId) {
@@ -71,6 +70,7 @@ public class ProductController {
         model.addAttribute("CategoryItems", adminService.getAllProductsByCategory(categoryId));
         return "Frontend/Main/CategoryPage";
     }
+
 
 
 

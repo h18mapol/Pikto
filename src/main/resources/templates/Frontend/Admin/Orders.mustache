@@ -221,127 +221,133 @@
                 </button>
             </div>
             <div class="modal-body" id="modalBody">
-                <form>
+                <form method="POST" action="/Admin/updateOrder" novalidate>
                     <div class="form-group row">
                         <label for="orderId" class="col-4 col-form-label">Order Id</label>
                         <div class="col-8">
-                            <input id="orderId" name="text1" type="text" class="form-control" readonly>
+                            <input id="orderId" name="orderId" type="text" class="form-control" readonly>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="userId" class="col-4 col-form-label">User id</label>
                         <div class="col-8">
-                            <input id="userId" name="text2" type="text" class="form-control" readonly>
+                            <input id="userId" name="userId" type="text" class="form-control" readonly>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="sessionId" class="col-4 col-form-label">Session Id</label>
                         <div class="col-8">
-                            <input id="sessionId" name="text" type="text" class="form-control" readonly>
+                            <input id="sessionId" name="sessionId" type="text" class="form-control" readonly>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="status" class="col-4 col-form-label">Status</label>
                         <div class="col-8">
-                            <input id="status" name="text3" type="text" class="form-control">
+                            <input id="status" name="status" type="text" class="form-control">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="subTotal" class="col-4 col-form-label">Sub Total</label>
                         <div class="col-8">
-                            <input id="subTotal" name="text3" type="text" class="form-control">
+                            <input id="subTotal" name="subTotal" type="text" class="form-control">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="itemDiscount" class="col-4 col-form-label">Item Discount</label>
                         <div class="col-8">
-                            <input id="itemDiscount" name="text3" type="text" class="form-control">
+                            <input id="itemDiscount" name="itemDiscount" type="text" class="form-control">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="tax" class="col-4 col-form-label">Tax</label>
                         <div class="col-8">
-                            <input id="tax" name="text3" type="text" class="form-control">
+                            <input id="tax" name="tax" type="text" class="form-control">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="shipping" class="col-4 col-form-label">Shipping cost</label>
                         <div class="col-8">
-                            <input id="shipping" name="text3" type="text" class="form-control">
+                            <input id="shipping" name="shipping" type="text" class="form-control">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="total" class="col-4 col-form-label">Total</label>
                         <div class="col-8">
-                            <input id="total" name="text3" type="text" class="form-control">
+                            <input id="total" name="total" type="text" class="form-control">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="promo" class="col-4 col-form-label">Promotion</label>
                         <div class="col-8">
-                            <input id="promo" name="text3" type="text" class="form-control">
+                            <input id="promo" name="promo" type="text" class="form-control">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="discount" class="col-4 col-form-label">Discount</label>
                         <div class="col-8">
-                            <input id="discount" name="text3" type="text" class="form-control">
+                            <input id="discount" name="discount" type="text" class="form-control">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="grandTotal" class="col-4 col-form-label">Grand Total</label>
                         <div class="col-8">
-                            <input id="grandTotal" name="text3" type="text" class="form-control">
+                            <input id="grandTotal" name="grandTotal" type="text" class="form-control">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="firstName" class="col-4 col-form-label">First Name</label>
                         <div class="col-8">
-                            <input id="firstName" name="text3" type="text" class="form-control" readonly>
+                            <input id="firstName" name="firstName" type="text" class="form-control" readonly>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="lastName" class="col-4 col-form-label">Last name</label>
                         <div class="col-8">
-                            <input id="lastName" name="text3" type="text" class="form-control" readonly>
+                            <input id="lastName" name="lastName" type="text" class="form-control" readonly>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="mobile" class="col-4 col-form-label">Mobile Number</label>
                         <div class="col-8">
-                            <input id="mobile" name="text3" type="text" class="form-control">
+                            <input id="mobile" name="mobile" type="text" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="email" class="col-4 col-form-label">Email</label>
+                        <div class="col-8">
+                            <input id="email" name="email" type="text" class="form-control">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="address" class="col-4 col-form-label">Address</label>
                         <div class="col-8">
-                            <input id="address" name="text3" type="text" class="form-control">
+                            <input id="address" name="address" type="text" class="form-control">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="city" class="col-4 col-form-label">City</label>
                         <div class="col-8">
-                            <input id="city" name="text3" type="text" class="form-control">
+                            <input id="city" name="city" type="text" class="form-control">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="createdAt" class="col-4 col-form-label">Date</label>
                         <div class="col-8">
-                            <input id="createdAt" name="text3" type="text" class="form-control">
+                            <input id="createdAt" name="createdAt" type="text" class="form-control">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="content" class="col-4 col-form-label">Content</label>
                         <div class="col-8">
-                            <input id="content" name="text3" type="text" class="form-control">
+                            <input id="content" name="content" type="text" class="form-control">
                         </div>
                     </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                        <a id="deletebtn" class="btn btn-danger">Delete Event</a>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
                 </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary">Save changes</button>
-                <button type="button" class="btn btn-danger" data-dismiss="modal">Delete</button>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
@@ -350,42 +356,8 @@
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 <script src="/js/Admin/scripts.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
-<script src="/js/Admin/chart-area-demo.js"></script>
-<script src="/js/Admin/chart-bar-demo.js"></script>
 <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
 <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
-<script src="/js/Admin/datatables-demo.js"></script>
-<script> //Selecting a row.
-$(document).ready(function () {
-    $("#dataTable tbody tr").click(function () {
-        var tableData = $(this).children("td").map(function() {
-            return $(this).text();
-        }).get();
-        $("#orderId").val(tableData[0]);
-        $("#userId").val(tableData[1]);
-        $("#sessionId").val(tableData[2]);
-        $("#status").val(tableData[3]);
-        $("#subTotal").val(tableData[4]);
-        $("#itemDiscount").val(tableData[5]);
-        $("#tax").val(tableData[6]);
-        $("#shipping").val(tableData[7]);
-        $("#total").val(tableData[8]);
-        $("#promo").val(tableData[9]);
-        $("#discount").val(tableData[10]);
-        $("#grandTotal").val(tableData[11]);
-        $("#firstName").val(tableData[12]);
-        $("#lastName").val(tableData[13]);
-        $("#mobile").val(tableData[14]);
-        $("#email").val(tableData[15]);
-        $("#address").val(tableData[16]);
-        $("#city").val(tableData[17]);
-        $("#createdAt").val(tableData[18]);
-        $("#content").val(tableData[19]);
-        $('#orderModal').modal('show');
-    });
-});
-
-</script>
+<script src="/js/Admin/datatables-orders.js"></script>
 </body>
 </html>
