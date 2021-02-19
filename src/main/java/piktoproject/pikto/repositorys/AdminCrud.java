@@ -235,4 +235,47 @@ public class AdminCrud extends UserCrud implements IAdminCrud {
         }//End getTeamById
         return null;
     } //Klar
+
+    @Override
+    public List<Product> getAllProductsByCategory(String categoryId) {
+         List<Product> products = new ArrayList<>();
+        try{
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/piktodb?serverTimezone=UTC", "root", "");
+
+     String sqlgetAllProducts = "SELECT * FROM product INNER JOIN product_category ON product.productId=product_category.productId WHERE categoryId= ?";
+
+            PreparedStatement statement = con.prepareStatement(sqlgetAllProducts);
+          statement.setString(1, categoryId);
+          
+            System.out.println(statement);
+
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+                Product product = new Product();
+                product.setProductId(resultSet.getInt("productId"));
+                product.setUserId(resultSet.getInt("userId"));
+                product.setTitle(resultSet.getString("title"));
+                product.setSummary(resultSet.getString("summary"));
+                product.setType(resultSet.getInt("type"));
+                product.setPrice(resultSet.getInt("price"));
+                product.setDiscount(resultSet.getInt("discount"));
+                product.setPublishedAt(resultSet.getString("publishedAt"));
+                product.setContent(resultSet.getString("content"));
+                product.setProductUrl(resultSet.getString("productUrl"));
+                product.setCategoryId(resultSet.getInt("categoryId"));
+                products.add(product);
+                System.out.println(product);
+            } //End while
+            resultSet.close();
+            statement.close();
+            con.close();
+            return products;
+        } //end try
+        catch(SQLException ex){
+            Logger.getLogger(UserCrud.class.getName()).log(Level.SEVERE, null, ex);
+        }//End getTeamById
+        return null;
+        
+    }
 }

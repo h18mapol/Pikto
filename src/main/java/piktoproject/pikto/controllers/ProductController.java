@@ -65,6 +65,13 @@ public class ProductController {
         System.out.println(adminService.getAllProductsBySearch(SearchWord));
         return "Frontend/Main/SearchPage";
     }
+    
+    @RequestMapping("/Index/Category/{categoryId}")
+    public String getCategoryPage(Model model, @PathVariable String categoryId) {
+        model.addAttribute("CategoryItems", adminService.getAllProductsByCategory(categoryId));
+        return "Frontend/Main/CategoryPage";
+    }
+
 
 
 }

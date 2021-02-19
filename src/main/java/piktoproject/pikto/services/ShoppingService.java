@@ -27,7 +27,7 @@ public class ShoppingService {
     public Cart getCart(String sessionId){ return ShoppingFunctionsCrud.getCart(sessionId);}
     public void deleteCart(Cart cart) {ShoppingFunctionsCrud.deleteCart(cart);}
     //OrderFunctions
-    public Order createOrder(Cart cart, User user){return ShoppingFunctionsCrud.createOrder(cart,user);}
+    //public Order createOrder(Cart cart, User user){return ShoppingFunctionsCrud.createOrder(cart,user);}
     //TransactionFunctions
     public Transaction createTransaction(Order order){return ShoppingFunctionsCrud.createTransaction(order);}
 }

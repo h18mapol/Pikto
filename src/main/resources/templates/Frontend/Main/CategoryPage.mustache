@@ -2,385 +2,497 @@
 <html lang="en">
 
 <head>
-
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
     <title>Bootstrap 4 Carousel with Multiple Items</title>
-
     <!-- CSS -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,600">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
           integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
           integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
-    <link rel="stylesheet" href="assets/css/animate.css">
-    <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="stylesheet" href="assets/css/media-queries.css">
-    <link rel="stylesheet" href="assets/css/carousel.css">
-
+    <link rel="stylesheet" href="/css/Main/animate.css">
+    <link rel="stylesheet" href="/css/Main/style.css">
+    <link rel="stylesheet" href="/css/Main/media-queries.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <style>
 
-    <!-- Favicon and touch icons -->
-    <link rel="shortcut icon" href="assets/ico/favicon.png">
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="assets/ico/apple-touch-icon-144-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="assets/ico/apple-touch-icon-114-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="assets/ico/apple-touch-icon-72-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" href="assets/ico/apple-touch-icon-57-precomposed.png">
+    @font-face {
+  font-family: moonget;
+  src: url(/font/moon_get-Heavy.ttf);
+}
+        .card-body-prod {
+            padding: 0;
+        }
+
+        .hero--video {
+            display: flex;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: flex-end;
+            justify-content:space-around;
+           flex-wrap:wrap;
+             height:40vh;
+        }
+
+        .navbar-fixed-top {
+            top: -70px;
+            opacity: 0;
+        }
+
+        .hero-image {
+            position: absolute;
+            z-index: 1;
+            width: 100%;
+            height: 600px;
+            margin: 0 auto;
+            right: 0;
+            left: 0;
+            -o-object-fit: cover;
+            object-fit: cover;
+        }
+
+        .hero .search {
+            position: relative;
+            vertical-align: middle;
+            z-index: 2;
+        }
+
+        .hero .search input {
+            width: 100%;
+            height: 76px;
+            line-height: 76px;
+            border: 1px solid #111;
+            background: rgba(0, 0, 0, 0.8);
+            font-size: 27px;
+            padding: 5px 5px 5px 47px;
+            color: #fff;
+            position: relative;
+            border-radius: 0;
+        }
+
+        .hero .search button {
+            position: absolute;
+            top: 6px;
+            right: 6px;
+            color: #fff;
+            background: #88687b;
+            font-size: 27px;
+            height: 65px;
+            line-height: 65px;
+            width: 68px;
+            padding: 0;
+            border: 0;
+        }
+
+        header {
+            width: 100%;
+            height: 70vh;
+            background: url(/img/hero2.png) no-repeat 50% 50%;
+            background-size: cover;
+        }
+
+        .content {
+            width: 94%;
+            margin: 4em auto;
+            font-size: 20px;
+            line-height: 30px;
+            text-align: justify;
+        }
+
+        .logo {
+            line-height: 60px;
+            position: fixed;
+            float: left;
+            margin: 16px 46px;
+            color: #fff;
+            font-weight: bold;
+            font-size: 20px;
+            letter-spacing: 2px;
+        }
+        .userMenu {
+            line-height: 60px;
+            position: fixed;
+            float: right;
+            margin: 16px 46px;
+            color: #fff;
+            font-weight: bold;
+            font-size: 20px;
+            letter-spacing: 2px;
+        }
+
+        nav {
+            position: fixed;
+            width: 100%;
+            line-height: 60px;
+            z-index: 3;
+        }
+
+        nav ul {
+            line-height: 60px;
+            list-style: none;
+            background: rgba(0, 0, 0, 0);
+            color: #fff;
+            padding: 0;
+            text-align: right;
+            margin: 0;
+            padding-right: 40px;
+            transition: 1s;
+        }
+
+        nav.black ul {
+            background: #000;
+        }
+
+        nav ul li {
+            display: inline-block;
+            padding: 16px 40px;;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #fff;
+            font-size: 16px;
+        }
+
+        .menu-icon {
+            line-height: 60px;
+            width: 100%;
+            background: #000;
+            text-align: right;
+            box-sizing: border-box;
+            padding: 15px 24px;
+            cursor: pointer;
+            color: #fff;
+            display: none;
+        }
+        .user2 {     
+                display:none;
+        }
+.card-columns{
+              column-count: 4;
+        }
+
+        .profile-circel-image-50 img {
+    width: 70px;
+    height: 70px;
+    border-radius: 70px;
+    float:left;
+    object-fit:cover;
+    
+    
+  
+}
+.profile-circel-image-50{
+     align-items: center;
+    justify-content: center;
+    display: flex;
+}
+.vv img {
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.vv img:hover {
+    opacity: 0.8;
+    box-shadow: 0px 0px 5px 8px rgba(0,0,0,0.08);
+}
+
+
+.center{
+    padding-top:37vh;
+    width:20%;
+  display: inline-block;
+    flex-grow: 1;
+    align-items: center;
+   
+}
+.center1{
+    padding-top:22vh;
+    width:20%;
+  display: inline-block;
+    flex-grow: 1;
+    align-items: center;
+   
+}
+.flex-container{
+    
+     display: flex;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: flex-end;
+            justify-content:space-around;
+           flex-wrap:wrap;
+             height:20vh;
+
+}
+.categoryText{
+    float:right;
+      color:white;
+      margin-left:5%;
+      margin-top:0;
+      margin-bottom:0;
+}
+        @media (max-width: 786px) {
+            .categoryText{
+     display:none;
+}
+.center{
+    padding-top:25vh;
+  
+   
+}
+                header {
+            width: 100%;
+            height: 60vh;
+            background: url(/img/hero2.png) no-repeat 50% 50%;
+            background-size: cover;
+        }
+
+           #user1 { 
+            display:none;
+        }
+        .user2 {
+             display:inline-block;       
+        }
+
+            .logo {
+                position: fixed;
+                top: 0;
+                margin-top: 16px;
+            }
+
+            nav ul {
+                max-height: 0px;
+                background: #000;
+            }
+             nav {
+                overflow:hidden;
+            }
+
+            nav.black ul {
+                background: #000;
+            }
+
+            .showing {
+                max-height: 34em;
+                overflow: visible;
+            }
+
+            nav ul li {
+                box-sizing: border-box;
+                width: 100%;
+                padding: 5px;
+                text-align: center;
+            }
+
+            .menu-icon {
+                display: block;
+            }
+            .card-columns{
+              column-count: 1;
+        }
+
+        }
+        
+
+        
+
+    </style>
+
 
 </head>
-
 <body>
 <!-- Top menu -->
-<nav class="navbar navbar-dark fixed-top navbar-expand-md">
-    <div class="container">
-        <a class="navbar-brand" href="index.html">Bootstrap 4 Carousel with Multiple Items</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
 
-            <!-- Wallpapers-->
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Wallpapers
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">Wallpapers</a>
-                        <a class="dropdown-item" href="#">Another action</a>
+<header>
+    <nav>
+        <div class="menu-icon">
+
+           <div >
+           
+        </div>
+      
+            <i class="fa fa-bars fa-2x"></i>
+
+              
+        </div>
+        
+        <div class="logo">
+            <img style="float: left; margin-right: 1%;" src="/img/pikto.png" width="100" href="localhost:8888/Index"/>
+        </div>
+     
+         
+
+
+        <div class="menu">
+            <ul>
+                <li><a href="#">Backgrounds</a></li>
+                <li><a href="#">Stockphotos</a></li>
+                <li><a href="#">Illustrations</a></li>
+                <li><a href="#">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                         class="bi bi-cart-fill" viewBox="0 0 16 16">
+                        <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+                    </svg>
+                </a></li>
+                <li class="nav-item dropdown" id="user1">
+                    <a class="nav-link dropdown-toggle" id="userDropdown" href="#" role="button" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown"
+                         style="position: absolute !important;">
+                        <a class="dropdown-item" href="#">Settings</a>
+                        <a class="dropdown-item" href="#">Activity Log</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Something else here</a>
+                        <form class="dropdown-item" action="/logout" method="post">
+                            <input type="hidden" name="_csrf" value=""/>
+                            <button type="submit" class="btn btn-primary">Logout</button>
+                        </form>
                     </div>
                 </li>
-                <!-- Wallpapers-->
 
-                <!-- Vectors-->
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Vectors
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">Vectors</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Something else here</a>
-                    </div>
-                </li>
-                <!-- Vectors-->
-
-                <!-- Stock photos-->
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Stock photos
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">Stock photos</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Something else here</a>
-                    </div>
-                </li>
-                <!-- Stock photos-->
-
-                <!-- Outlet-->
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Outlet
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">Outlet</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Something else here</a>
-                    </div>
-                </li>
+              <li class="user2"><i class='fas fa-user-alt'  style='font-size:17px;'></i></li>
 
             </ul>
-            <div class="navbar-nav ml-auto">
-                <a href="#" class="nav-item nav-link notifications"><i class="fa fa-bell-o"></i><span
-                        class="badge">1</span></a>
-                <a href="#" class="nav-item nav-link messages"><i class="fa fa-envelope-o"></i><span
-                        class="badge">10</span></a></a>
-                <div class="nav-item dropdown">
-                    <a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle user-action"><img
-                            src="assets/img/profile.png" class="avatar" alt="Avatar"> Paula Wilson <b class="caret"></b></a>
-                    <div class="dropdown-menu">
-                        <a href="#" class="dropdown-item"><i class="fa fa-user-o"></i> Profile</a></a>
-                        <a href="#" class="dropdown-item"><i class="fa fa-calendar-o"></i> Calendar</a></a>
-                        <a href="#" class="dropdown-item"><i class="fa fa-sliders"></i> Settings</a></a>
-                        <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item"><i class="material-icons">&#xE8AC;</i> Logout</a></a>
-                    </div>
-                </div>
-            </div>
         </div>
-    </div>
-</nav>
+    </nav>
+        <div class="flex-container">
 
-<!-- Top content -->
+        <div class=center1>
+        <h1 style="font-family:moonget; font-style:normal; color:white;">BACKGROUNDS</h1>
+      
+       </div>
+          </div>
+ 
+    <div class="flex-container">
+    <div class=center>
+    <div class="profile-circel-image-50" onclick="filter();">
+      <img src="https://images.pexels.com/photos/2113566/pexels-photo-2113566.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" class="img-fluid rounded-circle">
+      <h5 class="categoryText" >Nature</h5>
+      </div>
+       </div>
 
-<div class="container">
-    <div class="row row-cols-1 row-cols-md-3 g-4">
-        <div class="col">
-            <div class="card h-100">
-                <img src="..." class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">This is a longer card with supporting text below as a natural lead-in to
-                        additional content. This content is a little bit longer.</p>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card h-100">
-                <img src="..." class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">This is a short card.</p>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card h-100">
-                <img src="..." class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">This is a longer card with supporting text below as a natural lead-in to
-                        additional content.</p>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card h-100">
-                <img src="..." class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">This is a longer card with supporting text below as a natural lead-in to
-                        additional content. This content is a little bit longer.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+       <div class=center>
+    <div class="profile-circel-image-50">
+      <img src="https://images.pexels.com/photos/697243/pexels-photo-697243.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" class="img-fluid rounded-circle">
+      <h5 class="categoryText" >People</h5>
+      </div>
+       </div>
+
+       <div class=center>
+    <div class="profile-circel-image-50">
+      <img src="https://images.pexels.com/photos/936722/pexels-photo-936722.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" class="img-fluid rounded-circle">
+      <h5 class="categoryText" >Buildings</h5>
+      </div>
+       </div>
+
+       <div class=center>
+    <div class="profile-circel-image-50">
+      <img src="https://images.pexels.com/photos/247502/pexels-photo-247502.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" class="img-fluid rounded-circle">
+      <h5 class="categoryText" >Animals</h5>
+      </div>
+       </div>
+
+        
+        <div class=center>
+    <div class="profile-circel-image-50">
+      <img src="https://images.pexels.com/photos/3303614/pexels-photo-3303614.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" class="img-fluid rounded-circle">
+      <h5 class="categoryText" >Holidays</h5>
+      </div>
+       </div>
+      
+      
+      
+      
+             </div>
+   </header>
 
 
-<!-- Section 1 -->
 
-<div class="container">
-    <div class="row row-cols-1 row-cols-md-3 g-4">
-        <div class="col">
-            <div class="card h-100">
-                <img src="..." class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">This is a longer card with supporting text below as a natural lead-in to
-                        additional content. This content is a little bit longer.</p>
+<div class="container" style="max-width:90%; margin-top:1.25rem; ">
+    <div class="row">
+        <div class="card-columns" id="MyCards">
+            {{#CategoryItems}}
+            <div class="card" style="margin:0; padding:0; border:0px;">
+                <div class="card-body" style="margin:0; padding:0;">
+                <h4 style="display:none;">{{title}}</h4>
+                    <a href="http://localhost:8888/Index/{{productId}}">
+                        <img src="{{productUrl}}" alt="Italian Trulli" style="padding-bottom:1.25rem;">
+                    </a>
                 </div>
             </div>
-        </div>
-        <div class="col">
-            <div class="card h-100">
-                <img src="..." class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">This is a short card.</p>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card h-100">
-                <img src="..." class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">This is a longer card with supporting text below as a natural lead-in to
-                        additional content.</p>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card h-100">
-                <img src="..." class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">This is a longer card with supporting text below as a natural lead-in to
-                        additional content. This content is a little bit longer.</p>
-                </div>
-            </div>
+            {{/CategoryItems}}
         </div>
     </div>
 </div>
 
-
-<!-- Section 2 -->
-<div class="section-2-container section-container section-container-gray-bg">
-    <div class="container">
-        <div class="row">
-            <div class="col section-2 section-description wow fadeIn">
-            </div>
-        </div>
-        <div class="row">
-            <div class="col section-2-box wow fadeInLeft">
-                <h3>Section 2</h3>
-                <p class="medium-paragraph">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                    sed do eiusmod tempor incididunt ut labore et. Ut wisi enim ad minim veniam, quis nostrud.
-                </p>
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
-                    et.
-                    Ut wisi enim ad minim veniam, quis nostrud.
-                    Exerci tation ullamcorper suscipit <a href="#">lobortis nisl</a> ut aliquip ex ea commodo consequat.
-                    Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl.
-                </p>
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
-                    et.
-                    Ut wisi enim ad minim veniam, quis nostrud.
-                    Exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.
-                </p>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Section 3 -->
-<div class="section-3-container section-container">
-    <div class="container">
-
-        <div class="row">
-            <div class="col section-3 section-description wow fadeIn">
-                <h2>Section 3</h2>
-                <div class="divider-1 wow fadeInUp"><span></span></div>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-6 section-3-box wow fadeInLeft">
-                <div class="row">
-                    <div class="col-md-3">
-                        <div class="section-3-box-icon">
-                            <i class="fas fa-paperclip"></i>
-                        </div>
-                    </div>
-                    <div class="col-md-9">
-                        <h3>Ut wisi enim ad minim</h3>
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt
-                            ut labore et.
-                            Ut wisi enim ad minim veniam, quis nostrud.
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 section-3-box wow fadeInLeft">
-                <div class="row">
-                    <div class="col-md-3">
-                        <div class="section-3-box-icon">
-                            <i class="fas fa-pencil-alt"></i>
-                        </div>
-                    </div>
-                    <div class="col-md-9">
-                        <h3>Sed do eiusmod tempor</h3>
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt
-                            ut labore et.
-                            Ut wisi enim ad minim veniam, quis nostrud.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-6 section-3-box wow fadeInLeft">
-                <div class="row">
-                    <div class="col-md-3">
-                        <div class="section-3-box-icon">
-                            <i class="fas fa-cloud"></i>
-                        </div>
-                    </div>
-                    <div class="col-md-9">
-                        <h3>Quis nostrud exerci tat</h3>
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt
-                            ut labore et.
-                            Ut wisi enim ad minim veniam, quis nostrud.
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 section-3-box wow fadeInLeft">
-                <div class="row">
-                    <div class="col-md-3">
-                        <div class="section-3-box-icon">
-                            <i class="fab fa-google"></i>
-                        </div>
-                    </div>
-                    <div class="col-md-9">
-                        <h3>Minim veniam quis nostrud</h3>
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt
-                            ut labore et.
-                            Ut wisi enim ad minim veniam, quis nostrud.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    </div>
-</div>
-
-<!-- Section 4 -->
-<div class="section-4-container section-container section-container-image-bg">
-    <div class="container">
-        <div class="row">
-            <div class="col section-4 section-description wow fadeInLeftBig">
-                <h2>Section 4</h2>
-                <p>
-                    Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut
-                    aliquip ex ea commodo consequat. Ut wisi enim ad minim veniam, quis nostrud.
-                </p>
-            </div>
-        </div>
-    </div>
-</div>
 
 <!-- Footer -->
 <footer class="footer-container">
-
     <div class="container">
         <div class="row">
-
             <div class="col">
                 &copy; Bootstrap 4 Carousel with Multiple Items. Download it for free on <a href="https://azmind.com">AZMIND</a>.
             </div>
-
         </div>
     </div>
-
 </footer>
 
 <!-- Javascript -->
-<script src="assets/js/jquery-3.3.1.min.js"></script>
-<script src="assets/js/jquery-migrate-3.0.0.min.js"></script>
+<script src="/js/Main/jquery-3.3.1.min.js"></script>
+<script src="/js/Main/jquery-migrate-3.0.0.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
         integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
         crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
         integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
         crossorigin="anonymous"></script>
-<script src="assets/js/jquery.backstretch.min.js"></script>
-<script src="assets/js/wow.min.js"></script>
-<script src="assets/js/scripts.js"></script>
+<script src="/js/Main/jquery.backstretch.min.js"></script>
+<script src="/js/Main/wow.min.js"></script>
+<script src="/js/Main/scripts.js"></script>
+<script>
+    $(document).ready(function () {
+        $(".menu-icon").on("click", function () {
+            $("nav ul").toggleClass("showing");
+        });
+    });
+
+    // Scrolling Effect
+
+    $(window).on("scroll", function () {
+        if ($(window).scrollTop()) {
+            $('nav').addClass('black');
+        }
+
+        else {
+            $('nav').removeClass('black');
+        }
+    });
+
+    function myFunction() {
+        var text = document.getElementById("searchValue").value;
+        var concat = "http://localhost:8888/Index/Search/" + text;
+        window.location.replace(concat);
+
+    }
+
+    function filter() {
+   var value = $(this).find("h5").value;
+   alert(value);
+   // $("#MyCards .card").filter(function() {
+    //  $(this).toggle($(this).find('h4').text().toLowerCase().indexOf(value) > -1)
+  //  });
+ // });
+
+    }
+
+
+    
+
+  
+</script>
 
 </body>
 

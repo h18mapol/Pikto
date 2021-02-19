@@ -54,6 +54,10 @@ public class AdminService {
 
     return adminCrud.getAllProductsBySearch(SearchWord);
     }
+      public List<Product>getAllProductsByCategory(String categoryId){
+
+    return adminCrud.getAllProductsByCategory(categoryId);
+    }
     public List<Product>getAllProductsbyId(int userId){
         return adminCrud.getAllUserProducts(userId);
     }
