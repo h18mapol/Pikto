@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import piktoproject.pikto.login.facebook.Facebook;
 import piktoproject.pikto.models.User;
+import piktoproject.pikto.repositorys.ShoppingFunctions;
 import piktoproject.pikto.repositorys.UserCrud;
 import piktoproject.pikto.services.AdminService;
 import piktoproject.pikto.services.GoogleInfoService;
@@ -38,7 +39,9 @@ public class LoginController {
     @Autowired
     AdminService adminService;
 
-    private Facebook facebook;
+    @Autowired
+    ShoppingFunctions shoppingFunctions;
+
     @Autowired
     GoogleInfoService googleInfoService;
 
@@ -121,6 +124,7 @@ public class LoginController {
                     user.setPictureUrl("");
                     adminService.addUser(user);
                     user = adminService.getUserByEmail(facebookEmail);
+                    shoppingFunctions.a
                     model.addAttribute("userData", user);
                     model.addAttribute("userProducts", adminService.getAllProductsbyId(user.getUserId()));
                     model.addAttribute("userReviews", adminService.getAllReviewsById(user.getUserId()));
