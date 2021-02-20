@@ -8,15 +8,13 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import piktoproject.pikto.models.Order;
-import piktoproject.pikto.models.Product;
-import piktoproject.pikto.models.Product_review;
-import piktoproject.pikto.models.User;
+import piktoproject.pikto.models.*;
 import piktoproject.pikto.services.AdminService;
 import piktoproject.pikto.services.UserService;
 
 
 import javax.management.relation.Role;
+import javax.servlet.http.HttpServletRequest;
 
 @Controller
 @SessionAttributes("userData")
@@ -27,10 +25,13 @@ public class AdminController {
     private UserService userService;
 
     @RequestMapping("/Admin")
-    public String getAdminPageWithId(Model model){
+    public String getAdminPageWithId(Model model, HttpServletRequest request){
+        Cart cart = (Cart)request.getSession().getAttribute("cartData");
+        System.out.println("User id from Session Cart: " + cart.getUserId()+ " and cartId: " + cart.getCartId());
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         model.addAttribute("allProducts",adminService.getAllProducts());
         model.addAttribute("userData",adminService.getUserByEmail(auth.getName()));
+        model.addAttribute("allOrders", adminService.getAllOrders());
         System.out.println(auth.getName());
         return "Frontend/Admin/Admin";
     }

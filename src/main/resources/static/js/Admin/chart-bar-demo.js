@@ -3,36 +3,76 @@ Chart.defaults.global.defaultFontFamily = '-apple-system,system-ui,BlinkMacSyste
 Chart.defaults.global.defaultFontColor = '#292b2c';
 
 // Bar Chart Example
+var orderList = [];
+var labelList = [];
+// Bar Chart Example
+function fire_ajax_submit() {
+
+
+
+    $("#btn-search").prop("disabled", true);
+
+    $.ajax({
+        type: "GET",
+        contentType: "application/json",
+        url: "/Data/Orders",
+        dataType: 'json',
+        cache: false,
+        timeout: 600000,
+        success: function (data) {
+
+            for (i in data) {
+                orderList.push(parseInt(data[i].grandTotal));
+            }
+
+            handleData();
+
+        },
+        error: function (e) {
+
+            var json = "<h4>Ajax Response</h4>&lt;pre&gt;"
+                + e.responseText + "&lt;/pre&gt;";
+            //$('#feedback').html(json);
+
+            console.log("ERROR : ", e);
+            //$("#btn-search").prop("disabled", false);
+
+        }
+    });
+}
+function handleData() {
+    console.log(orderList);
+}
+
+fire_ajax_submit();
 var ctx = document.getElementById("myBarChart");
 var myLineChart = new Chart(ctx, {
   type: 'bar',
   data: {
-    labels: ["January", "February", "March", "April", "May", "June"],
+    labels: ["January"],
     datasets: [{
       label: "Revenue",
       backgroundColor: "rgba(2,117,216,1)",
       borderColor: "rgba(2,117,216,1)",
-      data: [4215, 5312, 6251, 7841, 9821, 14984],
-    }],
+      data: orderList
+    }]
   },
   options: {
     scales: {
       xAxes: [{
         time: {
-          unit: 'month'
+          unit: 'session'
         },
         gridLines: {
           display: false
         },
         ticks: {
-          maxTicksLimit: 6
         }
       }],
       yAxes: [{
         ticks: {
           min: 0,
-          max: 15000,
-          maxTicksLimit: 5
+          max: 50,
         },
         gridLines: {
           display: true
