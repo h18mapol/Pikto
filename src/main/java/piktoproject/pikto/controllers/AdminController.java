@@ -63,7 +63,9 @@ public class AdminController {
     }
     @RequestMapping("/Admin/User/{userId}")
     public String getUserPage(Model model, @PathVariable Integer userId){
-        model.addAttribute("userData",adminService.getUser(userId));
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        model.addAttribute("userData",adminService.getUserByEmail(auth.getName()));
+        model.addAttribute("user",adminService.getUser(userId));
         model.addAttribute("userProducts",adminService.getAllProductsbyId(userId));
         model.addAttribute("userReviews",adminService.getAllReviewsById(userId));
         model.addAttribute("userOrders",adminService.getAllOrdersById(userId));
