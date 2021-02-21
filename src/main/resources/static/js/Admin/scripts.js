@@ -1,4 +1,3 @@
-
 function scroll_to(clicked_link, nav_height) {
 	var element_class = clicked_link.attr('href').replace('#', '.');
 	var scroll_to = 0;
@@ -30,7 +29,7 @@ jQuery(document).ready(function() {
     /*
 	    Wow
 	*/
-	new WOW().init();
+	//new WOW().init();
 	
 	/*
 	    Carousel

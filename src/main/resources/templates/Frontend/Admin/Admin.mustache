@@ -9,7 +9,7 @@
     <title>Dashboard - Admin</title>
     <link href="/css/User/userstyles.css" rel="stylesheet"/>
     <!--<link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet"-->
-          crossorigin="anonymous"/>
+    crossorigin="anonymous"/>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js"
             crossorigin="anonymous"></script>
 </head>
@@ -203,31 +203,32 @@
                                                                     <input type="text" class="form-control"
                                                                            id="AdminfirstName" name="firstName"
                                                                            aria-describedby="emailHelp"
-                                                                           placeholder="Enter email">
+                                                                           placeholder="">
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label for="AdminLastName">Lastname</label>
                                                                     <input type="text" class="form-control"
                                                                            id="AdminLastName" name="lastName"
-                                                                           placeholder="Password">
+                                                                           placeholder="">
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label for="AdminPhoneNumber">Phonenumber</label>
                                                                     <input type="text" class="form-control"
                                                                            id="AdminPhoneNumber" name="mobileNr"
-                                                                           placeholder="Password">
+                                                                           placeholder="">
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label for="AdminEmail">Email</label>
                                                                     <input type="text" class="form-control"
                                                                            id="AdminEmail" name="email"
-                                                                           placeholder="Password">
+                                                                           placeholder="">
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label for="AdminPassword">Password</label>
                                                                     <input type="password" class="form-control"
                                                                            id="AdminPassword" name="password"
-                                                                           placeholder="Password">
+                                                                           placeholder="password"
+                                                                           autocomplete="current-password">
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label for="AdminAuth">Authority</label>
@@ -267,7 +268,7 @@
                         <div class="card mb-4">
                             <div class="card-header">
                                 <i class="fas fa-chart-area mr-1"></i>
-                                Area Chart Example
+                                Orders by Month
                             </div>
                             <div class="card-body">
                                 <canvas id="myAreaChart" width="100%" height="40"></canvas>
@@ -278,7 +279,7 @@
                         <div class="card mb-4">
                             <div class="card-header">
                                 <i class="fas fa-chart-bar mr-1"></i>
-                                Bar Chart Example
+                                Recent Orders
                             </div>
                             <div class="card-body">
                                 <canvas id="myBarChart" width="100%" height="40"></canvas>
@@ -304,13 +305,14 @@
 </div>
 
 <script src="/js/Admin/jquery.js"></script>
+<script src="/js/Admin/scripts.js"></script>
 <!--<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" crossorigin="anonymous"></script>-->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
         crossorigin="anonymous"></script>
-<script src="/js/Admin/scripts.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
 <script src="/js/Admin/chart-area-demo.js"></script>
 <script src="/js/Admin/chart-bar-demo.js"></script>
+<script src="/js/Admin/jquery.backstretch.min.js"></script>
 <!--<script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>-->
 <!--<script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>-->
 
