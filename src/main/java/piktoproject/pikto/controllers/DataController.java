@@ -26,4 +26,10 @@ public class DataController {
         List<Order> result = adminService.getAllOrders();
         return ResponseEntity.ok(result);
     }
+
+    @RequestMapping(value = "/Data/Orders", method = RequestMethod.GET)
+    public ResponseEntity<?> index(Model model) {
+        List<Order> result = adminService.getAllOrders();
+        return ResponseEntity.ok(result);
+    }
 }
