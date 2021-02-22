@@ -41,17 +41,21 @@ public class ProductController {
         model.addAttribute("allProducts", adminService.getAllProducts());
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         HttpSession session = request.getSession();
+       model.addAttribute("sessionId", session.getId());
+
         System.out.println(session.getId());
         if (auth.getPrincipal() != "anonymousUser") {
             System.out.println("User is logged in as: "+ auth.getPrincipal());
             User user = (User) session.getAttribute("userData");
-            System.out.println(user);
-            model.addAttribute("loggedIn", "true");
+            model.addAttribute("loggedIn", "loggedintrue");
             model.addAttribute("userData", user);
             return "Frontend/Main/Index";
         }
+       User user=new User();
+       user.setUserId(0);
+      model.addAttribute("userData", user);
         System.out.println("User is not logged in");
-        model.addAttribute("loggedIn", "false");
+        model.addAttribute("loggedIn", "loggedinfalse");
         return "Frontend/Main/Index";
     }
 
@@ -61,6 +65,15 @@ public class ProductController {
         model.addAttribute("Reviews", userService.getAllProductReviews(productId));
         return "Frontend/Main/ProductPage";
     }
+    @RequestMapping("/Index/Checkout/{SessionId}")
+    public String getAnonymousCart(Model model, @PathVariable String SessionId) {
+          Cart cart=productService.getCart(SessionId);
+          System.out.println(cart.getCartId());
+        model.addAttribute("userCart", productService.getAllCartItems(cart));
+
+        return "Frontend/Main/Checkout";
+    }
+    
 
     @RequestMapping("/Index/Search/{SearchWord}")
     public String getProductPage(Model model, @PathVariable String SearchWord) {

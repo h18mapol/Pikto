@@ -24,7 +24,7 @@ public class ShoppingService {
     public void deleteCartItem(CartItem cartItem) {
         ShoppingFunctionsCrud.deleteCartItem(cartItem);
     }
-    public Cart getCart(String sessionId, User user){ return ShoppingFunctionsCrud.getCart(sessionId);}
+    public Cart getCart(String sessionId){ return ShoppingFunctionsCrud.getCart(sessionId);}
     public void deleteCart(Cart cart) {ShoppingFunctionsCrud.deleteCart(cart);}
     public void emptyCart(Cart cart){ShoppingFunctionsCrud.emptyCart(cart);}
     public void createCart(String sessionId, User user){ShoppingFunctionsCrud.createCart(sessionId, user);}
