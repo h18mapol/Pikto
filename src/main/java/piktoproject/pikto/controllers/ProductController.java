@@ -11,6 +11,7 @@ import piktoproject.pikto.models.Cart;
 import piktoproject.pikto.services.AdminService;
 import piktoproject.pikto.services.ShoppingService;
 import piktoproject.pikto.services.UserService;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -41,17 +42,20 @@ public class ProductController {
         model.addAttribute("allProducts", adminService.getAllProducts());
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         HttpSession session = request.getSession();
+        model.addAttribute("sessionId", session.getId());
         System.out.println(session.getId());
         if (auth.getPrincipal() != "anonymousUser") {
-            System.out.println("User is logged in as: "+ auth.getPrincipal());
+            System.out.println("User is logged in as: " + auth.getPrincipal());
             User user = (User) session.getAttribute("userData");
-            System.out.println(user);
-            model.addAttribute("loggedIn", "loggedIntrue");
+            model.addAttribute("loggedIn", "loggedintrue");
             model.addAttribute("userData", user);
             return "Frontend/Main/Index";
         }
+        User user = new User();
+        user.setUserId(0);
+        model.addAttribute("userData", user);
         System.out.println("User is not logged in");
-        model.addAttribute("loggedIn", "loggedInFalse");
+        model.addAttribute("loggedIn", "loggedinfalse");
         return "Frontend/Main/Index";
     }
 
@@ -62,20 +66,24 @@ public class ProductController {
         return "Frontend/Main/ProductPage";
     }
 
+    @RequestMapping("/Index/Checkout/{SessionId}")
+    public String getAnonymousCart(Model model, @PathVariable String SessionId) {
+        Cart cart = productService.getCart(SessionId);
+        System.out.println(cart.getCartId());
+        model.addAttribute("userCart", productService.getAllCartItems(cart));
+        return "Frontend/Main/Checkout";
+    }
+
     @RequestMapping("/Index/Search/{SearchWord}")
     public String getProductPage(Model model, @PathVariable String SearchWord) {
         model.addAttribute("Product", adminService.getAllProductsBySearch(SearchWord));
         System.out.println(adminService.getAllProductsBySearch(SearchWord));
         return "Frontend/Main/SearchPage";
     }
-    
+
     @RequestMapping("/Index/Category/{categoryId}")
     public String getCategoryPage(Model model, @PathVariable String categoryId) {
         model.addAttribute("CategoryItems", adminService.getAllProductsByCategory(categoryId));
         return "Frontend/Main/CategoryPage";
     }
-
-
-
-
 }
