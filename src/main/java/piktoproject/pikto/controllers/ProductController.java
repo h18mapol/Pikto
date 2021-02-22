@@ -40,14 +40,17 @@ public class ProductController {
     public String getIndex(Model model, HttpServletRequest request) {
         model.addAttribute("allProducts", adminService.getAllProducts());
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        if (auth.getPrincipal() != null) {
-            HttpSession session = request.getSession();
+        HttpSession session = request.getSession();
+        System.out.println(session.getId());
+        if (auth.getPrincipal() != "anonymousUser") {
+            System.out.println("User is logged in as: "+ auth.getPrincipal());
             User user = (User) session.getAttribute("userData");
+            System.out.println(user);
             model.addAttribute("userData", user);
             return "Frontend/Main/Index";
         }
         System.out.println("User is not logged in");
-        model.addAttribute("userData", "null");
+        model.addAttribute("userData", null);
         return "Frontend/Main/Index";
     }
 

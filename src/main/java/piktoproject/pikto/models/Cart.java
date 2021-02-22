@@ -3,7 +3,7 @@ package piktoproject.pikto.models;
 public class Cart {
     private int cartId,userId;
     private boolean status;
-    private String sessionId,firstName,lastName,mobile,email,address,city,createdAt,content;
+    private String sessionId,firstName,lastName,mobileNr,email,address,city,createdAt,content;
 
     public int getCartId() {
         return cartId;
@@ -53,12 +53,12 @@ public class Cart {
         this.lastName = lastName;
     }
 
-    public String getMobile() {
-        return mobile;
+    public String getMobileNr() {
+        return mobileNr;
     }
 
-    public void setMobile(String mobile) {
-        this.mobile = mobile;
+    public void setMobileNr(String mobile) {
+        this.mobileNr = mobile;
     }
 
     public String getEmail() {

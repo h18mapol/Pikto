@@ -7,15 +7,16 @@ import java.util.List;
 
 
 public interface IShoppingFunctions {
+    //Cart Functions
+    void createCart(String sessionId, User user);
+    Cart getCart(String sessionId);
+    void deleteCart(Cart cart);
 
     //Cart Items Methods
     List<CartItem> getAllCartItems(Cart cart);
     void addToCart(CartItem cartItem);
-    void deleteFromCart(CartItem cartItem);
-
-    //Cart Functions
-    Cart getCart(String sessionId);
-    void deleteCart(Cart cart);
+    void deleteCartItem(CartItem cartItem);
+    void emptyCart(Cart cart);
 
     //Order Functions
     void createOrder(Cart cart, User user);

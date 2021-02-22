@@ -18,7 +18,9 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import piktoproject.pikto.login.facebook.Facebook;
+import piktoproject.pikto.models.Cart;
 import piktoproject.pikto.models.User;
+import piktoproject.pikto.repositorys.ShoppingFunctions;
 import piktoproject.pikto.repositorys.UserCrud;
 import piktoproject.pikto.services.AdminService;
 import piktoproject.pikto.services.GoogleInfoService;
@@ -35,10 +37,14 @@ import static org.springframework.security.web.context.HttpSessionSecurityContex
 @Controller
 public class LoginController {
 
+    private Facebook facebook;
+
     @Autowired
     AdminService adminService;
 
-    private Facebook facebook;
+    @Autowired
+    ShoppingFunctions shoppingFunctions;
+
     @Autowired
     GoogleInfoService googleInfoService;
 
@@ -70,12 +76,15 @@ public class LoginController {
         return "Frontend/Main/Index";
     }
 
-
     @RequestMapping("/formLogin")
     public String getformLoginInfo(Model model, HttpServletRequest request) {
+        Cart cart;
         HttpSession session = request.getSession();
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = adminService.getUserByEmail(auth.getName());
+        shoppingFunctions.createCart(session.getId(),user);
+        cart = shoppingFunctions.getCart(session.getId());
+        session.setAttribute("cartData", cart);
         session.setAttribute("userData", user);
         model.addAttribute("userData", user);
         model.addAttribute("userId", user.getUserId());
@@ -94,6 +103,8 @@ public class LoginController {
     @RequestMapping("/oauth2LoginSuccess")
     public String getOauth2LoginInfo(Model model, HttpServletRequest request) {
         HttpSession session = request.getSession();
+        Cart cart = new Cart();
+        cart.setSessionId(session.getId());
         System.out.println("Social Login!");
         OAuth2AuthorizedClientService clientService;
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -102,9 +113,9 @@ public class LoginController {
         System.out.println(session.getId());
         switch (clientRegistrationId) {
             case "facebook":
-                System.out.println(oauthToken.getPrincipal().getAttributes().toString());
+                //System.out.println(oauthToken.getPrincipal().getAttributes().toString());
                 String facebookEmail = (String) oauthToken.getPrincipal().getAttributes().get("email");
-                System.out.println(facebookEmail);
+                //System.out.println(facebookEmail);
                 String facebookname = (String) oauthToken.getPrincipal().getAttributes().get("name");
                 User user = adminService.getUserByEmail(facebookEmail);
                 if (user.getEmail() == null) {
@@ -121,6 +132,7 @@ public class LoginController {
                     user.setPictureUrl("");
                     adminService.addUser(user);
                     user = adminService.getUserByEmail(facebookEmail);
+
                     model.addAttribute("userData", user);
                     model.addAttribute("userProducts", adminService.getAllProductsbyId(user.getUserId()));
                     model.addAttribute("userReviews", adminService.getAllReviewsById(user.getUserId()));
@@ -128,6 +140,11 @@ public class LoginController {
                 } else {
                     System.out.println("Already a user");
                 }
+                //Cart functions
+                shoppingFunctions.createCart(session.getId(),user);
+                cart = shoppingFunctions.getCart(session.getId());
+                session.setAttribute("cartData", cart);
+
                 if (user.getAdmin() == 1) {
                     model.addAttribute("userData", user);
                     System.out.println("Role Admin --> redirect to login Admin");
@@ -155,6 +172,9 @@ public class LoginController {
                 } else {
                     System.out.println("Already a user");
                 }
+                shoppingFunctions.createCart(session.getId(),googleUser);
+                cart = shoppingFunctions.getCart(session.getId());
+                System.out.println("Got Cart with id"+ cart.getCartId());
                 if (googleUser.getAdmin() == 1) {
                     model.addAttribute("userData", session.getAttribute("userData"));
                     System.out.println("Role Admin --> Google: ");
@@ -169,10 +189,10 @@ public class LoginController {
                     return "Frontend/User/userPage";
                 }
             case "github":
-                System.out.println(oauthToken.getPrincipal().getAttributes().toString());
+                //System.out.println(oauthToken.getPrincipal().getAttributes().toString());
                 String githubEmail = (String) oauthToken.getPrincipal().getAttributes().get("login") + "@github.com";
                 String githubname = (String) oauthToken.getPrincipal().getAttributes().get("name");
-                System.out.println(githubEmail + "email : name " + githubname);
+                //System.out.println(githubEmail + "email : name " + githubname);
                 User githubUser = adminService.getUserByEmail(githubEmail);
                 if (githubUser.getEmail() == null) {
                     int idx = githubname.lastIndexOf(' ');
@@ -191,10 +211,13 @@ public class LoginController {
                 } else {
                     System.out.println("Already a user");
                 }
+                shoppingFunctions.createCart(session.getId(),githubUser);
+                cart = shoppingFunctions.getCart(session.getId());
+                System.out.println("Got Cart with id"+ cart.getCartId());
                 if (githubUser.getAdmin() == 1) {
                     System.out.println("Role Admin User --> Github: ");
                     model.addAttribute("userData", githubUser);
-                    System.out.println(authentication.toString());
+                    //System.out.println(authentication.toString());
                     return "loginAdmin";
                 } else {
                     session.setAttribute("userData", githubUser);
@@ -209,13 +232,4 @@ public class LoginController {
                 return "login";
         }
     }
-
-
-/*    @RequestMapping("/formLoginSuccess")
-    public String getOauth2LoginFormInfo(Model model){
-        OAuth2AuthorizedClientService clientService;
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        System.out.println(authentication.toString());
-        return "home";
-    }*/
 }

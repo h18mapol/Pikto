@@ -7,39 +7,18 @@ var orderList = [];
 var labelListBar = [];
 var labelListLine = [];
 let months = ["01","02","03","04","05"];
-// Bar Chart Example
-//$("#btn-search").prop("disabled", true);
 
-$.ajax({
-    type: "GET",
-    contentType: "application/json",
-    url: "/Data/Orders",
-    dataType: 'json',
-    cache: false,
-    timeout: 600000,
-    success: function (data) {
-
-        for (i in data) {
-            orderList.push(parseInt(data[i].grandTotal));
-            labelListBar.push(data[i].createdAt);
-            let last2 = data[i].createdAt.substring(8,10);
-            labelListLine.push(last2);
-        }
-        console.log(orderList + labelListBar + labelListLine);
-        BuildChart(orderList, labelListBar, "Order size");
-        BuildLineChart(orderList, labelListLine, "Order");
-    },
-    error: function (e) {
-
-        var json = "<h4>Ajax Response</h4>&lt;pre&gt;"
-            + e.responseText + "&lt;/pre&gt;";
-        //$('#feedback').html(json);
-
-        console.log("ERROR : ", e);
-        //$("#btn-search").prop("disabled", false);
-
-    }
+var data = $('#dataTableOrders').find("tbody tr");
+data.each(function(index, value) {
+    test = $(this).children("td");
+    let grandtotal = (test[11].innerHTML);
+    let date = test[18].innerHTML;
+    orderList.push(grandtotal);
+    labelListLine.push(date);
 });
+
+data.each(element => console.log(element[0]));
+BuildChart(orderList, labelListLine, "Grand Total");
 
 function BuildChart(orderList, labelList, chartTitle) {
     max = Math.max(...orderList) + 5;
@@ -149,45 +128,3 @@ function BuildLineChart(orderList, labelList, chartTitle) {
     });
     return myLineChart;
 }
-
-// var ctx = document.getElementById("myBarChart");
-// var myLineChart = new Chart(ctx, {
-//   type: 'bar',
-//   data: {
-//     labels: ["1","2","3"],
-//     datasets: [{
-//       label: "Revenue",
-//       backgroundColor: "rgba(2,117,216,1)",
-//       borderColor: "rgba(2,117,216,1)",
-//       data: [orderList[0],10,20],
-//     }]
-//   },
-//   options: {
-//     scales: {
-//       xAxes: [{
-//         time: {
-//           unit: 'session'
-//         },
-//         gridLines: {
-//           display: false
-//         },
-//           ticks: {
-//               maxTicksLimit: 5
-//           }
-//       }],
-//         yAxes: [{
-//             ticks: {
-//                 min: 0,
-//                 max: 100,
-//                 maxTicksLimit: 6
-//             },
-//             gridLines: {
-//                 color: "rgba(0, 0, 0, .125)",
-//             }
-//         }],
-//     },
-//       legend: {
-//           display: false
-//       }
-//   }
-// });
