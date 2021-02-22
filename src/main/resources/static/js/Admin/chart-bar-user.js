@@ -22,7 +22,7 @@ BuildChart(orderList, labelListLine, "Grand Total");
 
 function BuildChart(orderList, labelList, chartTitle) {
     max = Math.max(...orderList) + 5;
-    console.log(max);
+    //console.log(max);
     var ctx = document.getElementById("myBarChart").getContext('2d');
     var myChart = new Chart(ctx, {
         type: 'bar',

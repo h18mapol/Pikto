@@ -46,11 +46,12 @@ public class ProductController {
             System.out.println("User is logged in as: "+ auth.getPrincipal());
             User user = (User) session.getAttribute("userData");
             System.out.println(user);
+            model.addAttribute("loggedIn", "true");
             model.addAttribute("userData", user);
             return "Frontend/Main/Index";
         }
         System.out.println("User is not logged in");
-        model.addAttribute("userData", null);
+        model.addAttribute("loggedIn", "false");
         return "Frontend/Main/Index";
     }
 
