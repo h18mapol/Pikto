@@ -23,7 +23,6 @@ import piktoproject.pikto.repositorys.IAdminCrud;
 public class AdminService {
     @Autowired
     private IAdminCrud adminCrud;
-
     //Users
     public List<User>getAllUsers(){
         return adminCrud.getAllUsers();
@@ -44,7 +43,6 @@ public class AdminService {
         adminCrud.addUser(user);
     }
     public User getUserByEmail(String email){return adminCrud.getUserByEmail(email);}
-
     //Products
     public List<Product>getAllProducts(){
 
@@ -74,7 +72,6 @@ public class AdminService {
         adminCrud.addProduct(product);
         return product;
     }
-
     //Reviews
     public List<Product_review>getAllReviews(){
         return adminCrud.getAllReviews();
@@ -104,7 +101,10 @@ public class AdminService {
     public void deleteOrder(int orderId){
         adminCrud.deleteOrder(orderId);
     }
-      
+    public void sendEmail(User user){
+        adminCrud.sendEmail(user);
+    }
 }
     
-
+//Klarna API Username (UID): PK35775_806b73fafab9
+//Klarna API Password (UID): jxp23fYNvMCGoksK

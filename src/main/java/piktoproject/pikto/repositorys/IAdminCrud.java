@@ -17,4 +17,6 @@ public interface IAdminCrud extends IUserCrud{
     public List<Product_review>getAllReviews();
     public List<Order>getAllOrders();
     public User getLoggedInUser();
+
+    public void sendEmail(User user);
 }

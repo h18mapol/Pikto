@@ -26,6 +26,4 @@ public class DataController {
         List<Order> result = adminService.getAllOrders();
         return ResponseEntity.ok(result);
     }
-
-  
 }

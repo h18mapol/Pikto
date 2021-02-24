@@ -18,6 +18,7 @@ import piktoproject.pikto.services.UserService;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
+
 import piktoproject.pikto.services.ShoppingService;
 
 @Controller
@@ -30,53 +31,53 @@ public class UserController {
     private AdminService adminService;
     @Autowired
     OAuth2AuthorizedClientService authclientService;
-     @Autowired
+    @Autowired
     private ShoppingService shoppingService;
- 
 
 
     @RequestMapping("/User")
-    public String getUser(Model model){
+    public String getUser(Model model) {
         User user = adminService.getLoggedInUser();
-      
-   
+
+
         model.addAttribute("userData", user);
-        model.addAttribute("userOrders",userService.getAllUserOrders(user.getUserId()));
-        model.addAttribute("userProducts",userService.getAllUserProducts(user.getUserId()));
-        model.addAttribute("userReviews",userService.getAllUserReviews(user.getUserId()));
+        model.addAttribute("userOrders", userService.getAllUserOrders(user.getUserId()));
+        model.addAttribute("userProducts", userService.getAllUserProducts(user.getUserId()));
+        model.addAttribute("userReviews", userService.getAllUserReviews(user.getUserId()));
 
         return "Frontend/User/userPage";
     }
 
     @RequestMapping("/User/{userId}/Products")
-    public String getAllUserProducts(Model model, @PathVariable Integer userId){
-        model.addAttribute("allProducts",userService.getAllUserProducts(userId));
+    public String getAllUserProducts(Model model, @PathVariable Integer userId) {
+        model.addAttribute("allProducts", userService.getAllUserProducts(userId));
         System.out.println(userService.getAllUserReviews(userId).get(0).getProductId()); //Funkar
         return "urlview";
     }
 
     @RequestMapping("/Category/{categoryId}/Products")
-    public String getAllCategoryProducts(Model model, @PathVariable Integer categoryId){
-        model.addAttribute("allProducts",userService.getAllCategoryProducts(categoryId));
+    public String getAllCategoryProducts(Model model, @PathVariable Integer categoryId) {
+        model.addAttribute("allProducts", userService.getAllCategoryProducts(categoryId));
         System.out.println(userService.getAllUserReviews(categoryId).get(0).getProductId()); //Funkar
         return "getcategories";
     }
 
     @RequestMapping("/User/Product/{productId}")
-    public String getProduct(Model model, @PathVariable Integer productId){
-        model.addAttribute("product",userService.getProduct(productId));
+    public String getProduct(Model model, @PathVariable Integer productId) {
+        model.addAttribute("product", userService.getProduct(productId));
         System.out.println(userService.getProduct(productId).getCategoryId());
-        return "getproduct";   }
+        return "getproduct";
+    }
 
     @RequestMapping("/User/{userId}")
-    public String getUserById(Model model, @PathVariable Integer userId){
+    public String getUserById(Model model, @PathVariable Integer userId) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = adminService.getUserByEmail(auth.getName());
-        if (user.getUserId() == userId){
-            model.addAttribute("userData",user);
-            model.addAttribute("userOrders",userService.getAllUserOrders(userId));
-            model.addAttribute("userProducts",userService.getAllUserProducts(userId));
-            model.addAttribute("userReviews",userService.getAllUserReviews(userId));
+        if (user.getUserId() == userId) {
+            model.addAttribute("userData", user);
+            model.addAttribute("userOrders", userService.getAllUserOrders(userId));
+            model.addAttribute("userProducts", userService.getAllUserProducts(userId));
+            model.addAttribute("userReviews", userService.getAllUserReviews(userId));
             return "Frontend/User/userPage";
         } else {
             System.out.println("Redirect to /User");
@@ -85,34 +86,30 @@ public class UserController {
     }
 
     @RequestMapping("/User/{userId}/Reviews")
-    public String getAllUserReviews(Model model, @PathVariable Integer userId){
-        model.addAttribute("reviews",userService.getAllUserReviews(userId));
+    public String getAllUserReviews(Model model, @PathVariable Integer userId) {
+        model.addAttribute("reviews", userService.getAllUserReviews(userId));
         System.out.println(userService.getAllUserReviews(userId).get(0).getTitle());
         return "getreview";
     }
 
     @RequestMapping("/User/{userId}/Orders")
-    public String getAllUserOrders(Model model, @PathVariable Integer userId){
-        model.addAttribute("orders",userService.getAllUserOrders(userId));
+    public String getAllUserOrders(Model model, @PathVariable Integer userId) {
+        model.addAttribute("orders", userService.getAllUserOrders(userId));
         System.out.println(userService.getAllUserOrders(userId).get(0).getFirstName());
         return "getorders";
     }
 
     @PostMapping(path = "/User/Add/Product/{productId}")
-    public String addProduct(@ModelAttribute("product") Product product, @RequestParam Map<String, String> allRequestParams, @PathVariable Integer productId ){
+    public String addProduct(@ModelAttribute("product") Product product, @RequestParam Map<String, String> allRequestParams, @PathVariable Integer productId) {
         userService.addProduct(product);
         return "redirect:/getproduct";
     }
 
     @PostMapping(path = "/User/Update/Product/{productId}")
-    public String updateProduct(@ModelAttribute("product") Product product, @RequestParam Map<String, String> allRequestParams, @PathVariable Integer productId ){
+    public String updateProduct(@ModelAttribute("product") Product product, @RequestParam Map<String, String> allRequestParams, @PathVariable Integer productId) {
         userService.updateProduct(product);
         return "redirect:/getproduct";
     }
-
-
-
-
 
 
 }

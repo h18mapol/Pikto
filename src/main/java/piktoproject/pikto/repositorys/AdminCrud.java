@@ -8,9 +8,13 @@ package piktoproject.pikto.repositorys;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
+import org.springframework.context.annotation.Bean;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.client.OAuth2AuthorizedClientService;
@@ -20,6 +24,8 @@ import piktoproject.pikto.models.Product;
 import piktoproject.pikto.models.Order;
 import piktoproject.pikto.models.Product_review;
 import piktoproject.pikto.models.User;
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
 
 /**
  *
@@ -277,5 +283,50 @@ public class AdminCrud extends UserCrud implements IAdminCrud {
         }//End getTeamById
         return null;
         
+    }
+
+    @Bean
+    public JavaMailSender getJavaMailSenderInstance() {
+        JavaMailSenderImpl javaMailSenderObject = new JavaMailSenderImpl();
+        javaMailSenderObject.setHost("smtp.gmail.com");
+        javaMailSenderObject.setPort(587);
+
+        javaMailSenderObject.setUsername("pikto.noreply@gmail.com");
+        javaMailSenderObject.setPassword("Password.se");
+
+        Properties props = javaMailSenderObject.getJavaMailProperties();
+        props.put("mail.transport.protocol", "smtp");
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.starttls.enable", "true");
+        props.put("mail.debug", "true");
+
+        return javaMailSenderObject;
+    }
+
+    @Override
+    public void sendEmail(User user) {
+        JavaMailSender sender = getJavaMailSenderInstance();
+
+        MimeMessage message = sender.createMimeMessage();
+
+        // use the true flag to indicate you need a multipart message
+        MimeMessageHelper helper = null;
+        try {
+            helper = new MimeMessageHelper(message, true);
+        } catch (MessagingException ex) {
+            Logger.getLogger(AdminCrud.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            helper.setTo(user.getEmail());
+        } catch (MessagingException ex) {
+            Logger.getLogger(AdminCrud.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        try {
+            helper.setText("Thank you "+ user.getFirstName() + " " +user.getFirstName()+ "for Ordering at Pikto.se ");
+        } catch (MessagingException ex) {
+            Logger.getLogger(AdminCrud.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        sender.send(message);
     }
 }

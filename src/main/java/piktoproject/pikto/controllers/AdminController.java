@@ -212,6 +212,11 @@ public class AdminController {
         return "Frontend/Admin/IndividualUser";
     }
 
-
+    @RequestMapping("/Index/klarna")
+    public String getUserPage(Model model){
+        return "klarna";
+    }
+    //Klarna API Username (UID): PK35775_806b73fafab9
+    //Klarna API Password (UID): jxp23fYNvMCGoksK
 }
 
