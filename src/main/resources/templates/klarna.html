@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+</head>
+<body>
+<textarea style="display: none" id="KCO">
+</textarea>
+
+
+
+<div id="my-checkout-container"></div>
+
+
+
+<!-- START - Dont edit -->
+<script type="text/javascript">
+    var checkoutContainer = document.getElementById('my-checkout-container');
+    checkoutContainer.innerHTML = (document.getElementById("KCO").value).replace(/\\"/g, "\"").replace(/\\n/g, "");
+    var scriptsTags = checkoutContainer.getElementsByTagName('script');
+    for (var i = 0; i < scriptsTags.length; i++) {
+        var parentNode = scriptsTags[i].parentNode;
+        var newScriptTag = document.createElement('script');
+        newScriptTag.type = 'text/javascript';
+        newScriptTag.text = scriptsTags[i].text;
+        parentNode.removeChild(scriptsTags[i]);
+        parentNode.appendChild(newScriptTag)
+    }
+
+    var url = "https://api.playground.klarna.com/checkout/v3/orders";
+
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", url);
+
+    xhr.setRequestHeader('Access-Control-Allow-Headers', '*');
+    xhr.setRequestHeader('Access-Control-Allow-Origin', '*');
+    xhr.setRequestHeader("Authorization", "Basic VGVzdDpwYXNzd29yZA==");
+    xhr.setRequestHeader("Content-Type", "application/json");
+
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+            console.log(xhr.status);
+            console.log(xhr.responseText);
+        }};
+
+    var data = `{
+  "purchase_country": "SE",
+  "purchase_currency": "EUR",
+  "locale": "sv-SE",
+  "order_amount": 100000,
+  "order_tax_amount": 9090,
+  "order_lines": [
+      {
+          "type": "physical",
+          "reference": "19-402-USA",
+          "name": "Red T-Shirt",
+          "quantity": 5,
+          "quantity_unit": "pcs",
+          "unit_price": 10000,
+          "tax_rate": 1000,
+          "total_amount": 50000,
+          "total_discount_amount": 0,
+          "total_tax_amount": 4545
+      },{
+          "type": "physical",
+          "reference": "19-402-USA",
+          "name": "Red T-Shirt",
+          "quantity": 5,
+          "quantity_unit": "pcs",
+          "unit_price": 10000,
+          "tax_rate": 1000,
+          "total_amount": 50000,
+          "total_discount_amount": 0,
+          "total_tax_amount": 4545
+      }
+    ],
+  "merchant_urls": {
+    "terms": "https://pikto.se/Index/terms.html",
+    "checkout": "https://pikto.se/Index/checkout.html?order_id={checkout.order.id}",
+    "confirmation": "https://pikto.se/Index/confirmation.html?order_id={checkout.order.id}",
+    "push": "https://pikto.se/Index/api/push?order_id={checkout.order.id}"
+  }
+}`;
+
+    xhr.send(data);
+</script>
+<!-- END -->
+</body>
+</html>
