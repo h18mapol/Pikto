@@ -1,62 +1,22 @@
-function scroll_to(clicked_link, nav_height) {
-	var element_class = clicked_link.attr('href').replace('#', '.');
-	var scroll_to = 0;
-	if(element_class != '.top-content') {
-		element_class += '-container';
-		scroll_to = $(element_class).offset().top - nav_height;
-	}
-	if($(window).scrollTop() != scroll_to) {
-		$('html, body').stop().animate({scrollTop: scroll_to}, 1000);
-	}
-}
-
-
-jQuery(document).ready(function() {
-	
-	/*
-	    Navigation
-	*/
-	$('a.scroll-link').on('click', function(e) {
-		e.preventDefault();
-		scroll_to($(this), $('nav').outerHeight());
-	});
-	
-    /*
-        Background
+/*!
+    * Start Bootstrap - SB Admin v6.0.2 (https://startbootstrap.com/template/sb-admin)
+    * Copyright 2013-2020 Start Bootstrap
+    * Licensed under MIT (https://github.com/StartBootstrap/startbootstrap-sb-admin/blob/master/LICENSE)
     */
-    $('.section-4-container').backstretch("assets/img/backgrounds/bg.jpg");
-    
-    /*
-	    Wow
-	*/
-	//new WOW().init();
-	
-	/*
-	    Carousel
-	*/
-	$('#carousel-example').on('slide.bs.carousel', function (e) {
+    (function($) {
+    "use strict";
 
-	    /*
-	        CC 2.0 License Iatek LLC 2018
-	        Attribution required
-	    */
-	    var $e = $(e.relatedTarget);
-	    var idx = $e.index();
-	    var itemsPerSlide = 5;
-	    var totalItems = $('.carousel-item').length;
-	    
-	    if (idx >= totalItems-(itemsPerSlide-1)) {
-	        var it = itemsPerSlide - (totalItems - idx);
-	        for (var i=0; i<it; i++) {
-	            // append slides to end
-	            if (e.direction=="left") {
-	                $('.carousel-item').eq(i).appendTo('.carousel-inner');
-	            }
-	            else {
-	                $('.carousel-item').eq(0).appendTo('.carousel-inner');
-	            }
-	        }
-	    }
-	});
-	
-});
+    // Add active state to sidbar nav links
+    var path = window.location.href; // because the 'href' property of the DOM element is the absolute path
+        $("#layoutSidenav_nav .sb-sidenav a.nav-link").each(function() {
+            if (this.href === path) {
+                $(this).addClass("active");
+            }
+        });
+
+    // Toggle the side navigation
+    $("#sidebarToggle").on("click", function(e) {
+        e.preventDefault();
+        $("body").toggleClass("sb-sidenav-toggled");
+    });
+})(jQuery);

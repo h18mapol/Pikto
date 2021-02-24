@@ -36,6 +36,11 @@ public class UserService {
      public void addUser(User user){
         userCrud.addUser(user);
     }
+     
+     public void updateUser(User user){
+        userCrud.updateUser(user);
+    }
+
 
 
     //Product Methods

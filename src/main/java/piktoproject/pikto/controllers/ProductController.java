@@ -60,9 +60,27 @@ public class ProductController {
     }
 
     @RequestMapping("/Index/{productId}")
-    public String getProductPage(Model model, @PathVariable Integer productId) {
+    public String getProductPage(Model model, @PathVariable Integer productId,HttpServletRequest request) {
         model.addAttribute("Product", adminService.getProduct(productId));
         model.addAttribute("Reviews", userService.getAllProductReviews(productId));
+          Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        HttpSession session = request.getSession();
+       model.addAttribute("sessionId", session.getId());
+
+        System.out.println(session.getId());
+        if (auth.getPrincipal() != "anonymousUser") {
+            System.out.println("User is logged in as: "+ auth.getPrincipal());
+            User user = (User) session.getAttribute("userData");
+            model.addAttribute("loggedIn", "loggedintrue");
+            model.addAttribute("userData", user);
+        return "Frontend/Main/ProductPage";
+        }
+       User user=new User();
+       user.setUserId(0);
+      model.addAttribute("userData", user);
+        System.out.println("User is not logged in");
+        model.addAttribute("loggedIn", "loggedinfalse");
+    
         return "Frontend/Main/ProductPage";
     }
 
@@ -80,10 +98,46 @@ public class ProductController {
         System.out.println(adminService.getAllProductsBySearch(SearchWord));
         return "Frontend/Main/SearchPage";
     }
-
+    
+    
+   
+    
     @RequestMapping("/Index/Category/{categoryId}")
-    public String getCategoryPage(Model model, @PathVariable String categoryId) {
-        model.addAttribute("CategoryItems", adminService.getAllProductsByCategory(categoryId));
-        return "Frontend/Main/CategoryPage";
+    public String getCategoryPage(Model model, @PathVariable int categoryId,HttpServletRequest request) {
+       model.addAttribute("CategoryItems", adminService.getAllProductsByCategory(categoryId));
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        HttpSession session = request.getSession();
+       model.addAttribute("sessionId", session.getId());
+
+        System.out.println(session.getId());
+        if (auth.getPrincipal() != "anonymousUser") {
+            System.out.println("User is logged in as: "+ auth.getPrincipal());
+            User user = (User) session.getAttribute("userData");
+            model.addAttribute("loggedIn", "loggedintrue");
+            model.addAttribute("userData", user);
+        }else{
+             User user=new User();
+       user.setUserId(0);
+      model.addAttribute("userData", user);
+        System.out.println("User is not logged in");
+        model.addAttribute("loggedIn", "loggedinfalse");
+        }
+   
+        if(categoryId==1){
+                    return "Frontend/Main/Backgrounds";
+
+        }
+        else if(categoryId==2){
+                    return "Frontend/Main/Stockphotos";
+
+        }
+          else if(categoryId==3){
+                    return "Frontend/Main/Posters";
+
+        }
+        return null;
     }
+
+
+  
 }

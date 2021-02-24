@@ -95,9 +95,9 @@ public class AdminController {
         return "redirect:/Admin";
     }
     @RequestMapping(path="/Admin/updateUser", method={RequestMethod.POST})
-    public String updateUser(@ModelAttribute ("product")Product product,@RequestParam Map<String, String> allRequestParams){
-        userService.addProduct(product);
-        return "redirect:/Admin/Users";
+    public String updateUser(@ModelAttribute ("user")User user,@RequestParam Map<String, String> allRequestParams){
+        userService.updateUser(user);
+        return "redirect:/Admin";
     }
     @RequestMapping(path="/Admin/updateProduct", method={RequestMethod.POST})
     public String updateProduct(Model model,@ModelAttribute ("product")Product product,@RequestParam Map<String, String> allRequestParams){

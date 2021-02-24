@@ -166,7 +166,7 @@ public class UserCrud implements IUserCrud {
                 product.setPrice(resultSet.getInt("price"));
                 product.setDiscount(resultSet.getInt("discount"));
                 product.setPublishedAt(resultSet.getString("publishedAt"));
-                product.setContent(resultSet.getString("content"));
+                product.setContent("");
                 product.setProductUrl(resultSet.getString("productUrl"));
                 product.setCategoryId(resultSet.getInt("categoryId"));
                 products.add(product);
@@ -246,7 +246,7 @@ public class UserCrud implements IUserCrud {
                 product.setType(resultSet.getString("type"));
                 product.setPrice(resultSet.getInt("price"));
                 product.setDiscount(resultSet.getInt("discount"));
-                product.setContent(resultSet.getString("content"));
+                product.setContent("");
                 product.setCategoryId(resultSet.getInt("categoryId"));
                 product.setPublishedAt(resultSet.getString("publishedAt"));
                 product.setProductUrl(resultSet.getString("productUrl"));
