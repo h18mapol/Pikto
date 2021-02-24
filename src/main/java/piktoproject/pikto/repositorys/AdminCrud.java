@@ -48,8 +48,8 @@ public class AdminCrud extends UserCrud implements IAdminCrud {
                 product.setType(resultset.getString(5));
                 product.setPrice(resultset.getFloat(6));
                 product.setDiscount(resultset.getFloat(7));
-                product.setPublishedAt(resultset.getString(8));
-                product.setContent(resultset.getString(9));
+                product.setPublishedAt(resultset.getString(8)); 
+                product.setContent("");
                 product.setProductUrl(resultset.getString(10));
                 product.setCategoryId(resultset.getInt("categoryId"));
                 productList.add(product);
@@ -237,7 +237,7 @@ public class AdminCrud extends UserCrud implements IAdminCrud {
     } //Klar
 
     @Override
-    public List<Product> getAllProductsByCategory(String type) {
+    public List<Product> getAllProductsByCategory(int categoryId) {
          List<Product> products = new ArrayList<>();
         try{
             con = DriverManager.getConnection("jdbc:mysql://localhost:3306/piktodb?serverTimezone=UTC", "root", "");
@@ -245,7 +245,7 @@ public class AdminCrud extends UserCrud implements IAdminCrud {
      String sqlgetAllProducts = "SELECT * FROM product INNER JOIN product_category ON product.productId=product_category.productId WHERE categoryId= ?";
 
             PreparedStatement statement = con.prepareStatement(sqlgetAllProducts);
-          statement.setString(1, type);
+          statement.setInt(1, categoryId);
           
             System.out.println(statement);
 

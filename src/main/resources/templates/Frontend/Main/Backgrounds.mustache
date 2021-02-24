@@ -129,7 +129,7 @@
             position: fixed;
             width: 100%;
             line-height: 60px;
-            z-index: 3;
+            z-index: 255;
         }
 
         nav ul {
@@ -346,55 +346,56 @@
     <nav>
         <div class="menu-icon">
 
-            <div>
-
-            </div>
-
+           <div >
+           
+        </div>
+      
             <i class="fa fa-bars fa-2x"></i>
 
-
+              
         </div>
-
-        <div class="logo">
-            <img style="float: left; margin-right: 1%;" src="/img/pikto.png" width="100" href="localhost:8888/Index"/>
+        
+          <div class="logo" >
+     <a href="http://localhost:8888/Index/"><img style="float: left; margin-right: 1%;" src="/img/pikto.png" width="100"/></a>
         </div>
+     
+         
 
 
         <div class="menu">
             <ul>
-                <li><a href="#">Backgrounds</a></li>
-                <li><a href="#">Stockphotos</a></li>
-                <li><a href="#">Illustrations</a></li>
-                <li><a href="#">
+                <li><a href="http://localhost:8888/Index/Category/1">Backgrounds</a></li>
+                <li><a href="http://localhost:8888/Index/Category/2">Stockphotos</a></li>
+                <li><a href="http://localhost:8888/Index/Category/3">Posters</a></li>
+
+                <li id="loggedinfalse"><a href="http://localhost:8888/Index/Checkout/{{sessionId}}" >
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
-                         class="bi bi-cart-fill" viewBox="0 0 16 16">
+                         class="bi bi-cart-fill"viewBox="0 0 16 16">
                         <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
                     </svg>
                 </a></li>
-                <li class="nav-item dropdown" id="user1">
-                    <a class="nav-link dropdown-toggle" id="userDropdown" href="#" role="button" data-toggle="dropdown"
-                       aria-haspopup="true" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
-                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown"
-                         style="position: absolute !important;">
-                        <a class="dropdown-item" href="#">Settings</a>
-                        <a class="dropdown-item" href="#">Activity Log</a>
-                        <div class="dropdown-divider"></div>
-                        <form class="dropdown-item" action="/logout" method="post">
-                            <input type="hidden" name="_csrf" value=""/>
-                            <button type="submit" class="btn btn-primary">Logout</button>
-                        </form>
-                    </div>
-                </li>
 
-                <li class="user2"><i class='fas fa-user-alt' style='font-size:17px;'></i></li>
+                 <li id="loggedintrue" style="display:none;"><a href="http://localhost:8888/User/Checkout/{{userData.userId}}">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                         class="bi bi-cart-fill"viewBox="0 0 16 16">
+                        <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+                    </svg>
+                </a></li>
+
+
+                <a href="http://localhost:8888/User/{{userData.userId}}"><li class="loggedIn" style="display:none;" id="true"> <i class='fas fa-user-alt'  style='font-size:17px;'></i></li></a>
+
+               <a href="http://localhost:8888/login"><li class="{{loggedIn}}" id="login"> <i class='fas fa-user-alt'  style='font-size:17px;'></i></li></a>
+
+
 
             </ul>
         </div>
     </nav>
     <div class="flex-container">
 
-        <div class=center1>
-            <h1 style="font-family:moonget; font-style:normal; color:white;">BACKGROUNDS</h1>
+       <div class=center1 style="z-index:10;" onclick="location.href='http://localhost:8888/Index/Category/1';">
+           <h1 style="font-family:moonget; font-style:normal; color:white;">Backgrounds</h1>
 
         </div>
     </div>
@@ -463,16 +464,17 @@
 </div>
 
 
-<!-- Footer -->
-<footer class="footer-container">
-    <div class="container">
-        <div class="row">
-            <div class="col">
-                &copy; Bootstrap 4 Carousel with Multiple Items. Download it for free on <a href="https://azmind.com">AZMIND</a>.
+  <footer class="footer">
+
+  <div class="social">
+            <ul class="list-inline">
+                <li class="list-inline-item"><a href="#">About</a></li>
+                <li class="list-inline-item"><a href="#">Contact</a></li>
+                <li class="list-inline-item"><a href="#">Terms</a></li>
+                <li class="list-inline-item"><a href="#">Privacy Policy</a></li>
+            </ul>
             </div>
-        </div>
-    </div>
-</footer>
+  </footer>
 
 <!-- Javascript -->
 <script src="/js/Main/jquery-3.3.1.min.js"></script>
@@ -521,6 +523,20 @@
             }
         }
     });
+
+   var loggedin=$("#login").attr("class");
+    console.log(loggedin);
+
+    if(loggedin==="loggedintrue"){
+        $("#login").css("display","none");
+      $("#true").css("display","inline-block");
+       $("#loggedintrue").css("display","inline-block");
+       $("#loggedinfalse").css("display","none");
+
+
+
+    }
+   
 
 </script>
 </body>
