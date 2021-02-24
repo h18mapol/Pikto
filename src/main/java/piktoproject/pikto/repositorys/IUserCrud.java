@@ -11,7 +11,7 @@ public interface IUserCrud{
     void deleteUser(int userId);
     void addUser(User user);
     User getUserByEmail(String email);
-
+   
     //Products
     List<Product>getAllCategoryProducts(int categoryId);
     List<Product>getAllUserProducts(int userId);

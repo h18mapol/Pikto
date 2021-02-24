@@ -63,7 +63,8 @@ public class ProductController {
     public String getProductPage(Model model, @PathVariable Integer productId,HttpServletRequest request) {
         model.addAttribute("Product", adminService.getProduct(productId));
         model.addAttribute("Reviews", userService.getAllProductReviews(productId));
-          Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+       
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         HttpSession session = request.getSession();
        model.addAttribute("sessionId", session.getId());
 
