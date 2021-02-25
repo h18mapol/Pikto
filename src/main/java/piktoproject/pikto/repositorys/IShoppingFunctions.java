@@ -14,6 +14,7 @@ public interface IShoppingFunctions {
 
     //Cart Items Methods
     List<CartItem> getAllCartItems(Cart cart);
+    List<CartItemDTO> getAllCartItemsDTO(Cart cart);
     void addToCart(CartItem cartItem);
     void deleteCartItem(CartItem cartItem);
     void emptyCart(Cart cart);

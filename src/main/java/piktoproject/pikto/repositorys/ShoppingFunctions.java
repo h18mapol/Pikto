@@ -1,5 +1,7 @@
 package piktoproject.pikto.repositorys;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -48,14 +50,13 @@ public class ShoppingFunctions implements IShoppingFunctions {
                 cartitem.setCartItemId(resultset.getInt(1));
                 cartitem.setProductId(resultset.getInt(2));
                 cartitem.setCartId(resultset.getInt(3));
-                cartitem.setPrice(resultset.getFloat(4));
-                cartitem.setDiscount(resultset.getInt(5));
+                cartitem.setPrice(resultset.getDouble(4));
+                cartitem.setDiscount(resultset.getDouble(5));
                 cartitem.setQuantity(resultset.getInt(6));
                 cartitem.setCreatedAt(resultset.getString(7));
                 cartitem.setContent(resultset.getString(8));
                 cartList.add(cartitem);
             }
-
             resultset.close();
             statement.close();
             con.close();
@@ -67,6 +68,42 @@ public class ShoppingFunctions implements IShoppingFunctions {
     } //Klar
 
     @Override
+    public List<CartItemDTO> getAllCartItemsDTO(Cart cart) {
+        List<CartItemDTO> cartListDTO = new ArrayList<>();
+        try {
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/piktodb?serverTimezone=UTC", "root", "");
+            Statement statement = con.createStatement();
+            statement = con.createStatement();
+            String sqlSelectOrders = "SELECT cart_item.*, product.productUrl, product.title\n" +
+                    "FROM cart_item\n" +
+                    "LEFT JOIN product ON cart_item.productId = product.productId\n" +
+                    "WHERE cartId = " + cart.getCartId();
+            ResultSet resultset = statement.executeQuery(sqlSelectOrders);
+            while (resultset.next()) {
+                CartItemDTO cartitemDTO = new CartItemDTO();
+                cartitemDTO.setCartItemId(resultset.getInt(1));
+                cartitemDTO.setProductId(resultset.getInt(2));
+                cartitemDTO.setCartId(resultset.getInt(3));
+                cartitemDTO.setPrice(resultset.getDouble(4));
+                cartitemDTO.setDiscount(resultset.getDouble(5));
+                cartitemDTO.setQuantity(resultset.getInt(6));
+                cartitemDTO.setCreatedAt(resultset.getString(7));
+                cartitemDTO.setContent(resultset.getString(8));
+                cartitemDTO.setProductUrl(resultset.getString(9));
+                cartitemDTO.setTitle(resultset.getString(10));
+                cartListDTO.add(cartitemDTO);
+            }
+            resultset.close();
+            statement.close();
+            con.close();
+            return cartListDTO;
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminCrud.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
+    @Override
     public void addToCart(CartItem cartItem) {
         try {
             con = DriverManager.getConnection("jdbc:mysql://localhost:3306/piktodb?serverTimezone=UTC", "root", "");
@@ -74,8 +111,8 @@ public class ShoppingFunctions implements IShoppingFunctions {
             PreparedStatement statement = con.prepareStatement(sqlAddCartItem);
             statement.setInt(1, cartItem.getProductId());
             statement.setInt(2, cartItem.getCartId());
-            statement.setFloat(3, cartItem.getPrice());
-            statement.setFloat(4, cartItem.getDiscount());
+            statement.setDouble(3, cartItem.getPrice());
+            statement.setDouble(4, cartItem.getDiscount());
             statement.setInt(5, cartItem.getQuantity());
             statement.setString(6, cartItem.getContent());
             statement.close();
@@ -198,5 +235,14 @@ public class ShoppingFunctions implements IShoppingFunctions {
     @Override
     public Transaction createTransaction(Order order) {
         return null;
+    }
+
+    //Helper function
+    public static double round(double value, int places) {
+        if (places < 0) throw new IllegalArgumentException();
+
+        BigDecimal bd = BigDecimal.valueOf(value);
+        bd = bd.setScale(places, RoundingMode.HALF_UP);
+        return bd.doubleValue();
     }
 }

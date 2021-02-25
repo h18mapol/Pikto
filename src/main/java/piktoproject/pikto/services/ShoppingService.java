@@ -29,6 +29,9 @@ public class ShoppingService {
     public void emptyCart(Cart cart){ShoppingFunctionsCrud.emptyCart(cart);}
     public void createCart(String sessionId, User user){ShoppingFunctionsCrud.createCart(sessionId, user);}
     //OrderFunctions
+    public List<CartItemDTO> getAllCartItemsDTO(Cart cart) {
+        return ShoppingFunctionsCrud.getAllCartItemsDTO(cart);
+    }
 
     public void createOrder(Cart cart, User user){ShoppingFunctionsCrud.createOrder(cart, user);}
     //TransactionFunctions

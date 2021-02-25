@@ -4,8 +4,8 @@ public class CartItem {
     private int cartItemId;
     private int productId;
     private int cartId;
-    private float price;
-    private float discount;
+    private double price;
+    private double discount;
     private int quantity;
     private String createdAt;
     private String content;
@@ -37,19 +37,19 @@ public class CartItem {
         this.cartId = cartId;
     }
 
-    public float getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(float price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 
-    public float getDiscount() {
+    public double getDiscount() {
         return discount;
     }
 
-    public void setDiscount(float discount) {
+    public void setDiscount(double discount) {
         this.discount = discount;
     }
 

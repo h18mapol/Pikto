@@ -33,7 +33,7 @@ import java.util.Map;
 
 import static org.springframework.security.web.context.HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY;
 
-@SessionAttributes("userData")
+@SessionAttributes({"userData","cartData"})
 @Controller
 public class LoginController {
 
@@ -131,13 +131,12 @@ public class LoginController {
                 shoppingFunctions.createCart(session.getId(),user);
                 cart = shoppingFunctions.getCart(session.getId());
                 session.setAttribute("cartData", cart);
-
+                session.setAttribute("userData", user);
                 if (user.getAdmin() == 1) {
                     model.addAttribute("userData", user);
                     System.out.println("Role Admin --> redirect to login Admin");
                     return "loginAdmin";
                 } else {
-                    session.setAttribute("userData", user);
                     model.addAttribute("userData", session.getAttribute("userData"));
                     model.addAttribute("userProducts", adminService.getAllProductsbyId(user.getUserId()));
                     model.addAttribute("userReviews", adminService.getAllReviewsById(user.getUserId()));
@@ -161,13 +160,13 @@ public class LoginController {
                 }
                 shoppingFunctions.createCart(session.getId(),googleUser);
                 cart = shoppingFunctions.getCart(session.getId());
+                session.setAttribute("userData", googleUser);
                 System.out.println("Got Cart with id"+ cart.getCartId());
                 if (googleUser.getAdmin() == 1) {
                     model.addAttribute("userData", session.getAttribute("userData"));
                     System.out.println("Role Admin --> Google: ");
                     return "loginAdmin";
                 } else {
-                    session.setAttribute("userData", googleUser);
                     model.addAttribute("userData", session.getAttribute("userData"));
                     model.addAttribute("userProducts", adminService.getAllProductsbyId(googleUser.getUserId()));
                     model.addAttribute("userReviews", adminService.getAllReviewsById(googleUser.getUserId()));
@@ -200,14 +199,14 @@ public class LoginController {
                 }
                 shoppingFunctions.createCart(session.getId(),githubUser);
                 cart = shoppingFunctions.getCart(session.getId());
-                System.out.println("Got Cart with id"+ cart.getCartId());
+                session.setAttribute("userData", githubUser);
+                System.out.println("Got Cart with id"+ cart.getCartId() + "for user " + session.getAttribute("userData").toString());
                 if (githubUser.getAdmin() == 1) {
                     System.out.println("Role Admin User --> Github: ");
                     model.addAttribute("userData", githubUser);
                     //System.out.println(authentication.toString());
                     return "loginAdmin";
                 } else {
-                    session.setAttribute("userData", githubUser);
                     model.addAttribute("userData", session.getAttribute("userData"));
                     model.addAttribute("userProducts", adminService.getAllProductsbyId(githubUser.getUserId()));
                     model.addAttribute("userReviews", adminService.getAllReviewsById(githubUser.getUserId()));

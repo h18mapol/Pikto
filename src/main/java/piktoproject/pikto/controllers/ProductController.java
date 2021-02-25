@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 @Controller
-@SessionAttributes("userName")
+@SessionAttributes({"userId","cartId"})
 public class ProductController {
     @Autowired
     private AdminService adminService;
@@ -26,15 +26,6 @@ public class ProductController {
 
     @Autowired
     private UserService userService;
-
-    @RequestMapping("/User/Checkout/{userId}")
-    public String checkoutUser(Model model, @PathVariable Integer userId) {
-        Cart cart = new Cart();
-        cart.setCartId(1);
-        model.addAttribute("user", userService.getUserById(userId));
-        model.addAttribute("userCart", productService.getAllCartItems(cart));
-        return "Frontend/User/Checkout";
-    }
 
     @RequestMapping("/")
     public String indexRedirect(Model model, HttpServletRequest request) {
@@ -47,6 +38,7 @@ public class ProductController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         HttpSession session = request.getSession();
         model.addAttribute("sessionId", session.getId());
+
         System.out.println(session.getId());
         if (auth.getPrincipal() != "anonymousUser") {
             System.out.println("User is logged in as: " + auth.getPrincipal());
