@@ -117,7 +117,7 @@
 
 
         <main>
-            <div class="container" style="margin-top:50px;">
+            <div class="container" style="padding-top: 100px;">
 
 
                     <div class="row">
@@ -175,12 +175,12 @@
                                       
 
             <div class="card shadow-sm border-light mb-4">
-                <a href="#" class="position-relative">
-                    <img src="https://via.placeholder.com/500x350/5fa9f8/ffffff" class="card-img-top" alt="image"> </a>
+                    <img src="{{pictureUrl}}" style="object-fit:cover; width:300px; height:200px;" class="card-img-top" alt="image" > 
                 <div class="card-body">
                    <h5>{{title}}</h5>
-                   
-                    <div class="post-meta"><span class="small lh-120">{{createdAt}}</span></div>
+                                      <h6>{{firstname}} {{lastname}}</h6>
+
+                    <div class="post-meta"><span class="small lh-120"> {{createdAt}}</span></div>
                     
 
                                             <div class="review-block-rate" id="{{rating}}">

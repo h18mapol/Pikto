@@ -754,7 +754,12 @@ public class UserCrud implements IUserCrud {
                 product_review.setRating(resultSet.getInt("rating"));
                 product_review.setCreatedAt(resultSet.getString("createdAt"));
                 product_review.setContent(resultSet.getString("content"));
-                product_review.setUserId(resultSet.getInt("userId"));
+                int userID=resultSet.getInt("userId");
+                product_review.setUserId(userID);
+                product_review.setPictureUrl(getUserById(userID).getPictureUrl());
+                 product_review.setFirstname(getUserById(userID).getFirstName());
+                product_review.setLastname(getUserById(userID).getLastName());
+      
                 product_reviews.add(product_review);
             } //End while
             resultSet.close();
@@ -768,4 +773,5 @@ public class UserCrud implements IUserCrud {
         return null;
     } //Klar
 
+  
 }

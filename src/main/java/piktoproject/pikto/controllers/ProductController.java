@@ -70,7 +70,6 @@ public class ProductController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         HttpSession session = request.getSession();
         model.addAttribute("sessionId", session.getId());
-
         System.out.println(session.getId());
         if (auth.getPrincipal() != "anonymousUser") {
             System.out.println("User is logged in as: " + auth.getPrincipal());
@@ -84,7 +83,6 @@ public class ProductController {
         model.addAttribute("userData", user);
         System.out.println("User is not logged in");
         model.addAttribute("loggedIn", "loggedinfalse");
-
         return "Frontend/Main/ProductPage";
     }
 
