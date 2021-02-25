@@ -23,6 +23,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/Index/**").permitAll()
                 .antMatchers("/Admin/**").hasAuthority("ROLE_ADMIN")
                 .antMatchers("/css/**","/img/**","/font/**","/js/**", "/webjars/**").permitAll()
+                .antMatchers("/").permitAll()
                 .anyRequest().authenticated()
                 .and().formLogin().permitAll() // enable form based login
                 .loginPage("/login")

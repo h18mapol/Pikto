@@ -23,7 +23,7 @@ public class AdminController {
     private AdminService adminService;
     @Autowired
     private UserService userService;
-
+    //Admin get all functions
     @RequestMapping("/Admin")
     public String getAdminPageWithId(Model model, HttpServletRequest request){
         Cart cart = (Cart)request.getSession().getAttribute("cartData");
@@ -61,6 +61,8 @@ public class AdminController {
         model.addAttribute("allOrders", adminService.getAllOrders());
         return "Frontend/Admin/Orders";
     }
+
+    //Admin User Functions
     @RequestMapping("/Admin/User/{userId}")
     public String getUserPage(Model model, @PathVariable Integer userId){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -112,6 +114,7 @@ public class AdminController {
         return "Frontend/Admin/Products";
     }
 
+    //Admin Order functions
     @RequestMapping(path="/Admin/updateOrder", method={RequestMethod.POST})
     public String updateOrder(Model model, @ModelAttribute ("order") Order order, @RequestParam Map<String, String> allRequestParams){
         adminService.updateOrder(order);
@@ -139,8 +142,6 @@ public class AdminController {
         model.addAttribute("allReviews",adminService.getAllReviews());
         return "Frontend/Admin/Reviews";
     }
-
-
 
     @RequestMapping(path="/Admin/User/updateProduct", method={RequestMethod.POST})
     public String updateUserProduct(Model model,@ModelAttribute ("product")Product product,@RequestParam Map<String, String> allRequestParams){

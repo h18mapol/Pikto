@@ -38,13 +38,10 @@ public class UserController {
     @RequestMapping("/User")
     public String getUser(Model model) {
         User user = adminService.getLoggedInUser();
-
-
         model.addAttribute("userData", user);
         model.addAttribute("userOrders", userService.getAllUserOrders(user.getUserId()));
         model.addAttribute("userProducts", userService.getAllUserProducts(user.getUserId()));
         model.addAttribute("userReviews", userService.getAllUserReviews(user.getUserId()));
-
         return "Frontend/User/userPage";
     }
 
