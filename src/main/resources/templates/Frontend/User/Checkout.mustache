@@ -149,15 +149,23 @@
                                 {{/userCart}}
                                 <li class="list-group-item d-flex justify-content-between lh-condensed">
                                     <div>
-                                        <h6 class="my-0">Total {{total}}</h6>
-                                        <small class="text-muted">Total discount {{itemDiscount}}</small>
+                                        <h6 class="my-0">Total </h6>
+                                        <h6 class="my-0">{{total}} </h6>
+                                    </div>
+                                    <div>
+                                        <small class="text-muted">Total discount</small>
+                                        <small class="text-muted .text-danger">{{itemDiscount}}</small>
+                                    </div>
+                                    <div>
+                                        <small class="text-muted">Grand Total</small>
+                                        <small class="text-muted .text-danger">{{grandTotal}}</small>
                                     </div>
                                 </li>
                             </ul>
 
                             <form class="card p-2">
                                 <div class="input-group">
-                                    <input type="text" class="form-control" placeholder="Promo code">
+                                    <input type="text" class="form-control" placeholder="Promo code" disabled>
                                     <div class="input-group-append">
                                         <button type="submit" class="btn btn-secondary">Redeem</button>
                                     </div>
@@ -192,7 +200,7 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text">@</span>
                                         </div>
-                                        <input type="text" class="form-control" id="username" placeholder="Username"
+                                        <input type="number" class="form-control" id="username" placeholder="Username"
                                                required value="{{userData.userId}}" name="userId">
                                         <div class="invalid-feedback" style="width: 100%;">
                                             Your username is required.
@@ -202,7 +210,7 @@
 
                                 <div class="mb-3">
                                     <label for="email">Email <span class="text-muted">(Optional)</span></label>
-                                    <input type="email" class="form-control" id="email" placeholder="you@example.com" value="{{userData.email}}">
+                                    <input type="email" class="form-control" id="email" placeholder="you@example.com" value="{{userData.email}}" name="email">
                                     <div class="invalid-feedback">
                                         Please enter a valid email address for shipping updates.
                                     </div>
@@ -211,7 +219,7 @@
                                 <div class="mb-3">
                                     <label for="address">Address</label>
                                     <input type="text" class="form-control" id="address" placeholder="1234 Main St"
-                                           required>
+                                           required name="address">
                                     <div class="invalid-feedback">
                                         Please enter your shipping address.
                                     </div>
@@ -226,7 +234,7 @@
                                 <div class="row">
                                     <div class="col-md-5 mb-3">
                                         <label for="country">Country</label>
-                                        <select class="custom-select d-block w-100" id="country" required>
+                                        <select class="custom-select d-block w-100" id="country" name="country" required>
                                             <option value="">Choose...</option>
                                             <option>Sweden</option>
                                             <option>Norway</option>
@@ -241,7 +249,7 @@
                                     </div>
                                     <div class="col-md-4 mb-3">
                                         <label for="city">City</label>
-                                        <input type="text" class="form-control" id="City"
+                                        <input type="text" class="form-control" id="City" name="city"
                                                placeholder="Stad">
                                         <div class="invalid-feedback">
                                             Please provide a valid city.
@@ -249,7 +257,7 @@
                                     </div>
                                     <div class="col-md-3 mb-3">
                                         <label for="zip">Zip</label>
-                                        <input type="text" class="form-control" id="zip" placeholder="" required>
+                                        <input type="text" class="form-control" id="zip" placeholder="" required name="zip">
                                         <div class="invalid-feedback">
                                             Zip code required.
                                         </div>

@@ -152,15 +152,20 @@
                                         <h6 class="my-0">Total {{total}}</h6>
                                         <small class="text-muted">Total discount {{itemDiscount}}</small>
                                     </div>
+                                    <h6 class="my-0">Grand Total:<span class="my-0" id="grandTotal">{{grandTotal}}</span> </h6>
+
                                 </li>
                             </ul>
 
                             <form class="card p-2">
                                 <div class="input-group">
-                                    <input type="text" class="form-control" placeholder="Promo code">
+                                    <input type="text" class="form-control" placeholder="Promo code" id="promoId">
                                     <div class="input-group-append">
-                                        <button type="submit" class="btn btn-secondary">Redeem</button>
+                                        <button type="button" class="btn btn-primary" onclick="promoValidation()">Redeem</button>
                                     </div>
+                                </div>
+                                <div class="input-group">
+                                    <p id="redeemvalidation"></p>
                                 </div>
                             </form>
                         </div>
@@ -210,12 +215,15 @@
 <script src="/js/Admin/scripts.js"></script>
 <script src="https://www.paypal.com/sdk/js?client-id=AVGb1kVA3fCbt3rHo2wUoOIvoK0gJnnAfHPanEoRhI0RHLocUNsX7dGViu2aetmZGzByr0vonqo0IJT1&currency=SEK" data-namespace="paypal_sdk"></script>
 <script>
+    let data2 = $("#grandTotal").text();
+    console.log("Data inte data2 --> " + data2.toString());
     paypal_sdk.Buttons({
         createOrder:function (data, actions) {
+
             return actions.order.create({
                 purchase_units:[{
                     amount:{
-                        value:'0.1'
+                        value: data2
                     }
                 }]
             });
@@ -223,18 +231,29 @@
         onApprove:function (data,actions) {
             return actions.order.capture().then(function (details) {
                 console.log(details);
-                window.location.replace("/User/Checkout/Sucess/" + details.status)
+
+                window.location.replace("/User/Checkout/Status/" + details.status)
             })
         },
-        onCancel:function (data) {
+        onCancel:function (data,actions) {
             return actions.order.capture().then(function (details) {
-                window.location.replace("/User/Checkout/Sucess/" + details.status)
+                window.location.replace("/User/Checkout/Status/" + details.status)
             })
         }
     }).render("#paypal");
 
 
-
+</script>
+<script>
+    function promoValidation(){
+        var value = $("#promoId").val();
+        console.log(value);
+        if (value == "Rabatt2021") {
+            return $( "#redeemvalidation" ).text( "Valid promo: 10%" ).addClass("text-success")
+        }else {
+            return $( "#redeemvalidation" ).text( "Not a valid promo" ).addClass("text-danger")
+        }
+    }
 </script>
 </body>
 </html>

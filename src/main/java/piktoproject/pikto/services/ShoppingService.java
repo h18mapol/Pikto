@@ -34,6 +34,7 @@ public class ShoppingService {
     }
 
     public void createOrder(Cart cart, User user){ShoppingFunctionsCrud.createOrder(cart, user);}
+    public void createOrderPaypal(Order order){ShoppingFunctionsCrud.createOrderPaypal(order);}
     //TransactionFunctions
     public Transaction createTransaction(Order order){return ShoppingFunctionsCrud.createTransaction(order);}
 }

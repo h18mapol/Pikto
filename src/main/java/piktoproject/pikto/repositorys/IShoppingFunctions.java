@@ -21,7 +21,7 @@ public interface IShoppingFunctions {
 
     //Order Functions
     void createOrder(Cart cart, User user);
-
+    void createOrderPaypal(Order order);
     //Transaction Functions
     Transaction createTransaction(Order order);
 }
