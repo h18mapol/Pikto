@@ -16,7 +16,7 @@ $(document).ready(function() {
                 $("#date").val(tableData[8]);
                 $("#content").val(tableData[9]);
                 $("#productUrl").val(tableData[10]);
-                $('#editModal').modal('show');
+                $('#productModal').modal('show');
                 var a = document.getElementById('deletebtn'); //or grab it by tagname etc
                 a.href = "/Admin/deleteProduct/" + (tableData[1]);
             });

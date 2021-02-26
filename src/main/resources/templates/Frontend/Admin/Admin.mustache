@@ -109,7 +109,7 @@
                                     <div class="card-header" id="headingOne">
                                         <h2 class="mb-0">
                                             <button type="button" class="btn btn-link" data-toggle="collapse"
-                                                    data-target="#collapseOne">Admin functions
+                                                    data-target="#collapseOne">Admin Functions <i class="arrow down"></i>
                                             </button>
                                         </h2>
                                     </div>
@@ -129,10 +129,10 @@
                                                                            id="adminProductName" name="title"
                                                                            placeholder="">
                                                                 </div>
-                                                                <div class="form-group">
+                                                                <div class="form-group" style="display:none;">
                                                                     <label for="adminid">User id</label>
                                                                     <input type="text" class="form-control" id="adminid"
-                                                                           name="userId" placeholder="">
+                                                                           name="userId" value="{{userData.userId}}" placeholder="">
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label for="adminSummary">Summary</label>
@@ -196,7 +196,7 @@
                                                     <div class="card mb-4">
                                                         <div class="card-body">
                                                             <form method="POST" action="/Admin/addUser">
-                                                                <h1 class="h1 align-content-center text-secondary">Add
+                                                                <h1 class="align-content-center text-primary">Add
                                                                     User</h1>
                                                                 <div class="form-group">
                                                                     <label for="AdminfirstName">Firstname</label>
@@ -232,9 +232,14 @@
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label for="AdminAuth">Authority</label>
-                                                                    <input type="text" class="form-control"
-                                                                           id="AdminAuth" name="admin"
-                                                                           placeholder="Password">
+                                                                   
+
+                                                            <select class="form-control" id="AdminAuth" name="admin">
+                                                             <option value="0">User</option>
+                                                             <option value="1">Admin</option>
+                    
+                                                             </select>
+                                                                           
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label for="AdminPictureUrl">Profile
@@ -243,12 +248,7 @@
                                                                            id="AdminPictureUrl" name="pictureUrl"
                                                                            placeholder="Password">
                                                                 </div>
-                                                                <div class="form-group form-check">
-                                                                    <label class="form-check-label" for="AdminCheck2">Check
-                                                                        me out</label>
-                                                                    <input type="checkbox" class="form-check-input"
-                                                                           id="AdminCheck2">
-                                                                </div>
+                                                                
                                                                 <button type="submit" class="btn btn-primary">Submit
                                                                 </button>
                                                             </form>
@@ -259,6 +259,30 @@
                                         </div>
                                     </div>
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xl-6">
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <i class="fas fa-chart-area mr-1"></i>
+                                Orders by Month
+                            </div>
+                            <div class="card-body">
+                                <canvas id="myAreaChart" width="100%" height="40"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-6">
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <i class="fas fa-chart-bar mr-1"></i>
+                                Recent Orders
+                            </div>
+                            <div class="card-body">
+                                <canvas id="myBarChart" width="100%" height="40"></canvas>
                             </div>
                         </div>
                     </div>

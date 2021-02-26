@@ -302,51 +302,175 @@
 
 
 
+<div class="modal" tabindex="-1" role="dialog" id="orderModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Edit Product</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="modalBody">
+                <form method="POST" action="/Admin/updateProduct" novalidate>
+                    <div class="form-group row">
+                        <label for="reviewId" class="col-4 col-form-label">OrderId</label>
+                        <div class="col-8">
+                            <input id="orderId" name="orderId" type="text" class="form-control" readonly>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="productId" class="col-4 col-form-label">UserId</label>
+                        <div class="col-8">
+                            <input id="userId" name="userId" type="text" class="form-control" readonly>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group row">
+                        <label for="title" class="col-4 col-form-label">sessionId</label>
+                        <div class="col-8">
+                            <input id="sessionId" name="sessionId" type="text" class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="rating" class="col-4 col-form-label">status</label>
+                        <div class="col-8">
+                            <input id="status" name="status" type="number" class="form-control" required min="1" max="5" placeholder="max rating 5">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="createdAt" class="col-4 col-form-label">subTotal</label>
+                        <div class="col-8">
+                            <input id="subTotal" name="subTotal" type="text" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="content" class="col-4 col-form-label">itemDiscount</label>
+                        <div class="col-8">
+                            <input id="itemDiscount" name="itemDiscount" type="text" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="userId" class="col-4 col-form-label">tax</label >
+                        <div class="col-8">
+                            <input id="tax" name="tax" type="number" class="form-control" readonly>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="userId" class="col-4 col-form-label">shipping</label >
+                        <div class="col-8">
+                            <input id="shipping" name="shipping" type="text" class="form-control" readonly>
+                        </div>
+                    </div>
+
+                     <div class="form-group row">
+                        <label for="userId" class="col-4 col-form-label">total</label >
+                        <div class="col-8">
+                            <input id="total" name="total" type="text" class="form-control" readonly>
+                        </div>
+                    </div>
+                     <div class="form-group row">
+                        <label for="userId" class="col-4 col-form-label">promo</label >
+                        <div class="col-8">
+                            <input id="promo" name="promo" type="text" class="form-control" readonly>
+                        </div>
+                    </div>
+                     <div class="form-group row">
+                        <label for="userId" class="col-4 col-form-label">discount</label >
+                        <div class="col-8">
+                            <input id="discount" name="discount" type="text" class="form-control" readonly>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="userId" class="col-4 col-form-label">grandTotal</label >
+                        <div class="col-8">
+                            <input id="grandTotal" name="grandTotal" type="text" class="form-control" readonly>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="userId" class="col-4 col-form-label">firstName</label >
+                        <div class="col-8">
+                            <input id="firstName" name="firstName" type="text" class="form-control" readonly>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="userId" class="col-4 col-form-label">lastName</label >
+                        <div class="col-8">
+                            <input id="lastName" name="lastName" type="text" class="form-control" readonly>
+                        </div>
+                    </div>
+
+                     <div class="form-group row">
+                        <label for="userId" class="col-4 col-form-label">mobile</label >
+                        <div class="col-8">
+                            <input id="mobile" name="mobile" type="text" class="form-control" readonly>
+                        </div>
+                    </div>
+                     <div class="form-group row">
+                        <label for="userId" class="col-4 col-form-label">email</label >
+                        <div class="col-8">
+                            <input id="email" name="email" type="text" class="form-control" readonly>
+                        </div>
+                    </div>
+                     <div class="form-group row">
+                        <label for="userId" class="col-4 col-form-label">address</label >
+                        <div class="col-8">
+                            <input id="address" name="address" type="text" class="form-control" readonly>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="userId" class="col-4 col-form-label">city</label >
+                        <div class="col-8">
+                            <input id="city" name="city" type="text" class="form-control" readonly>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="userId" class="col-4 col-form-label">createdAt</label >
+                        <div class="col-8">
+                            <input id="createdAt" name="createdAt" type="text" class="form-control" readonly>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="userId" class="col-4 col-form-label">content</label >
+                        <div class="col-8">
+                            <input id="content" name="content" type="text" class="form-control" readonly>
+                        </div>
+                    </div>
+                    
+
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                        <a id="deletebtn" class="btn btn-danger">Delete Event</a>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
 
 
 </div>
 <script>
-$(document).ready(function () {
 
-    $("#dataTable tbody tr").click(function () {
-        var tableData = $(this).children("td").map(function() {
-            return $(this).text();
-        }).get();
-
-        window.location.href = '/Admin/User/'+tableData[0];
-});
-
-});
-  
-
-    // Toggle the side navigation
-    function clicked(){
-
-          var path = window.location.href; // because the 'href' property of the DOM element is the absolute path
-        $("#layoutSidenav_nav .sb-sidenav a.nav-link").each(function() {
-            if (this.href === path) {
-                $(this).addClass("active");
-            }
-        });
-
-
-
-      $("body").toggleClass("sb-sidenav-toggled");
-
-    }
     
 </script>
 
 <script src="/js/Admin/jquery.js"></script>
-<script src="/js/Admin/scripts.js"></script>
-<!--<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" crossorigin="anonymous"></script>-->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
-        crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
-<script src="/js/Admin/chart-area-demo.js"></script>
-<script src="/js/Admin/chart-bar-demo.js"></script>
-<script src="/js/Admin/datatables-users.js"></script>
-
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+<!--<script src="/js/Admin/scripts.js"></script>-->
+<script src="/js/Admin/jquery.backstretch.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
+<script src="/js/Admin/datatables-orders.js"></script>
 <script src="/js/Admin/jquery.backstretch.min.js"></script>
 <!--<script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>-->
 <!--<script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>-->
