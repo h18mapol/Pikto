@@ -20,6 +20,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.authorizeRequests().antMatchers("/login").permitAll()
                 .antMatchers("/Index/**").permitAll()
+                .antMatchers("/SignUp/**").permitAll()
                 .antMatchers("/Admin/**").hasAuthority("ROLE_ADMIN")
                 .antMatchers("/css/**","/img/**","/font/**","/js/**", "/webjars/**").permitAll()
                 .antMatchers("/").permitAll()
@@ -27,7 +28,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and().formLogin().permitAll() // enable form based login
                 .loginPage("/login")
                 .successForwardUrl("/formLogin")
-                .and().logout() // enable logout
+                .and().logout().logoutSuccessUrl("/Index") // enable logout
                 .and().oauth2Login() // enable OAuth2
                 .loginPage("/login").defaultSuccessUrl("/oauth2LoginSuccess", true)
                 .and()

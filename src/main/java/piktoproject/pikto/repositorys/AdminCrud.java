@@ -17,13 +17,13 @@ import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCrypt;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.oauth2.client.OAuth2AuthorizedClientService;
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
 import org.springframework.stereotype.Repository;
-import piktoproject.pikto.models.Product;
-import piktoproject.pikto.models.Order;
-import piktoproject.pikto.models.Product_review;
-import piktoproject.pikto.models.User;
+import piktoproject.pikto.models.*;
+
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
@@ -328,5 +328,37 @@ public class AdminCrud extends UserCrud implements IAdminCrud {
             Logger.getLogger(AdminCrud.class.getName()).log(Level.SEVERE, null, ex);
         }
         sender.send(message);
+    }
+
+    @Override
+    public boolean changePassword(PasswordDTO passwordDTO) {
+        User user = getUserByEmail(passwordDTO.getUsername());
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        String existingPassword = passwordDTO.getOldpassword(); // Password entered by user
+        String dbPassword = user.getPassword(); // Load hashed DB password
+        System.out.println(existingPassword);
+        if (passwordEncoder.matches(existingPassword, dbPassword)) {
+            System.out.println("Changed Password");
+            user.setPassword(passwordDTO.getNewpassword());
+            try {
+                con = DriverManager.getConnection("jdbc:mysql://localhost:3306/piktodb?serverTimezone=UTC", "root", "");
+                String sqlUpdateUser = "UPDATE user SET password=? WHERE userId=?";
+                PreparedStatement statement = con.prepareStatement(sqlUpdateUser);
+                statement.setString(1, BCrypt.hashpw(user.getPassword(), BCrypt.gensalt()));
+                statement.setInt(2, user.getUserId());
+                statement.execute();
+                statement.close();
+                con.close();
+                return true;
+            } //end try
+            catch (SQLException ex) {
+                Logger.getLogger(AdminCrud.class.getName()).log(Level.SEVERE, null, ex);
+            }//End events
+        } else {
+            System.out.println("Error not able to change password");
+            return false;
+        }
+        System.out.println("Error: Password dont match");
+        return false;
     }
 }

@@ -1,22 +1,21 @@
 package piktoproject.pikto.repositorys;
 
 import java.util.List;
-import piktoproject.pikto.models.Order;
-import piktoproject.pikto.models.Product;
-import piktoproject.pikto.models.Product_review;
-import piktoproject.pikto.models.User;
+
+import piktoproject.pikto.models.*;
 
 
 public interface IAdminCrud extends IUserCrud{
-    public List<User>getAllUsers();
-    public List<Product>getAllProducts();
-    public List<Product>getAllProductsBySearch(String SearchWord);
+    List<User>getAllUsers();
+    List<Product>getAllProducts();
+    List<Product>getAllProductsBySearch(String SearchWord);
     
-   public List<Product>getAllProductsByCategory(int categoryId);
+    List<Product>getAllProductsByCategory(int categoryId);
 
-    public List<Product_review>getAllReviews();
-    public List<Order>getAllOrders();
-    public User getLoggedInUser();
+    List<Product_review>getAllReviews();
+    List<Order>getAllOrders();
+    User getLoggedInUser();
 
-    public void sendEmail(User user);
+    void sendEmail(User user);
+    boolean changePassword(PasswordDTO passwordDTO);
 }

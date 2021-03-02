@@ -134,35 +134,79 @@
                                 <span class="text-muted">Your cart</span>
                                 <span class="badge badge-secondary badge-pill">{{itemCounter}}</span>
                             </h4>
-                            <ul class="list-group mb-3">
+                            <ul class="list-group mb-3 " style="list-style: none">
                                 {{#userCart}}
                                 <li class="list-group-item d-flex justify-content-between lh-condensed">
                                     <small class="text-muted">
-                                        <img src="{{productUrl}}" style="object-fit:cover; width:90px; height:60px;">
+                                        <img src="{{productUrl}}" style="object-fit:cover; width:120px; height:100px;">
                                     </small>
                                     <div>
-                                        <h6 class="my-0">{{title}}</h6>
-                                        <small class="text-muted">Quantity: {{quantity}}</small>
-                                        <small class="text-muted">Price: {{price}}</small>
-                                        <a href="http://localhost:8888/User/Payment/Remove/{{cartItemId}}" class="btn btn-secondary">Remove</a>
+                                        <div class="d-flex justify-content-between">
+                                            <div>
+                                                <h5>{{title}}</h5>
+                                                <p class="mb-3 text-muted text-uppercase small">Discount: {{discount}}</p>
+                                                <p class="mb-2 text-muted text-uppercase small">Quantity: {{quantity}}</p>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <div>
+                                                <a href="http://localhost:8888/User/Payment/Remove/{{cartItemId}}" type="button" class="card-link-secondary small text-uppercase mr-3"><i
+                                                        class="fas fa-trash-alt mr-1"></i> Remove</a>
+                                            </div>
+                                            <p class="mb-0"><span><strong>{{price}}</strong></span></p>
+                                        </div>
                                     </div>
                                 </li>
                                 {{/userCart}}
-                                <li class="list-group-item d-flex justify-content-between lh-condensed">
-                                    <div>
-                                        <h6 class="my-0">Total {{total}}</h6>
-                                        <small class="text-muted">Total discount {{itemDiscount}}</small>
-                                    </div>
-                                    <h6 class="my-0">Grand Total:<span class="my-0" id="grandTotal">{{grandTotal}}</span> </h6>
+                                <!-- Card -->
+                                <li>
+                                    <div class="mb-3">
+                                        <div class="pt-4">
 
+                                            <h5 class="mb-3">The total amount of</h5>
+
+                                            <ul class="list-group list-group-flush">
+                                                <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">
+                                                    Temporary amount (ex-moms)
+                                                    <span>{{orderData.subTotal}}</span>
+                                                </li>
+                                                <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">
+                                                    Moms
+                                                    <span>{{orderData.tax}}</span>
+                                                </li>
+                                                <li class="list-group-item d-flex justify-content-between align-items-center px-0">
+                                                    Shipping
+                                                    <span>{{orderData.shipping}}</span>
+                                                <li class="list-group-item d-flex justify-content-between align-items-center px-0 text-danger">
+                                                    Discount
+                                                    <span>{{orderData.itemDiscount}}</span>
+                                                </li>
+                                                <li id="promotion" class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0 text-danger">
+
+                                                </li>
+                                                <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-3">
+                                                    <div>
+                                                        <strong>The total amount of</strong>
+                                                        <strong>
+                                                            <p class="mb-0">(including VAT)</p>
+                                                        </strong>
+                                                    </div>
+                                                    <span><strong id="grandTotal">{{orderData.total}}</strong></span>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
                                 </li>
+                                <!-- Card -->
                             </ul>
 
                             <form class="card p-2">
                                 <div class="input-group">
                                     <input type="text" class="form-control" placeholder="Promo code" id="promoId">
                                     <div class="input-group-append">
-                                        <button type="button" class="btn btn-primary" onclick="promoValidation()">Redeem</button>
+                                        <button type="button" class="btn btn-primary" onclick="promoValidation()">
+                                            Redeem
+                                        </button>
                                     </div>
                                 </div>
                                 <div class="input-group">
@@ -176,12 +220,14 @@
                                 <div class="row">
                                     <div class="col-md-6 mb-3">
                                         <label for="firstName">First name</label>
-                                        <input type="text" class="form-control" id="firstName" placeholder="" value="{{userData.firstName}}" name="firstName"
+                                        <input type="text" class="form-control" id="firstName" placeholder=""
+                                               value="{{userData.firstName}}" name="firstName"
                                                disabled>
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <label for="lastName">Last name</label>
-                                        <input type="text" class="form-control" id="lastName" placeholder="" value="{{userData.lastName}}" name="lastName"
+                                        <input type="text" class="form-control" id="lastName" placeholder=""
+                                               value="{{userData.lastName}}" name="lastName"
                                                disabled>
                                     </div>
                                 </div>
@@ -214,29 +260,30 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
         crossorigin="anonymous"></script>
 <script src="/js/Admin/scripts.js"></script>
-<script src="https://www.paypal.com/sdk/js?client-id=AVGb1kVA3fCbt3rHo2wUoOIvoK0gJnnAfHPanEoRhI0RHLocUNsX7dGViu2aetmZGzByr0vonqo0IJT1&currency=SEK" data-namespace="paypal_sdk"></script>
+<script src="https://www.paypal.com/sdk/js?client-id=AVGb1kVA3fCbt3rHo2wUoOIvoK0gJnnAfHPanEoRhI0RHLocUNsX7dGViu2aetmZGzByr0vonqo0IJT1&currency=SEK"
+        data-namespace="paypal_sdk"></script>
 <script>
     let data2 = $("#grandTotal").text();
     console.log("Data inte data2 --> " + data2.toString());
     paypal_sdk.Buttons({
-        createOrder:function (data, actions) {
+        createOrder: function (data, actions) {
 
             return actions.order.create({
-                purchase_units:[{
-                    amount:{
+                purchase_units: [{
+                    amount: {
                         value: data2
                     }
                 }]
             });
         },
-        onApprove:function (data,actions) {
+        onApprove: function (data, actions) {
             return actions.order.capture().then(function (details) {
                 console.log(details);
 
                 window.location.replace("/Index/Checkout/Status/" + details.status)
             })
         },
-        onCancel:function (data,actions) {
+        onCancel: function (data, actions) {
             return actions.order.capture().then(function (details) {
                 window.location.replace("/Index/Checkout/Status/" + details.status)
             })
@@ -246,13 +293,27 @@
 
 </script>
 <script>
-    function promoValidation(){
+    var active = false;
+    function promoValidation() {
         var value = $("#promoId").val();
         console.log(value);
-        if (value == "Rabatt2021") {
-            return $( "#redeemvalidation" ).text( "Valid promo: 10%" ).addClass("text-success")
-        }else {
-            return $( "#redeemvalidation" ).text( "Not a valid promo" ).addClass("text-danger")
+        if (value === "Rabatt2021" && active === false) {
+            active = true;
+            var promo = parseInt($("#grandTotal").text());
+            var promo2 = promo * 0.1;
+            promo = promo * 0.9;
+            console.log(promo);
+            console.log(promo2);
+            $("#grandTotal").text(promo);
+            $("#promotion").text("Active Promo: (Rabatt2021)").show().append("<span>"+promo2+'</span>');
+
+            $("#promoSuccess").text("Promo Discount").show().addClass("text-success");
+            return $("#redeemvalidation").text("Valid promo: 10%").addClass("text-success");
+        } else {
+            if (active){
+                return $("#redeemvalidation").text("Promo already active").addClass("text-danger")
+            }
+            return $("#redeemvalidation").text("Not a valid promo").addClass("text-danger")
         }
     }
 </script>

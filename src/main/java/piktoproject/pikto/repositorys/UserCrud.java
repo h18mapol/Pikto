@@ -126,6 +126,7 @@ public class UserCrud implements IUserCrud {
                 user.setMobileNr(resultSet.getString("mobileNr"));
                 user.setEmail(resultSet.getString("email"));
                 user.setAdmin(resultSet.getInt("admin"));
+                user.setPassword(resultSet.getString("password"));
                 user.setSeller(resultSet.getInt("seller"));
                 user.setPictureUrl(resultSet.getString("pictureUrl"));
             } //End while
