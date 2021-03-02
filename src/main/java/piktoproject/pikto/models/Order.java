@@ -10,14 +10,30 @@ package piktoproject.pikto.models;
  */
 public class Order {
     int orderId, userId, status;
-    float itemDiscount, tax, shipping, total, discount, grandTotal, subTotal;
-    String sessionId, firstName, lastName, email, address, city, createdAt, content, promo, mobile;
+    double itemDiscount, tax, shipping, total, discount, grandTotal, subTotal;
+    String sessionId, firstName, lastName, email, address, city, createdAt, content, promo, mobile, zip, country;
 
     public Order() {
     }
 
     public int getOrderId() {
         return orderId;
+    }
+
+    public String getZip() {
+        return zip;
+    }
+
+    public void setZip(String zip) {
+        this.zip = zip;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
     }
 
     public void setOrderId(int orderId) {
@@ -40,75 +56,59 @@ public class Order {
         this.status = status;
     }
 
-    public String getMobile() {
-        return mobile;
-    }
-
-    public void setMobile(String mobile) {
-        this.mobile = mobile;
-    }
-
-    public float getItemDiscount() {
+    public double getItemDiscount() {
         return itemDiscount;
     }
 
-    public void setItemDiscount(float itemDiscount) {
+    public void setItemDiscount(double itemDiscount) {
         this.itemDiscount = itemDiscount;
     }
 
-    public float getTax() {
+    public double getTax() {
         return tax;
     }
 
-    public void setTax(float tax) {
+    public void setTax(double tax) {
         this.tax = tax;
     }
 
-    public float getShipping() {
+    public double getShipping() {
         return shipping;
     }
 
-    public void setShipping(float shipping) {
+    public void setShipping(double shipping) {
         this.shipping = shipping;
     }
 
-    public float getTotal() {
+    public double getTotal() {
         return total;
     }
 
-    public void setTotal(float total) {
+    public void setTotal(double total) {
         this.total = total;
     }
 
-    public String getPromo() {
-        return promo;
-    }
-
-    public void setPromo(String promo) {
-        this.promo = promo;
-    }
-
-    public float getDiscount() {
+    public double getDiscount() {
         return discount;
     }
 
-    public void setDiscount(float discount) {
+    public void setDiscount(double discount) {
         this.discount = discount;
     }
 
-    public float getGrandTotal() {
+    public double getGrandTotal() {
         return grandTotal;
     }
 
-    public void setGrandTotal(float grandTotal) {
+    public void setGrandTotal(double grandTotal) {
         this.grandTotal = grandTotal;
     }
 
-    public float getSubTotal() {
+    public double getSubTotal() {
         return subTotal;
     }
 
-    public void setSubTotal(float subTotal) {
+    public void setSubTotal(double subTotal) {
         this.subTotal = subTotal;
     }
 
@@ -176,4 +176,19 @@ public class Order {
         this.content = content;
     }
 
+    public String getPromo() {
+        return promo;
+    }
+
+    public void setPromo(String promo) {
+        this.promo = promo;
+    }
+
+    public String getMobile() {
+        return mobile;
+    }
+
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
+    }
 }

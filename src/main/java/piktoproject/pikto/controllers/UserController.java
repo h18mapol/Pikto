@@ -4,29 +4,32 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.client.OAuth2AuthorizedClientService;
-import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
-import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import piktoproject.pikto.models.CartItem;
+import piktoproject.pikto.models.User;
+import piktoproject.pikto.models.Order;
 import piktoproject.pikto.models.Product;
 import piktoproject.pikto.models.Cart;
 import piktoproject.pikto.models.Product_review;
 
-import piktoproject.pikto.models.User;
+
+
 import piktoproject.pikto.services.AdminService;
 import piktoproject.pikto.services.UserService;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.util.LinkedHashMap;
 import java.util.Map;
 
 import piktoproject.pikto.services.ShoppingService;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 @Controller
-@SessionAttributes("userId")
+@SessionAttributes({"userId", "orderData"})
 public class UserController {
 
     @Autowired
@@ -40,7 +43,9 @@ public class UserController {
 
 
     @RequestMapping("/User")
-    public String getUser(Model model) {
+    public String getUser(Model model, HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        model.addAttribute("sessionId", session.getId());
         User user = adminService.getLoggedInUser();
         model.addAttribute("userData", user);
         model.addAttribute("userOrders", userService.getAllUserOrders(user.getUserId()));
@@ -49,10 +54,28 @@ public class UserController {
         return "Frontend/User/userPage";
     }
 
+    @RequestMapping("/User/Checkout/Status/{status}")
+    public String createOrder(Model model, HttpServletRequest request, @PathVariable String status) {
+        Order order = (Order) request.getSession().getAttribute("orderData");
+        if(status.equalsIgnoreCase("COMPLETED")){
+            order.setStatus(2); //Set as completed
+            shoppingService.createOrderPaypal(order);
+            //Empty cart
+            shoppingService.emptyCart(shoppingService.getCart(order.getSessionId()));
+            System.out.println("order created: " + order.getSessionId());
+        return "redirect:/Index";
+    }
+        System.out.println("Payment Denied for: " + order.getSessionId());
+        HttpSession session = request.getSession();
+        model.addAttribute("sessionId", session.getId());
+        return "Frontend/User/Payment";
+    }
+
     @RequestMapping("/User/Checkout")
-    public String checkoutUser(Model model) {
+    public String checkoutUser(Model model, HttpServletRequest request){
+        HttpSession session = request.getSession();
         User user = adminService.getLoggedInUser();
-        Cart cart = shoppingService.getCart("1");
+        Cart cart = shoppingService.getCart(session.getId());
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         double subTotal = 0;
         double itemDiscount = 0;
@@ -71,6 +94,8 @@ public class UserController {
             System.out.println(itemcount + " costs --> Discount: " + itemDiscount + " : --> " + cartItem.getDiscount() );
         }
         total = (subTotal * (1+tax)) + shipping;
+        grandTotal = ((total* (1 - discount)) - itemDiscount);
+        model.addAttribute("grandTotal", grandTotal);
         model.addAttribute("itemCounter", itemcount);
         model.addAttribute("total", round(total, 2));
         model.addAttribute("itemDiscount", round(itemDiscount, 2));
@@ -82,10 +107,11 @@ public class UserController {
         return "Frontend/User/Checkout";
     }
 
-    @RequestMapping("/User/createOrder")
-    public String paymentUser(Model model) {
+    @RequestMapping(path="/User/createOrder", method={RequestMethod.POST})
+    public String paymentUser(Model model, HttpServletRequest request, @ModelAttribute ("order") Order order, @RequestParam Map<String, String> allRequestParams) {
+        HttpSession session = request.getSession();
+        Cart cart = shoppingService.getCart(session.getId());
         User user = adminService.getLoggedInUser();
-        Cart cart = shoppingService.getCart("1");
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         double subTotal = 0;
         double itemDiscount = 0;
@@ -101,9 +127,10 @@ public class UserController {
             double cartItemCost = cartItem.getPrice()*cartItem.getQuantity();
             subTotal += cartItemCost;
             itemDiscount += (cartItemCost * cartItem.getDiscount());
-            System.out.println(itemcount + " costs --> Discount: " + itemDiscount + " : --> " + cartItem.getDiscount() );
+            //System.out.println(itemcount + " costs --> Discount: " + itemDiscount + " : --> " + cartItem.getDiscount() );
         }
         total = (subTotal * (1+tax)) + shipping;
+        grandTotal = ((total* (1 - discount)) - itemDiscount);
         model.addAttribute("itemCounter", itemcount);
         model.addAttribute("total", round(total, 2));
         model.addAttribute("itemDiscount", round(itemDiscount, 2));
@@ -111,7 +138,21 @@ public class UserController {
         model.addAttribute("subTotal", round(subTotal, 2));
         model.addAttribute("userData", user);
         model.addAttribute("userCart", shoppingService.getAllCartItemsDTO(cart));
-        System.out.println(shoppingService.getAllCartItemsDTO(cart).size());
+        model.addAttribute("grandTotal", round(grandTotal,2));
+        order.setMobile(user.getMobileNr());
+        order.setSessionId(request.getSession().getId());
+        order.setStatus(0);
+        order.setSubTotal(subTotal);
+        order.setItemDiscount(itemDiscount);
+        order.setTax(tax);
+        order.setShipping(shipping);
+        order.setTotal(total);
+        order.setPromo("");
+        order.setDiscount(discount);
+        order.setGrandTotal(grandTotal);
+        order.setMobile(user.getMobileNr());
+        order.setContent("");
+        request.getSession().setAttribute("orderData", order);
         return "Frontend/User/Payment";
     }
 
@@ -149,6 +190,44 @@ public class UserController {
 
     }
 
+
+
+
+    @RequestMapping("User/Payment/Remove/{CartItemId}")
+    public String getAllUserReviews(Model model, @PathVariable Integer CartItemId,HttpServletRequest request) {
+        shoppingService.deleteCartItem(CartItemId);
+        HttpSession session = request.getSession();
+        Cart cart = shoppingService.getCart(session.getId());
+        User user = adminService.getLoggedInUser();
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        double subTotal = 0;
+        double itemDiscount = 0;
+        double tax = 0.30;
+        double shipping = 30;
+        double total = 0;
+        double discount = 0; //Promo Discount!
+        double grandTotal = 0;
+        int itemcount = 0;
+        for (CartItem cartItem: shoppingService.getAllCartItems(cart)
+        ) {
+            itemcount += 1;
+            double cartItemCost = cartItem.getPrice()*cartItem.getQuantity();
+            subTotal += cartItemCost;
+            itemDiscount += (cartItemCost * cartItem.getDiscount());
+            //System.out.println(itemcount + " costs --> Discount: " + itemDiscount + " : --> " + cartItem.getDiscount() );
+        }
+        total = (subTotal * (1+tax)) + shipping;
+        grandTotal = ((total* (1 - discount)) - itemDiscount);
+        model.addAttribute("itemCounter", itemcount);
+        model.addAttribute("total", round(total, 2));
+        model.addAttribute("itemDiscount", round(itemDiscount, 2));
+        model.addAttribute("shipping", shipping);
+        model.addAttribute("subTotal", round(subTotal, 2));
+        model.addAttribute("userData", user);
+        model.addAttribute("userCart", shoppingService.getAllCartItemsDTO(cart));
+        model.addAttribute("grandTotal", round(grandTotal,2));
+        return "Frontend/User/Payment";
+    }
 
     /*@RequestMapping("/User/{userId}/Reviews")
     public String getAllUserReviews(Model model, @PathVariable Integer userId) {

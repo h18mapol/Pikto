@@ -38,7 +38,7 @@
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
 
  <div class="logo" >
-     <a href="http://localhost:8888/Index/"><img style="float: left; margin-right: 1%;" src="/img/pikto.png" width="100"/></a>
+     <a href="http://localhost:8888/Index"><img style="float: left; margin-right: 1%;" src="/img/pikto.png" width="100"/></a>
         </div>
           
             <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#" onclick='clicked()'><i class="fas fa-bars"></i></button>
@@ -46,6 +46,7 @@
           <button type="button" class="btn btn-default btn-sm" style="color:black; background-color:white; margin-right:1.5em;">
            Log out
         </button>
+
         </div>
         </nav>
     <!-- Navbar-->
@@ -87,7 +88,7 @@
                             <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                             Dashboard
                         </a>
-                        <a class="nav-link" href="http://localhost:8888/User/Checkout">
+                        <a class="nav-link" href="http://localhost:8888/Index/Checkout/{{sessionId}}">
                             <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                             Cart
                         </a>

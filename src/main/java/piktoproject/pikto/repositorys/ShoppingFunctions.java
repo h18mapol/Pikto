@@ -115,6 +115,7 @@ public class ShoppingFunctions implements IShoppingFunctions {
             statement.setDouble(4, cartItem.getDiscount());
             statement.setInt(5, cartItem.getQuantity());
             statement.setString(6, cartItem.getContent());
+            statement.executeUpdate();
             statement.close();
             con.close();
         } catch (SQLException ex) {
@@ -123,12 +124,13 @@ public class ShoppingFunctions implements IShoppingFunctions {
     } //Klar
 
     @Override
-    public void deleteCartItem(CartItem cartItem) {
+    public void deleteCartItem(Integer cartItemId) {
         try {
             con = DriverManager.getConnection("jdbc:mysql://localhost:3306/piktodb?serverTimezone=UTC", "root", "");
             Statement statement = con.createStatement();
             statement = con.createStatement();
-            String sqlDeleteCartItem = "DELETE FROM piktodb.cart_item WHERE cartItemId=" + cartItem.getCartItemId();
+            System.out.println("DELETE From Cart");
+            String sqlDeleteCartItem = "DELETE FROM piktodb.cart_item WHERE cartItemId=" + cartItemId;
             statement.executeUpdate(sqlDeleteCartItem);
             statement.close();
             con.close();
@@ -225,12 +227,45 @@ public class ShoppingFunctions implements IShoppingFunctions {
             statement.setString(16, cart.getAddress());
             statement.setString(17, cart.getCity());
             statement.setString(18, cart.getContent());
+            statement.executeUpdate();
             statement.close();
             con.close();
         } catch (SQLException ex) {
             Logger.getLogger(ShoppingFunctions.class.getName()).log(Level.SEVERE, null, ex);
         }//End CreateOrder;
     } //Behöver function för att beräknat total kostnad
+
+    @Override
+    public void createOrderPaypal(Order order) {
+        try {
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/piktodb?serverTimezone=UTC", "root", "");
+            String sqlAddCartItem = "INSERT INTO `order` (userId, sessionId, status, subTotal, itemDiscount, tax, shipping, total, promo, discount, grandTotal, firstName, lastName, mobile, email, address, city, content) VALUE (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+            PreparedStatement statement = con.prepareStatement(sqlAddCartItem);
+            statement.setInt(1, order.getUserId());
+            statement.setString(2, order.getSessionId());
+            statement.setInt(3, order.getStatus()); // Status = Not delivered
+            statement.setDouble(4, order.getSubTotal()); //subTotal
+            statement.setDouble(5, order.getItemDiscount()); //itemDiscount
+            statement.setDouble(6, order.getTax()); //tax
+            statement.setDouble(7, order.getShipping()); //shipping
+            statement.setDouble(8, order.getTotal()); //total
+            statement.setString(9, order.getPromo()); //promo
+            statement.setDouble(10, order.getDiscount()); //discount
+            statement.setDouble(11, order.getGrandTotal()); //Grand total
+            statement.setString(12, order.getFirstName());
+            statement.setString(13, order.getLastName());
+            statement.setString(14, order.getMobile());
+            statement.setString(15, order.getEmail());
+            statement.setString(16, order.getAddress());
+            statement.setString(17, order.getCity());
+            statement.setString(18, order.getContent());
+            statement.executeUpdate();
+            statement.close();
+            con.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(ShoppingFunctions.class.getName()).log(Level.SEVERE, null, ex);
+        }//End CreateOrder;
+    }
 
     @Override
     public Transaction createTransaction(Order order) {
