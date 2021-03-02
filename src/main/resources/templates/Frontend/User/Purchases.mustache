@@ -6,13 +6,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
     <meta name="description" content=""/>
     <meta name="author" content=""/>
-    <title>Dashboard - Admin</title>
+    <title>Dashboard - SB Admin</title>
     <link href="/css/User/userstyles.css" rel="stylesheet"/>
-    <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+
+    <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet"
+          crossorigin="anonymous"/>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js"
             crossorigin="anonymous"></script>
+               <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,600">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+          integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+          integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/Main/animate.css">
+    <link rel="stylesheet" href="/css/Main/style.css">
+    <link rel="stylesheet" href="/css/Main/media-queries.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
+            
    <style>
+   .modal-open .modal {
+    overflow-x: hidden;
+    overflow-y: auto;
+    margin-left: 4%;
+}
  .logo {
             line-height: 60px;
             float: left;
@@ -30,6 +48,9 @@
 .bg-dark {
     background-color: black;
 }
+.card-columns {
+    column-count: 1;
+}
    </style>
 </head>
   <body class="sb-nav-fixed">
@@ -46,10 +67,12 @@
         </button>
         </div>
         </nav>
+    <!-- Navbar-->
+ 
 <div id="layoutSidenav">
     <div id="layoutSidenav_nav">
         <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
-            <div class="sb-sidenav-menu">
+               <div class="sb-sidenav-menu">
 
                 <div class="profile-userpic">
                     <img src="{{userData.pictureUrl}}" class="img-responsive" style="display:block; margin: 0 auto; padding-top: 20px; ">
@@ -64,100 +87,60 @@
                      
                     </div>
                     <div class="nav">
-                        <a class="nav-link" href="http://localhost:8888/Admin">
+                        <a class="nav-link" href="http://localhost:8888/User">
                             <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                             Dashboard
                         </a>
-                        <a class="nav-link" href="http://localhost:8888/Admin/Products">
-                            <div class="sb-nav-link-icon"><i class="fab fa-product-hunt"></i></div>
-                            Products
+                        <a class="nav-link" href="http://localhost:8888/User/Checkout">
+                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                            Cart
                         </a>
-                        <a class="nav-link" href="http://localhost:8888/Admin/Users">
-                            <div class="sb-nav-link-icon"><i class="fas fa-users"></i></div>
-                            Users
-                        </a>
-                        <a class="nav-link" href="http://localhost:8888/Admin/Orders">
-                            <div class="sb-nav-link-icon"><i class="fas fa-receipt"></i></div>
-                            Orders
-                        </a>
-                        <a class="nav-link" href="http://localhost:8888/Admin/Reviews">
-                            <div class="sb-nav-link-icon"><i class="fas fa-glasses"></i></div>
-                            Reviews
+                        <a class="nav-link" href="http://localhost:8888/User/Purchases">
+                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                            Purchased images
                         </a>
                     </div>
-                   
                 </div>
                <div class="sb-sidenav-footer">
                       <p data-toggle="modal" data-target="#editModal" style="float:left;"><i class="fas fa-cog" style="margin-right:5px"></i>Settings</p>
 
                     </div>
+
             </div>
         </nav>
     </div>
-
+      </div>
     <div id="layoutSidenav_content">
-        <main>
-            <div class="container-fluid">
-                <h1 class="mt-4">Customers</h1>
-                <div class="card mb-4">
-                    <div class="card-header">
-                        <i class="fas fa-table mr-1"></i>
-                        Customers
-                    </div>
-                    <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                <thead>
-                                <tr>
-                                    <th>UserID</th>
-                                    <th>Firstname</th>
-                                    <th>Lastname</th>
-                                    <th>Mobilenumber</th>
-                                    <th>Email</th>
-                                    <th class="hide">admin</th>
-                                    <th class="hide">seller</th>
-                                    <th class="hide">pictureUrl</th>
-                                </tr>
-                                </thead>
-                                <tfoot>
-                                <tr>
-                                    <th>UserID</th>
-                                    <th>Firstname</th>
-                                    <th>Lastname</th>
-                                    <th>Mobilenumber</th>
-                                    <th>Email</th>
-                                    <th class="hide">admin</th>
-                                    <th class="hide">seller</th>
-                                    <th class="hide">pictureUrl</th>
-                                </tr>
-                                </tfoot>
-                                <tbody>
-                                {{#allUsers}}
-                                <tr>
-                                    <td>{{userId}}</td>
-                                    <td>{{firstName}}</td>
-                                    <td>{{lastName}}</td>
-                                    <td>{{mobileNr}}</td>
-                                    <td>{{email}}</td>
-                                    <td class="hide">{{admin}}</td>
-                                    <td class="hide">{{seller}}</td>
-                                    <td class="hide">{{pictureUrl}}</td>
-                                </tr>
-                                {{/allUsers}}
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
+<div class="container" style="margin-top: 5%; margin-left: 28%;">
+<div class="row">
+        <div class="card-columns">
+            {{#userOrders}}
+            <div class="card">
+           <h4 class="card-title" style="color:black;">{{title}}</h4>
+            <h6  id="idProduct">{{productId}}</h6>
+                <div class="card-body">
+                        <img src="{{productUrl}}" alt="Italian Trulli" style="padding-bottom:1.25rem;">
+                </div>
+                <div class="card-footer">
+                <a href="{{productUrl}}" download>
+
+                <button type="button" class="btn btn-info"><i class="fa fa-download"></i>Download</button>
+                 </a>
+
+                <button type="button" class="btn btn-success" data-toggle="modal"  id="toggleModal" data-target="#addReview">Review</button>
+
+
+
                 </div>
             </div>
-        </main>
-    </div>
+            {{/userOrders}}
+        </div>
 </div>
 
-
-
-
-
+            </div>
+        
+     </div>
+    
 <div class="modal" tabindex="-1" role="dialog" id="editModal">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -243,83 +226,81 @@
                 </form>
             </div>
 
-            
-
-        </div>
-    </div>
+</div>
+</div>
 </div>
 
 
 
 
-<div class="modal" tabindex="-1" role="dialog" id="productsModal">
+
+
+
+
+
+
+
+<div class="modal" tabindex="-1" role="dialog" id="addReview">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Edit Product</h5>
+                <h5 class="modal-title">Add Review</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body" id="modalBody">
-                <form method="POST" action="/Admin/updateProduct" novalidate>
-                    <div class="form-group row">
-                        <label for="reviewId" class="col-4 col-form-label">Review id</label>
-                        <div class="col-8">
-                            <input id="reviewId" name="reviewId" type="text" class="form-control" readonly>
-                        </div>
+            <div class="modal-body" id="reviewModalBody">
+                <form method="POST" action="/User/addReview" novalidate>
+                    <div class="form-group row" style="display:none;">
+                        <label for="productId">Product id</label>
+                       
+                            <input id="r_productId" name="productId" type="text" class="form-control" hidden>
+    
                     </div>
                     <div class="form-group row">
-                        <label for="productId" class="col-4 col-form-label">Product id</label>
-                        <div class="col-8">
-                            <input id="productId" name="productId" type="text" class="form-control" readonly>
-                        </div>
+                        <label for="r_title">Title</label>
+                            <input id="r_title" name="title" type="text" class="form-control">
+                    </div>
+
+                     <div class="form-group row">
+                       <label for="r_title">Rating</label>
+                         <select class="form-control" id="Rating" name="rating">
+                        <option value="1">1</option>
+                          <option value="2">2</option>
+                           <option value="3">3</option>
+                            <option value="4">4</option>
+                             <option value="5">5</option>
+                    
+                         </select>
+                                                                           
+                            </div>
+                    <div class="form-group row" style="display:none;">
+                        <label for="r_createdAt">Created At</label>
+                      
+                            <input id="r_createdAt" name="createdAt" type="text" class="form-control" >
+                   
                     </div>
                     <div class="form-group row">
-                        <label for="title" class="col-4 col-form-label">Title</label>
-                        <div class="col-8">
-                            <input id="title" name="title" type="text" class="form-control">
-                        </div>
+                        <label for="r_content" >Review text</label>
+                       
+                            <input id="r_content" name="content" type="text" class="form-control">
                     </div>
-                    <div class="form-group row">
-                        <label for="rating" class="col-4 col-form-label">Rating</label>
-                        <div class="col-8">
-                            <input id="rating" name="rating" type="number" class="form-control" required min="1" max="5" placeholder="max rating 5">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="createdAt" class="col-4 col-form-label">Created At</label>
-                        <div class="col-8">
-                            <input id="createdAt" name="createdAt" type="text" class="form-control">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="content" class="col-4 col-form-label">Content</label>
-                        <div class="col-8">
-                            <input id="content" name="content" type="text" class="form-control">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="userId" class="col-4 col-form-label">User id</label >
-                        <div class="col-8">
-                            <input id="userId" name="userId" type="number" class="form-control" readonly>
-                        </div>
+                    <div class="form-group row" style="display:none;">
+                        <label for="r_userId" >User id</label >
+                       
+                            <input id="r_userId" name="userId" type="number" value="{{userData.userId}}"class="form-control" >
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-primary">Save changes</button>
-                        <a id="deletebtn" class="btn btn-danger">Delete Event</a>
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
-</div>
 
+        </div>
 
-
-
-    </div>
 
 
 
@@ -327,51 +308,24 @@
 
 
 </div>
-
 
 <script src="/js/Admin/jquery.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-<!--<script src="/js/Admin/scripts.js"></script>-->
-<script src="/js/Admin/jquery.backstretch.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
+        crossorigin="anonymous"></script>
+<script src="/js/Admin/scripts.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+<script src="/js/Admin/chart-area-demo.js"></script>
+<script src="/js/Admin/chart-bar-demo.js"></script>
 <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
 <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
-<script src="/js/Admin/datatables-products.js"></script>
-
-<!--<script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>-->
-<!--<script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>-->
+<script src="/js/Admin/datatables-demo.js"></script>
 
 <script>
-
-$(document).ready(function () {
-
-    $("#dataTable tbody tr").click(function () {
-        alert("Hej");
-        var tableData = $(this).children("td").map(function() {
-            return $(this).text();
-        }).get();
-
-        window.location.href = '/Admin/User/'+tableData[0];
-});
-
-});
-  
-
-    // Toggle the side navigation
-    function clicked(){
-
-          var path = window.location.href; // because the 'href' property of the DOM element is the absolute path
-        $("#layoutSidenav_nav .sb-sidenav a.nav-link").each(function() {
-            if (this.href === path) {
-                $(this).addClass("active");
-            }
-        });
-
-
-
-      $("body").toggleClass("sb-sidenav-toggled");
-
-    }
-    
+     $("#toggleModal").click(function () { 
+            var id = $("#idProduct").text(); 
+            alert(id);
+            $("#r_productId").val(id); 
+        }); 
 </script>
 </body>
 </html>

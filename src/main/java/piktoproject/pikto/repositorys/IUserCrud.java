@@ -13,6 +13,7 @@ public interface IUserCrud{
     User getUserByEmail(String email);
    
     //Products
+    
     List<Product>getAllCategoryProducts(int categoryId);
     List<Product>getAllUserProducts(int userId);
     Product getProduct(int productId);
@@ -34,6 +35,8 @@ public interface IUserCrud{
     Order getOrderById(int orderId);
     Order updateOrder(Order order);
     void deleteOrder(int orderId);
+     List<Product>getAllOrderItems(int userId);
+
 
     //Category
     List<Category>getAllCategories();

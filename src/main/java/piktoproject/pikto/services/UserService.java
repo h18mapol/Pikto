@@ -41,7 +41,7 @@ public class UserService {
         userCrud.updateUser(user);
     }
      
-     
+  
 
 
     //Product Methods
@@ -79,10 +79,16 @@ public class UserService {
     public void deleteReview(int reviewId){
         userCrud.deleteReview(reviewId);
     }
+    public void addReview(Product_review product_review){
+        userCrud.addReview(product_review);
+    }
 
     //Order Methods
     public List<Order> getAllUserOrders(int userId){
         return userCrud.getAllUserOrders(userId);
+    }
+        public List<Product> getAllOrderItems(int userId){
+        return userCrud.getAllOrderItems(userId);
     }
 }
 

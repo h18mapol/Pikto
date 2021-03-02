@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import piktoproject.pikto.models.CartItem;
 import piktoproject.pikto.models.Product;
 import piktoproject.pikto.models.Cart;
+import piktoproject.pikto.models.Product_review;
 
 import piktoproject.pikto.models.User;
 import piktoproject.pikto.services.AdminService;
@@ -130,6 +131,24 @@ public class UserController {
             return "redirect:http://localhost:8888/User";
         }
     }
+    
+     @RequestMapping("/User/Purchases")
+    public String getUserPurchases(Model model) {
+        User user = adminService.getLoggedInUser();
+        model.addAttribute("userData", user);
+        model.addAttribute("userOrders", userService.getAllOrderItems(user.getUserId()));
+     
+        return "Frontend/User/Purchases";
+    }
+    
+     @RequestMapping(path="/User/addReview", method={RequestMethod.POST})
+    public String addProduct(@ModelAttribute ("review")Product_review review,@RequestParam Map<String, String> allRequestParams){
+
+        userService.addReview(review);
+        return "redirect:http://localhost:8888/User/Purchases";
+
+    }
+
 
     /*@RequestMapping("/User/{userId}/Reviews")
     public String getAllUserReviews(Model model, @PathVariable Integer userId) {

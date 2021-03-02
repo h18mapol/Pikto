@@ -76,17 +76,6 @@ public class AdminController {
     @RequestMapping(path="/Admin/addProduct", method={RequestMethod.POST})
     public String addProduct(@ModelAttribute ("product")Product product,@RequestParam Map<String, String> allRequestParams){
 
-        System.out.println(product.getTitle());
-        System.out.println(product.getCategoryId());
-        System.out.println(product.getProductUrl());
-        System.out.println(product.getPrice());
-        System.out.println(product.getContent());
-        System.out.println(product.getDiscount());
-        System.out.println(product.getPublishedAt());
-        System.out.println(product.getType());
-        System.out.println(product.getSummary());
-        System.out.println(product.getProductId());
-        System.out.println(product.getUserId());
         userService.addProduct(product);
         return "redirect:/Admin";
 
@@ -101,6 +90,12 @@ public class AdminController {
         userService.updateUser(user);
         return "redirect:/Admin";
     }
+    @RequestMapping(path="/Admin/User/deleteUser/{userId}")
+    public String deleteUser(Model model,@PathVariable Integer userId){
+        adminService.deleteUser(userId);
+        return "redirect:/Admin";
+    }
+    
     @RequestMapping(path="/Admin/updateProduct", method={RequestMethod.POST})
     public String updateProduct(Model model,@ModelAttribute ("product")Product product,@RequestParam Map<String, String> allRequestParams){
         userService.updateProduct(product);
@@ -212,6 +207,8 @@ public class AdminController {
         model.addAttribute("userOrders",adminService.getAllOrdersById(user.getUserId()));
         return "Frontend/Admin/IndividualUser";
     }
+    
+    
 
     @RequestMapping("/Index/klarna")
     public String getUserPage(Model model){

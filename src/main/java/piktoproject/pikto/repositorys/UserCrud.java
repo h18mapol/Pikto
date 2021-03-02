@@ -773,5 +773,40 @@ public class UserCrud implements IUserCrud {
         return null;
     } //Klar
 
+    @Override
+    public List<Product> getAllOrderItems(int userId) {
+          List<Product> orderItems = new ArrayList<>();
+        try{
+            con=DriverManager.getConnection("jdbc:mysql://localhost:3306/piktodb?serverTimezone=UTC","root","");
+            String sqlGetOrderItems="SELECT * FROM product WHERE product.productId IN ( SELECT order_item.productId FROM order_item WHERE order_item.orderId IN ( SELECT piktodb.order.orderId FROM piktodb.order WHERE piktodb.order.userId = ? ))";
+       PreparedStatement statement = con.prepareStatement(sqlGetOrderItems);
+
+            statement.setInt(1, 11);
+
+            ResultSet resultset=statement.executeQuery();
+            while (resultset.next()){
+                  Product product = new Product();
+                product.setProductId(resultset.getInt("productId"));
+                product.setUserId(resultset.getInt("userId"));
+                product.setTitle(resultset.getString("title"));
+                product.setSummary(resultset.getString("summary"));
+                product.setType(resultset.getString("type"));
+                product.setPrice(resultset.getInt("price"));
+                product.setDiscount(resultset.getInt("discount"));
+                product.setPublishedAt(resultset.getString("publishedAt"));
+                product.setContent("");
+                product.setProductUrl(resultset.getString("productUrl"));
+                orderItems.add(product);
+            }
+            resultset.close();
+            statement.close();
+            con.close();
+            return orderItems;
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminCrud.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    } //Klar
+
   
 }
