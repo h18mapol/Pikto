@@ -80,23 +80,22 @@
             border: 0;
         }
 
-footer {
-  text-align: center;
-  background-color: #000;
-  color: #000;
-  position: fixed;
-  padding:0;
-  bottom: 0;
-  width: 100%;
-  height:30px;
+        footer {
+            text-align: center;
+            background-color: #000;
+            color: #000;
+            position: fixed;
+            padding: 0;
+            bottom: 0;
+            width: 100%;
+            height: 30px;
 
-}
-.social{
-    padding-bottom:15px;
+        }
 
-}
+        .social {
+            padding-bottom: 15px;
 
-
+        }
 
         header {
             width: 100%;
@@ -123,6 +122,7 @@ footer {
             font-size: 20px;
             letter-spacing: 2px;
         }
+
         .userMenu {
             line-height: 60px;
             position: fixed;
@@ -179,27 +179,30 @@ footer {
             color: #fff;
             display: none;
         }
-        .user2 {     
-                display:none;
+
+        .user2 {
+            display: none;
         }
-.card-columns{
-              column-count: 4;
+
+        .card-columns {
+            column-count: 4;
         }
 
         @media (max-width: 786px) {
-                header {
-            width: 100%;
-            height: 60vh;
-            background: url(/img/hero.png) no-repeat 50% 50%;
-            background-size: cover;
-        }
+            header {
+                width: 100%;
+                height: 60vh;
+                background: url(/img/hero.png) no-repeat 50% 50%;
+                background-size: cover;
+            }
 
-           #user1 { 
-            display:none;
-        }
-        .user2 {
-             display:inline-block;       
-        }
+            #user1 {
+                display: none;
+            }
+
+            .user2 {
+                display: inline-block;
+            }
 
             .logo {
                 position: fixed;
@@ -211,8 +214,9 @@ footer {
                 max-height: 0px;
                 background: #000;
             }
-             nav {
-                overflow:hidden;
+
+            nav {
+                overflow: hidden;
             }
 
             nav.black ul {
@@ -234,40 +238,38 @@ footer {
             .menu-icon {
                 display: block;
             }
-            .card-columns{
-              column-count: 1;
-        }
+
+            .card-columns {
+                column-count: 1;
+            }
 
         }
-        
 
-        
 
     </style>
 
 
 </head>
-<body >
+<body>
 <!-- Top menu -->
 
 <header>
     <nav>
         <div class="menu-icon">
 
-           <div >
-           
-        </div>
-      
+            <div>
+
+            </div>
+
             <i class="fa fa-bars fa-2x"></i>
 
-              
+
         </div>
-        
-          <div class="logo" >
-     <a href="http://localhost:8888/Index/"><img style="float: left; margin-right: 1%;" src="/img/pikto.png" width="100"/></a>
+
+        <div class="logo">
+            <a href="http://localhost:8888/Index/"><img style="float: left; margin-right: 1%;" src="/img/pikto.png"
+                                                        width="100"/></a>
         </div>
-     
-         
 
 
         <div class="menu">
@@ -276,24 +278,29 @@ footer {
                 <li><a href="http://localhost:8888/Index/Category/2">Stockphotos</a></li>
                 <li><a href="http://localhost:8888/Index/Category/3">Posters</a></li>
 
-                <li id="loggedinfalse"><a href="http://localhost:8888/Index/Checkout/{{sessionId}}" >
+                <li id="loggedinfalse"><a href="http://localhost:8888/Index/Checkout/{{sessionId}}">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
-                         class="bi bi-cart-fill"viewBox="0 0 16 16">
+                         class="bi bi-cart-fill" viewBox="0 0 16 16">
                         <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
                     </svg>
                 </a></li>
 
-                 <li id="loggedintrue" style="display:none;"><a href="http://localhost:8888/User/Checkout">
+                <li id="loggedintrue" style="display:none;"><a href="http://localhost:8888/User/Checkout">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
-                         class="bi bi-cart-fill"viewBox="0 0 16 16">
+                         class="bi bi-cart-fill" viewBox="0 0 16 16">
                         <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
                     </svg>
                 </a></li>
 
 
-                <a href="http://localhost:8888/User"><li class="loggedIn" style="display:none;" id="true"> <i class='fas fa-user-alt'  style='font-size:17px;'></i></li></a>
+                <a href="http://localhost:8888/User">
+                    <li class="loggedIn" style="display:none;" id="true"><i class='fas fa-user-alt'
+                                                                            style='font-size:17px;'></i></li>
+                </a>
 
-               <a href="http://localhost:8888/login"><li class="{{loggedIn}}" id="login"> <i class='fas fa-user-alt'  style='font-size:17px;'></i></li></a>
+                <a href="http://localhost:8888/login">
+                    <li class="{{loggedIn}}" id="login"><i class='fas fa-user-alt' style='font-size:17px;'></i></li>
+                </a>
             </ul>
         </div>
     </nav>
@@ -313,7 +320,7 @@ footer {
 
 <div class="container" style="max-width:90%; margin-top:1.25rem; ">
     <div class="row">
-        <div class="card-columns" >
+        <div class="card-columns">
             {{#allProducts}}
             <div class="card" style="margin:0; padding:0; border:0px;">
                 <div class="card-body" style="margin:0; padding:0;">
@@ -330,17 +337,17 @@ footer {
 
 <!-- Footer -->
 
-  <footer class="footer">
+<footer class="footer">
 
-  <div class="social">
-            <ul class="list-inline">
-                <li class="list-inline-item"><a href="#">About</a></li>
-                <li class="list-inline-item"><a href="#">Contact</a></li>
-                <li class="list-inline-item"><a href="#">Terms</a></li>
-                <li class="list-inline-item"><a href="#">Privacy Policy</a></li>
-            </ul>
-            </div>
-  </footer>
+    <div class="social">
+        <ul class="list-inline">
+            <li class="list-inline-item"><a href="#">About</a></li>
+            <li class="list-inline-item"><a href="#">Contact</a></li>
+            <li class="list-inline-item"><a href="#">Terms</a></li>
+            <li class="list-inline-item"><a href="#">Privacy Policy</a></li>
+        </ul>
+    </div>
+</footer>
 </body>
 <!-- Javascript -->
 <script src="/js/Main/jquery-3.3.1.min.js"></script>
@@ -381,25 +388,19 @@ footer {
     }
 
 
-    var loggedin=$("#login").attr("class");
+    var loggedin = $("#login").attr("class");
     console.log(loggedin);
 
-    if(loggedin==="loggedintrue"){
-        $("#login").css("display","none");
-      $("#true").css("display","inline-block");
-       $("#loggedintrue").css("display","inline-block");
-       $("#loggedinfalse").css("display","none");
-
+    if (loggedin === "loggedintrue") {
+        $("#login").css("display", "none");
+        $("#true").css("display", "inline-block");
+        $("#loggedintrue").css("display", "inline-block");
+        $("#loggedinfalse").css("display", "none");
 
 
     }
-   
 
 
-
-    
-
-  
 </script>
 
 

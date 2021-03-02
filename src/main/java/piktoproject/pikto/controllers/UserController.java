@@ -76,10 +76,11 @@ public class UserController {
         HttpSession session = request.getSession();
         User user = adminService.getLoggedInUser();
         Cart cart = shoppingService.getCart(session.getId());
+        Order order = new Order();
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         double subTotal = 0;
         double itemDiscount = 0;
-        double tax = 0.30;
+        double tax = 0;
         double shipping = 30;
         double total = 0;
         double discount = 0; //Promo Discount!
@@ -89,21 +90,31 @@ public class UserController {
         ) {
             itemcount += 1;
             double cartItemCost = cartItem.getPrice()*cartItem.getQuantity();
+            tax += cartItemCost * 0.3;
             subTotal += cartItemCost;
             itemDiscount += (cartItemCost * cartItem.getDiscount());
             System.out.println(itemcount + " costs --> Discount: " + itemDiscount + " : --> " + cartItem.getDiscount() );
         }
-        total = (subTotal * (1+tax)) + shipping;
+        total = (subTotal + tax + shipping);
         grandTotal = ((total* (1 - discount)) - itemDiscount);
-        model.addAttribute("grandTotal", grandTotal);
+        order.setMobile(user.getMobileNr());
+        order.setSessionId(request.getSession().getId());
+        order.setStatus(0);
+        order.setSubTotal(round(subTotal, 2));
+        order.setItemDiscount(round(itemDiscount, 2));
+        order.setTax(tax);
+        order.setShipping(shipping);
+        order.setTotal(round(total, 2));
+        order.setPromo("");
+        order.setDiscount(discount);
+        order.setGrandTotal(round(grandTotal,2));
+        order.setMobile(user.getMobileNr());
+        order.setContent("");
+        model.addAttribute("orderData", order);
+        request.getSession().setAttribute("orderData", order);
         model.addAttribute("itemCounter", itemcount);
-        model.addAttribute("total", round(total, 2));
-        model.addAttribute("itemDiscount", round(itemDiscount, 2));
-        model.addAttribute("shipping", shipping);
-        model.addAttribute("subTotal", round(subTotal, 2));
         model.addAttribute("userData", user);
         model.addAttribute("userCart", shoppingService.getAllCartItemsDTO(cart));
-        System.out.println(shoppingService.getAllCartItemsDTO(cart).size());
         return "Frontend/User/Checkout";
     }
 
@@ -125,33 +136,30 @@ public class UserController {
         ) {
             itemcount += 1;
             double cartItemCost = cartItem.getPrice()*cartItem.getQuantity();
+            tax += cartItemCost * 0.3;
             subTotal += cartItemCost;
             itemDiscount += (cartItemCost * cartItem.getDiscount());
             //System.out.println(itemcount + " costs --> Discount: " + itemDiscount + " : --> " + cartItem.getDiscount() );
         }
-        total = (subTotal * (1+tax)) + shipping;
+        total = subTotal + tax + shipping;
         grandTotal = ((total* (1 - discount)) - itemDiscount);
         model.addAttribute("itemCounter", itemcount);
-        model.addAttribute("total", round(total, 2));
-        model.addAttribute("itemDiscount", round(itemDiscount, 2));
-        model.addAttribute("shipping", shipping);
-        model.addAttribute("subTotal", round(subTotal, 2));
         model.addAttribute("userData", user);
         model.addAttribute("userCart", shoppingService.getAllCartItemsDTO(cart));
-        model.addAttribute("grandTotal", round(grandTotal,2));
         order.setMobile(user.getMobileNr());
         order.setSessionId(request.getSession().getId());
         order.setStatus(0);
-        order.setSubTotal(subTotal);
-        order.setItemDiscount(itemDiscount);
+        order.setSubTotal(round(subTotal, 2));
+        order.setItemDiscount(round(itemDiscount, 2));
         order.setTax(tax);
         order.setShipping(shipping);
-        order.setTotal(total);
+        order.setTotal(round(total, 2));
         order.setPromo("");
         order.setDiscount(discount);
-        order.setGrandTotal(grandTotal);
+        order.setGrandTotal(round(grandTotal,2));
         order.setMobile(user.getMobileNr());
         order.setContent("");
+        model.addAttribute("orderData", order);
         request.getSession().setAttribute("orderData", order);
         return "Frontend/User/Payment";
     }

@@ -147,36 +147,70 @@
                                 {{#userCart}}
                                 <li class="list-group-item d-flex justify-content-between lh-condensed">
                                     <small class="text-muted">
-                                        <img src="{{productUrl}}" style="object-fit:cover; width:90px; height:60px;">
+                                        <img src="{{productUrl}}" style="object-fit:cover; width:120px; height:90px;">
                                     </small>
                                     <div>
-                                        <h6 class="my-0">{{title}}</h6>
-                                        <small class="text-muted">Quantity: {{quantity}}</small>
+                                        <div class="d-flex justify-content-between">
+                                            <div>
+                                                <h5>{{title}}</h5>
+                                                <p class="mb-3 text-muted text-uppercase small">Discount: {{discount}}</p>
+                                                <p class="mb-2 text-muted text-uppercase small">Quantity: {{quantity}}</p>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <div>
+                                                <a href="http://localhost:8888/User/Payment/Remove/{{cartItemId}}" type="button" class="card-link-secondary small text-uppercase mr-3"><i
+                                                        class="fas fa-trash-alt mr-1"></i> Remove</a>
+                                            </div>
+                                            <p class="mb-0"><span><strong>{{price}}</strong></span></p>
+                                        </div>
                                     </div>
-                                    <span class="text-muted">Price: {{price}}</span>
                                 </li>
                                 {{/userCart}}
-                                <li class="list-group-item d-flex justify-content-between lh-condensed">
-                                    <div>
-                                        <h6 class="my-0">Total </h6>
-                                        <h6 class="my-0">{{total}} </h6>
+                                <!-- Card -->
+                                <li>
+                                <div class="mb-3">
+                                    <div class="pt-4">
+
+                                        <h5 class="mb-3">The total amount of</h5>
+
+                                        <ul class="list-group list-group-flush">
+                                            <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">
+                                                Temporary amount (ex-moms)
+                                                <span>{{orderData.subTotal}}</span>
+                                            </li>
+                                            <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">
+                                                Moms
+                                                <span>{{orderData.tax}}</span>
+                                            </li>
+                                            <li class="list-group-item d-flex justify-content-between align-items-center px-0">
+                                                Shipping
+                                                <span>{{orderData.shipping}}</span>
+                                            <li class="list-group-item d-flex justify-content-between align-items-center px-0 text-danger">
+                                                Discount
+                                                <span>{{orderData.itemDiscount}}</span>
+                                            </li>
+                                            <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-3">
+                                                <div>
+                                                    <strong>The total amount of</strong>
+                                                    <strong>
+                                                        <p class="mb-0">(including VAT)</p>
+                                                    </strong>
+                                                </div>
+                                                <span><strong>{{orderData.total}}</strong></span>
+                                            </li>
+                                        </ul>
                                     </div>
-                                    <div>
-                                        <small class="text-muted">Total discount</small>
-                                        <small class="text-muted .text-danger">{{itemDiscount}}</small>
-                                    </div>
-                                    <div>
-                                        <small class="text-muted">Grand Total</small>
-                                        <small class="text-muted .text-danger">{{grandTotal}}</small>
-                                    </div>
+                                </div>
                                 </li>
+                                <!-- Card -->
                             </ul>
 
                             <form class="card p-2">
                                 <div class="input-group">
                                     <input type="text" class="form-control" placeholder="Promo code" disabled>
                                     <div class="input-group-append">
-                                        <button type="submit" class="btn btn-secondary">Redeem</button>
+                                        <button type="button" class="btn btn-secondary">Redeem</button>
                                     </div>
                                 </div>
                             </form>

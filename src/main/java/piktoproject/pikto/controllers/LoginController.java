@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import piktoproject.pikto.login.facebook.Facebook;
 import piktoproject.pikto.models.Cart;
+import piktoproject.pikto.models.PasswordDTO;
 import piktoproject.pikto.models.User;
 import piktoproject.pikto.repositorys.ShoppingFunctions;
 import piktoproject.pikto.repositorys.UserCrud;
@@ -60,6 +61,34 @@ public class LoginController {
     public String loadLoginPage(Model model) {
         return "login";
     }
+
+    @GetMapping("/SignUp")
+    public String loadSignUp(Model model) {
+        return "signup";
+    }
+
+    @PostMapping(path = "/SignUp/NewUser")
+    public String newUser(Model model, @ModelAttribute("user") User user, @RequestParam Map<String, String> allRequestParams){
+        adminService.addUser(user);
+        return "login";
+    }
+
+    @GetMapping("/SignUp/ForgotPassword")
+    public String loadForgotPassword(Model model) {
+        return "forgotpassword";
+    }
+
+    @PostMapping(path = "/SignUp/ForgotPassword/NewPassword")
+    public String newPassword(Model model, @ModelAttribute("passwordDTO") PasswordDTO passwordDTO, @RequestParam Map<String, String> allRequestParams){
+        if (adminService.resetPassword(passwordDTO)){
+            System.out.println("Success new password");
+            return "login";
+        } else {
+            System.out.println("Fail: new password");
+            return "forgotpassword";
+        }
+    }
+
 
     @RequestMapping("/formLogin")
     public String getformLoginInfo(Model model, HttpServletRequest request) {
@@ -219,4 +248,5 @@ public class LoginController {
                 return "login";
         }
     }
+
 }
