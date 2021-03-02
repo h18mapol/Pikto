@@ -21,8 +21,8 @@ public class ShoppingService {
     public List<CartItem> getAllCartItems(Cart cart) {
         return ShoppingFunctionsCrud.getAllCartItems(cart);
     }
-    public void deleteCartItem(CartItem cartItem) {
-        ShoppingFunctionsCrud.deleteCartItem(cartItem);
+    public void deleteCartItem(Integer cartItemId) {
+        ShoppingFunctionsCrud.deleteCartItem(cartItemId);
     }
     public Cart getCart(String sessionId){ return ShoppingFunctionsCrud.getCart(sessionId);}
     public void deleteCart(Cart cart) {ShoppingFunctionsCrud.deleteCart(cart);}

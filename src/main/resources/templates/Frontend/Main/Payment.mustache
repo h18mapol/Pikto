@@ -40,7 +40,7 @@
 </head>
 <body class="sb-nav-fixed">
 <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-    <a class="navbar-brand" href="index.html">Start Bootstrap</a>
+    <a class="navbar-brand" href="/Index">Start Bootstrap</a>
     <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i>
     </button>
     <!-- Navbar Search-->
@@ -70,44 +70,10 @@
         </li>
     </ul>
 </nav>
-<div id="layoutSidenav">
+><div id="layoutSidenav">
     <div id="layoutSidenav_nav">
         <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
-
             <div class="sb-sidenav-menu">
-                <div class="profile-userpic">
-                    <img src="https://scontent.fbma2-1.fna.fbcdn.net/v/t1.0-9/17796707_10155264022745159_8129848447376750595_n.jpg?_nc_cat=111&ccb=2&_nc_sid=174925&_nc_ohc=njmSzJq0HE8AX_RWY6P&_nc_ht=scontent.fbma2-1.fna&oh=ae2a9a187954f17fe489be1522d04e9e&oe=60448624"
-                         class="img-responsive" style="display:block; margin: 0 auto; padding-top: 20px; ">
-                </div>
-
-                <div class="profile-usertitle">
-                    <div class="profile-usertitle-name">
-                        {{userData.firstName}}
-                        <div class="profile-usertitle-name">
-                            {{userData.lastName}}
-                            <div class="profile-usertitle-name">
-                                {{userData.email}}
-                                <div class="profile-usertitle-job">
-                                    {{userData.mobileNr}}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="profile-userbuttons">
-                    </div>
-                    <div class="nav">
-                        <div class="sb-sidenav-menu-heading">Admin</div>
-                        <a class="nav-link" href="http://localhost:8888/User">
-                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                            Dashboard
-                        </a>
-                        <a class="nav-link" href="http://localhost:8888/User/Checkout">
-                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                            Cart
-                        </a>
-                    </div>
-                </div>
             </div>
             <div class="sb-sidenav-footer">
                 <a data-toggle="modal" data-target="#editModal">
@@ -143,17 +109,16 @@
                                     <div>
                                         <h6 class="my-0">{{title}}</h6>
                                         <small class="text-muted">Quantity: {{quantity}}</small>
-                                        <small class="text-muted">Price: {{price}}</small>
-                                        <a href="http://localhost:8888/User/Payment/Remove/{{cartItemId}}" class="btn btn-secondary">Remove</a>
                                     </div>
+                                    <span class="text-muted">Price: {{price}}</span>
                                 </li>
                                 {{/userCart}}
                                 <li class="list-group-item d-flex justify-content-between lh-condensed">
                                     <div>
-                                        <h6 class="my-0">Total {{total}}</h6>
-                                        <small class="text-muted">Total discount {{itemDiscount}}</small>
+                                        <h6 class="my-0">Total {{order.total}}</h6>
+                                        <small class="text-muted">Total discount {{order.itemDiscount}}</small>
                                     </div>
-                                    <h6 class="my-0">Grand Total:<span class="my-0" id="grandTotal">{{grandTotal}}</span> </h6>
+                                    <h6 class="my-0">Grand Total:<span class="my-0" id="grandTotal">{{order.grandTotal}}</span> </h6>
 
                                 </li>
                             </ul>
@@ -176,12 +141,12 @@
                                 <div class="row">
                                     <div class="col-md-6 mb-3">
                                         <label for="firstName">First name</label>
-                                        <input type="text" class="form-control" id="firstName" placeholder="" value="{{userData.firstName}}" name="firstName"
+                                        <input type="text" class="form-control" id="firstName" placeholder="" value="{{order.firstName}}" name="firstName"
                                                disabled>
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <label for="lastName">Last name</label>
-                                        <input type="text" class="form-control" id="lastName" placeholder="" value="{{userData.lastName}}" name="lastName"
+                                        <input type="text" class="form-control" id="lastName" placeholder="" value="{{order.lastName}}" name="lastName"
                                                disabled>
                                     </div>
                                 </div>
@@ -193,7 +158,7 @@
                                             <span class="input-group-text">@</span>
                                         </div>
                                         <input type="text" class="form-control" id="username" placeholder="Username"
-                                               disabled value="{{userData.userId}}" name="userId">
+                                               disabled value="{{order.email}}" name="userId">
                                     </div>
                                 </div>
                                 <hr class="mb-4">

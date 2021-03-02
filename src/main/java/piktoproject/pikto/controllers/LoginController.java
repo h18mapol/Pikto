@@ -65,6 +65,7 @@ public class LoginController {
     public String getformLoginInfo(Model model, HttpServletRequest request) {
         Cart cart;
         HttpSession session = request.getSession();
+        model.addAttribute("sessionId", session.getId());
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = adminService.getUserByEmail(auth.getName());
         shoppingFunctions.createCart(session.getId(),user);
@@ -97,7 +98,7 @@ public class LoginController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         OAuth2AuthenticationToken oauthToken = (OAuth2AuthenticationToken) authentication;
         String clientRegistrationId = oauthToken.getAuthorizedClientRegistrationId();
-        System.out.println(session.getId());
+        model.addAttribute("sessionId", session.getId());
         switch (clientRegistrationId) {
             case "facebook":
                 //System.out.println(oauthToken.getPrincipal().getAttributes().toString());

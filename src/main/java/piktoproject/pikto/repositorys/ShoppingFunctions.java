@@ -124,12 +124,13 @@ public class ShoppingFunctions implements IShoppingFunctions {
     } //Klar
 
     @Override
-    public void deleteCartItem(CartItem cartItem) {
+    public void deleteCartItem(Integer cartItemId) {
         try {
             con = DriverManager.getConnection("jdbc:mysql://localhost:3306/piktodb?serverTimezone=UTC", "root", "");
             Statement statement = con.createStatement();
             statement = con.createStatement();
-            String sqlDeleteCartItem = "DELETE FROM piktodb.cart_item WHERE cartItemId=" + cartItem.getCartItemId();
+            System.out.println("DELETE From Cart");
+            String sqlDeleteCartItem = "DELETE FROM piktodb.cart_item WHERE cartItemId=" + cartItemId;
             statement.executeUpdate(sqlDeleteCartItem);
             statement.close();
             con.close();
