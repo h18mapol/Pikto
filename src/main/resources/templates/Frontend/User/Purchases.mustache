@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
           integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
     <link rel="stylesheet" href="/css/Main/animate.css">
-    <link rel="stylesheet" href="/css/Main/style.css">
+    <link rel="stylesheet" href="/css/User/style.css">
     <link rel="stylesheet" href="/css/Main/media-queries.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
@@ -46,7 +46,7 @@
 }
 
 .bg-dark {
-    background-color: black;
+    background-color: black !important;
 }
 .card-columns {
     column-count: 1;
@@ -62,9 +62,9 @@
           
             <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#" onclick='clicked()'><i class="fas fa-bars"></i></button>
         <div class="d-md-inline-block ml-auto mr-0 mr-md-3 my-2 my-md-0">
-          <button type="button" class="btn btn-default btn-sm" style="color:black; background-color:white; margin-right:1.5em;">
+          <a href="http://localhost:8888/login?logout"><button type="button" class="btn btn-default btn-sm" style="color:black; background-color:white; margin-right:1.5em;">
            Log out
-        </button>
+        </button></a>
         </div>
         </nav>
     <!-- Navbar-->
@@ -75,7 +75,7 @@
                <div class="sb-sidenav-menu">
 
                 <div class="profile-userpic">
-                    <img src="{{userData.pictureUrl}}" class="img-responsive" style="display:block; margin: 0 auto; padding-top: 20px; ">
+                    <img src="{{userData.pictureUrl}}" class="img-responsive" style="display:block; margin: 0 auto; margin-top: 20px; ">
                 </div>
                 <div class="profile-usertitle">
                     <div class="profile-usertitle-name">
@@ -116,10 +116,10 @@
         <div class="card-columns">
             {{#userOrders}}
             <div class="card">
-           <h4 class="card-title" style="color:black;">{{title}}</h4>
-            <h6  id="idProduct">{{productId}}</h6>
+           <h4 class="card-title" style="color:black; display:none;">{{title}}</h4>
+            <h6  style="display:none;" id="idProduct">{{productId}}</h6>
                 <div class="card-body">
-                        <img src="{{productUrl}}" alt="Italian Trulli" style="padding-bottom:1.25rem;">
+                        <img src="{{productUrl}}" alt="Italian Trulli">
                 </div>
                 <div class="card-footer">
                 <a href="{{productUrl}}" download>
@@ -231,15 +231,6 @@
 </div>
 
 
-
-
-
-
-
-
-
-
-
 <div class="modal" tabindex="-1" role="dialog" id="addReview">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -326,6 +317,20 @@
             alert(id);
             $("#r_productId").val(id); 
         }); 
+         function clicked(){
+
+          var path = window.location.href; // because the 'href' property of the DOM element is the absolute path
+        $("#layoutSidenav_nav .sb-sidenav a.nav-link").each(function() {
+            if (this.href === path) {
+                $(this).addClass("active");
+            }
+        });
+
+
+
+      $("body").toggleClass("sb-sidenav-toggled");
+
+    }
 </script>
 </body>
 </html>

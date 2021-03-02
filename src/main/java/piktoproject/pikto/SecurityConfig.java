@@ -27,7 +27,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and().formLogin().permitAll() // enable form based login
                 .loginPage("/login")
                 .successForwardUrl("/formLogin")
-                .and().logout() // enable logout
+                .and().logout().logoutSuccessUrl("/Index")
                 .and().oauth2Login() // enable OAuth2
                 .loginPage("/login").defaultSuccessUrl("/oauth2LoginSuccess", true)
                 .and()
