@@ -136,19 +136,19 @@
 
                                         </div>
                                         <div class="details col-md-6">
-                                            <h3 class="product-title">{{Product.title}}</h3>
+                                            <h1 class="product-title">{{Product.title}}</h1>
+                                            <h4>{{Product.price}}</h4>
+
                                             <div class="rating">
                                                 <div class="stars">
-                                                    <span class="fa fa-star checked"></span>
-                                                    <span class="fa fa-star checked"></span>
-                                                    <span class="fa fa-star checked"></span>
-                                                    <span class="fa fa-star"></span>
-                                                    <span class="fa fa-star"></span>
+                                                    <span id="fa1" class="fa fa-star"></span>
+                                                    <span id="fa2" class="fa fa-star"></span>
+                                                    <span id="fa3" class="fa fa-star"></span>
+                                                    <span id="fa4" class="fa fa-star"></span>
+                                                    <span id="fa5" class="fa fa-star"></span>
                                                 </div>
-                                                <span class="review-no">41 reviews</span>
                                             </div>
                                             <p class="product-description">{{Product.summary}}</p>
-                                            <h4 class="price">price: <span>{{Product.price}}</span></h4>
                                           
                                             <div class="action">
                                                 <form action="/Index/addToCart/{{Product.productId}}">
@@ -272,11 +272,44 @@
 
         })
 
-        //test[0].className("btn btn-default btn-grey btn-sm");
-        /*            test[1].attr("class","btn btn-default btn-grey btn-sm");
-                    test[2].attr("class","btn btn-default btn-grey btn-sm");
-                    test[3].attr("class","btn btn-default btn-grey btn-sm");
-                    test[4].attr("class","btn btn-default btn-grey btn-sm");*/
+     
+    });
+    var sum=0;
+    var avg=0;
+    $('.review-block-rate').each(function(i, obj) {
+     avg++;
+      var i= $(this).attr('id');
+       sum =sum+(parseInt(i));
+
+});
+
+
+$('.stars').each(function (index, value) {
+      avg=Math.round(sum/avg);
+      
+        $(this).children("span").each(function (index2, value2) {
+            if (avg == 1 && index2 < avg) {
+                $(this).removeClass("fa fa-star").addClass("fa fa-star checked");
+            }
+            if (avg == 2 && index2 < avg) {
+                $(this).removeClass("fa fa-star").addClass("fa fa-star checked");
+            }
+
+            if (avg == 3 && index2 < avg) {
+                $(this).removeClass("fa fa-star").addClass("fa fa-star checked");
+            }
+
+            if (avg == 4 && index2 < avg) {
+                $(this).removeClass("fa fa-star").addClass("fa fa-star checked");
+            }
+
+            if (avg == 5 && index2 < avg) {
+                $(this).removeClass("fa fa-star").addClass("fa fa-star checked");
+            }
+
+        })
+
+     
     });
 
 </script>

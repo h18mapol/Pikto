@@ -320,10 +320,12 @@
 
 <div class="container" style="max-width:90%; margin-top:1.25rem; ">
     <div class="row">
-        <div class="card-columns">
+        <div class="card-columns" id="MyCards">
             {{#allProducts}}
             <div class="card" style="margin:0; padding:0; border:0px;">
                 <div class="card-body" style="margin:0; padding:0;">
+                   <h5 class="card-title" style="display:none;">{{title}}</h5>
+
                     <a href="http://localhost:8888/Index/{{productId}}">
                         <img src="{{productUrl}}" alt="Italian Trulli" style="padding-bottom:1.25rem;">
                     </a>
@@ -366,8 +368,27 @@
         $(".menu-icon").on("click", function () {
             $("nav ul").toggleClass("showing");
         });
-    });
+ 
 
+
+
+
+  $("#searchValue").on("keyup", function() {
+
+
+    var clickedBtnID = $(this).val();
+        cardContainer = document.getElementById("MyCards");
+        cards = cardContainer.getElementsByClassName("card");
+        for (i = 0; i < cards.length; i++) {
+            title = cards[i].querySelector(".card-body h5.card-title");
+            if (title.innerText.indexOf(clickedBtnID) > -1) {
+                cards[i].style.display = "";
+            } else {
+                cards[i].style.display = "none";
+            }
+        }
+    });
+ });
     // Scrolling Effect
 
     $(window).on("scroll", function () {
