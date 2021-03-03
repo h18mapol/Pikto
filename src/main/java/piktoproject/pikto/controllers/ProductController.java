@@ -124,6 +124,7 @@ public class ProductController {
     @RequestMapping("/Index/Checkout/{SessionId}")
     public String getAnonymousCart(Model model, @PathVariable String SessionId) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Order order = new Order();
         Cart cart = productService.getCart(SessionId);
         User user;
         if (auth.getPrincipal() != "anonymousUser") {
@@ -138,7 +139,7 @@ public class ProductController {
         }
         double subTotal = 0;
         double itemDiscount = 0;
-        double tax = 0.30;
+        double tax = 0;
         double shipping = 30;
         double total = 0;
         double discount = 0; //Promo Discount!
@@ -153,19 +154,47 @@ public class ProductController {
             model.addAttribute("subTotal", round(subTotal, 2));
             model.addAttribute("userData", user);
             model.addAttribute("userCart", shoppingService.getAllCartItemsDTO(cart));
+            order.setMobile(user.getMobileNr());
+            order.setSessionId(SessionId);
+            order.setStatus(0);
+            order.setSubTotal(round(subTotal, 2));
+            order.setItemDiscount(round(itemDiscount, 2));
+            order.setTax(tax);
+            order.setShipping(shipping);
+            order.setTotal(round(total, 2));
+            order.setPromo("");
+            order.setDiscount(discount);
+            order.setGrandTotal(round(grandTotal,2));
+            order.setMobile(user.getMobileNr());
+            order.setContent("");
+            model.addAttribute("orderData", order);
             return "Frontend/Main/Checkout";
         }
         for (CartItem cartItem: shoppingService.getAllCartItems(cart)
         ) {
             itemcount += 1;
             double cartItemCost = cartItem.getPrice()*cartItem.getQuantity();
+            tax += cartItemCost * 0.25;
             subTotal += cartItemCost;
             itemDiscount += (cartItemCost * cartItem.getDiscount());
-            System.out.println(itemcount + " costs -->" + total + " Discount: " + itemDiscount + " : --> " + cartItem.getDiscount() );
+            System.out.println(itemcount + " costs --> Discount: " + itemDiscount + " : --> " + cartItem.getDiscount() );
         }
-        total = (subTotal * (1+tax)) + shipping;
-        grandTotal = ((total* (1 - discount)) - itemDiscount);
-        System.out.println(grandTotal);
+        total = (subTotal + tax + shipping - itemDiscount);
+        grandTotal = ((total* (1 - discount)));
+        order.setMobile(user.getMobileNr());
+        order.setSessionId(SessionId);
+        order.setStatus(0);
+        order.setSubTotal(round(subTotal, 2));
+        order.setItemDiscount(round(itemDiscount, 2));
+        order.setTax(tax);
+        order.setShipping(shipping);
+        order.setTotal(round(total, 2));
+        order.setPromo("");
+        order.setDiscount(discount);
+        order.setGrandTotal(round(grandTotal,2));
+        order.setMobile(user.getMobileNr());
+        order.setContent("");
+        model.addAttribute("orderData", order);
         model.addAttribute("grandTotal", grandTotal);
         model.addAttribute("itemCounter", itemcount);
         model.addAttribute("total", round(total, 2));
@@ -195,7 +224,7 @@ public class ProductController {
         }
         double subTotal = 0;
         double itemDiscount = 0;
-        double tax = 0.30;
+        double tax = 0;
         double shipping = 30;
         double total = 0;
         double discount = 0; //Promo Discount!
@@ -205,12 +234,13 @@ public class ProductController {
         ) {
             itemcount += 1;
             double cartItemCost = cartItem.getPrice()*cartItem.getQuantity();
+            tax += cartItemCost * 0.25;
             subTotal += cartItemCost;
             itemDiscount += (cartItemCost * cartItem.getDiscount());
-            System.out.println(itemcount + " costs -->" + total + " Discount: " + itemDiscount + " : --> " + cartItem.getDiscount() );
+            System.out.println(itemcount + " costs --> Discount: " + itemDiscount + " : --> " + cartItem.getDiscount() );
         }
-        total = (subTotal * (1+tax)) + shipping;
-        grandTotal = ((total* (1 - discount)) - itemDiscount);
+        total = (subTotal + tax + shipping - itemDiscount);
+        grandTotal = ((total* (1 - discount)));
         model.addAttribute("itemCounter", itemcount);
         model.addAttribute("total", round(total, 2));
         model.addAttribute("itemDiscount", round(itemDiscount, 2));
@@ -232,7 +262,67 @@ public class ProductController {
         order.setGrandTotal(grandTotal);
         order.setMobile("");
         order.setContent("");
+        model.addAttribute("orderData", order);
         request.getSession().setAttribute("orderData", order);
+        return "Frontend/Main/Payment";
+    }
+
+    @RequestMapping("Index/Checkout/Remove/{CartItemId}")
+    public String removeCartItem(Model model, @PathVariable Integer CartItemId, HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        shoppingService.deleteCartItem(CartItemId);
+        return "redirect:/Index/Checkout/"+session.getId();
+    }
+
+    @RequestMapping("Index/Payment/Remove/{CartItemId}")
+    public String getAllUserReviews(Model model, @PathVariable Integer CartItemId,HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        Order order = (Order)session.getAttribute("orderData");
+
+        shoppingService.deleteCartItem(CartItemId);
+        Cart cart = shoppingService.getCart(session.getId());
+        User user = adminService.getLoggedInUser();
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        double subTotal = 0;
+        double itemDiscount = 0;
+        double tax = 0;
+        double shipping = 30;
+        double total = 0;
+        double discount = 0; //Promo Discount!
+        double grandTotal = 0;
+        int itemcount = 0;
+        for (CartItem cartItem: shoppingService.getAllCartItems(cart)
+        ) {
+            itemcount += 1;
+            double cartItemCost = cartItem.getPrice()*cartItem.getQuantity();
+            tax += cartItemCost * 0.25;
+            subTotal += cartItemCost;
+            itemDiscount += (cartItemCost * cartItem.getDiscount());
+            System.out.println(itemcount + " costs --> Discount: " + itemDiscount + " : --> " + cartItem.getDiscount() );
+        }
+        total = (subTotal * (1+tax)) + shipping;
+        grandTotal = ((total* (1 - discount)) - itemDiscount);
+        model.addAttribute("itemCounter", itemcount);
+        model.addAttribute("total", round(total, 2));
+        model.addAttribute("itemDiscount", round(itemDiscount, 2));
+        model.addAttribute("shipping", shipping);
+        model.addAttribute("subTotal", round(subTotal, 2));
+        model.addAttribute("userData", user);
+        model.addAttribute("userCart", shoppingService.getAllCartItemsDTO(cart));
+        model.addAttribute("grandTotal", round(grandTotal,2));
+        order.setMobile(user.getMobileNr());
+        order.setSessionId(request.getSession().getId());
+        order.setStatus(0);
+        order.setSubTotal(subTotal);
+        order.setItemDiscount(itemDiscount);
+        order.setTax(tax);
+        order.setShipping(shipping);
+        order.setTotal(total);
+        order.setDiscount(discount);
+        order.setGrandTotal(grandTotal);
+        order.setMobile("");
+        order.setContent("");
+        model.addAttribute("orderData", order);
         return "Frontend/Main/Payment";
     }
 

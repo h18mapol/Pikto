@@ -32,6 +32,13 @@
         .lh-condensed {
             line-height: 1.25;
         }
+
+        .truncateLongTexts {
+            width: 100px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis // This is where the magic happens
+        }
     </style>
     <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet"
           crossorigin="anonymous"/>
@@ -141,35 +148,75 @@
                                         <img src="{{productUrl}}" style="object-fit:cover; width:90px; height:60px;">
                                     </small>
                                     <div>
-                                        <h6 class="my-0">{{title}}</h6>
+                                        <h6 class="my-0 truncateLongTexts">{{title}}</h6>
+                                        <small class="text-muted">Price: {{price}}</small>
                                         <small class="text-muted">Quantity: {{quantity}}</small>
                                     </div>
-                                    <span class="text-muted">Price: {{price}}</span>
-                                    <button type="button" class="btn btn-danger">Danger</button>
+                                    <div>
+                                        <h6 class="my-0 truncateLongTexts">
+                                            <a href="http://localhost:8888/Index/Checkout/Remove/{{cartItemId}}"
+                                               type="button"
+                                               class="card-link-secondary small text-uppercase mr-3"><i
+                                                    class="fas fa-trash-alt mr-1"></i></a>
+                                        </h6>
+                                    </div>
+                                    <div>
+                                        <h6 class="my-0 truncateLongTexts"></h6>
+                                    </div>
                                 </li>
                                 {{/userCart}}
                                 <li class="list-group-item d-flex justify-content-between lh-condensed">
-                                    <div>
-                                        <h6 class="my-0">Total </h6>
-                                        <h6 class="my-0">{{total}} </h6>
-                                    </div>
-                                    <div>
-                                        <small class="text-muted">Total discount</small>
-                                        <small class="text-muted .text-danger">{{itemDiscount}}</small>
-                                    </div>
-                                    <div>
-                                        <small class="text-muted">Grand Total</small>
-                                        <small class="text-muted .text-danger">{{grandTotal}}</small>
+                                    <div class="mb-3">
+                                        <div class="pt-4">
+
+                                            <h5 class="mb-3">The total amount of</h5>
+
+                                            <ul class="list-group list-group-flush">
+                                                <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">
+                                                    Temporary amount (ex-moms)
+                                                    <span>{{orderData.subTotal}}</span>
+                                                </li>
+                                                <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">
+                                                    Moms
+                                                    <span>{{orderData.tax}}</span>
+                                                </li>
+                                                <li class="list-group-item d-flex justify-content-between align-items-center px-0">
+                                                    Shipping
+                                                    <span>{{orderData.shipping}}</span>
+                                                <li class="list-group-item d-flex justify-content-between align-items-center px-0 text-danger">
+                                                    Discount
+                                                    <span>{{orderData.itemDiscount}}</span>
+                                                </li>
+                                                <li id="promotion"
+                                                    class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0 text-danger">
+
+                                                </li>
+                                                <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-3">
+                                                    <div>
+                                                        <strong>The total amount of</strong>
+                                                        <strong>
+                                                            <p class="mb-0">(including VAT)</p>
+                                                        </strong>
+                                                    </div>
+                                                    <span><strong id="grandTotal">{{orderData.total}}</strong></span>
+                                                </li>
+                                            </ul>
+                                        </div>
                                     </div>
                                 </li>
                             </ul>
 
                             <form class="card p-2">
                                 <div class="input-group">
-                                    <input type="text" class="form-control" placeholder="Promo code" disabled>
+                                    <input type="text" class="form-control" placeholder="Promo code" id="promoId">
                                     <div class="input-group-append">
-                                        <button type="submit" class="btn btn-secondary">Redeem</button>
+                                        <button type="button" class="btn btn-primary" onclick="promoValidation()">
+                                            Redeem
+                                        </button>
                                     </div>
+                                </div>
+                                <div class="input-group">
+                                    <p id="redeemvalidation"></p>
                                 </div>
                             </form>
                         </div>
@@ -313,6 +360,33 @@
             });
         }, false);
     })();
+</script>
+<script>
+    var active = false;
+    function promoValidation() {
+        var value = $("#promoId").val();
+        console.log(value);
+        if (value === "Rabatt2021" && active === false) {
+            active = true;
+            var promo = parseInt($("#grandTotal").text());
+            var promo2 = promo * 0.1;
+            promo = promo * 0.9;
+            promo = Math.round(promo  * 100) / 100;
+            promo2 = Math.round(promo2  * 100) / 100;
+            console.log(promo);
+            console.log(promo2);
+            $("#grandTotal").text(promo);
+            $("#promotion").text("Active Promo: (Rabatt2021)").show().append("<span>"+promo2+'</span>');
+
+            $("#promoSuccess").text("Promo Discount").show().addClass("text-success");
+            return $("#redeemvalidation").text("Valid promo: 10%").addClass("text-success");
+        } else {
+            if (active){
+                return $("#redeemvalidation").text("Promo already active").addClass("text-danger")
+            }
+            return $("#redeemvalidation").text("Not a valid promo").addClass("text-danger")
+        }
+    }
 </script>
 </body>
 </html>

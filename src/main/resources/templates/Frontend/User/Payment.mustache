@@ -32,6 +32,13 @@
         .lh-condensed {
             line-height: 1.25;
         }
+
+        .truncateLongTexts {
+            width: 100px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis // This is where the magic happens
+        }
     </style>
     <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet"
           crossorigin="anonymous"/>
@@ -73,31 +80,21 @@
 <div id="layoutSidenav">
     <div id="layoutSidenav_nav">
         <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
-
             <div class="sb-sidenav-menu">
-                <div class="profile-userpic">
-                    <img src="https://scontent.fbma2-1.fna.fbcdn.net/v/t1.0-9/17796707_10155264022745159_8129848447376750595_n.jpg?_nc_cat=111&ccb=2&_nc_sid=174925&_nc_ohc=njmSzJq0HE8AX_RWY6P&_nc_ht=scontent.fbma2-1.fna&oh=ae2a9a187954f17fe489be1522d04e9e&oe=60448624"
-                         class="img-responsive" style="display:block; margin: 0 auto; padding-top: 20px; ">
-                </div>
 
+                <div class="profile-userpic">
+                    <img src="{{userData.pictureUrl}}" class="img-responsive" style="display:block; margin: 0 auto; margin-top: 20px; ">
+                </div>
                 <div class="profile-usertitle">
                     <div class="profile-usertitle-name">
-                        {{userData.firstName}}
-                        <div class="profile-usertitle-name">
-                            {{userData.lastName}}
-                            <div class="profile-usertitle-name">
-                                {{userData.email}}
-                                <div class="profile-usertitle-job">
-                                    {{userData.mobileNr}}
-                                </div>
-                            </div>
-                        </div>
+                        {{userData.firstName}} {{userData.lastName}}
                     </div>
-
                     <div class="profile-userbuttons">
                     </div>
+                    <div style="background-color:white; width:100%; height:0.3em; margin-top:50px;">
+
+                    </div>
                     <div class="nav">
-                        <div class="sb-sidenav-menu-heading">Admin</div>
                         <a class="nav-link" href="http://localhost:8888/User">
                             <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                             Dashboard
@@ -106,21 +103,20 @@
                             <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                             Cart
                         </a>
+                        <a class="nav-link" href="http://localhost:8888/User/Purchases">
+                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                            Purchased images
+                        </a>
                     </div>
                 </div>
-            </div>
-            <div class="sb-sidenav-footer">
-                <a data-toggle="modal" data-target="#editModal">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                         class="bi bi-gear" viewBox="0 0 16 16">
-                        <path d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492zM5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0z"/>
-                        <path d="M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52l-.094-.319zm-2.633.283c.246-.835 1.428-.835 1.674 0l.094.319a1.873 1.873 0 0 0 2.693 1.115l.291-.16c.764-.415 1.6.42 1.184 1.185l-.159.292a1.873 1.873 0 0 0 1.116 2.692l.318.094c.835.246.835 1.428 0 1.674l-.319.094a1.873 1.873 0 0 0-1.115 2.693l.16.291c.415.764-.42 1.6-1.185 1.184l-.291-.159a1.873 1.873 0 0 0-2.693 1.116l-.094.318c-.246.835-1.428.835-1.674 0l-.094-.319a1.873 1.873 0 0 0-2.692-1.115l-.292.16c-.764.415-1.6-.42-1.184-1.185l.159-.291A1.873 1.873 0 0 0 1.945 8.93l-.319-.094c-.835-.246-.835-1.428 0-1.674l.319-.094A1.873 1.873 0 0 0 3.06 4.377l-.16-.292c-.415-.764.42-1.6 1.185-1.184l.292.159a1.873 1.873 0 0 0 2.692-1.115l.094-.319z"/>
-                    </svg>
-                </a>
+                <div class="sb-sidenav-footer">
+                    <p data-toggle="modal" data-target="#editModal" style="float:left;"><i class="fas fa-cog" style="margin-right:5px"></i>Settings</p>
+
+                </div>
+
             </div>
         </nav>
     </div>
-
     <div id="layoutSidenav_content">
 
         <main>
@@ -138,28 +134,28 @@
                                 {{#userCart}}
                                 <li class="list-group-item d-flex justify-content-between lh-condensed">
                                     <small class="text-muted">
-                                        <img src="{{productUrl}}" style="object-fit:cover; width:120px; height:100px;">
+                                        <img src="{{productUrl}}" style="object-fit:cover; width:90px; height:60px;">
                                     </small>
                                     <div>
-                                        <div class="d-flex justify-content-between">
-                                            <div>
-                                                <h5>{{title}}</h5>
-                                                <p class="mb-3 text-muted text-uppercase small">Discount: {{discount}}</p>
-                                                <p class="mb-2 text-muted text-uppercase small">Quantity: {{quantity}}</p>
-                                            </div>
-                                        </div>
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <div>
-                                                <a href="http://localhost:8888/User/Payment/Remove/{{cartItemId}}" type="button" class="card-link-secondary small text-uppercase mr-3"><i
-                                                        class="fas fa-trash-alt mr-1"></i> Remove</a>
-                                            </div>
-                                            <p class="mb-0"><span><strong>{{price}}</strong></span></p>
-                                        </div>
+                                        <h6 class="my-0 truncateLongTexts">{{title}}</h6>
+                                        <small class="text-muted">Price: {{price}}</small>
+                                        <small class="text-muted">Quantity: {{quantity}}</small>
+                                    </div>
+                                    <div>
+                                        <h6 class="my-0 truncateLongTexts">
+                                            <a href="http://localhost:8888/User/Payment/Remove/{{cartItemId}}"
+                                               type="button"
+                                               class="card-link-secondary small text-uppercase mr-3"><i
+                                                    class="fas fa-trash-alt mr-1"></i></a>
+                                        </h6>
+                                    </div>
+                                    <div>
+                                        <h6 class="my-0 truncateLongTexts"></h6>
                                     </div>
                                 </li>
                                 {{/userCart}}
                                 <!-- Card -->
-                                <li>
+                                <li style="list-style: none">
                                     <div class="mb-3">
                                         <div class="pt-4">
 
@@ -181,7 +177,8 @@
                                                     Discount
                                                     <span>{{orderData.itemDiscount}}</span>
                                                 </li>
-                                                <li id="promotion" class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0 text-danger">
+                                                <li id="promotion"
+                                                    class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0 text-danger">
 
                                                 </li>
                                                 <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-3">
@@ -202,9 +199,10 @@
 
                             <form class="card p-2">
                                 <div class="input-group">
-                                    <input type="text" class="form-control" placeholder="Promo code" id="promoId">
+                                    <input type="text" class="form-control" placeholder="Promo code" id="promoId"
+                                           disabled>
                                     <div class="input-group-append">
-                                        <button type="button" class="btn btn-primary" onclick="promoValidation()">
+                                        <button type="button" class="btn btn-primary" onclick="promoValidation() ">
                                             Redeem
                                         </button>
                                     </div>
@@ -294,6 +292,7 @@
 </script>
 <script>
     var active = false;
+
     function promoValidation() {
         var value = $("#promoId").val();
         console.log(value);
@@ -305,12 +304,12 @@
             console.log(promo);
             console.log(promo2);
             $("#grandTotal").text(promo);
-            $("#promotion").text("Active Promo: (Rabatt2021)").show().append("<span>"+promo2+'</span>');
+            $("#promotion").text("Active Promo: (Rabatt2021)").show().append("<span>" + promo2 + '</span>');
 
             $("#promoSuccess").text("Promo Discount").show().addClass("text-success");
             return $("#redeemvalidation").text("Valid promo: 10%").addClass("text-success");
         } else {
-            if (active){
+            if (active) {
                 return $("#redeemvalidation").text("Promo already active").addClass("text-danger")
             }
             return $("#redeemvalidation").text("Not a valid promo").addClass("text-danger")
