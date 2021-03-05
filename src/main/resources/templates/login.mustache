@@ -151,7 +151,7 @@
         </div>
         <div class="clearfix">
             <label class="pull-left checkbox-inline"><input type="checkbox"> Remember me</label>
-            <a href="/SignUp/ForgotPassword" class="pull-right text-success">Forgot Password?</a>
+            <a href="#forgot" class="pull-right text-success" data-toggle="modal" data-target="#forgot">Forgot Password?</a>
         </div>
     </form>
     <div class="hint-text small">Don't have an account? <a href="#register" data-toggle="modal" class="text-success" data-target="#register">Sign up!</a></div>
@@ -161,57 +161,49 @@
 <div class="modal fade" id="register" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
+      
       <div class="modal-body">
 
-
+<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span></button>
 
       <div class="login-form">
     <form action="/SignUp/NewUser" method="post">
         <h2 class="text-center">Sign up</h2>
         <div class="form-group">
             <div class="input-group">
-                <span class="input-group-addon">First name:</span>
                 <input type="text" class="form-control" name="firstName" placeholder="First name.." required="required" autocomplete="given-name">
             </div>
         </div>
         <div class="form-group">
             <div class="input-group">
-                <span class="input-group-addon">Last name:</span>
                 <input type="text" class="form-control" name="lastName" placeholder="Last name.." required="required" autocomplete="family-name">
             </div>
         </div>
         <div class="form-group">
             <div class="input-group">
-                <span class="input-group-addon">Mobile number:</span>
                 <input type="text" class="form-control" name="mobileNr" placeholder="Mobile nr.." required="required" autocomplete="tel">
             </div>
         </div>
         <div class="form-group">
             <div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-user"></i></span>
                 <input type="text" class="form-control" name="email" placeholder="Email/Username" required="required" autocomplete="username">
             </div>
         </div>
         <div class="form-group">
             <div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-lock"></i></span>
                 <input type="password" class="form-control" name="password" placeholder="Password" required="required" autocomplete="new-password">
             </div>
         </div>
         <div class="form-group">
             <div class="input-group">
-                <span class="input-group-addon">Picture Url:</span>
                 <input type="text" class="form-control" name="pictureUrl" placeholder="pictureUrl" autocomplete="url">
             </div>
         </div>
-        <div class="form-group">
-            <button type="submit" class="btn btn-success btn-block login-btn">Sign Up</button>
-        </div>
+         
+          <button type="submit" class="btn btn-success btn-block login-btn">Sign up</button>
+
+    
     </form>
 </div>  
       </div>
@@ -220,6 +212,49 @@
   </div>
 </div>
 
+
+
+<div class="modal fade" id="forgot" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+    
+      <div class="modal-body">
+
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+
+<div class="login-form">
+    <form action="/SignUp/ForgotPassword/NewPassword" method="post">
+        <h2 class="text-center">Forgot password</h2>
+        <div class="form-group">
+            <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                <input type="text" autocomplete="username" class="form-control" name="username" placeholder="Email" required="required">
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                <input type="password" class="form-control" autocomplete="current-password" name="oldpassword" placeholder="Old Password" required="required">
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="input-group">
+            <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+            <input type="password" class="form-control" autocomplete="new-password" name="newpassword" placeholder="New Password" required="required">
+        </div>
+        </div>
+            <button type="submit" class="btn btn-success btn-block login-btn">Change Password</button>
+ 
+    </form>
+</div>
+      </div>
+      
+    </div>
+  </div>
+</div>
+</div>
 </body>
 <script src="/js/Main/jquery-3.3.1.min.js"></script>
 <script src="/js/Main/jquery-migrate-3.0.0.min.js"></script>

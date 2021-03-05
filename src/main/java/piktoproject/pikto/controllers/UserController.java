@@ -12,6 +12,7 @@ import piktoproject.pikto.models.User;
 import piktoproject.pikto.models.Order;
 import piktoproject.pikto.models.Product;
 import piktoproject.pikto.models.Cart;
+import piktoproject.pikto.models.PasswordDTO;
 import piktoproject.pikto.models.Product_review;
 
 
@@ -70,6 +71,17 @@ public class UserController {
         model.addAttribute("sessionId", session.getId());
         return "Frontend/User/Payment";
     }
+    
+    
+   
+
+    @PostMapping(path = "/User/NewPassword")
+    public String userNewPassword(Model model, @ModelAttribute("passwordDTO") PasswordDTO passwordDTO, @RequestParam Map<String, String> allRequestParams){
+       adminService.resetPassword(passwordDTO);
+       return "redirect:http://localhost:8888/User";
+    }
+
+    
 
     @RequestMapping("/User/Checkout")
     public String checkoutUser(Model model, HttpServletRequest request){

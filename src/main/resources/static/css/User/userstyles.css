@@ -20,7 +20,16 @@
   padding: 20px 0 10px 0;
   background: #fff;
 }
+#dataTable_length{
+text-align:left;
+}
 
+#dataTableProducts_length{
+text-align:left;
+}
+#dataTableReviews_length{
+text-align:left;
+}
 .profile-userpic img {
   float: none;
   margin: 0 auto;

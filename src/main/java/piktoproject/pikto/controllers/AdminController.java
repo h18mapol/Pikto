@@ -51,6 +51,12 @@ public class AdminController {
         model.addAttribute("allUsers",adminService.getAllUsers());
         return "Frontend/Admin/Users";
     }
+    
+     @PostMapping(path = "/Admin/NewPassword")
+    public String userNewPassword(Model model, @ModelAttribute("passwordDTO") PasswordDTO passwordDTO, @RequestParam Map<String, String> allRequestParams){
+       adminService.resetPassword(passwordDTO);
+       return "redirect:http://localhost:8888/Admin";
+    }
     @RequestMapping("/Admin/Reviews")
     public String getAllReviews(Model model){
         model.addAttribute("allReviews",adminService.getAllReviews());

@@ -7,80 +7,64 @@
     <meta name="description" content=""/>
     <meta name="author" content=""/>
     <title>Dashboard - SB Admin</title>
+    
     <link href="/css/User/userstyles.css" rel="stylesheet"/>
-    <style>
-        .container {
-            max-width: 960px;
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,600">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+          integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/Main/animate.css">
+    <link rel="stylesheet" href="/css/Main/media-queries.css">
+
+
+            
+   <style>
+ .logo {
+            line-height: 60px;
+            float: left;
+            margin: 16px 46px;
+            color: #fff;
+            font-weight: bold;
+            font-size: 20px;
+            letter-spacing: 2px;
         }
 
-        .border-top {
-            border-top: 1px solid #e5e5e5;
-        }
+        .sb-sidenav-dark .sb-sidenav-menu .nav-link {
+    color: white;
+}
 
-        .border-bottom {
-            border-bottom: 1px solid #e5e5e5;
-        }
+.bg-dark {
+    background-color: black!important;
+}
 
-        .border-top-gray {
-            border-top-color: #adb5bd;
-        }
-
-        .box-shadow {
-            box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
-        }
-
-        .lh-condensed {
-            line-height: 1.25;
-        }
-
-        .truncateLongTexts {
+.truncateLongTexts {
             width: 100px;
             white-space: nowrap;
             overflow: hidden;
-            text-overflow: ellipsis // This is where the magic happens
+            text-overflow: ellipsis;
         }
-    </style>
-    <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet"
-          crossorigin="anonymous"/>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js"
-            crossorigin="anonymous"></script>
+
+   </style>
 </head>
-<body class="sb-nav-fixed">
-<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-    <a class="navbar-brand" href="/Index">Pikto</a>
-    <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i>
-    </button>
-    <!-- Navbar Search-->
-    <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
-        <div class="input-group">
-            <input class="form-control" type="text" placeholder="Search for..." aria-label="Search"
-                   aria-describedby="basic-addon2"/>
-            <div class="input-group-append">
-                <button class="btn btn-primary" type="button"><i class="fas fa-search"></i></button>
-            </div>
+  <body class="sb-nav-fixed">
+        <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+
+ <div class="logo" >
+     <a href="http://localhost:8888/Index"><img style="float: left; margin-right: 1%;" src="/img/pikto.png" width="100"/></a>
         </div>
-    </form>
-    <!-- Navbar-->
-    <ul class="navbar-nav ml-auto ml-md-0">
-        <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" id="userDropdown" href="#" role="button" data-toggle="dropdown"
-               aria-haspopup="true" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
-            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                <a class="dropdown-item" href="#">Settings</a>
-                <a class="dropdown-item" href="#">Activity Log</a>
-                <div class="dropdown-divider"></div>
-                <form class="dropdown-item" action="/logout" method="post">
-                    <input type="hidden" name="_csrf" value=""/>
-                    <button type="submit" class="btn btn-primary">Logout</button>
-                </form>
-            </div>
-        </li>
-    </ul>
-</nav>
+          
+            <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#" onclick='clicked()'><i class="fas fa-bars"></i></button>
+        <div class="d-md-inline-block ml-auto mr-0 mr-md-3 my-2 my-md-0">
+          
+   <a href="http://localhost:8888/logout"><button type="button" class="btn btn-default btn-sm" style="color:black; background-color:white; margin-right:1.5em;">Logout</button> </a>     
+
+
+        </div>
+        </nav>
+    
 <div id="layoutSidenav">
     <div id="layoutSidenav_nav">
         <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
-            <div class="sb-sidenav-menu">
+               <div class="sb-sidenav-menu">
 
                 <div class="profile-userpic">
                     <img src="{{userData.pictureUrl}}" class="img-responsive" style="display:block; margin: 0 auto; margin-top: 20px; ">
@@ -92,14 +76,14 @@
                     <div class="profile-userbuttons">
                     </div>
                     <div style="background-color:white; width:100%; height:0.3em; margin-top:50px;">
-
+                     
                     </div>
                     <div class="nav">
                         <a class="nav-link" href="http://localhost:8888/User">
                             <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                             Dashboard
                         </a>
-                        <a class="nav-link" href="http://localhost:8888/User/Checkout">
+                        <a class="nav-link" href="http://localhost:8888/User/Checkout/">
                             <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                             Cart
                         </a>
@@ -109,16 +93,15 @@
                         </a>
                     </div>
                 </div>
-                <div class="sb-sidenav-footer">
-                    <p data-toggle="modal" data-target="#editModal" style="float:left;"><i class="fas fa-cog" style="margin-right:5px"></i>Settings</p>
+               <div class="sb-sidenav-footer">
+                      <p data-toggle="modal" data-target="#editModal" style="float:left;"><i class="fas fa-cog" style="margin-right:5px"></i>Settings</p>
 
-                </div>
+                    </div>
 
             </div>
         </nav>
     </div>
-
-    <div id="layoutSidenav_content">
+   <div id="layoutSidenav_content">
 
         <main>
             <div class="container-fluid">
@@ -323,59 +306,126 @@
             </div>
         </main>
     </div>
-</div>
+    
+<div class="modal" tabindex="-1" role="dialog" id="editModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Edit User</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="modalBody">
+                <form method="POST" action="/Admin/updateUser" novalidate>
+                   <div class="form-group row">
+                        <label for="userId" class="col-4 col-form-label">User id</label>
+                        <div class="col-8">
+                            <input id="userId" name="userId" type="text" class="form-control" value="{{userData.userId}}" readonly>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="title" class="col-4 col-form-label">Firstname</label>
+                        <div class="col-8">
+                            <input id="Firstname" name="firstName" type="text" class="form-control" value="{{userData.firstName}}">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="summary" class="col-4 col-form-label">Lastname</label>
+                        <div class="col-8">
+                            <input id="Lastname" name="lastName" type="text" class="form-control" value="{{userData.lastName}}">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="mobileNr" class="col-4 col-form-label">Phonenumber</label>
+                        <div class="col-8">
+                            <input id="mobileNr" name="mobileNr" type="text" class="form-control" value="{{userData.mobileNr}}">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="email" class="col-4 col-form-label">Email</label>
+                        <div class="col-8">
+                            <input id="email" name="email" type="text" class="form-control" value="{{userData.email}}">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="pictureUrl" class="col-4 col-form-label">Profilepicture</label>
+                        <div class="col-8">
+                            <input id="pictureUrl" name="pictureUrl" type="text" class="form-control" value="{{userData.pictureUrl}}">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                    </div>
+                </form>
+            </div>
 
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" crossorigin="anonymous"></script>
+   <div style="background-color:black; width:100%; height:0.7em;">
+                     
+                    </div>
+               <div class="modal-header">
+                <h5 class="modal-title">Change password</h5>
+            </div>
+            <div class="modal-body" id="modalBody">
+                <form method="POST" action="/User/NewPassword" novalidate>
+
+                  <div class="form-group row" style="display:none;">
+                        <label for="userId" class="col-4 col-form-label">username</label>
+                        <div class="col-8">
+                            <input id="userId" name="username" type="password" class="form-control">
+                        </div>
+                    </div>
+
+                   <div class="form-group row">
+                        <label for="userId" class="col-4 col-form-label">Old password</label>
+                        <div class="col-8">
+                            <input id="userId" name="oldpassword" type="password" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="title" class="col-4 col-form-label">New password</label>
+                        <div class="col-8">
+                            <input id="Firstname" name="newpassword" type="password" class="form-control">
+                        </div>
+                    </div>      
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                    </div>
+                </form>
+            </div>
+
+</div>
+<script src="/js/Admin/jquery.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
         crossorigin="anonymous"></script>
 <script src="/js/Admin/scripts.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+<script src="/js/Admin/chart-area-demo.js"></script>
+<script src="/js/Admin/chart-bar-demo.js"></script>
+<script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
+<script src="/js/Admin/datatables-demo.js"></script>
 <script>
-    // Example starter JavaScript for disabling form submissions if there are invalid fields
-    (function () {
-        'use strict';
-        window.addEventListener('load', function () {
-            // Fetch all the forms we want to apply custom Bootstrap validation styles to
-            var forms = document.getElementsByClassName('needs-validation');
+    $(document).ready(function() {
+        $('#dataTableReview').DataTable();
+    });
+    $(document).ready(function() {
+        $('#dataTableProducts').DataTable();
+    });
 
-            // Loop over them and prevent submission
-            var validation = Array.prototype.filter.call(forms, function (form) {
-                form.addEventListener('submit', function (event) {
-                    if (form.checkValidity() === false) {
-                        event.preventDefault();
-                        event.stopPropagation();
-                    }
-                    form.classList.add('was-validated');
+     function clicked(){
 
-                }, false);
-            });
-        }, false);
-    })();
-</script>
-<script>
-    var active = false;
-    function promoValidation() {
-        var value = $("#promoId").val();
-        console.log(value);
-        if (value === "Rabatt2021" && active === false) {
-            active = true;
-            var promo = parseInt($("#grandTotal").text());
-            var promo2 = promo * 0.1;
-            promo = promo * 0.9;
-            promo = Math.round(promo  * 100) / 100;
-            promo2 = Math.round(promo2  * 100) / 100;
-            console.log(promo);
-            console.log(promo2);
-            $("#grandTotal").text(promo);
-            $("#promotion").text("Active Promo: (Rabatt2021)").show().append("<span>"+promo2+'</span>');
-
-            $("#promoSuccess").text("Promo Discount").show().addClass("text-success");
-            return $("#redeemvalidation").text("Valid promo: 10%").addClass("text-success");
-        } else {
-            if (active){
-                return $("#redeemvalidation").text("Promo already active").addClass("text-danger")
+          var path = window.location.href; // because the 'href' property of the DOM element is the absolute path
+        $("#layoutSidenav_nav .sb-sidenav a.nav-link").each(function() {
+            if (this.href === path) {
+                $(this).addClass("active");
             }
-            return $("#redeemvalidation").text("Not a valid promo").addClass("text-danger")
-        }
+        });
+
+
+
+      $("body").toggleClass("sb-sidenav-toggled");
+
     }
 </script>
 </body>
