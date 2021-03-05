@@ -56,15 +56,20 @@ public class UserController {
     }
 
     @RequestMapping("/User/Checkout/Status/{status}")
-    public String createOrder(Model model, HttpServletRequest request, @PathVariable String status) {
+    public String createOrderUser(Model model, HttpServletRequest request, @PathVariable String status) {
         Order order = (Order) request.getSession().getAttribute("orderData");
         if(status.equalsIgnoreCase("COMPLETED")){
             order.setStatus(2); //Set as completed
+            //Create Order
             shoppingService.createOrderPaypal(order);
+            System.out.println("Create Order with sessionId" + order.getSessionId());
+            Cart cart = shoppingService.getCart(order.getSessionId());
+            //Create Order Items
+            userService.addOrderItems(shoppingService.getAllCartItems(cart), order.getSessionId());
             //Empty cart
             shoppingService.emptyCart(shoppingService.getCart(order.getSessionId()));
             System.out.println("order created: " + order.getSessionId());
-        return "redirect:/Index";
+            return "redirect:/Index";
     }
         System.out.println("Payment Denied for: " + order.getSessionId());
         HttpSession session = request.getSession();

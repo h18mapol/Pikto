@@ -70,7 +70,8 @@ public class LoginController {
     @PostMapping(path = "/SignUp/NewUser")
     public String newUser(Model model, @ModelAttribute("user") User user, @RequestParam Map<String, String> allRequestParams){
         adminService.addUser(user);
-        return "login";
+        adminService.sendEmail(user);
+        return "redirect:/User";
     }
 
     @GetMapping("/SignUp/ForgotPassword")

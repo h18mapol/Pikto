@@ -3,6 +3,7 @@ package piktoproject.pikto.repositorys;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Repository;
 import piktoproject.pikto.models.*;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -633,14 +634,14 @@ public class UserCrud implements IUserCrud {
     @Override
     public List<Category> getAllCategories() {
         List<Category> categories = new ArrayList<>();
-        try{
-            con=DriverManager.getConnection("jdbc:mysql://localhost:3306/piktodb?serverTimezone=UTC","root","");
-            Statement statement =con.createStatement();
-            statement=con.createStatement();
-            String sqlSelectAllCategories="SELECT * FROM `category`";
-            ResultSet resultset=statement.executeQuery(sqlSelectAllCategories);
-            while (resultset.next()){
-                Category category=new Category();
+        try {
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/piktodb?serverTimezone=UTC", "root", "");
+            Statement statement = con.createStatement();
+            statement = con.createStatement();
+            String sqlSelectAllCategories = "SELECT * FROM `category`";
+            ResultSet resultset = statement.executeQuery(sqlSelectAllCategories);
+            while (resultset.next()) {
+                Category category = new Category();
                 category.setCategoryId(resultset.getInt("categoryId"));
                 category.setTitle(resultset.getString("title"));
                 category.setContent(resultset.getString("content"));
@@ -681,9 +682,9 @@ public class UserCrud implements IUserCrud {
             PreparedStatement statement = con.prepareStatement(sqlgetCategoryById);
             statement.setInt(1, categoryId);
             ResultSet resultSet = statement.executeQuery();
-             Category category = new Category();
+            Category category = new Category();
 
-            while (resultSet.next()){
+            while (resultSet.next()) {
                 category.setCategoryId(resultSet.getInt("categoryId"));
                 category.setTitle(resultSet.getString("title"));
                 category.setContent(resultSet.getString("content"));
@@ -755,12 +756,12 @@ public class UserCrud implements IUserCrud {
                 product_review.setRating(resultSet.getInt("rating"));
                 product_review.setCreatedAt(resultSet.getString("createdAt"));
                 product_review.setContent(resultSet.getString("content"));
-                int userID=resultSet.getInt("userId");
+                int userID = resultSet.getInt("userId");
                 product_review.setUserId(userID);
                 product_review.setPictureUrl(getUserById(userID).getPictureUrl());
-                 product_review.setFirstname(getUserById(userID).getFirstName());
+                product_review.setFirstname(getUserById(userID).getFirstName());
                 product_review.setLastname(getUserById(userID).getLastName());
-      
+
                 product_reviews.add(product_review);
             } //End while
             resultSet.close();
@@ -776,17 +777,17 @@ public class UserCrud implements IUserCrud {
 
     @Override
     public List<Product> getAllOrderItems(int userId) {
-          List<Product> orderItems = new ArrayList<>();
-        try{
-            con=DriverManager.getConnection("jdbc:mysql://localhost:3306/piktodb?serverTimezone=UTC","root","");
-            String sqlGetOrderItems="SELECT * FROM product WHERE product.productId IN ( SELECT order_item.productId FROM order_item WHERE order_item.orderId IN ( SELECT piktodb.order.orderId FROM piktodb.order WHERE piktodb.order.userId = ? ))";
-       PreparedStatement statement = con.prepareStatement(sqlGetOrderItems);
+        List<Product> orderItems = new ArrayList<>();
+        try {
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/piktodb?serverTimezone=UTC", "root", "");
+            String sqlGetOrderItems = "SELECT * FROM product WHERE product.productId IN ( SELECT order_item.productId FROM order_item WHERE order_item.orderId IN ( SELECT piktodb.order.orderId FROM piktodb.order WHERE piktodb.order.userId = ? ))";
+            PreparedStatement statement = con.prepareStatement(sqlGetOrderItems);
 
             statement.setInt(1, 11);
 
-            ResultSet resultset=statement.executeQuery();
-            while (resultset.next()){
-                  Product product = new Product();
+            ResultSet resultset = statement.executeQuery();
+            while (resultset.next()) {
+                Product product = new Product();
                 product.setProductId(resultset.getInt("productId"));
                 product.setUserId(resultset.getInt("userId"));
                 product.setTitle(resultset.getString("title"));
@@ -809,5 +810,51 @@ public class UserCrud implements IUserCrud {
         return null;
     } //Klar
 
-  
+    @Override
+    public Integer getOrderIdBySessionId(String sessionId) {
+        System.out.println("Function getOrderIdBySessionId ---------------> Start");
+        try {
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/piktodb?serverTimezone=UTC", "root", "");
+            String sqlGetOrderItems = "SELECT orderId FROM `order` WHERE `order`.sessionId = ?";
+            PreparedStatement statement = con.prepareStatement(sqlGetOrderItems);
+            int orderId = 0;
+            statement.setString(1, sessionId);
+            ResultSet resultset = statement.executeQuery();
+            while (resultset.next()) {
+                orderId = resultset.getInt(1);
+        }
+            resultset.close();
+            statement.close();
+            con.close();
+            System.out.println("OrderId: ---------------> " + orderId);
+            return orderId;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
+    public void addOrderItems(List<CartItem> cartItems, String sessionId) {
+        try {
+            Integer orderId = getOrderIdBySessionId(sessionId);
+            for (CartItem cartItem: cartItems
+                 ) {
+                con = DriverManager.getConnection("jdbc:mysql://localhost:3306/piktodb?serverTimezone=UTC", "root", "");
+                String sqlAddCartItem = "INSERT INTO order_item (productId, orderId, price, discount, quantity, content) VALUE (?,?,?,?,?,?)";
+                PreparedStatement statement = con.prepareStatement(sqlAddCartItem);
+                statement.setInt(1, cartItem.getProductId());
+                statement.setInt(2, orderId);
+                statement.setDouble(3, cartItem.getPrice());
+                statement.setDouble(4, cartItem.getDiscount());
+                statement.setInt(5, cartItem.getQuantity());
+                statement.setString(6, cartItem.getContent());
+                statement.executeUpdate();
+                statement.close();
+                con.close();
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ShoppingFunctions.class.getName()).log(Level.SEVERE, null, ex);
+        }//End addToCart
+    }
 }

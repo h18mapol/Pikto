@@ -1,5 +1,4 @@
 package piktoproject.pikto.controllers;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -10,14 +9,11 @@ import piktoproject.pikto.models.*;
 import piktoproject.pikto.services.AdminService;
 import piktoproject.pikto.services.ShoppingService;
 import piktoproject.pikto.services.UserService;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-
 import java.util.Map;
 
 import static piktoproject.pikto.controllers.UserController.round;
-
 @Controller
 @SessionAttributes({"userId","cartId"})
 public class ProductController {
@@ -331,9 +327,12 @@ public class ProductController {
         Order order = (Order) request.getSession().getAttribute("orderData");
         if(status.equalsIgnoreCase("COMPLETED")){
             order.setStatus(2); //Set as completed
+            //Create Order
             shoppingService.createOrderPaypal(order);
+            //Create Order Items
+            Cart cart = shoppingService.getCart(order.getSessionId());
+            userService.addOrderItems(shoppingService.getAllCartItems(cart), order.getSessionId());
             //Empty cart
-            System.out.println("order created: " + order.getSessionId());
             shoppingService.emptyCart(shoppingService.getCart(order.getSessionId()));
             return "redirect:/Index";
         }
