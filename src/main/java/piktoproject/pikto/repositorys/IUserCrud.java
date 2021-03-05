@@ -35,7 +35,11 @@ public interface IUserCrud{
     Order getOrderById(int orderId);
     Order updateOrder(Order order);
     void deleteOrder(int orderId);
-     List<Product>getAllOrderItems(int userId);
+    List<Product>getAllOrderItems(int userId);
+
+     //OrderItems
+    Integer getOrderIdBySessionId(String  sessionId);
+    void addOrderItems(List<CartItem> cartItems, String sessionId);
 
 
     //Category
