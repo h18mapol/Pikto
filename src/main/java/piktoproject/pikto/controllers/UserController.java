@@ -22,6 +22,7 @@ import piktoproject.pikto.services.UserService;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.List;
 import java.util.Map;
 
 import piktoproject.pikto.services.ShoppingService;
@@ -52,6 +53,7 @@ public class UserController {
         model.addAttribute("userOrders", userService.getAllUserOrders(user.getUserId()));
         model.addAttribute("userProducts", userService.getAllUserProducts(user.getUserId()));
         model.addAttribute("userReviews", userService.getAllUserReviews(user.getUserId()));
+        System.out.println(userService.getAllUserReviews(user.getUserId()).get(0).getReviewId());
         return "Frontend/User/userPage";
     }
 
@@ -76,17 +78,12 @@ public class UserController {
         model.addAttribute("sessionId", session.getId());
         return "Frontend/User/Payment";
     }
-    
-    
-   
 
     @PostMapping(path = "/User/NewPassword")
     public String userNewPassword(Model model, @ModelAttribute("passwordDTO") PasswordDTO passwordDTO, @RequestParam Map<String, String> allRequestParams){
        adminService.resetPassword(passwordDTO);
        return "redirect:http://localhost:8888/User";
     }
-
-    
 
     @RequestMapping("/User/Checkout")
     public String checkoutUser(Model model, HttpServletRequest request){
@@ -200,15 +197,18 @@ public class UserController {
      @RequestMapping("/User/Purchases")
     public String getUserPurchases(Model model) {
         User user = adminService.getLoggedInUser();
+        System.out.println(user.getEmail() + " Test! " +  user.getUserId());
         model.addAttribute("userData", user);
-        model.addAttribute("userOrders", userService.getAllOrderItems(user.getUserId()));
-     
+         List<Product> productList = userService.getAllOrderItems(user.getUserId());
+         System.out.println("awdawdadadadadada --->>>>>---- : " + productList.get(0).getProductId());
+        model.addAttribute("userOrders", productList);
+
         return "Frontend/User/Purchases";
     }
     
      @RequestMapping(path="/User/addReview", method={RequestMethod.POST})
     public String addProduct(@ModelAttribute ("review")Product_review review,@RequestParam Map<String, String> allRequestParams){
-
+         System.out.println(review.getUserId());
         userService.addReview(review);
         return "redirect:http://localhost:8888/User/Purchases";
 

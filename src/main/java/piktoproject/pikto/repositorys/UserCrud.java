@@ -333,13 +333,13 @@ public class UserCrud implements IUserCrud {
     @Override
     public List<Product_review> getAllUserReviews(int userId) {
         List<Product_review> product_reviews = new ArrayList<>();
+        System.out.println("REVIEW !!!!!! ----->>>>>> " + userId);
         try {
             con = DriverManager.getConnection("jdbc:mysql://localhost:3306/piktodb?serverTimezone=UTC", "root", "");
             String sqlgetAllReviews = "SELECT * FROM product_review WHERE userId = ?";
             PreparedStatement statement = con.prepareStatement(sqlgetAllReviews);
             statement.setInt(1, userId);
             ResultSet resultSet = statement.executeQuery();
-
             while (resultSet.next()) {
                 Product_review product_review = new Product_review();
                 product_review.setReviewId(resultSet.getInt("reviewId"));
@@ -458,39 +458,35 @@ public class UserCrud implements IUserCrud {
         List<Order> orders = new ArrayList<>();
         try {
             con = DriverManager.getConnection("jdbc:mysql://localhost:3306/piktodb?serverTimezone=UTC", "root", "");
-
-
             String sqlgetAllOrders = "SELECT * FROM piktodb.order where userId=?";
             PreparedStatement statement = con.prepareStatement(sqlgetAllOrders);
             statement.setInt(1, userId);
-
-            ResultSet resultSet = statement.executeQuery();
-
-            while (resultSet.next()) {
-                Order order = new Order();
-                order.setOrderId(resultSet.getInt("orderId"));
-                order.setUserId(resultSet.getInt("userId"));
-                order.setSessionId(resultSet.getString("sessionId"));
-                order.setStatus(resultSet.getInt("status"));
-                order.setSubTotal(resultSet.getInt("subTotal"));
-                order.setItemDiscount(resultSet.getFloat("itemDiscount"));
-                order.setTax(resultSet.getFloat("tax"));
-                order.setShipping(resultSet.getFloat("shipping"));
-                order.setTotal(resultSet.getFloat("total"));
-                order.setPromo(resultSet.getString("promo"));
-                order.setDiscount(resultSet.getInt("discount"));
-                order.setGrandTotal(resultSet.getInt("grandTotal"));
-                order.setFirstName(resultSet.getString("firstName"));
-                order.setLastName(resultSet.getString("lastName"));
-                order.setMobile(resultSet.getString("mobile"));
-                order.setEmail(resultSet.getString("email"));
-                order.setAddress(resultSet.getString("address"));
-                order.setCity(resultSet.getString("city"));
-                order.setCreatedAt(resultSet.getString("createdAt"));
-                order.setContent(resultSet.getString("content"));
+            ResultSet resultset = statement.executeQuery();
+            while (resultset.next()){
+                Order order=new Order();
+                order.setOrderId(resultset.getInt(1));
+                order.setUserId(resultset.getInt(2));
+                order.setSessionId(resultset.getString(3));
+                order.setStatus(resultset.getInt(4));
+                order.setSubTotal(resultset.getInt(5));
+                order.setItemDiscount(resultset.getFloat(6));
+                order.setTax(resultset.getFloat(7));
+                order.setShipping(resultset.getFloat(8));
+                order.setTotal(resultset.getFloat(9));
+                order.setPromo(resultset.getString(10));
+                order.setDiscount(resultset.getInt(11));
+                order.setGrandTotal(resultset.getInt(12));
+                order.setFirstName(resultset.getString(13));
+                order.setLastName(resultset.getString(14));
+                order.setMobile(resultset.getString(15));
+                order.setEmail(resultset.getString(16));
+                order.setAddress(resultset.getString(17));
+                order.setCity(resultset.getString(18));
+                order.setCreatedAt(resultset.getString(19));
+                order.setContent(resultset.getString(20));
                 orders.add(order);
             } //End while
-            resultSet.close();
+            resultset.close();
             statement.close();
             con.close();
             return orders;
@@ -780,11 +776,9 @@ public class UserCrud implements IUserCrud {
         List<Product> orderItems = new ArrayList<>();
         try {
             con = DriverManager.getConnection("jdbc:mysql://localhost:3306/piktodb?serverTimezone=UTC", "root", "");
-            String sqlGetOrderItems = "SELECT * FROM product WHERE product.productId IN ( SELECT order_item.productId FROM order_item WHERE order_item.orderId IN ( SELECT piktodb.order.orderId FROM piktodb.order WHERE piktodb.order.userId = ? ))";
+            String sqlGetOrderItems = "SELECT * FROM product WHERE product.productId IN (SELECT order_item.productId FROM order_item WHERE order_item.orderId IN ( SELECT piktodb.order.orderId FROM piktodb.order WHERE piktodb.order.userId = ?))";
             PreparedStatement statement = con.prepareStatement(sqlGetOrderItems);
-
-            statement.setInt(1, 11);
-
+            statement.setInt(1, userId);
             ResultSet resultset = statement.executeQuery();
             while (resultset.next()) {
                 Product product = new Product();
@@ -799,6 +793,7 @@ public class UserCrud implements IUserCrud {
                 product.setContent("");
                 product.setProductUrl(resultset.getString("productUrl"));
                 orderItems.add(product);
+                System.out.println("Order Item Test--------------->>> " + product.getTitle());
             }
             resultset.close();
             statement.close();

@@ -15,6 +15,7 @@ import piktoproject.pikto.services.UserService;
 
 import javax.management.relation.Role;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 @Controller
 @SessionAttributes("userData")
@@ -145,8 +146,11 @@ public class AdminController {
     }
 
     @RequestMapping(path="/Admin/User/updateProduct", method={RequestMethod.POST})
-    public String updateUserProduct(Model model,@ModelAttribute ("product")Product product,@RequestParam Map<String, String> allRequestParams){
+    public String updateUserProduct(Model model,@ModelAttribute ("product")Product product,@RequestParam Map<String, String> allRequestParams, HttpServletRequest request){
         userService.updateProduct(product);
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("userData");
+        model.addAttribute("user", user);
         model.addAttribute("userData",adminService.getUser(product.getUserId()));
         model.addAttribute("userProducts",adminService.getAllProductsbyId(product.getUserId()));
         model.addAttribute("userReviews",adminService.getAllReviewsById(product.getUserId()));

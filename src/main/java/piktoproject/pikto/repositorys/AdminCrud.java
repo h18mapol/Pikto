@@ -165,11 +165,9 @@ public class AdminCrud extends UserCrud implements IAdminCrud {
                 order.setCity(resultset.getString(18));
                 order.setCreatedAt(resultset.getString(19));
                 order.setContent(resultset.getString(20));
-                      
 
                    orderList.add(order);
             }
-         
             resultset.close();
             statement.close();
             con.close();

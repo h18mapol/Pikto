@@ -12,8 +12,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js"
             crossorigin="anonymous"></script>
 
-   <style>
- .logo {
+    <style>
+        .logo {
             line-height: 60px;
             float: left;
             margin: 16px 46px;
@@ -24,34 +24,39 @@
         }
 
         .sb-sidenav-dark .sb-sidenav-menu .nav-link {
-    color: white;
-}
+            color: white;
+        }
 
-.bg-dark {
-    background-color: black;
-}
-   </style>
+        .bg-dark {
+            background-color: black;
+        }
+    </style>
 </head>
-  <body class="sb-nav-fixed">
-        <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+<body class="sb-nav-fixed">
+<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
 
- <div class="logo" >
-     <a href="http://localhost:8888/Index/"><img style="float: left; margin-right: 1%;" src="/img/pikto.png" width="100"/></a>
-        </div>
-        <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#" onclick='clicked()'><i class="fas fa-bars"></i></button>
-        <div class="d-md-inline-block ml-auto mr-0 mr-md-3 my-2 my-md-0">
-          <button type="button" class="btn btn-default btn-sm" style="color:black; background-color:white; margin-right:1.5em;">
-           Log out
-        </button>
-        </div>
-        </nav>
+    <div class="logo">
+        <a href="http://localhost:8888/Index"><img style="float: left; margin-right: 1%;" src="/img/pikto.png"
+                                                   width="100"/></a>
+    </div>
+    <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#" onclick='clicked()'><i
+            class="fas fa-bars"></i></button>
+    <div class="d-md-inline-block ml-auto mr-0 mr-md-3 my-2 my-md-0">
+        <a href="http://localhost:8888/logout">
+            <button type="button" class="btn btn-default btn-sm"
+                    style="color:black; background-color:white; margin-right:1.5em;">Logout
+            </button>
+        </a>
+    </div>
+</nav>
 <div id="layoutSidenav">
     <div id="layoutSidenav_nav">
         <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
             <div class="sb-sidenav-menu">
 
                 <div class="profile-userpic">
-                    <img src="{{userData.pictureUrl}}" class="img-responsive" style="display:block; margin: 0 auto; margin-top: 20px; ">
+                    <img src="{{userData.pictureUrl}}" class="img-responsive"
+                         style="display:block; margin: 0 auto; margin-top: 20px; ">
                 </div>
                 <div class="profile-usertitle">
                     <div class="profile-usertitle-name">
@@ -60,7 +65,7 @@
                     <div class="profile-userbuttons">
                     </div>
                     <div style="background-color:white; width:100%; height:0.3em; margin-top:50px;">
-                     
+
                     </div>
                     <div class="nav">
                         <a class="nav-link" href="http://localhost:8888/Admin">
@@ -84,12 +89,14 @@
                             Reviews
                         </a>
                     </div>
-                   
-                </div>
-               <div class="sb-sidenav-footer">
-                      <p data-toggle="modal" data-target="#editModal" style="float:left;"><i class="fas fa-cog" style="margin-right:5px"></i>Settings</p>
 
-                    </div>
+                </div>
+                <div class="sb-sidenav-footer">
+                    <p data-toggle="modal" data-target="#editModal" style="float:left;"><i class="fas fa-cog"
+                                                                                           style="margin-right:5px"></i>Settings
+                    </p>
+
+                </div>
             </div>
         </nav>
     </div>
@@ -108,7 +115,8 @@
                                     <div class="card-header" id="headingOne">
                                         <h2 class="mb-0">
                                             <button type="button" class="btn btn-link" data-toggle="collapse"
-                                                    data-target="#collapseOne">Admin Functions <i class="arrow down"></i>
+                                                    data-target="#collapseOne">Admin Functions <i
+                                                    class="arrow down"></i>
                                             </button>
                                         </h2>
                                     </div>
@@ -131,7 +139,8 @@
                                                                 <div class="form-group" style="display:none;">
                                                                     <label for="adminid">User id</label>
                                                                     <input type="text" class="form-control" id="adminid"
-                                                                           name="userId" value="{{userData.userId}}" placeholder="">
+                                                                           name="userId" value="{{userData.userId}}"
+                                                                           placeholder="">
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label for="adminSummary">Summary</label>
@@ -139,17 +148,17 @@
                                                                            id="adminSummary" name="summary"
                                                                            placeholder="">
                                                                 </div>
-                                                              
-                                                               <div class="form-group">
-                                                                <label for="admincategoryid">Category</label>
-                                                                    
-                                                               <select class="form-control" name="type">
-                                                             <option value="Nature">Nature</option>
-                                                             <option value="People">People</option>
-                                                             <option value="Buildings">Buildings</option>
-                                                             <option value="Animals">Animals</option>
-                                                             <option value="Holidays">Holidays</option>
-                                                             </select>
+
+                                                                <div class="form-group">
+                                                                    <label for="admincategoryid">Category</label>
+
+                                                                    <select class="form-control" name="type">
+                                                                        <option value="Nature">Nature</option>
+                                                                        <option value="People">People</option>
+                                                                        <option value="Buildings">Buildings</option>
+                                                                        <option value="Animals">Animals</option>
+                                                                        <option value="Holidays">Holidays</option>
+                                                                    </select>
                                                                 </div>
 
 
@@ -159,22 +168,22 @@
                                                                            id="adminprice" name="price" placeholder="">
                                                                 </div>
                                                                 <div class="form-group">
-                                                            <label for="admindiscount">Discount</label>
-                                                            <select class="form-control" name="discount">
-                                                             <option value="0"></option>
-                                                             <option value="0.1">10%</option>
-                                                             <option value="0.25">25%</option>
-                                                             <option value="0.5">50%</option>
-                                                             </select>
-                                                                   </div>
-                                                            
-                                                                 <div class="form-group">
-                                                                <label for="adminproducttype">Type</label>   
-                                                               <select class="form-control" name="categoryId">
-                                                             <option value="1">Background</option>
-                                                             <option value="2">Stockphoto</option>
-                                                             <option value="3">Poster</option>
-                                                             </select>
+                                                                    <label for="admindiscount">Discount</label>
+                                                                    <select class="form-control" name="discount">
+                                                                        <option value="0"></option>
+                                                                        <option value="0.1">10%</option>
+                                                                        <option value="0.25">25%</option>
+                                                                        <option value="0.5">50%</option>
+                                                                    </select>
+                                                                </div>
+
+                                                                <div class="form-group">
+                                                                    <label for="adminproducttype">Type</label>
+                                                                    <select class="form-control" name="categoryId">
+                                                                        <option value="1">Background</option>
+                                                                        <option value="2">Stockphoto</option>
+                                                                        <option value="3">Poster</option>
+                                                                    </select>
                                                                 </div>
 
                                                                 <div class="form-group">
@@ -183,8 +192,8 @@
                                                                            id="adminproductUrl" name="productUrl"
                                                                            placeholder="">
                                                                 </div>
-                                                            
-                                                               
+
+
                                                                 <button type="submit" class="btn btn-primary">Submit
                                                                 </button>
                                                             </form>
@@ -231,14 +240,15 @@
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label for="AdminAuth">Authority</label>
-                                                                   
 
-                                                            <select class="form-control" id="AdminAuth" name="admin">
-                                                             <option value="0">User</option>
-                                                             <option value="1">Admin</option>
-                    
-                                                             </select>
-                                                                           
+
+                                                                    <select class="form-control" id="AdminAuth"
+                                                                            name="admin">
+                                                                        <option value="0">User</option>
+                                                                        <option value="1">Admin</option>
+
+                                                                    </select>
+
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label for="AdminPictureUrl">Profile
@@ -247,7 +257,7 @@
                                                                            id="AdminPictureUrl" name="pictureUrl"
                                                                            placeholder="Password">
                                                                 </div>
-                                                                
+
                                                                 <button type="submit" class="btn btn-primary">Submit
                                                                 </button>
                                                             </form>
@@ -315,123 +325,123 @@
     </div>
 
 
-<div class="modal" tabindex="-1" role="dialog" id="editModal">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Edit User</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body" id="modalBody">
-                <form method="POST" action="/Admin/updateUser" novalidate>
-                   <div class="form-group row">
-                        <label for="userId" class="col-4 col-form-label">User id</label>
-                        <div class="col-8">
-                            <input id="userId" name="userId" type="text" class="form-control" value="{{userData.userId}}" readonly>
+    <div class="modal" tabindex="-1" role="dialog" id="editModal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Edit User</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="modalBody">
+                    <form method="POST" action="/Admin/updateUser" novalidate>
+                        <div class="form-group row">
+                            <label for="userId" class="col-4 col-form-label">User id</label>
+                            <div class="col-8">
+                                <input id="userId" name="userId" type="text" class="form-control"
+                                       value="{{userData.userId}}" readonly>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="title" class="col-4 col-form-label">Firstname</label>
-                        <div class="col-8">
-                            <input id="Firstname" name="firstName" type="text" class="form-control" value="{{userData.firstName}}">
+                        <div class="form-group row">
+                            <label for="title" class="col-4 col-form-label">Firstname</label>
+                            <div class="col-8">
+                                <input id="Firstname" name="firstName" type="text" class="form-control"
+                                       value="{{userData.firstName}}">
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="summary" class="col-4 col-form-label">Lastname</label>
-                        <div class="col-8">
-                            <input id="Lastname" name="lastName" type="text" class="form-control" value="{{userData.lastName}}">
+                        <div class="form-group row">
+                            <label for="summary" class="col-4 col-form-label">Lastname</label>
+                            <div class="col-8">
+                                <input id="Lastname" name="lastName" type="text" class="form-control"
+                                       value="{{userData.lastName}}">
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="mobileNr" class="col-4 col-form-label">Phonenumber</label>
-                        <div class="col-8">
-                            <input id="mobileNr" name="mobileNr" type="text" class="form-control" value="{{userData.mobileNr}}">
+                        <div class="form-group row">
+                            <label for="mobileNr" class="col-4 col-form-label">Phonenumber</label>
+                            <div class="col-8">
+                                <input id="mobileNr" name="mobileNr" type="text" class="form-control"
+                                       value="{{userData.mobileNr}}">
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="email" class="col-4 col-form-label">Email</label>
-                        <div class="col-8">
-                            <input id="email" name="email" type="text" class="form-control" value="{{userData.email}}">
+                        <div class="form-group row">
+                            <label for="email" class="col-4 col-form-label">Email</label>
+                            <div class="col-8">
+                                <input id="email" name="email" type="text" class="form-control"
+                                       value="{{userData.email}}">
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="pictureUrl" class="col-4 col-form-label">Profilepicture</label>
-                        <div class="col-8">
-                            <input id="pictureUrl" name="pictureUrl" type="text" class="form-control" value="{{userData.pictureUrl}}">
+                        <div class="form-group row">
+                            <label for="pictureUrl" class="col-4 col-form-label">Profilepicture</label>
+                            <div class="col-8">
+                                <input id="pictureUrl" name="pictureUrl" type="text" class="form-control"
+                                       value="{{userData.pictureUrl}}">
+                            </div>
                         </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary">Save changes</button>
-                    </div>
-                </form>
-            </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </form>
+                </div>
 
-   <div style="background-color:black; width:100%; height:0.7em;">
-                    </div>
-             <div class="modal-header">
-                <h5 class="modal-title">Change password</h5>
-            </div>
-            <div class="modal-body" id="modalBody">
-                <form method="POST" action="/Admin/NewPassword" novalidate>
+                <div style="background-color:black; width:100%; height:0.7em;">
+                </div>
+                <div class="modal-header">
+                    <h5 class="modal-title">Change password</h5>
+                </div>
+                <div class="modal-body" id="modalBody">
+                    <form method="POST" action="/Admin/NewPassword" novalidate>
 
-                  <div class="form-group row" style="display:none;">
-                        <label for="userId" class="col-4 col-form-label">username</label>
-                        <div class="col-8">
-                            <input id="userId" name="username" type="password" class="form-control">
+                        <div class="form-group row" style="display:none;">
+                            <label for="userId" class="col-4 col-form-label">username</label>
+                            <div class="col-8">
+                                <input id="userId" name="username" type="password" class="form-control">
+                            </div>
                         </div>
-                    </div>
 
-                   <div class="form-group row">
-                        <label for="userId" class="col-4 col-form-label">Old password</label>
-                        <div class="col-8">
-                            <input id="userId" name="oldpassword" type="password" class="form-control">
+                        <div class="form-group row">
+                            <label for="userId" class="col-4 col-form-label">Old password</label>
+                            <div class="col-8">
+                                <input id="userId" name="oldpassword" type="password" class="form-control">
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="title" class="col-4 col-form-label">New password</label>
-                        <div class="col-8">
-                            <input id="Firstname" name="newpassword" type="password" class="form-control">
+                        <div class="form-group row">
+                            <label for="title" class="col-4 col-form-label">New password</label>
+                            <div class="col-8">
+                                <input id="Firstname" name="newpassword" type="password" class="form-control">
+                            </div>
                         </div>
-                    </div>      
-                    <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary">Save changes</button>
-                    </div>
-                </form>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
+
 </div>
-
-    </div>
-
-
-
-
 
 
 </div>
 <script>
 
-  
 
     // Toggle the side navigation
-    function clicked(){
+    function clicked() {
 
-          var path = window.location.href; // because the 'href' property of the DOM element is the absolute path
-        $("#layoutSidenav_nav .sb-sidenav a.nav-link").each(function() {
+        var path = window.location.href; // because the 'href' property of the DOM element is the absolute path
+        $("#layoutSidenav_nav .sb-sidenav a.nav-link").each(function () {
             if (this.href === path) {
                 $(this).addClass("active");
             }
         });
 
 
-
-      $("body").toggleClass("sb-sidenav-toggled");
+        $("body").toggleClass("sb-sidenav-toggled");
 
     }
-    
+
 </script>
 
 <script src="/js/Admin/jquery.js"></script>
