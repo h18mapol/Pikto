@@ -107,7 +107,7 @@
     </div>
     <div id="layoutSidenav_content">
         <main>
-            <div class="container-fluid">
+            <div class="container-fluid" style="margin-top:2%">
 
 
                 <div class="row">
@@ -115,9 +115,13 @@
                         <div class="card">
 
                             <div class="card-body" style="text-align: center;">
+                <div class="profile-userpic">
 
-                                <img src="{{user.pictureUrl}}" class="img-circle" width="150">
-                                <h4 class="card-title m-t-10">{{user.firstName}} {{user.lastName}}</h4>
+                                <img src="{{user.pictureUrl}}" class="img-responsive"
+                         style="display:block; object-fit: cover; margin-top: 20px; margin: 0 auto; min-width:120px; min-height:120px;">
+                                </div>
+                                <h4 class="card-title m-t-10" style="padding-top:5%;">{{user.firstName}} {{user.lastName}}</h4>
+
                             </div>
                             <div>
                                 <hr>
