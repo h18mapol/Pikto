@@ -323,10 +323,14 @@
         <div class="card-columns" id="MyCards">
             {{#allProducts}}
             <div class="card" style="margin:0; padding:0; border:0px;">
-                <div class="card-body" style="margin:0; padding:0;">
-                   <h5 class="card-title" style="display:none;">{{title}}</h5>
-
+                <div class="card-body" style="margin:0; padding:0; position: relative; display: inline-block;">
+                    <h5 class="card-title" style="display:none;">{{title}}</h5>
                     <a href="http://localhost:8888/Index/{{productId}}">
+                        <a href="#" class="badge badge-danger" style="
+                            margin-left: 2%;
+                            position: absolute;
+                            margin-top: 2%;
+                            font-size: 1.3em;">{{discount}}</a>
                         <img src="{{productUrl}}" alt="Italian Trulli" style="padding-bottom:1.25rem;">
                     </a>
                 </div>
@@ -365,30 +369,43 @@
 <script src="/js/Main/scripts.js"></script>
 <script>
     $(document).ready(function () {
+        var discount = $(".badge-danger");
+        for (let i = 0; i < discount.length; i++) {
+           let sale = discount[i].innerText;
+            console.log(sale);
+           if(sale == 0){
+               console.log(sale);
+               discount[i].style.display = "none";
+           } else {
+               sale = sale * 100;
+               discount[i].innerText = (parseFloat(sale).toFixed(0)+"%");
+           }
+
+        }
+    });
+
+    $(document).ready(function () {
         $(".menu-icon").on("click", function () {
             $("nav ul").toggleClass("showing");
         });
- 
 
 
+        $("#searchValue").on("keyup", function () {
 
 
-  $("#searchValue").on("keyup", function() {
-
-
-    var clickedBtnID = $(this).val();
-        cardContainer = document.getElementById("MyCards");
-        cards = cardContainer.getElementsByClassName("card");
-        for (i = 0; i < cards.length; i++) {
-            title = cards[i].querySelector(".card-body h5.card-title");
-            if (title.innerText.indexOf(clickedBtnID) > -1) {
-                cards[i].style.display = "";
-            } else {
-                cards[i].style.display = "none";
+            var clickedBtnID = $(this).val();
+            cardContainer = document.getElementById("MyCards");
+            cards = cardContainer.getElementsByClassName("card");
+            for (i = 0; i < cards.length; i++) {
+                title = cards[i].querySelector(".card-body h5.card-title");
+                if (title.innerText.indexOf(clickedBtnID) > -1) {
+                    cards[i].style.display = "";
+                } else {
+                    cards[i].style.display = "none";
+                }
             }
-        }
+        });
     });
- });
     // Scrolling Effect
 
     $(window).on("scroll", function () {
@@ -420,6 +437,8 @@
 
 
     }
+
+
 
 
 </script>
