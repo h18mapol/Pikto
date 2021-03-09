@@ -56,7 +56,7 @@
 
                 <div class="profile-userpic">
                     <img src="{{userData.pictureUrl}}" class="img-responsive"
-                         style="display:block; margin: 0 auto; padding-top: 20px; ">
+                         style="display:block; margin: 0 auto; margin-top: 20px; ">
                 </div>
                 <div class="profile-usertitle">
                     <div class="profile-usertitle-name">
@@ -348,7 +348,6 @@
     $(document).ready(function () {
 
         $("#dataTable tbody tr").click(function () {
-            alert("Hej");
             var tableData = $(this).children("td").map(function () {
                 return $(this).text();
             }).get();

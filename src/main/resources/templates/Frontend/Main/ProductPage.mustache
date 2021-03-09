@@ -125,40 +125,36 @@
                         <div class="container">
                             <div class="card">
                                 <div class="container-fliud">
-                                    <div class="wrapper row">
-                                        <div class="preview col-md-6">
+                                        <div class="preview col-md-7" style="margin-left:auto; margin-right:auto;">
+                                        <h1 class="product-title">{{Product.title}}</h1>
+                                        
 
                                             <div class="preview-pic tab-content">
                                                 <div class="tab-pane active" id="pic-1"><img
                                                         src="{{Product.productUrl}}"/></div>
                                             </div>
-
-
-                                        </div>
-                                        <div class="details col-md-6">
-                                            <h1 class="product-title">{{Product.title}}</h1>
-                                            <h4>{{Product.price}}</h4>
-
-                                            <div class="rating">
+                                              <div class="rating" style="padding-top:20px;">
                                                 <div class="stars">
                                                     <span id="fa1" class="fa fa-star"></span>
                                                     <span id="fa2" class="fa fa-star"></span>
                                                     <span id="fa3" class="fa fa-star"></span>
                                                     <span id="fa4" class="fa fa-star"></span>
                                                     <span id="fa5" class="fa fa-star"></span>
+                                                    <span id="numRev"></span>
                                                 </div>
                                             </div>
-                                            <p class="product-description">{{Product.summary}}</p>
+                                            <h4>{{Product.price}} SEK</h4>
+                                              <p class="product-description">{{Product.summary}}</p>
                                           
                                             <div class="action">
                                                 <form action="/Index/addToCart/{{Product.productId}}">
-                                                    <button class="like btn btn-default" type="submit">Add to cart</button>
+<button type="button" class="submit"><i class="fa fa-cart-plus" aria-hidden="true"></i>  Add to cart</button>
                                                 </form>
-                                            </div>
+
+
                                         </div>
-                                    </div>
+                                      
                                 </div>
-                            </div>
                         </div>
 
 
@@ -275,17 +271,27 @@
      
     });
     var sum=0;
-    var avg=0;
+    var count=0;
     $('.review-block-rate').each(function(i, obj) {
-     avg++;
+     count++;
       var i= $(this).attr('id');
        sum =sum+(parseInt(i));
 
 });
 
+if(count===1){
+ 
+  $( "#numRev" ).html( count+" review" );
+
+}
+
+else{ $( "#numRev" ).html( count+" reviews" );
+
+}
 
 $('.stars').each(function (index, value) {
-      avg=Math.round(sum/avg);
+      
+      var avg=Math.round(sum/count);
       
         $(this).children("span").each(function (index2, value2) {
             if (avg == 1 && index2 < avg) {
@@ -306,6 +312,9 @@ $('.stars').each(function (index, value) {
             if (avg == 5 && index2 < avg) {
                 $(this).removeClass("fa fa-star").addClass("fa fa-star checked");
             }
+             
+          
+
 
         })
 
