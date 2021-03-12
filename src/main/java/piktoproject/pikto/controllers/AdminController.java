@@ -161,6 +161,7 @@ public class AdminController {
     public String deleteUserProduct(Model model,@PathVariable Integer productId){
         Product product = adminService.getProduct(productId);
         adminService.deleteProduct(productId);
+        model.addAttribute("user",adminService.getUser(product.getUserId()));
         model.addAttribute("userData",adminService.getUser(product.getUserId()));
         model.addAttribute("userProducts",adminService.getAllProductsbyId(product.getUserId()));
         model.addAttribute("userReviews",adminService.getAllReviewsById(product.getUserId()));
@@ -181,6 +182,7 @@ public class AdminController {
     public String deleteUserOrder(Model model,@PathVariable Integer orderId){
         Order order = adminService.getOrder(orderId);
         adminService.deleteOrder(orderId);
+        model.addAttribute("user",adminService.getUser(order.getUserId()));
         model.addAttribute("userData",adminService.getUser(order.getUserId()));
         model.addAttribute("userProducts",adminService.getAllProductsbyId(order.getUserId()));
         model.addAttribute("userReviews",adminService.getAllReviewsById(order.getUserId()));
@@ -201,6 +203,7 @@ public class AdminController {
     public String deleteUserReview(Model model,@PathVariable Integer reviewId){
         Product_review product_review = adminService.getReviewById(reviewId);
         adminService.deleteReview(reviewId);
+        model.addAttribute("user",adminService.getUser(product_review.getUserId()));
         model.addAttribute("userData",adminService.getUser(product_review.getUserId()));
         model.addAttribute("userProducts",adminService.getAllProductsbyId(product_review.getUserId()));
         model.addAttribute("userReviews",adminService.getAllReviewsById(product_review.getUserId()));
