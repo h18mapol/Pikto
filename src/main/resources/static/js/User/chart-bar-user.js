@@ -8,7 +8,7 @@ var labelListBar = [];
 var labelListLine = [];
 let months = ["01","02","03","04","05"];
 
-var data = $('#dataTableOrders').find("tbody tr");
+var data = $('#dataTable').find("tbody tr");
 data.each(function(index, value) {
     test = $(this).children("td");
     let grandtotal = (test[11].innerHTML);
@@ -17,13 +17,13 @@ data.each(function(index, value) {
     labelListLine.push(date);
 });
 
-data.each(element => console.log(element[0]));
+//data.each(element => console.log(element[0]));
 BuildChart(orderList, labelListLine, "Grand Total");
 
 function BuildChart(orderList, labelList, chartTitle) {
     max = Math.max(...orderList) + 5;
     //console.log(max);
-    var ctx = document.getElementById("myBarChart").getContext('2d');
+    var ctx = document.getElementById("UserReviewsChart").getContext('2d');
     var myChart = new Chart(ctx, {
         type: 'bar',
         data: {

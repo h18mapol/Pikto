@@ -207,7 +207,7 @@ public class UserController {
     
      @RequestMapping(path="/User/addReview", method={RequestMethod.POST})
     public String addProduct(@ModelAttribute ("review")Product_review review,@RequestParam Map<String, String> allRequestParams){
-         System.out.println(review.getUserId());
+        System.out.println(review.getProductId() + "awdawdawd" + review.getRating());
         userService.addReview(review);
         return "redirect:http://localhost:8888/User/Purchases";
 
