@@ -53,7 +53,6 @@ public class UserController {
         model.addAttribute("userOrders", userService.getAllUserOrders(user.getUserId()));
         model.addAttribute("userProducts", userService.getAllUserProducts(user.getUserId()));
         model.addAttribute("userReviews", userService.getAllUserReviews(user.getUserId()));
-        System.out.println(userService.getAllUserReviews(user.getUserId()).get(0).getReviewId());
         return "Frontend/User/userPage";
     }
 

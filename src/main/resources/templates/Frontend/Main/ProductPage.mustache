@@ -127,7 +127,8 @@
                                 <div class="container-fliud">
                                         <div class="preview col-md-7" style="margin-left:auto; margin-right:auto;">
                                         <h1 class="product-title">{{Product.title}}</h1>
-                                        
+                                        <h1 class="sale" id="sale" style="display:none;">{{Product.discount}}</h1>
+
 
                                             <div class="preview-pic tab-content">
                                                 <div class="tab-pane active" id="pic-1"><img
@@ -143,12 +144,15 @@
                                                     <span id="numRev"></span>
                                                 </div>
                                             </div>
-                                            <h4>{{Product.price}} SEK</h4>
+                                            <h4 id="normalPrice">{{Product.price}} SEK</h4>
+                                            <h4 id="PriceOver" style="display:none;"><del>{{Product.price}} SEK</del></h4>
+                                             <h4 id="newPrice" style="display:none; color:red;">SEK</h4>
+
                                               <p class="product-description">{{Product.summary}}</p>
                                           
                                             <div class="action">
-                                                <form action="/Index/addToCart/{{Product.productId}}">
-<button type="button" class="submit"><i class="fa fa-cart-plus" aria-hidden="true"></i>  Add to cart</button>
+                                                <form action="http://localhost:8888/Index/addToCart/{{Product.productId}}">
+                                        <button type="submit" class="btn btn-info"><i class="fa fa-cart-plus" aria-hidden="true"></i>  Add to cart</button>
                                                 </form>
 
 
@@ -242,6 +246,25 @@
 <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
 
 <script>
+
+     var discount=document.getElementById('sale').innerHTML;
+     var price=document.getElementById('normalPrice').innerHTML;
+     var intPrice=price.replace( " SEK", '');
+     var floatPrice=parseFloat(intPrice);
+    var floatDiscount=parseFloat(discount);
+     var monetaryDiscount=floatPrice*floatDiscount;
+    var salePrice=intPrice-monetaryDiscount;
+    if(discount===0.0){
+
+    } else{
+       document.getElementById("normalPrice").style.display = "none";
+        document.getElementById("PriceOver").style.display = "block";
+       document.getElementById("newPrice").innerHTML = salePrice+ " SEK";
+        document.getElementById("newPrice").style.display = "block";
+
+        
+
+    }
 
     $('.review-block-rate').each(function (index, value) {
         var id = $(this).attr('id');

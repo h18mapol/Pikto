@@ -7,7 +7,7 @@
     <meta name="description" content=""/>
     <meta name="author" content=""/>
     <title>Dashboard - SB Admin</title>
-    <link href="/css/User/userstyles.css" rel="stylesheet"/>
+     <link href="/css/User/userstyles.css" rel="stylesheet"/>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
 
     <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet"
@@ -135,8 +135,7 @@
                         <a href="{{productUrl}}" download>
                             <button type="button" class="btn btn-info"><i class="fa fa-download"></i>Download</button>
                         </a>
-                        <button type="button" class="btn btn-success" data-toggle="modal" id="toggleModal"
-                                data-target="#addReview">Review
+                        <button type="button" class="btn btn-success" data-toggle="modal" id="toggleModal" data-target="#addReview">Review
                         </button>
                     </div>
                 </div>
@@ -256,8 +255,7 @@
                 <form method="POST" action="/User/addReview" novalidate>
                     <div class="form-group row" style="display:none;">
                         <label for="r_productId">Product id</label>
-                        <input id="r_productId" name="productId" type="text" class="form-control" hidden
-                               value="{{prod}}">
+                        <input id="r_productId" name="productId" type="text" class="form-control" hidden>
                     </div>
                     <div class="form-group row">
                         <label for="r_title">Title</label>
@@ -306,16 +304,18 @@
 
 </div>
 
-<script src="/js/Admin/jquery.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
-        crossorigin="anonymous"></script>
-<script src="/js/Admin/scripts.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
-<script src="/js/Admin/chart-area-demo.js"></script>
-<script src="/js/Admin/chart-bar-demo.js"></script>
-<script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
-<script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
-<script src="/js/Admin/datatables-demo.js"></script>
+           <script src="/js/Admin/jquery.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
+                    crossorigin="anonymous"></script>
+            <script src="/js/Admin/scripts.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"
+                    crossorigin="anonymous"></script>
+            <script src="/js/Admin/chart-area-demo.js"></script>
+            <script src="/js/Admin/chart-bar-demo.js"></script>
+            <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"
+                    crossorigin="anonymous"></script>
+            <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"
+                    crossorigin="anonymous"></script>
 
 <script>
     $("#toggleModal").click(function () {
@@ -323,6 +323,8 @@
         alert(id);
         $("#r_productId").val(id);
     });
+
+
 
     function clicked() {
 

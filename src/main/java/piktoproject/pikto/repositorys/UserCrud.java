@@ -247,7 +247,8 @@ public class UserCrud implements IUserCrud {
                 product.setSummary(resultSet.getString("summary"));
                 product.setType(resultSet.getString("type"));
                 product.setPrice(resultSet.getInt("price"));
-                product.setDiscount(resultSet.getInt("discount"));
+                System.out.println(resultSet.getInt("discount"));
+                product.setDiscount(resultSet.getFloat("discount"));
                 product.setContent("");
                 product.setCategoryId(resultSet.getInt("categoryId"));
                 product.setPublishedAt(resultSet.getString("publishedAt"));
