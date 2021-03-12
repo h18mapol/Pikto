@@ -252,26 +252,24 @@
                 </button>
             </div>
             <div class="modal-body" id="reviewModalBody">
-                <form method="POST" action="/User/addReview" novalidate>
-                    <div class="form-group row" style="display:none;">
-                        <label for="r_productId">Product id</label>
+                <form method="POST" action="/User/addReview" id="reviewForm">
+                    <div class="form-group row">
+                        <label for="r_productId">ProductId</label>
                         <input id="r_productId" name="productId" type="text" class="form-control" hidden>
                     </div>
                     <div class="form-group row">
                         <label for="r_title">Title</label>
                         <input id="r_title" name="title" type="text" class="form-control">
                     </div>
-
                     <div class="form-group row">
                         <label for="r_title">Rating</label>
-                        <select class="form-control" id="Rating" name="rating">
+                        <select class="form-control" id="Rating" name="rating" type="text" form="reviewForm">
                             <option value="1">1</option>
                             <option value="2">2</option>
                             <option value="3">3</option>
                             <option value="4">4</option>
                             <option value="5">5</option>
                         </select>
-
                     </div>
                     <div class="form-group row" style="display:none;">
                         <label for="r_createdAt">Created At</label>
