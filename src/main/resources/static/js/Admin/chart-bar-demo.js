@@ -3,10 +3,12 @@ Chart.defaults.global.defaultFontFamily = '-apple-system,system-ui,BlinkMacSyste
 Chart.defaults.global.defaultFontColor = '#292b2c';
 
 // Bar Chart Example
-var orderList = [];
+var orderList = [0,0,0,0,0,0,0,0,0,0,0,0];
 var labelListBar = [];
 var labelListLine = [];
-let months = ["01","02","03","04","05"];
+let months = ["Jan","Feb","Mar","Apr","Maj", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+let jan =
+
 // Bar Chart Example
 //$("#btn-search").prop("disabled", true);
 
@@ -20,14 +22,60 @@ $.ajax({
     success: function (data) {
 
         for (i in data) {
-            orderList.push(parseInt(data[i].grandTotal));
             labelListBar.push(data[i].createdAt);
-            let last2 = data[i].createdAt.substring(8,10);
+            let last2 = data[i].createdAt.substring(5,7);
+            switch (last2) {
+                case "01":
+                    let jan = orderList[0];
+                    jan += parseInt(data[i].grandTotal);
+                    orderList[0] = jan;
+                    break;
+                case "02":
+                    let feb = orderList[1];
+                    feb += parseInt(data[i].grandTotal);
+                    orderList[1] = feb;
+                    break;
+                case "03":
+                    let mar = orderList[2];
+                    mar = mar + parseInt(data[i].grandTotal);
+                    console.log(last2 + mar);
+                    orderList[2] = mar;
+                    break;
+                case "04":
+                    let apr = orderList[3];
+                    apr = apr + parseInt(data[i].grandTotal);
+                    orderList[3] = apr;
+                case "05":
+                    let maj = orderList[4];
+                    maj += parseInt(data[i].grandTotal);
+                    orderList[4] = maj;
+                case "06":
+                    let jun = orderList[5];
+                    jun += parseInt(data[i].grandTotal);
+                case "07":
+                    let jul = orderList[6];
+                    jul += parseInt(data[i].grandTotal);
+                case "08":
+                    let aug = orderList[7];
+                    aug += parseInt(data[i].grandTotal);
+                case "09":
+                    sep = orderList[8];
+                    sep += parseInt(data[i].grandTotal);
+                case "10":
+                    oct = orderList[9];
+                    oct += parseInt(data[i].grandTotal);
+                case "11":
+                    nov = orderList[10];
+                    nov += parseInt(data[i].grandTotal);
+                case "12":
+                    dec = orderList[11];
+                    dec += parseInt(data[i].grandTotal);
+            }
+            console.log(parseInt(data[i].grandTotal));
             labelListLine.push(last2);
         }
-        console.log(orderList + labelListBar + labelListLine);
+        BuildLineChart(orderList, months, "Order");
         BuildChart(orderList, labelListBar, "Order size");
-        BuildLineChart(orderList, labelListLine, "Order");
     },
     error: function (e) {
 
