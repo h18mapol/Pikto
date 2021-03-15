@@ -253,7 +253,7 @@
                         <div class="form-group row">
                             <label for="email" class="col-4 col-form-label">Email</label>
                             <div class="col-8">
-                                <input id="email" name="email" type="text" class="form-control"
+                                <input id="email2" name="email" type="text" class="form-control"
                                        value="{{userData.email}}">
                             </div>
                         </div>
@@ -282,7 +282,7 @@
                         <div class="form-group row" style="display:none;">
                             <label for="userId" class="col-4 col-form-label">username</label>
                             <div class="col-8">
-                                <input id="userId" name="username" type="password" class="form-control">
+                                <input id="userId" name="username" type="text" class="form-control" value="{{userData.email}}>
                             </div>
                         </div>
 
@@ -316,28 +316,28 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Edit Product</h5>
+                <h5 class="modal-title">Edit Order</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body" id="modalBody">
-                <form method="POST" action="/Admin/updateProduct" novalidate>
-                    <div class="form-group row">
+                <form method="POST" action="/Admin/updateOrder" id="editOrderForm" novalidate>
+                    <div class="form-group row" hidden>
                         <label for="reviewId" class="col-4 col-form-label">OrderId</label>
                         <div class="col-8">
-                            <input id="orderId" name="orderId" type="text" class="form-control" readonly>
+                            <input id="orderId" name="orderId" type="text" class="form-control" readonly >
                         </div>
                     </div>
-                    <div class="form-group row">
+                    <div class="form-group row" hidden>
                         <label for="productId" class="col-4 col-form-label">UserId</label>
                         <div class="col-8">
-                            <input id="userId" name="userId" type="text" class="form-control" readonly>
+                            <input id="userId" name="userId" type="text" class="form-control" readonly value="{{userData.userId}}">
                         </div>
                     </div>
 
 
-                    <div class="form-group row">
+                    <div class="form-group row" hidden>
                         <label for="title" class="col-4 col-form-label">sessionId</label>
                         <div class="col-8">
                             <input id="sessionId" name="sessionId" type="text" class="form-control">
@@ -345,17 +345,20 @@
                     </div>
 
                     <div class="form-group row">
-                        <label for="rating" class="col-4 col-form-label">status</label>
+                        <label for="status" class="col-4 col-form-label">status</label>
                         <div class="col-8">
-                            <input id="status" name="status" type="number" class="form-control" required min="1" max="5"
-                                   placeholder="max rating 5">
+                            <select class="form-control" name="status" type="text" form="editOrderForm">
+                                <option value="0">Confirmed</option>
+                                <option value="1">On-Route</option>
+                                <option value="2">Delivered</option>
+                            </select>
                         </div>
                     </div>
 
-                    <div class="form-group row">
+                    <div class="form-group row" hidden>
                         <label for="createdAt" class="col-4 col-form-label">subTotal</label>
                         <div class="col-8">
-                            <input id="subTotal" name="subTotal" type="text" class="form-control">
+                            <input id="subTotal" name="subTotal" type="text" class="form-control" >
                         </div>
                     </div>
                     <div class="form-group row">
@@ -364,99 +367,99 @@
                             <input id="itemDiscount" name="itemDiscount" type="text" class="form-control">
                         </div>
                     </div>
-                    <div class="form-group row">
+                    <div class="form-group row" hidden>
                         <label for="userId" class="col-4 col-form-label">tax</label>
                         <div class="col-8">
-                            <input id="tax" name="tax" type="number" class="form-control" readonly>
+                            <input id="tax" name="tax" type="text" class="form-control" readonly >
                         </div>
                     </div>
 
-                    <div class="form-group row">
+                    <div class="form-group row" hidden>
                         <label for="userId" class="col-4 col-form-label">shipping</label>
                         <div class="col-8">
-                            <input id="shipping" name="shipping" type="text" class="form-control" readonly>
+                            <input id="shipping" name="shipping" type="text" class="form-control" readonly >
                         </div>
                     </div>
 
-                    <div class="form-group row">
+                    <div class="form-group row" hidden>
                         <label for="userId" class="col-4 col-form-label">total</label>
                         <div class="col-8">
-                            <input id="total" name="total" type="text" class="form-control" readonly>
+                            <input id="total" name="total" type="text" class="form-control" readonly >
                         </div>
                     </div>
-                    <div class="form-group row">
+                    <div class="form-group row" hidden>
                         <label for="userId" class="col-4 col-form-label">promo</label>
                         <div class="col-8">
                             <input id="promo" name="promo" type="text" class="form-control" readonly>
                         </div>
                     </div>
-                    <div class="form-group row">
+                    <div class="form-group row" hidden>
                         <label for="userId" class="col-4 col-form-label">discount</label>
                         <div class="col-8">
-                            <input id="discount" name="discount" type="text" class="form-control" readonly>
+                            <input id="discount" name="discount" type="text" class="form-control" readonly >
                         </div>
                     </div>
 
-                    <div class="form-group row">
+                    <div class="form-group row" hidden>
                         <label for="userId" class="col-4 col-form-label">grandTotal</label>
                         <div class="col-8">
-                            <input id="grandTotal" name="grandTotal" type="text" class="form-control" readonly>
+                            <input id="grandTotal" name="grandTotal" type="text" class="form-control" readonly >
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="userId" class="col-4 col-form-label">firstName</label>
                         <div class="col-8">
-                            <input id="firstName" name="firstName" type="text" class="form-control" readonly>
+                            <input id="firstName" name="firstName" type="text" class="form-control" >
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="userId" class="col-4 col-form-label">lastName</label>
                         <div class="col-8">
-                            <input id="lastName" name="lastName" type="text" class="form-control" readonly>
+                            <input id="lastName" name="lastName" type="text" class="form-control" >
                         </div>
                     </div>
 
                     <div class="form-group row">
                         <label for="userId" class="col-4 col-form-label">mobile</label>
                         <div class="col-8">
-                            <input id="mobile" name="mobile" type="text" class="form-control" readonly>
+                            <input id="mobile" name="mobile" type="text" class="form-control" >
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="userId" class="col-4 col-form-label">email</label>
+                        <label for="email" class="col-4 col-form-label">email</label>
                         <div class="col-8">
-                            <input id="email" name="email" type="text" class="form-control" readonly>
+                            <input id="email" name="email" type="text" class="form-control" value="{{userData.email}}">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="userId" class="col-4 col-form-label">address</label>
                         <div class="col-8">
-                            <input id="address" name="address" type="text" class="form-control" readonly>
+                            <input id="address" name="address" type="text" class="form-control" >
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="userId" class="col-4 col-form-label">city</label>
                         <div class="col-8">
-                            <input id="city" name="city" type="text" class="form-control" readonly>
+                            <input id="city" name="city" type="text" class="form-control" >
                         </div>
                     </div>
-                    <div class="form-group row">
+                    <div class="form-group row" hidden>
                         <label for="userId" class="col-4 col-form-label">createdAt</label>
                         <div class="col-8">
-                            <input id="createdAt" name="createdAt" type="text" class="form-control" readonly>
+                            <input id="createdAt" name="createdAt" type="text" class="form-control" readonly >
                         </div>
                     </div>
-                    <div class="form-group row">
+                    <div class="form-group row" hidden>
                         <label for="userId" class="col-4 col-form-label">content</label>
                         <div class="col-8">
-                            <input id="content" name="content" type="text" class="form-control" readonly>
+                            <input id="content" name="content" type="text" class="form-control" readonly >
                         </div>
                     </div>
 
 
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-primary">Save changes</button>
-                        <a id="deletebtn" class="btn btn-danger">Delete Event</a>
+                        <a id="deletebtn" class="btn btn-danger">Delete Order</a>
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     </div>
                 </form>

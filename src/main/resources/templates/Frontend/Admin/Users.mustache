@@ -231,7 +231,7 @@
                     <div class="form-group row" style="display:none;">
                         <label for="userId" class="col-4 col-form-label">username</label>
                         <div class="col-8">
-                            <input id="userId" name="username" type="password" class="form-control">
+                            <input id="userId" name="username" type="text" class="form-control" value="{{userData.email}}>
                         </div>
                     </div>
 
@@ -338,23 +338,11 @@
 <script src="/js/Admin/jquery.backstretch.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
 <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
-
+<script src="/js/Admin/datatables-users.js"></script>
 <!--<script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>-->
 <!--<script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>-->
 
 <script>
-
-    $(document).ready(function () {
-
-        $("#dataTable tbody tr").click(function () {
-            var tableData = $(this).children("td").map(function () {
-                return $(this).text();
-            }).get();
-
-            window.location.href = '/Admin/User/' + tableData[0];
-        });
-
-    });
 
 
     // Toggle the side navigation

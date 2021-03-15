@@ -80,8 +80,11 @@ public class UserController {
 
     @PostMapping(path = "/User/NewPassword")
     public String userNewPassword(Model model, @ModelAttribute("passwordDTO") PasswordDTO passwordDTO, @RequestParam Map<String, String> allRequestParams){
-       adminService.resetPassword(passwordDTO);
-       return "redirect:http://localhost:8888/User";
+        if (adminService.resetPassword(passwordDTO)){
+            return "redirect:http://localhost:8888/User";
+        } else {
+            return "redirect:http://localhost:8888/User";
+        }
     }
 
     @RequestMapping("/User/Checkout")
