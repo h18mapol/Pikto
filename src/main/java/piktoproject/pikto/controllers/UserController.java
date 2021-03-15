@@ -29,6 +29,7 @@ import piktoproject.pikto.services.ShoppingService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 @Controller
 @SessionAttributes({"userId", "orderData"})
@@ -46,6 +47,7 @@ public class UserController {
 
     @RequestMapping("/User")
     public String getUser(Model model, HttpServletRequest request) {
+      Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         HttpSession session = request.getSession();
         model.addAttribute("sessionId", session.getId());
         User user = adminService.getLoggedInUser();
@@ -53,7 +55,13 @@ public class UserController {
         model.addAttribute("userOrders", userService.getAllUserOrders(user.getUserId()));
         model.addAttribute("userProducts", userService.getAllUserProducts(user.getUserId()));
         model.addAttribute("userReviews", userService.getAllUserReviews(user.getUserId()));
+          if (auth.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_ADMIN"))) {
+            System.out.println("Role Admin -->");
+            //adminService.sendEmail(user);
+            return "Frontend/Admin/Admin";
+        }
         return "Frontend/User/userPage";
+        
     }
 
     @RequestMapping("/User/Checkout/Status/{status}")
