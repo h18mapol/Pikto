@@ -48,61 +48,36 @@
     <link rel="stylesheet" href="/css/Main/media-queries.css">
 </head>
   <body class="sb-nav-fixed">
-        <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+   <nav style="background-color:black;">
+        <div class="menu-icon">
 
- <div class="logo" >
-     <a href="http://localhost:8888/Index"><img style="float: left; margin-right: 1%;" src="/img/pikto.png" width="100"/></a>
-        </div>
-          
-            <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#" onclick='clicked()'><i class="fas fa-bars"></i></button>
-        <div class="d-md-inline-block ml-auto mr-0 mr-md-3 my-2 my-md-0">
-          
-   <a href="http://localhost:8888/logout"><button type="button" class="btn btn-default btn-sm" style="color:black; background-color:white; margin-right:1.5em;">Logout</button> </a>     
-
-
-        </div>
-        </nav>
-    
-<div id="layoutSidenav">
-    <div id="layoutSidenav_nav">
-        <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
-               <div class="sb-sidenav-menu">
-
-                <div class="profile-userpic">
-                    <img src="{{userData.pictureUrl}}" class="img-responsive" style="display:block; margin: 0 auto; margin-top: 20px; ">
-                </div>
-                <div class="profile-usertitle">
-                    <div class="profile-usertitle-name">
-                        {{userData.firstName}} {{userData.lastName}}
-                    </div>
-                    <div class="profile-userbuttons">
-                    </div>
-                    <div style="background-color:white; width:100%; height:0.3em; margin-top:50px;">
-                     
-                    </div>
-                    <div class="nav">
-                        <a class="nav-link" href="http://localhost:8888/User">
-                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                            Dashboard
-                        </a>
-                        <a class="nav-link" href="http://localhost:8888/User/Checkout/">
-                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                            Cart
-                        </a>
-                        <a class="nav-link" href="http://localhost:8888/User/Purchases">
-                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                            Purchased images
-                        </a>
-                    </div>
-                </div>
-               <div class="sb-sidenav-footer">
-                      <p data-toggle="modal" data-target="#editModal" style="float:left;"><i class="fas fa-cog" style="margin-right:5px"></i>Settings</p>
-
-                    </div>
+            <div>
 
             </div>
-        </nav>
-    </div>
+
+            <i class="fa fa-bars fa-2x"></i>
+
+
+        </div>
+
+        <div class="logo">
+            <a href="http://localhost:8888/Index/"><img style="float: left; margin-right: 1%;" src="/img/pikto.png"
+                                                        width="100"/></a>
+        </div>
+
+
+        <div class="menu">
+            <ul>
+                <li><a href="http://localhost:8888/Index/Category/1">Backgrounds</a></li>
+                <li><a href="http://localhost:8888/Index/Category/2">Stockphotos</a></li>
+                <li><a href="http://localhost:8888/Index/Category/3">Posters</a></li>
+
+             
+            </ul>
+        </div>
+    </nav>
+ 
+
     <div id="layoutSidenav_content">
 
         <main>
