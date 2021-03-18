@@ -8,6 +8,9 @@
     <meta name="author" content=""/>
     <title>Dashboard - SB Admin</title>
     <style>
+     a{
+            color:white !important;
+        }
         .container {
             max-width: 960px;
         }
@@ -38,9 +41,237 @@
             overflow: hidden;
             text-overflow: ellipsis // This is where the magic happens
         }
+          .card-body-prod {
+            padding: 0;
+        }
+
+        .hero--video {
+            display: flex;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+            min-height: 600px;
+        }
+
+        .navbar-fixed-top {
+            top: -70px;
+            opacity: 0;
+        }
+
+        .hero-image {
+            position: absolute;
+            z-index: 1;
+            width: 100%;
+            height: 600px;
+            margin: 0 auto;
+            right: 0;
+            left: 0;
+            -o-object-fit: cover;
+            object-fit: cover;
+        }
+
+        .hero .search {
+            position: relative;
+            vertical-align: middle;
+            z-index: 2;
+        }
+
+        .hero .search input {
+            width: 100%;
+            height: 76px;
+            line-height: 76px;
+            border: 1px solid #111;
+            background: rgba(0, 0, 0, 0.8);
+            font-size: 27px;
+            padding: 5px 5px 5px 47px;
+            color: #fff;
+            position: relative;
+            border-radius: 0;
+        }
+
+        .hero .search button {
+            position: absolute;
+            top: 6px;
+            right: 6px;
+            color: #fff;
+            background: #88687b;
+            font-size: 27px;
+            height: 65px;
+            line-height: 65px;
+            width: 68px;
+            padding: 0;
+            border: 0;
+        }
+
+        footer {
+            text-align: center;
+            background-color: #000;
+            color: #000;
+            position: fixed;
+            padding: 0;
+            bottom: 0;
+            width: 100%;
+            height: 30px;
+
+        }
+
+        .social {
+            padding-bottom: 15px;
+
+        }
+
+        
+
+        .content {
+            width: 94%;
+            margin: 4em auto;
+            font-size: 20px;
+            line-height: 30px;
+            text-align: justify;
+        }
+
+        .logo {
+            line-height: 60px;
+            position: fixed;
+            float: left;
+            margin: 16px 46px;
+            color: #fff;
+            font-weight: bold;
+            font-size: 20px;
+            letter-spacing: 2px;
+        }
+
+        .userMenu {
+            line-height: 60px;
+            position: fixed;
+            float: right;
+            margin: 16px 46px;
+            color: #fff;
+            font-weight: bold;
+            font-size: 20px;
+            letter-spacing: 2px;
+        }
+
+        nav {
+            position: fixed;
+            width: 100%;
+            line-height: 60px;
+            z-index: 3;
+        }
+
+        nav ul {
+            line-height: 60px;
+            list-style: none;
+            background: rgba(0, 0, 0, 0);
+            color: #fff;
+            padding: 0;
+            text-align: right;
+            margin: 0;
+            padding-right: 40px;
+            transition: 1s;
+        }
+
+        nav.black ul {
+            background: #000;
+        }
+
+        nav ul li {
+            display: inline-block;
+            padding: 16px 40px;;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #fff;
+            font-size: 16px;
+        }
+
+        .menu-icon {
+            line-height: 60px;
+            width: 100%;
+            background: #000;
+            text-align: right;
+            box-sizing: border-box;
+            padding: 15px 24px;
+            cursor: pointer;
+            color: #fff;
+            display: none;
+        }
+
+        .user2 {
+            display: none;
+        }
+
+        .card-columns {
+            column-count: 4;
+        }
+
+        @media (max-width: 786px) {
+            header {
+                width: 100%;
+                height: 60vh;
+                background: url(/img/hero.png) no-repeat 50% 50%;
+                background-size: cover;
+            }
+
+            #user1 {
+                display: none;
+            }
+
+            .user2 {
+                display: inline-block;
+            }
+
+            .logo {
+                position: fixed;
+                top: 0;
+                margin-top: 16px;
+            }
+
+            nav ul {
+                max-height: 0px;
+                background: #000;
+            }
+
+            nav {
+                overflow: hidden;
+            }
+
+            nav.black ul {
+                background: #000;
+            }
+
+            .showing {
+                max-height: 34em;
+                overflow: visible;
+            }
+
+            nav ul li {
+                box-sizing: border-box;
+                width: 100%;
+                padding: 5px;
+                text-align: center;
+            }
+
+            .menu-icon {
+                display: block;
+            }
+
+            .card-columns {
+                column-count: 1;
+            }
+
+        }
+
+.truncateLongTexts {
+            width: 100px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+       
     </style>
-    
-    <link href="/css/User/userstyles.css" rel="stylesheet"/>
+       <link href="/css/User/userstyles.css" rel="stylesheet"/>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,600">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
           integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
@@ -83,7 +314,7 @@
         <main>
             <div class="container-fluid">
 
-                <div class="container" style="padding-top: 5%">
+                <div class="container" style="padding-top: 10%">
 
                     <div class="row">
                         <div class="col-md-4 order-md-2 mb-4">
@@ -208,97 +439,17 @@
         </main>
     </div>
 
-    <div class="modal" tabindex="-1" role="dialog" id="editModal">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Edit User</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body" id="modalBody">
-                <form method="POST" action="/Admin/updateUser" novalidate>
-                   <div class="form-group row">
-                        <label for="userId" class="col-4 col-form-label">User id</label>
-                        <div class="col-8">
-                            <input id="userId" name="userId" type="text" class="form-control" value="{{userData.userId}}" readonly>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="title" class="col-4 col-form-label">Firstname</label>
-                        <div class="col-8">
-                            <input id="Firstname" name="firstName" type="text" class="form-control" value="{{userData.firstName}}">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="summary" class="col-4 col-form-label">Lastname</label>
-                        <div class="col-8">
-                            <input id="Lastname" name="lastName" type="text" class="form-control" value="{{userData.lastName}}">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="mobileNr" class="col-4 col-form-label">Phonenumber</label>
-                        <div class="col-8">
-                            <input id="mobileNr" name="mobileNr" type="text" class="form-control" value="{{userData.mobileNr}}">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="email" class="col-4 col-form-label">Email</label>
-                        <div class="col-8">
-                            <input id="email" name="email" type="text" class="form-control" value="{{userData.email}}">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="pictureUrl" class="col-4 col-form-label">Profilepicture</label>
-                        <div class="col-8">
-                            <input id="pictureUrl" name="pictureUrl" type="text" class="form-control" value="{{userData.pictureUrl}}">
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary">Save changes</button>
-                    </div>
-                </form>
-            </div>
+<footer class="footer">
 
-   <div style="background-color:black; width:100%; height:0.7em;">
-                     
-                    </div>
-               <div class="modal-header">
-                <h5 class="modal-title">Change password</h5>
-            </div>
-            <div class="modal-body" id="modalBody">
-                <form method="POST" action="/User/NewPassword" novalidate>
-
-                  <div class="form-group row" style="display:none;">
-                        <label for="userId" class="col-4 col-form-label">username</label>
-                        <div class="col-8">
-                            <input id="userId" name="username" type="password" class="form-control">
-                        </div>
-                    </div>
-
-                   <div class="form-group row">
-                        <label for="userId" class="col-4 col-form-label">Old password</label>
-                        <div class="col-8">
-                            <input id="userId" name="oldpassword" type="password" class="form-control">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="title" class="col-4 col-form-label">New password</label>
-                        <div class="col-8">
-                            <input id="Firstname" name="newpassword" type="password" class="form-control">
-                        </div>
-                    </div>      
-                    <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary">Save changes</button>
-                    </div>
-                </form>
-            </div>
-
-</div>
-</div>
-</div>
-
+    <div class="social">
+        <ul class="list-inline">
+            <li class="list-inline-item"><a href="#">About</a></li>
+            <li class="list-inline-item"><a href="#">Contact</a></li>
+            <li class="list-inline-item"><a href="#">Terms</a></li>
+            <li class="list-inline-item"><a href="#">Privacy Policy</a></li>
+        </ul>
+    </div>
+</footer>
 
 </div>
    
