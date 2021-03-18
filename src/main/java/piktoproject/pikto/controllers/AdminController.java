@@ -105,6 +105,7 @@ public class AdminController {
     
     @RequestMapping(path="/Admin/updateProduct", method={RequestMethod.POST})
     public String updateProduct(Model model,@ModelAttribute ("product")Product product,@RequestParam Map<String, String> allRequestParams){
+        System.out.println(product.toString());
         userService.updateProduct(product);
         model.addAttribute("allProducts",adminService.getAllProducts());
         return "Frontend/Admin/Products";
