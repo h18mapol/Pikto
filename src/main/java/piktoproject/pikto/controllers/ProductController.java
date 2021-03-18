@@ -334,7 +334,7 @@ public class ProductController {
             userService.addOrderItems(shoppingService.getAllCartItems(cart), order.getSessionId());
             //Empty cart
             shoppingService.emptyCart(shoppingService.getCart(order.getSessionId()));
-            return "redirect:/Index";
+            return "redirectorder";
         }
         System.out.println("Payment Denied for: " + order.getSessionId());
         return "Frontend/Index/Payment";
