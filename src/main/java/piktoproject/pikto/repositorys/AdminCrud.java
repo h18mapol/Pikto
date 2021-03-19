@@ -139,7 +139,7 @@ public class AdminCrud extends UserCrud implements IAdminCrud {
      List <Order> orderList=new ArrayList<>();
         try{
             con=DriverManager.getConnection("jdbc:mysql://localhost:3306/piktodb?serverTimezone=UTC","root","");
-            Statement statement =con.createStatement();
+            Statement statement;
             statement=con.createStatement();
             String sqlSelectOrders="SELECT * FROM `order`";
             ResultSet resultset=statement.executeQuery(sqlSelectOrders);
@@ -263,7 +263,7 @@ public class AdminCrud extends UserCrud implements IAdminCrud {
                 product.setSummary(resultSet.getString("summary"));
                 product.setType(resultSet.getString("type"));
                 product.setPrice(resultSet.getInt("price"));
-                product.setDiscount(resultSet.getInt("discount"));
+                product.setDiscount(resultSet.getFloat("discount"));
                 product.setPublishedAt(resultSet.getString("publishedAt"));
                 product.setContent(resultSet.getString("content"));
                 product.setProductUrl(resultSet.getString("productUrl"));
@@ -302,7 +302,7 @@ public class AdminCrud extends UserCrud implements IAdminCrud {
     }
 
     @Override
-    public void sendEmail(User user) {
+    public void sendEmail(User user, Order order) {
         JavaMailSender sender = getJavaMailSenderInstance();
 
         MimeMessage message = sender.createMimeMessage();
@@ -321,7 +321,7 @@ public class AdminCrud extends UserCrud implements IAdminCrud {
         }
 
         try {
-            helper.setText("Thank you "+ user.getFirstName() + " " +user.getFirstName()+ "for Ordering at Pikto.se ");
+            helper.setText("Thank you "+ user.getFirstName() + " " +user.getLastName() + " for Ordering at Pikto.se " + " Your orderID =" +order.getOrderId());
         } catch (MessagingException ex) {
             Logger.getLogger(AdminCrud.class.getName()).log(Level.SEVERE, null, ex);
         }

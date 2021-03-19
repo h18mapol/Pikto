@@ -4,8 +4,8 @@ public class Product {
 
     private int productId;
     private int userId;
-    private int categoryId;
-    private String type;
+    private int categoryId; //Backgronnd
+    private String type; //Animal
     private String title;
     private String summary;
     private String content;

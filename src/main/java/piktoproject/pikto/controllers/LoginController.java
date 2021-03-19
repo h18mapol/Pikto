@@ -69,8 +69,8 @@ public class LoginController {
 
     @PostMapping(path = "/SignUp/NewUser")
     public String newUser(Model model, @ModelAttribute("user") User user, @RequestParam Map<String, String> allRequestParams){
+        System.out.println(user.getPictureUrl());
         adminService.addUser(user);
-        adminService.sendEmail(user);
         return "redirect:/User";
     }
 

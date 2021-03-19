@@ -92,18 +92,32 @@ public class UserCrud implements IUserCrud {
     public void addUser(User user) {
         try {
             con = DriverManager.getConnection("jdbc:mysql://localhost:3306/piktodb?serverTimezone=UTC", "root", "");
-            String sqlAddUser = "INSERT INTO user (firstName, lastName, mobileNr, email, password, admin, pictureUrl) VALUES(?,?,?,?,?,?,?)";
-            PreparedStatement statement = con.prepareStatement(sqlAddUser);
-            statement.setString(1, user.getFirstName());
-            statement.setString(2, user.getLastName());
-            statement.setString(3, user.getMobileNr());
-            statement.setString(4, user.getEmail());
-            statement.setString(5, BCrypt.hashpw(user.getPassword(), BCrypt.gensalt()));
-            statement.setInt(6, user.getAdmin());
-            statement.setString(7, user.getPictureUrl());
-            statement.executeUpdate();
-            statement.close();
-            con.close();
+            if (user.getPictureUrl().equals("")){
+                String sqlAddUser = "INSERT INTO user (firstName, lastName, mobileNr, email, password, admin) VALUES(?,?,?,?,?,?)";
+                PreparedStatement statement = con.prepareStatement(sqlAddUser);
+                statement.setString(1, user.getFirstName());
+                statement.setString(2, user.getLastName());
+                statement.setString(3, user.getMobileNr());
+                statement.setString(4, user.getEmail());
+                statement.setString(5, BCrypt.hashpw(user.getPassword(), BCrypt.gensalt()));
+                statement.setInt(6, user.getAdmin());
+                statement.executeUpdate();
+                statement.close();
+                con.close();
+            } else {
+                String sqlAddUser = "INSERT INTO user (firstName, lastName, mobileNr, email, password, admin, pictureUrl) VALUES(?,?,?,?,?,?,?)";
+                PreparedStatement statement = con.prepareStatement(sqlAddUser);
+                statement.setString(1, user.getFirstName());
+                statement.setString(2, user.getLastName());
+                statement.setString(3, user.getMobileNr());
+                statement.setString(4, user.getEmail());
+                statement.setString(5, BCrypt.hashpw(user.getPassword(), BCrypt.gensalt()));
+                statement.setInt(6, user.getAdmin());
+                statement.setString(7, user.getPictureUrl());
+                statement.executeUpdate();
+                statement.close();
+                con.close();
+            }
         } catch (SQLException ex) {
             Logger.getLogger(AdminCrud.class.getName()).log(Level.SEVERE, null, ex);
         }//End addUser
@@ -269,7 +283,7 @@ public class UserCrud implements IUserCrud {
     public Product updateProduct(Product product) {
         try {
             con = DriverManager.getConnection("jdbc:mysql://localhost:3306/piktodb?serverTimezone=UTC", "root", "");
-            String sqlUpdateEvent = "UPDATE product SET userId=?, title=?, summary=?, type=?, price=?, discount=?, publishedAt=?, content=?, productUrl=? WHERE productId=?";
+            String sqlUpdateEvent = "UPDATE product SET userId=?, title=?, summary=?, type=?, price=?, discount=?,publishedAt=? ,content=?, productUrl=? WHERE productId=?";
             PreparedStatement statement = con.prepareStatement(sqlUpdateEvent);
             statement.setInt(1, product.getUserId());
             statement.setString(2, product.getTitle());
@@ -543,26 +557,26 @@ public class UserCrud implements IUserCrud {
             ResultSet resultSet = statement.executeQuery();
             Order order = new Order();
             while (resultSet.next()) {
-                order.setUserId(resultSet.getInt("orderId"));
+                order.setOrderId(resultSet.getInt("orderId"));
                 order.setUserId(resultSet.getInt("userId"));
-                order.setUserId(resultSet.getInt("sessionId"));
-                order.setUserId(resultSet.getInt("status"));
-                order.setUserId(resultSet.getInt("subTotal"));
-                order.setUserId(resultSet.getInt("itemDiscount"));
-                order.setUserId(resultSet.getInt("tax"));
-                order.setUserId(resultSet.getInt("shipping"));
-                order.setUserId(resultSet.getInt("total"));
-                order.setUserId(resultSet.getInt("promo"));
-                order.setUserId(resultSet.getInt("discount"));
-                order.setUserId(resultSet.getInt("grandTotal"));
-                order.setUserId(resultSet.getInt("firstName"));
-                order.setUserId(resultSet.getInt("lastName"));
-                order.setUserId(resultSet.getInt("mobile"));
-                order.setUserId(resultSet.getInt("email"));
-                order.setUserId(resultSet.getInt("address"));
-                order.setUserId(resultSet.getInt("city"));
-                order.setUserId(resultSet.getInt("createdAt"));
-                order.setUserId(resultSet.getInt("content"));
+                order.setSessionId(resultSet.getString("sessionId"));
+                order.setStatus(resultSet.getInt("status"));
+                order.setSubTotal(resultSet.getDouble("subTotal"));
+                order.setItemDiscount(resultSet.getDouble("itemDiscount"));
+                order.setTax(resultSet.getDouble("tax"));
+                order.setShipping(resultSet.getDouble("shipping"));
+                order.setTotal(resultSet.getDouble("total"));
+                order.setPromo(resultSet.getString("promo"));
+                order.setDiscount(resultSet.getDouble("discount"));
+                order.setGrandTotal(resultSet.getDouble("grandTotal"));
+                order.setFirstName(resultSet.getString("firstName"));
+                order.setLastName(resultSet.getString("lastName"));
+                order.setMobile(resultSet.getString("mobile"));
+                order.setEmail(resultSet.getString("email"));
+                order.setAddress(resultSet.getString("address"));
+                order.setCity(resultSet.getString("city"));
+                order.setCreatedAt(resultSet.getString("createdAt"));
+                order.setContent(resultSet.getString("content"));
             } //End while
             resultSet.close();
             statement.close();

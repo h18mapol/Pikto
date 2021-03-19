@@ -71,6 +71,7 @@ public class UserController {
             order.setStatus(2); //Set as completed
             //Create Order
             shoppingService.createOrderPaypal(order);
+            adminService.sendEmail(adminService.getUser(order.getUserId()), order);
             System.out.println("Create Order with sessionId" + order.getSessionId());
             Cart cart = shoppingService.getCart(order.getSessionId());
             //Create Order Items

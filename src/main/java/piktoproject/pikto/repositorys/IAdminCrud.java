@@ -16,6 +16,6 @@ public interface IAdminCrud extends IUserCrud{
     List<Order>getAllOrders();
     User getLoggedInUser();
     
-    void sendEmail(User user);
+    void sendEmail(User user, Order order);
     boolean changePassword(PasswordDTO passwordDTO);
 }

@@ -282,7 +282,7 @@
                         <div class="form-group row" style="display:none;">
                             <label for="userId" class="col-4 col-form-label">username</label>
                             <div class="col-8">
-                                <input id="userId" name="username" type="text" class="form-control" value="{{userData.email}}>
+                                <input id="userId" name="username" type="text" class="form-control" value="{{userData.email}}">
                             </div>
                         </div>
 
@@ -347,7 +347,7 @@
                     <div class="form-group row">
                         <label for="status" class="col-4 col-form-label">status</label>
                         <div class="col-8">
-                            <select class="form-control" name="status" type="text" form="editOrderForm">
+                            <select class="form-control" name="status" type="number" form="editOrderForm" id="status">
                                 <option value="0">Confirmed</option>
                                 <option value="1">On-Route</option>
                                 <option value="2">Delivered</option>
@@ -466,9 +466,6 @@
             </div>
         </div>
     </div>
-</div>
-
-
 </div>
 <script>
 

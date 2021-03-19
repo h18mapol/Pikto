@@ -11,6 +11,7 @@ import piktoproject.pikto.services.ShoppingService;
 import piktoproject.pikto.services.UserService;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 import java.util.Map;
 
 import static piktoproject.pikto.controllers.UserController.round;
@@ -327,6 +328,14 @@ public class ProductController {
         Order order = (Order) request.getSession().getAttribute("orderData");
         if(status.equalsIgnoreCase("COMPLETED")){
             order.setStatus(2); //Set as completed
+            User user = adminService.getUser(order.getUserId());
+            user.setFirstName(order.getFirstName());
+            user.setLastName(order.getLastName());
+            user.setEmail(order.getEmail());
+            String sessionId = request.getSession().getId();
+            System.out.println(userService.getOrderIdBySessionId(sessionId));
+            order.setOrderId(userService.getOrderIdBySessionId(sessionId));
+            adminService.sendEmail(user, order);
             //Create Order
             shoppingService.createOrderPaypal(order);
             //Create Order Items
@@ -349,7 +358,12 @@ public class ProductController {
 
     @RequestMapping("/Index/Category/{categoryId}")
     public String getCategoryPage(Model model, @PathVariable int categoryId, HttpServletRequest request) {
+        List<Product> products = adminService.getAllProductsByCategory(categoryId);
+        for (int i = 0; i < products.size(); i++) {
+            System.out.println(products.get(i).getDiscount());
+        }
         model.addAttribute("CategoryItems", adminService.getAllProductsByCategory(categoryId));
+
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         HttpSession session = request.getSession();
         model.addAttribute("sessionId", session.getId());

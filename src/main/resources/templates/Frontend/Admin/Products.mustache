@@ -127,6 +127,7 @@
                                     <th>Date</th>
                                     <th class="hide">content</th>
                                     <th class="hide">ProductUrl</th>
+                                    <th class="hide">CategoryId</th>
                                 </tr>
                                 </thead>
                                 <tfoot>
@@ -142,6 +143,7 @@
                                     <th>Date</th>
                                     <th class="hide">content</th>
                                     <th class="hide">ProductUrl</th>
+                                    <th class="hide">CategoryId</th>
                                 </tr>
                                 </tfoot>
                                 <tbody>
@@ -159,6 +161,7 @@
                                     <td>{{publishedAt}}</td>
                                     <td class="hide">{{content}}</td>
                                     <td class="hide">{{productUrl}}</td>
+                                    <th class="hide">{{categoryId}}</th>
                                 </tr>
                                 {{/allProducts}}
                                 </tbody>
@@ -193,7 +196,7 @@
                 </button>
             </div>
             <div class="modal-body" id="modalBody">
-                <form method="POST" action="/Admin/updateProduct" novalidate>
+                <form method="POST" action="/Admin/updateProduct" id="productForm" novalidate>
                     <div class="form-group row">
                         <label for="productId" class="col-4 col-form-label">Product id</label>
                         <div class="col-8">
@@ -219,13 +222,15 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="type" class="col-4 col-form-label">Type</label>
+                        <label for="type" class="col-4 col-form-label">Category</label>
                         <div class="col-8">
- <select class="form-control" name="categoryId">
-                                                                        <option value="1">Background</option>
-                                                                        <option value="2">Stockphoto</option>
-                                                                        <option value="3">Poster</option>
-                                                                    </select>                        </div>
+                            <select class="form-control" name="type" type="text" form="productForm" id="type">
+                                <option value="Nature">Nature</option>
+                                <option value="People">People</option>
+                                <option value="Buildings">Buildings</option>
+                                <option value="Animals">Animals</option>
+                                <option value="Holidays">Holidays</option>
+                            </select></div>
                     </div>
                     <div class="form-group row">
                         <label for="price" class="col-4 col-form-label">Price</label>
@@ -236,13 +241,13 @@
                     <div class="form-group row">
                         <label for="discount" class="col-4 col-form-label">Discount</label>
                         <div class="col-8">
- <select class="form-control" name="discount">
-                                                                        <option value="0"></option>
-                                                                        <option value="0.1">10%</option>
-                                                                        <option value="0.25">25%</option>
-                                                                        <option value="0.5">50%</option>
-                                                                    </select>                        </div>
-                    </div>                                                                   
+                            <select class="form-control" name="discount" id="discount">
+                                <option value="0"></option>
+                                <option value="0.1">10%</option>
+                                <option value="0.25">25%</option>
+                                <option value="0.5">50%</option>
+                            </select></div>
+                    </div>
                     <div class="form-group row">
                         <label for="date" class="col-4 col-form-label">Published at</label>
                         <div class="col-8">
@@ -348,91 +353,25 @@
                         </div>
                     </div>
 
-                    <div class="form-group row">
-                        <label for="userId" class="col-4 col-form-label">Old password</label>
-                        <div class="col-8">
-                            <input id="userId" name="oldpassword" type="password" class="form-control">
+                    <div class=" form-group row">
+                            <label for="userId" class="col-4 col-form-label">Old password</label>
+                            <div class="col-8">
+                                <input id="userId" name="oldpassword" type="password" class="form-control">
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="title" class="col-4 col-form-label">New password</label>
-                        <div class="col-8">
-                            <input id="Firstname" name="newpassword" type="password" class="form-control">
+                        <div class="form-group row">
+                            <label for="title" class="col-4 col-form-label">New password</label>
+                            <div class="col-8">
+                                <input id="Firstname" name="newpassword" type="password" class="form-control">
+                            </div>
                         </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary">Save changes</button>
-                    </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary">Save changes</button>
+                        </div>
                 </form>
             </div>
 
 
-        </div>
-    </div>
-</div>
-
-
-<div class="modal" tabindex="-1" role="dialog" id="productsModal">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Edit Product</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body" id="modalBody">
-                <form method="POST" action="/Admin/updateProduct" novalidate>
-                    <div class="form-group row">
-                        <label for="reviewId" class="col-4 col-form-label">Review id</label>
-                        <div class="col-8">
-                            <input id="reviewId" name="reviewId" type="text" class="form-control" readonly>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="productId" class="col-4 col-form-label">Product id</label>
-                        <div class="col-8">
-                            <input id="productId" name="productId" type="text" class="form-control" readonly>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="title" class="col-4 col-form-label">Title</label>
-                        <div class="col-8">
-                            <input id="title" name="title" type="text" class="form-control">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="rating" class="col-4 col-form-label">Rating</label>
-                        <div class="col-8">
-                            <input id="rating" name="rating" type="number" class="form-control" required min="1" max="5"
-                                   placeholder="max rating 5">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="createdAt" class="col-4 col-form-label">Created At</label>
-                        <div class="col-8">
-                            <input id="createdAt" name="createdAt" type="text" class="form-control">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="content" class="col-4 col-form-label">Content</label>
-                        <div class="col-8">
-                            <input id="content" name="content" type="text" class="form-control">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="userId" class="col-4 col-form-label">User id</label>
-                        <div class="col-8">
-                            <input id="userId" name="userId" type="number" class="form-control" readonly>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary">Save changes</button>
-                        <a id="deletebtn" class="btn btn-danger">Delete Event</a>
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    </div>
-                </form>
-            </div>
         </div>
     </div>
 </div>

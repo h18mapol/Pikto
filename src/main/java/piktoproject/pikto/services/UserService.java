@@ -99,6 +99,8 @@ public class UserService {
 
     public void addOrderItems(List<CartItem> cartItems, String sessionId){
         userCrud.addOrderItems(cartItems, sessionId);}
+
+        public int getOrderIdBySessionId(String sessionId){return userCrud.getOrderIdBySessionId(sessionId);}
 }
 
 

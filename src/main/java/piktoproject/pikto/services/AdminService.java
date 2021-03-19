@@ -129,8 +129,8 @@ public class AdminService {
         adminCrud.deleteOrder(orderId);
     }
 
-    public void sendEmail(User user) {
-        adminCrud.sendEmail(user);
+    public void sendEmail(User user, Order order) {
+        adminCrud.sendEmail(user, order);
     }
 
     public boolean resetPassword(PasswordDTO passwordDTO){

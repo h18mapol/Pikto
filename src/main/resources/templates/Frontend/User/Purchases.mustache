@@ -127,7 +127,7 @@
                 {{#userOrders}}
                 <div class="card">
                     <h4 class="card-title" style="color:black; display:none;">{{title}}</h4>
-                    <h6 style="display:none;" id="idProduct">{{productId}}</h6>
+                    <h6 style="display:none;" id="idProduct" >{{productId}}</h6>
                     <div class="card-body">
                         <img src="{{productUrl}}" alt="Italian Trulli">
                     </div>
@@ -234,6 +234,7 @@
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-primary">Save changes</button>
                     </div>
+                    </div>
                 </form>
             </div>
 
@@ -253,9 +254,9 @@
             </div>
             <div class="modal-body" id="reviewModalBody">
                 <form method="POST" action="/User/addReview" id="reviewForm">
-                    <div class="form-group row">
-                        <label for="r_productId">ProductId</label>
-                        <input id="r_productId" name="productId" type="text" class="form-control" hidden>
+                    <div class="form-group row" hidden>
+                        <label for="r_productId" >ProductId</label>
+                        <input id="r_productId" name="productId" type="text" class="form-control">
                     </div>
                     <div class="form-group row">
                         <label for="r_title">Title</label>
@@ -300,7 +301,7 @@
 </div>
 
 
-</div>
+
 
            <script src="/js/Admin/jquery.js"></script>
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"

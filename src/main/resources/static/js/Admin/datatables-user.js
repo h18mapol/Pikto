@@ -25,7 +25,7 @@ $(document).ready(function() {
                 $("#city").val(tableData[17]);
                 $("#createdAt").val(tableData[18]);
                 $("#content").val(tableData[19]);
-                var table = $('#dataTableProducts').DataTable();
+                var table = $('#dataTableOrders').DataTable();
                 if ( ! table.data().any() ) {
                     alert( 'Empty: User has no Orders' );
                 } else {

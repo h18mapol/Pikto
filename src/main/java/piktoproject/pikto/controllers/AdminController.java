@@ -151,14 +151,16 @@ public class AdminController {
         userService.updateProduct(product);
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("userData");
-        model.addAttribute("user", user);
-        model.addAttribute("userData",adminService.getUser(product.getUserId()));
+        model.addAttribute("userUser", user);
+        model.addAttribute("user",adminService.getUser(product.getUserId()));
         model.addAttribute("userProducts",adminService.getAllProductsbyId(product.getUserId()));
         model.addAttribute("userReviews",adminService.getAllReviewsById(product.getUserId()));
         model.addAttribute("userOrders",adminService.getAllOrdersById(product.getUserId()));
         return "Frontend/Admin/IndividualUser";
     }
     @RequestMapping(path="/Admin/User/deleteProduct/{productId}")
+
+
     public String deleteUserProduct(Model model,@PathVariable Integer productId){
         Product product = adminService.getProduct(productId);
         adminService.deleteProduct(productId);
@@ -171,20 +173,21 @@ public class AdminController {
     }
 
     @RequestMapping(path="/Admin/User/updateOrder", method={RequestMethod.POST})
-    public String updateUserOrder(Model model, @ModelAttribute ("order") Order order, @RequestParam Map<String, String> allRequestParams){
+    public String updateUserOrder(Model model, @ModelAttribute ("order") Order order, HttpServletRequest request, @RequestParam Map<String, String> allRequestParams){
         adminService.updateOrder(order);
-        model.addAttribute("userData",adminService.getUser(order.getUserId()));
+        model.addAttribute("userData", request.getSession().getAttribute("userData"));
+        model.addAttribute("user",adminService.getUser(order.getUserId()));
         model.addAttribute("userProducts",adminService.getAllProductsbyId(order.getUserId()));
         model.addAttribute("userReviews",adminService.getAllReviewsById(order.getUserId()));
         model.addAttribute("userOrders",adminService.getAllOrdersById(order.getUserId()));
         return "Frontend/Admin/IndividualUser";
     }
     @RequestMapping(path="/Admin/User/deleteOrder/{orderId}")
-    public String deleteUserOrder(Model model,@PathVariable Integer orderId){
+    public String deleteUserOrder(Model model,@PathVariable Integer orderId, HttpServletRequest request){
         Order order = adminService.getOrder(orderId);
         adminService.deleteOrder(orderId);
         model.addAttribute("user",adminService.getUser(order.getUserId()));
-        model.addAttribute("userData",adminService.getUser(order.getUserId()));
+        model.addAttribute("userData",request.getSession().getAttribute("userData"));
         model.addAttribute("userProducts",adminService.getAllProductsbyId(order.getUserId()));
         model.addAttribute("userReviews",adminService.getAllReviewsById(order.getUserId()));
         model.addAttribute("userOrders",adminService.getAllOrdersById(order.getUserId()));
@@ -192,20 +195,21 @@ public class AdminController {
     }
 
     @RequestMapping(path="/Admin/User/updateReview", method={RequestMethod.POST})
-    public String updateUserReview(Model model, @ModelAttribute ("product_review") Product_review product_review, @RequestParam Map<String, String> allRequestParams){
+    public String updateUserReview(Model model, @ModelAttribute ("product_review") Product_review product_review, @RequestParam Map<String, String> allRequestParams, HttpServletRequest request){
         adminService.updateReview(product_review);
-        model.addAttribute("userData",adminService.getUser(product_review.getUserId()));
+        model.addAttribute("userData",request.getSession().getAttribute("userData"));
+        model.addAttribute("user",adminService.getUser(product_review.getUserId()));
         model.addAttribute("userProducts",adminService.getAllProductsbyId(product_review.getUserId()));
         model.addAttribute("userReviews",adminService.getAllReviewsById(product_review.getUserId()));
         model.addAttribute("userOrders",adminService.getAllOrdersById(product_review.getUserId()));
         return "Frontend/Admin/IndividualUser";
     }
     @RequestMapping(path="/Admin/User/deleteReview/{reviewId}")
-    public String deleteUserReview(Model model,@PathVariable Integer reviewId){
+    public String deleteUserReview(Model model,@PathVariable Integer reviewId, HttpServletRequest request){
         Product_review product_review = adminService.getReviewById(reviewId);
         adminService.deleteReview(reviewId);
+        model.addAttribute("userData",request.getSession().getAttribute("userData"));
         model.addAttribute("user",adminService.getUser(product_review.getUserId()));
-        model.addAttribute("userData",adminService.getUser(product_review.getUserId()));
         model.addAttribute("userProducts",adminService.getAllProductsbyId(product_review.getUserId()));
         model.addAttribute("userReviews",adminService.getAllReviewsById(product_review.getUserId()));
         model.addAttribute("userOrders",adminService.getAllOrdersById(product_review.getUserId()));

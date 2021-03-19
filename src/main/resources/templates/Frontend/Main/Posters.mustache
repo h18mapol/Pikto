@@ -452,10 +452,15 @@
         <div class="card-columns" id="MyCards">
             {{#CategoryItems}}
             <div class="card" style="margin:0; padding:0; border:0px;">
-                <div class="card-body" style="margin:0; padding:0;">
-                    <h4 style="display:none;">{{title}}</h4>
-                    <h5 class="card-title" style="display:none;">{{type}}</h5>
+                <div class="card-body" style="margin:0; padding:0; position: relative; display: inline-block;">
+                    <h5 class="card-title" style="display:none;">{{title}}</h5>
                     <a href="http://localhost:8888/Index/{{productId}}">
+                        <div class="badge badge-danger" style="
+                        display:none;
+                            margin-left: 2%;
+                            position: absolute;
+                            margin-top: 2%;
+                            font-size: 1.3em;">{{discount}}</div>
                         <img src="{{productUrl}}" alt="Italian Trulli" style="padding-bottom:1.25rem;">
                     </a>
                 </div>
@@ -491,8 +496,22 @@
 <script src="/js/Main/wow.min.js"></script>
 <script src="/js/Main/scripts.js"></script>
 <script>
-
     $(document).ready(function () {
+        var discount = $(".badge-danger");
+        for (let i = 0; i < discount.length; i++) {
+            let sale = discount[i].innerText;
+            console.log(sale);
+            if(sale == 0){
+                console.log(sale);
+                discount[i].style.display = "none";
+            } else {
+                discount[i].style.display = "inline-block";
+
+                sale = sale * 100;
+                discount[i].innerText = (parseFloat(sale).toFixed(0)+"%");
+            }
+
+        }
         $(".menu-icon").on("click", function () {
             $("nav ul").toggleClass("showing");
         });

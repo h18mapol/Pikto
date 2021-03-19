@@ -9,9 +9,9 @@ package piktoproject.pikto.models;
  * @author Henrik
  */
 public class Order {
-    int orderId, userId, status;
-    double itemDiscount, tax, shipping, total, discount, grandTotal, subTotal;
-    String sessionId, firstName, lastName, email, address, city, createdAt, content, promo, mobile, zip, country;
+    private int orderId, userId, status;
+    private double itemDiscount, tax, shipping, total, discount, grandTotal, subTotal;
+    private String sessionId, firstName, lastName, email, address, city, createdAt, content, promo, mobile, zip, country;
 
     public Order() {
     }
