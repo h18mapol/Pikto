@@ -303,6 +303,7 @@ public class AdminCrud extends UserCrud implements IAdminCrud {
 
     @Override
     public void sendEmail(User user, Order order) {
+        System.out.println(order.getOrderId());
         JavaMailSender sender = getJavaMailSenderInstance();
 
         MimeMessage message = sender.createMimeMessage();
@@ -321,7 +322,7 @@ public class AdminCrud extends UserCrud implements IAdminCrud {
         }
 
         try {
-            helper.setText("Thank you "+ user.getFirstName() + " " +user.getLastName() + " for Ordering at Pikto.se " + " Your orderID =" +order.getOrderId());
+            helper.setText("Thank you "+ user.getFirstName() + " " +user.getLastName() + " for Ordering at Pikto.se ");
         } catch (MessagingException ex) {
             Logger.getLogger(AdminCrud.class.getName()).log(Level.SEVERE, null, ex);
         }

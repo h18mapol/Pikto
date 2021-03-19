@@ -8,7 +8,7 @@ var labelListBar = [];
 var labelListLine = [];
 let months = ["01","02","03","04","05"];
 
-var data = $('#dataTable').find("tbody tr");
+var data = $('#dataTableOrders').find("tbody tr");
 data.each(function(index, value) {
     test = $(this).children("td");
     let grandtotal = (test[11].innerHTML);

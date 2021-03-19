@@ -64,6 +64,7 @@ public class UserController {
         
     }
 
+
     @RequestMapping("/User/Checkout/Status/{status}")
     public String createOrderUser(Model model, HttpServletRequest request, @PathVariable String status) {
         Order order = (Order) request.getSession().getAttribute("orderData");
@@ -277,6 +278,12 @@ public class UserController {
     public String getRemoveCheckout(Model model, @PathVariable Integer CartItemId) {
         shoppingService.deleteCartItem(CartItemId);
         return "redirect:/User/Checkout";
+    }
+
+    @RequestMapping(path="/User/updateUser", method={RequestMethod.POST})
+    public String updateUser(@ModelAttribute ("user")User user,@RequestParam Map<String, String> allRequestParams){
+        userService.updateUser(user);
+        return "redirect:/User";
     }
     /*@RequestMapping("/User/{userId}/Reviews")
     public String getAllUserReviews(Model model, @PathVariable Integer userId) {
